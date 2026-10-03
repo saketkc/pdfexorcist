@@ -1,0 +1,117 @@
+name: Prepare release
+
+# Manual (Actions > Prepare release > Run workflow, on the default branch).
+# Sets the new version in pyproject.toml, the only place it is written
+# (`pdfexorcist --version` reads the installed package's metadata), moves the
+# CHANGELOG.md [Unreleased] entries into a dated section for it, and opens a
+# pull request. Once that is merged, tag the merge commit.
+on:
+  workflow_dispatch:
+    inputs:
+      bump:
+        description: Part of the version to raise (ignored when an exact version is given)
+        type: choice
+        options: [patch, minor, major]
+        default: patch
+      version:
+        description: Or an exact version, e.g. 1.2.0rc1, or 0.1.0 for the first release (no leading v)
+        type: string
+        required: false
+
+permissions:
+  contents: read
+
+concurrency:
+  group: prepare-release
+  cancel-in-progress: false
+
+jobs:
+  prepare:
+    name: Bump the version, update the changelog, open a PR
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    permissions:
+      contents: write # push the release branch
+      pull-requests: write # open the pull request
+      actions: write # start CI on it: pushes made with GITHUB_TOKEN start no workflows
+    env:
+      GH_TOKEN: ${{ github.token }}
+    steps:
+      - name: Run from the default branch only
+        if: github.ref_name != github.event.repository.default_branch
+        env:
+          DEFAULT: ${{ github.event.repository.default_branch }}
+        run: |
+          echo "::error::run Prepare release on $DEFAULT, the branch that will be tagged"
+          exit 1
+      - uses: actions/checkout@v7
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@v7
+        with:
+          python-version: "3.13"
+      - uses: astral-sh/setup-uv@c18668ad3cf93ea998bef934396af7bb5c839dc7 # v10.2.0
+        with:
+          enable-cache: false
+
+      - name: Set the version in pyproject.toml
+        id: bump
+        env:
+          BUMP: ${{ inputs.bump }}
+          EXACT: ${{ inputs.version }}
+        run: |
+          read_version() {
+            python -c "import tomllib; print(tomllib.load(open('pyproject.toml', 'rb'))['project']['version'])"
+          }
+          current=$(read_version)
+          EXACT=${EXACT#v}
+          if [ -z "$EXACT" ]; then
+            uv version --bump "$BUMP" --frozen
+          elif [ "$EXACT" != "$current" ]; then # the same version: a first release never tagged
+            uv version "$EXACT" --frozen # uv rejects a version that is not PEP 440
+          fi
+          new=$(read_version)
+          # PEP 440 order (1.2.0rc1 < 1.2.0), so a typo cannot go backwards
+          uv run --no-project --quiet --with packaging python - "$current" "$new" <<'EOF'
+          import sys
+          from packaging.version import Version
+          old, new = map(Version, sys.argv[1:])
+          sys.exit(f"{new} is lower than the current {old}" if new < old else 0)
+          EOF
+          if gh api "repos/$GITHUB_REPOSITORY/git/ref/tags/v$new" --silent 2>/dev/null; then
+            echo "::error::tag v$new already exists"
+            exit 1
+          fi
+          echo "pyproject.toml: $current -> $new"
+          echo "version=$new" >> "$GITHUB_OUTPUT"
+
+      - name: Move the [Unreleased] entries in CHANGELOG.md to the new version
+        env:
+          VERSION: ${{ steps.bump.outputs.version }}
+        run: python .github/scripts/changelog.py release "$VERSION"
+
+      - name: Push a release branch and open the pull request
+        env:
+          VERSION: ${{ steps.bump.outputs.version }}
+          BASE: ${{ github.ref_name }}
+        run: |
+          branch="release/v$VERSION"
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git switch -c "$branch"
+          git commit -am "Release v$VERSION"
+          gh auth setup-git
+          git push origin "$branch"
+          {
+            echo "Release v$VERSION: the version in pyproject.toml and its CHANGELOG.md section."
+            echo
+            python .github/scripts/changelog.py notes "$VERSION"
+            echo
+            echo "After merging, tag the merge commit to publish:"
+            echo
+            echo '```bash'
+            echo "git switch $BASE && git pull && git tag -a v$VERSION -m v$VERSION && git push origin v$VERSION"
+            echo '```'
+          } > pr-body.md
+          gh pr create --base "$BASE" --head "$branch" --title "Release v$VERSION" --body-file pr-body.md
+          gh workflow run ci.yml --ref "$branch"

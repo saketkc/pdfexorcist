@@ -1,0 +1,44 @@
+# pdfexorcist recipe: MCCD Table 4 with fit_boxes = false, to show what it does
+#
+# table4.toml with [pages] fit_boxes = false. The 2011 fixture is a two-page
+# spread drawn half outside its page box. By default pdfexorcist widens each
+# page box to cover its text first. With fit_boxes = false, four engines read
+# only the half inside the box and camelot reads all of it, so half the cells
+# have no majority, and on page 2 the clipped reading puts values under the
+# wrong States. Use fit_boxes = false only when the text outside the box
+# belongs to another page. Try it:
+#
+#   pdfexorcist extract tests/fixtures/mccd/mccd_2011.pdf --recipe examples/mccd/unfitted.toml
+
+name = "MCCD Table 4, page boxes as printed"
+description = "table4.toml with fit_boxes = false"
+sample = "../../tests/fixtures/mccd/mccd_2011.pdf"
+
+[pages]
+start = 'TABLE\s*[-–]?\s*4\s*[-–:.].*STATES'
+stop = 'TABLE\s*[-–]?\s*5\s*[-–:.]'
+fit_boxes = false
+
+[parser]
+type = "custom"
+function = "mccd_table4.py:parse"
+key = ["page", "code", "pocc", "sex", "col"]
+
+[postprocess]
+function = "mccd_table4.py:name_states"
+
+[[checks]]
+column = "sex"
+rule = "T >= M + F"
+by = ["page", "code", "pocc", "col"]
+
+[[checks]]
+column = "state"
+rule = "All States (Total) >= rest"
+by = ["page", "code", "pocc", "sex"]
+
+[output]
+layout = "table"
+rows = ["code", "pocc", "sex"]
+columns = "state"
+format = "csv"

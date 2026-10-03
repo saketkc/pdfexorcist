@@ -1,0 +1,32 @@
+# pdfexorcist recipe: the NFHS-5 State sheet, with pdfplumber and camelot voting once
+#
+# state.toml with one [engines] setting added. pdfplumber and camelot both
+# read the text layer with pdfminer, so they can share a misreading. As a
+# family they first settle on one value, which then counts as one vote. The
+# five engines become four voters, and 3 must still agree. Try it:
+#
+#   pdfexorcist extract tests/fixtures/nfhs5_state/nfhs5_chandigarh_p3-6.pdf --recipe examples/nfhs5/families.toml
+
+name = "NFHS-5 State fact sheet, pdfminer engines as one"
+description = "state.toml with families = { pdfminer = [pdfplumber, camelot] }"
+sample = "../../tests/fixtures/nfhs5_state/nfhs5_chandigarh_p3-6.pdf"
+
+[pages]
+match = '[-–]\s*Key\s+Indicators'
+
+[engines]
+families = { pdfminer = ["pdfplumber", "camelot"] }
+
+[parser]
+type = "custom"
+function = "nfhs5_factsheet.py:parse"
+key = ["page", "indicator_no", "column"]
+
+[[checks]]
+function = "nfhs5_factsheet.py:checks"
+
+[output]
+layout = "table"
+rows = ["geo", "indicator_no"]
+columns = "column"
+format = "csv"

@@ -1,0 +1,42 @@
+# pdfexorcist recipe: NFHS-6 State/UT fact sheet, "Key Indicators" pages
+#
+# India's National Family Health Survey 2023-24 (IIPS) prints 101 indicators
+# per State over three pages: NFHS-6 Urban, Rural and Total, and NFHS-5 Total.
+# Rows are keyed by the printed indicator number, which the generic parsers
+# cannot do (wrapped labels put a row's values on a line of their own; some
+# labels are graphics), so the recipe points to nfhs6_factsheet.py next to it.
+# Try it:
+#
+#   pdfexorcist extract tests/fixtures/nfhs6_state/nfhs6_chandigarh_p145-147.pdf --recipe examples/nfhs6/state.toml
+#
+# Some States' pages (Tamil Nadu, Rajasthan, ...) draw every glyph as a path,
+# with no text layer: add --ocr.
+
+name = "NFHS-6 State fact sheet"
+description = "NFHS-6 Key Indicators for a State/UT or India: Urban, Rural, Total and NFHS-5 Total"
+sample = "../../tests/fixtures/nfhs6_state/nfhs6_india_p26-28.pdf"
+
+[pages]
+# On the whole "NFHS 6 factsheet.pdf", only the indicator pages.
+match = 'Key\s+Indicators'
+
+[engines]
+ocr = false  # a text layer: the five default engines, 3 must agree
+
+[parser]
+type = "custom"
+function = "nfhs6_factsheet.py:parse"
+# page, the printed indicator number, and the column (nfhs6_urban, nfhs6_rural,
+# nfhs6_total, nfhs5_total); values stay as printed: "(45.6)", "*"
+key = ["page", "indicator_no", "column"]
+
+# No percentage over 100 (the total fertility rate is not one), and every
+# Total between its Urban and Rural.
+[[checks]]
+function = "nfhs6_factsheet.py:checks"
+
+[output]
+layout = "table"
+rows = ["geo", "indicator_no"]  # one row per geography and indicator
+columns = "column"
+format = "csv"

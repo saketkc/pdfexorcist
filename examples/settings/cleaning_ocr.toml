@@ -1,0 +1,37 @@
+# pdfexorcist recipe: cleaning.toml's table as an image, read by OCR.
+#
+# tests/fixtures/synthetic/cleaning.png is cleaning.pdf rendered at 200 dpi.
+# An image has no text layer, so `ocr = true` adds every installed OCR engine
+# (see `pdfexorcist engines`); a majority of them, at least 2, must agree.
+#
+#   pdfexorcist extract tests/fixtures/synthetic/cleaning.png --recipe examples/settings/cleaning_ocr.toml
+
+name = "Values by region, from an image"
+description = "Synthetic table read by OCR"
+sample = "../../tests/fixtures/synthetic/cleaning.png"
+
+[engines]
+ocr = true
+
+[normalize]
+raised_dots = true
+minus_signs = true
+remove_footnote_marks = true
+
+[parser]
+type = "columns"   # OCR engines place words by x; values go to the nearest column
+
+[postprocess]
+function = "numbers.py:add_number"
+
+[[checks]]
+column = "col"
+total = 2
+parts = [0, 1]
+by = ["page", "row"]
+value = "number"
+name = "Total = A + B"
+
+[output]
+layout = "table"
+format = "csv"

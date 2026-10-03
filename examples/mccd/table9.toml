@@ -1,0 +1,44 @@
+# pdfexorcist recipe: MCCD Table 9 (deaths by ICD-10 chapter x sex x year)
+#
+# Table 5's parser on a different header: the columns are years, and the
+# labels carry no ICD codes, so blocks are keyed by Roman numeral only. Try it:
+#
+#   pdfexorcist extract tests/fixtures/mccd/mccd_2019_t9_p194.pdf --recipe examples/mccd/table9.toml
+#
+# On that page the checks fail for 2018: chapter XII prints T = 4910, but
+# M + F = 4510 (the 2018 report prints 4510).
+
+name = "MCCD Table 9"
+description = "Medically certified deaths by ICD-10 chapter and sex over a decade or more, all States (RGI annual report)"
+sample = "../../tests/fixtures/mccd/mccd_2019_t9_p194.pdf"
+
+[pages]
+start = 'TABLE\s*9\s*:'
+stop = 'TABLE\s*10\s*:'
+
+[engines]
+ocr = false
+
+[parser]
+type = "custom"
+function = "mccd_tables.py:parse"
+key = ["page", "group", "sex", "col"]
+
+[postprocess]
+function = "mccd_tables.py:name_years"  # adds "year"
+
+[[checks]]
+column = "sex"
+rule = "T = M + F"
+by = ["page", "group", "col"]
+
+[[checks]]
+column = "group"
+rule = "ALL = rest"
+by = ["page", "sex", "col"]
+
+[output]
+layout = "table"
+rows = ["group", "sex"]
+columns = "year"
+format = "csv"

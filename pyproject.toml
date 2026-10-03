@@ -1,0 +1,124 @@
+[project]
+name = "pdfexorcist"
+version = "0.1.0"
+description = "Extract tables from PDFs, scans and photos by majority vote across independent engines"
+readme = "README.md"
+license = "MIT"
+license-files = ["LICENSE"]
+authors = [{ name = "Saket Choudhary", email = "saketc@iitb.ac.in" }]
+requires-python = ">=3.10"
+keywords = ["pdf", "tables", "extraction", "ocr", "scraping", "majority vote"]
+classifiers = [
+    "Development Status :: 3 - Alpha",
+    "Environment :: Console",
+    "Intended Audience :: Science/Research",
+    "Operating System :: OS Independent",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Programming Language :: Python :: 3.13",
+    "Programming Language :: Python :: 3.14",
+    "Topic :: Scientific/Engineering :: Information Analysis",
+    "Topic :: Text Processing :: General",
+    "Typing :: Typed",
+]
+dependencies = [
+    "pandas",
+    "pdfplumber",
+    "pymupdf",
+    "pypdfium2",
+    "camelot-py",
+    "typer>=0.12",  
+    "rich>=13",
+    "tomli; python_version < '3.11'",  # recipes (tomllib is stdlib from 3.11)
+]
+
+[project.optional-dependencies]
+tabula = ["tabula-py", "jpype1"]  # needs Java
+chandra = ["chandra-ocr", "torch", "torchvision", "transformers", "accelerate", "pillow"]
+paddleocr = ["paddleocr>=3", "paddlepaddle", "pillow"]
+ocrmac = ["ocrmac; sys_platform == 'darwin'", "pillow"]
+glmocr = ["mlx-vlm; sys_platform == 'darwin' and platform_machine == 'arm64'", "pillow"]
+all = ["pdfexorcist[tabula,chandra,paddleocr,ocrmac,glmocr]"]  # ocrmac and glmocr install only where they run
+# older names
+ocr = ["pdfexorcist[chandra]"]
+paddle = ["pdfexorcist[paddleocr]"]
+mac = ["pdfexorcist[ocrmac]"]
+mlx = ["pdfexorcist[glmocr]"]
+
+[project.urls]
+Homepage = "https://github.com/saketlab/pdfexorcist"
+Documentation = "https://saketlab.github.io/pdfexorcist/"
+Repository = "https://github.com/saketlab/pdfexorcist"
+Issues = "https://github.com/saketlab/pdfexorcist/issues"
+Changelog = "https://saketlab.github.io/pdfexorcist/changelog.html"
+
+[project.scripts]
+pdfexorcist = "pdfexorcist.cli:main"
+
+[build-system]
+requires = ["setuptools>=77"]  # license = "MIT" (PEP 639)
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools]
+packages = ["pdfexorcist"]  # the wheel holds only the package; MANIFEST.in adds tests to the sdist
+
+[tool.setuptools.package-data]
+pdfexorcist = ["py.typed"]
+
+[dependency-groups]
+# CI pins these; locally: uv pip install --group dev
+lint = ["ruff==0.16.10", "mypy==2.4.0", "pandas-stubs"]
+dev = ["pytest", "pyarrow", "openpyxl", { include-group = "lint" }]  # parquet and xlsx output tests
+
+[tool.ruff]
+target-version = "py310"
+line-length = 100
+
+[tool.ruff.lint]
+select = [
+    "E", "W",  # pycodestyle
+    "F",       # pyflakes
+    "I",       # isort
+    "B",       # bugbear
+    "BLE",     # blind except: each deliberate one carries a noqa with its reason
+    "C4",      # comprehensions
+    "PIE",
+    "RET",
+    "SIM",
+    "PERF",
+    "PTH",     # pathlib over os.path
+    "UP",      # pyupgrade, to target-version
+    "RUF",
+]
+ignore = [
+    "B008",  # typer declares options as function calls in argument defaults
+]
+# Characters the parsers read in real tables; they are meant, not lookalikes.
+allowed-confusables = ["−", "–", "×", "·", "‘", "’"]
+
+[tool.ruff.lint.per-file-ignores]
+# CSS and JavaScript held in Python strings, shipped verbatim in the HTML view
+"pdfexorcist/show_assets.py" = ["E501"]
+
+[tool.mypy]
+python_version = "3.10"
+files = ["pdfexorcist"]
+check_untyped_defs = true
+disallow_untyped_defs = true
+disallow_incomplete_defs = true
+no_implicit_optional = true
+strict_equality = true
+warn_redundant_casts = true
+warn_unused_ignores = true
+warn_unused_configs = true
+
+[[tool.mypy.overrides]]
+# engines and backends that ship no type information
+module = [
+    "camelot.*", "chandra.*", "mlx_vlm.*", "ocrmac.*", "paddleocr.*", "pdfplumber.*",
+    "pypdfium2.*", "tabula.*", "torch.*", "transformers.*",
+    "tomli",  # Python 3.10 only; not installed where mypy runs
+]
+ignore_missing_imports = true

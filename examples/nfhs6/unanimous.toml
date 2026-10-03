@@ -1,0 +1,35 @@
+# pdfexorcist recipe: the NFHS-6 State sheet, with every engine required to agree
+#
+# state.toml with three [engines] settings changed. min_agree = 5 keeps a
+# value only when all five engines read it identically. pdfium reads 276 of
+# the 404 values on the Chandigarh pages and reads nothing for the rest, so
+# min_agree = 5 alone leaves those cells unresolved. min_unopposed = 3 also
+# keeps a value that three engines read when no engine read another. Try it:
+#
+#   pdfexorcist extract tests/fixtures/nfhs6_state/nfhs6_chandigarh_p145-147.pdf --recipe examples/nfhs6/unanimous.toml
+
+name = "NFHS-6 State fact sheet, all engines agree"
+description = "state.toml with min_agree = 5 and min_unopposed = 3"
+sample = "../../tests/fixtures/nfhs6_state/nfhs6_chandigarh_p145-147.pdf"
+
+[pages]
+match = 'Key\s+Indicators'
+
+[engines]
+use = ["pdftotext", "pdfplumber", "pymupdf", "camelot", "pdfium"]  # named, so a missing one is an error
+min_agree = 5
+min_unopposed = 3
+
+[parser]
+type = "custom"
+function = "nfhs6_factsheet.py:parse"
+key = ["page", "indicator_no", "column"]
+
+[[checks]]
+function = "nfhs6_factsheet.py:checks"
+
+[output]
+layout = "table"
+rows = ["geo", "indicator_no"]
+columns = "column"
+format = "csv"

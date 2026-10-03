@@ -1,0 +1,248 @@
+{
+ "report_date": "2026-07-15",
+ "source": "BMC official report (image, manual-verified)",
+ "extraction": "manual-verified",
+ "lakes": [
+  {
+   "lake": "Upper Vaitarna",
+   "datum": "M.S.L.",
+   "fsl": 603.51,
+   "ldl": 595.44,
+   "fsl_useful_content_ml": 227047,
+   "years": {
+    "2026": {
+     "level": 598.12,
+     "rise_fall_24h": 0.03,
+     "useful_content_ml": 65294,
+     "pct_useful_content": 28.76,
+     "today_rain_mm": 0.0,
+     "total_rain_mm": 899.0
+    },
+    "2025": {
+     "level": 601.93,
+     "useful_content_ml": 175993,
+     "pct_useful_content": 77.51,
+     "today_rain_mm": 42.0,
+     "total_rain_mm": 1076.0
+    },
+    "2024": {
+     "level": 595.95,
+     "useful_content_ml": 12899,
+     "pct_useful_content": 5.68,
+     "today_rain_mm": 65.0,
+     "total_rain_mm": 696.0
+    }
+   }
+  },
+  {
+   "lake": "Modak Sagar",
+   "datum": "T.H.D.",
+   "fsl": 163.15,
+   "ldl": 143.26,
+   "fsl_useful_content_ml": 128925,
+   "years": {
+    "2026": {
+     "level": 159.63,
+     "rise_fall_24h": -0.24,
+     "useful_content_ml": 100356,
+     "pct_useful_content": 77.84,
+     "today_rain_mm": 0.0,
+     "total_rain_mm": 1317.0
+    },
+    "2025": {
+     "level": 163.16,
+     "useful_content_ml": 128925,
+     "pct_useful_content": 100.0,
+     "today_rain_mm": 33.0,
+     "total_rain_mm": 1538.0
+    },
+    "2024": {
+     "level": 155.72,
+     "useful_content_ml": 71205,
+     "pct_useful_content": 55.23,
+     "today_rain_mm": 99.0,
+     "total_rain_mm": 1060.0
+    }
+   }
+  },
+  {
+   "lake": "Tansa",
+   "datum": "T.H.D.",
+   "fsl": 128.63,
+   "ldl": 118.87,
+   "fsl_useful_content_ml": 145080,
+   "years": {
+    "2026": {
+     "level": 126.91,
+     "rise_fall_24h": -0.02,
+     "useful_content_ml": 113174,
+     "pct_useful_content": 78.01,
+     "today_rain_mm": 0.0,
+     "total_rain_mm": 1367.0
+    },
+    "2025": {
+     "level": 127.43,
+     "useful_content_ml": 122461,
+     "pct_useful_content": 84.41,
+     "today_rain_mm": 60.0,
+     "total_rain_mm": 1479.0
+    },
+    "2024": {
+     "level": 126.31,
+     "useful_content_ml": 102611,
+     "pct_useful_content": 70.73,
+     "today_rain_mm": 93.0,
+     "total_rain_mm": 1143.0
+    }
+   }
+  },
+  {
+   "lake": "Middle Vaitarna",
+   "datum": "T.H.D.",
+   "fsl": 285.0,
+   "ldl": 220.0,
+   "fsl_useful_content_ml": 193530,
+   "years": {
+    "2026": {
+     "level": 264.65,
+     "rise_fall_24h": 0.05,
+     "useful_content_ml": 85616,
+     "pct_useful_content": 44.24,
+     "today_rain_mm": 0.0,
+     "total_rain_mm": 952.0
+    },
+    "2025": {
+     "level": 283.02,
+     "useful_content_ml": 182226,
+     "pct_useful_content": 94.16,
+     "today_rain_mm": 57.0,
+     "total_rain_mm": 1721.0
+    },
+    "2024": {
+     "level": 258.33,
+     "useful_content_ml": 61066,
+     "pct_useful_content": 31.55,
+     "today_rain_mm": 120.0,
+     "total_rain_mm": 1051.0
+    }
+   }
+  },
+  {
+   "lake": "Bhatsa",
+   "datum": "M.S.L.",
+   "fsl": 142.07,
+   "ldl": 104.9,
+   "fsl_useful_content_ml": 717037,
+   "years": {
+    "2026": {
+     "level": 125.2,
+     "rise_fall_24h": -0.08,
+     "useful_content_ml": 319659,
+     "pct_useful_content": 44.58,
+     "today_rain_mm": 0.0,
+     "total_rain_mm": 1070.0
+    },
+    "2025": {
+     "level": 133.8,
+     "useful_content_ml": 505551,
+     "pct_useful_content": 70.51,
+     "today_rain_mm": 69.0,
+     "total_rain_mm": 1457.0
+    },
+    "2024": {
+     "level": 120.9,
+     "useful_content_ml": 238959,
+     "pct_useful_content": 33.33,
+     "today_rain_mm": 38.0,
+     "total_rain_mm": 1238.0
+    }
+   }
+  },
+  {
+   "lake": "Vihar",
+   "datum": "T.H.D.",
+   "fsl": 80.12,
+   "ldl": 73.92,
+   "fsl_useful_content_ml": 27698,
+   "years": {
+    "2026": {
+     "level": 80.21,
+     "rise_fall_24h": -0.01,
+     "useful_content_ml": 27698,
+     "pct_useful_content": 100.0,
+     "today_rain_mm": 0.0,
+     "total_rain_mm": 1643.0
+    },
+    "2025": {
+     "level": 77.39,
+     "useful_content_ml": 14006,
+     "pct_useful_content": 50.57,
+     "today_rain_mm": 50.0,
+     "total_rain_mm": 706.0
+    },
+    "2024": {
+     "level": 77.6,
+     "useful_content_ml": 14955,
+     "pct_useful_content": 53.99,
+     "today_rain_mm": 17.0,
+     "total_rain_mm": 1516.0
+    }
+   }
+  },
+  {
+   "lake": "Tulsi",
+   "datum": "T.H.D.",
+   "fsl": 139.17,
+   "ldl": 131.07,
+   "fsl_useful_content_ml": 8046,
+   "years": {
+    "2026": {
+     "level": 139.08,
+     "rise_fall_24h": -0.03,
+     "useful_content_ml": 7920,
+     "pct_useful_content": 98.43,
+     "today_rain_mm": 5.0,
+     "total_rain_mm": 2201.0
+    },
+    "2025": {
+     "level": 135.97,
+     "useful_content_ml": 4185,
+     "pct_useful_content": 52.01,
+     "today_rain_mm": 24.0,
+     "total_rain_mm": 1296.0
+    },
+    "2024": {
+     "level": 137.92,
+     "useful_content_ml": 6413,
+     "pct_useful_content": 79.7,
+     "today_rain_mm": 22.0,
+     "total_rain_mm": 1684.0
+    }
+   }
+  }
+ ],
+ "totals": {
+  "fsl_useful_content_ml": 1447363,
+  "years": {
+   "2026": {
+    "useful_content_ml": 719716,
+    "pct_useful_content": 49.73
+   },
+   "2025": {
+    "useful_content_ml": 1133347,
+    "pct_useful_content": 78.3
+   },
+   "2024": {
+    "useful_content_ml": 508108,
+    "pct_useful_content": 35.11
+   }
+  }
+ },
+ "remarks": [
+  "Middle Vaitarna WSCPO Gate closed on 06/07/2026 @ 14:00 Hrs",
+  "Upper Vaitarana Release stopped from 06/07/2026 @ 10.00 Hrs",
+  "Bhandup Complex Today's Rainfall: 02 ; Total Rainfall 1718 mm.",
+  "Vehar Lake started overflowing on 07.07.2026 at 21.00 Hrs",
+  "Tulsi Lake started overflowing on 07.07.2026 at 23.43 Hrs"
+ ]
+}

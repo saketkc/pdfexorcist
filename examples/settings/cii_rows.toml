@@ -1,0 +1,33 @@
+# pdfexorcist recipe: a column total checked on a Crime in India page
+#
+# Table 1A.4 prints Incidence, Victims and Rate three times: road-accident
+# deaths in total, then Hit and Run, then Other Accidents. So column 0
+# (total incidence) must equal column 3 + column 6. One row has no label on
+# its line (the name wraps around it), so the "rows" parser reads its serial
+# number "31" as the first value, and the check flags that row. Try it:
+#
+#   pdfexorcist extract tests/fixtures/cii/cii_2023_1A.4_p47.pdf --recipe examples/settings/cii_rows.toml
+#
+# cii_columns.toml reads the same page with the "columns" parser.
+
+name = "Crime in India 1A.4, rows parser"
+description = "Road-accident deaths by State/UT: Total, Hit and Run, Other (I, V, R each)"
+sample = "../../tests/fixtures/cii/cii_2023_1A.4_p47.pdf"
+
+[parser]
+type = "rows"
+min_values = 3
+
+# A total column, written as total and parts instead of a rule. The values of
+# "col" are numbers; total and parts may be written as numbers or text.
+[[checks]]
+column = "col"
+total = 0
+parts = [3, 6]
+op = "="
+by = ["page", "row"]  # one check per line
+name = "Total I = Hit and Run I + Other I"
+
+[output]
+layout = "table"
+format = "csv"

@@ -1,0 +1,33 @@
+# pdfexorcist recipe: the page of cii_rows.toml, read with the "columns" parser
+#
+# The "columns" parser places each value under the column it sits in, so the
+# serial number has a column of its own (0) and the unlabelled row's values
+# stay in theirs. Total incidence is now column 1 = column 4 + column 7.
+# Written as an Excel file. Try it:
+#
+#   pdfexorcist extract tests/fixtures/cii/cii_2023_1A.4_p47.pdf --recipe examples/settings/cii_columns.toml
+
+name = "Crime in India 1A.4, columns parser"
+description = "Road-accident deaths by State/UT: Total, Hit and Run, Other (I, V, R each)"
+sample = "../../tests/fixtures/cii/cii_2023_1A.4_p47.pdf"
+
+[parser]
+type = "columns"
+min_values = 3
+# pdftotext places text by character column, which is coarser than the
+# other engines' points: at the default 0.45 it places 383 of the 387
+# values, at 0.6 all of them. A value further than this many column
+# spacings from every column is dropped.
+tolerance = 0.6
+
+[[checks]]
+column = "col"
+total = 1
+parts = [4, 7]
+by = ["page", "row"]
+missing = "fail"  # a row with total incidence but without a part fails
+name = "Total I = Hit and Run I + Other I"
+
+[output]
+layout = "table"
+format = "xlsx"  # sheet "table", and a "review" sheet when a cell needs a look

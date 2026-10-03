@@ -1,0 +1,58 @@
+# Python
+__pycache__/
+*.py[cod]
+*.so
+*.egg-info/
+*.egg
+.eggs/
+build/
+dist/
+wheels/
+pip-wheel-metadata/
+
+# Environments
+.venv/
+.venv-*/
+venv/
+env/
+.env
+.env.*
+.python-version
+
+# uv: a library does not pin its dependencies
+uv.lock
+
+# Tests, coverage, type and lint caches
+.pytest_cache/
+.pytest_tmp/
+.coverage
+.coverage.*
+htmlcov/
+coverage.xml
+.tox/
+.nox/
+.hypothesis/
+.mypy_cache/
+.ruff_cache/
+.dmypy.json
+
+# Docs
+site/
+docs/_build/
+
+# Notebooks, editors, OS
+.ipynb_checkpoints/
+.idea/
+.vscode/
+*.swp
+.DS_Store
+Thumbs.db
+
+# Local tool state and logs
+.claude/
+logs/
+CLAUDE.md
+AGENTS.md
+
+# Local release notes
+RELEASING.md

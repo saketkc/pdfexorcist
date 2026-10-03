@@ -1,0 +1,33 @@
+# pdfexorcist recipe: BMC daily lake-level report (a photo)
+#
+# Mumbai's water department tweets this table every morning as a photo, so
+# only OCR engines can read it. A row is placed by its YEAR cell, which the
+# generic parsers cannot do, so the recipe points to bmc_lake_report.py next
+# to it. Try it (needs at least two OCR engines; see `pdfexorcist engines`):
+#
+#   pdfexorcist extract tests/fixtures/bmc/2026-09-28.jpg --recipe examples/lake_photo/recipe.toml
+
+name = "BMC lake levels"
+description = "Seven Mumbai lakes: level, useful content, % and rain, this year and the two before"
+sample = "../../tests/fixtures/bmc/2026-09-28.jpg"
+
+[engines]
+# OCR engines from four labs, so their misreads are independent; those not
+# installed are skipped. Tesseract runs columns together on grainy phone photos.
+use = ["chandra", "glmocr", "paddleocr", "ocrmac"]
+# min_agree: by default a strict majority of the engines that run, at least 2
+# (3 of 4, 2 of 3, 2 of 2).
+# Two engines reading a value identically count when the others read nothing
+# there (Chandra and GLM-OCR skip the title; a speck can void one engine's row).
+min_unopposed = 2
+
+[parser]
+type = "custom"
+function = "bmc_lake_report.py:parse"
+key = ["lake", "year", "field"]
+
+[output]
+layout = "table"
+rows = ["lake", "year"]  # one row per lake and year
+columns = "field"        # level, useful content, % ...
+format = "csv"

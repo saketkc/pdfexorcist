@@ -1,0 +1,33 @@
+# pdfexorcist recipe: the NFHS-5 State sheet, with values cleaned to plain numbers
+#
+# recipe.toml keeps every value as printed. This copy adds [normalize]:
+# remove_commas turns "5,586" into "5586", and clean.py drops "na" (not
+# available), so the cell is blank. Brackets and "*" are kept. Each engine's
+# reading is cleaned before the vote. Written as Parquet. Try it:
+#
+#   pdfexorcist extract tests/fixtures/nfhs5_state/nfhs5_chandigarh_p3-6.pdf --recipe examples/nfhs5/numbers.toml
+
+name = "NFHS-5 State fact sheet, plain numbers"
+description = "state.toml with commas removed and na dropped"
+sample = "../../tests/fixtures/nfhs5_state/nfhs5_chandigarh_p3-6.pdf"
+
+[pages]
+match = '[-–]\s*Key\s+Indicators'
+
+[normalize]
+remove_commas = true
+function = "clean.py:drop_na"
+
+[parser]
+type = "custom"
+function = "nfhs5_factsheet.py:parse"
+key = ["page", "indicator_no", "column"]
+
+[[checks]]
+function = "nfhs5_factsheet.py:checks"
+
+[output]
+layout = "table"
+rows = ["geo", "indicator_no"]
+columns = "column"
+format = "parquet"  # values stay text: "5586", "(45.6)", "*"

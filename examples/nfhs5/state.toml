@@ -1,0 +1,38 @@
+# pdfexorcist recipe: NFHS-5 India and State/UT fact sheets, "Key Indicators" pages
+#
+# India's National Family Health Survey 2019-21 (IIPS) prints 131 indicators
+# per sheet over four pages: NFHS-5 Urban, Rural and Total, and NFHS-4 Total.
+# Rows are keyed by the printed indicator number, which the generic parsers
+# cannot do (wrapped labels put a row's values on a line of their own), so the
+# recipe points to nfhs5_factsheet.py next to it. Try it:
+#
+#   pdfexorcist extract tests/fixtures/nfhs5_state/nfhs5_chandigarh_p3-6.pdf --recipe examples/nfhs5/state.toml
+
+name = "NFHS-5 State fact sheet"
+description = "NFHS-5 Key Indicators for India or a State/UT: Urban, Rural, Total and NFHS-4 Total"
+sample = "../../tests/fixtures/nfhs5_state/nfhs5_india_p3-6.pdf"
+
+[pages]
+# On a whole IIPS sheet, only the indicator pages ("Bihar - Key Indicators").
+match = '[-–]\s*Key\s+Indicators'
+
+[engines]
+ocr = false  # a text layer: the five default engines, 3 must agree
+
+[parser]
+type = "custom"
+function = "nfhs5_factsheet.py:parse"
+# page, the printed indicator number, and the column (nfhs5_urban, nfhs5_rural,
+# nfhs5_total, nfhs4_total); values stay as printed: "(45.6)", "*", "na", "1,020"
+key = ["page", "indicator_no", "column"]
+
+# No percentage over 100 (sex ratios, rates per 1,000, TFR and Rs. are not
+# percentages), and every Total between its Urban and Rural.
+[[checks]]
+function = "nfhs5_factsheet.py:checks"
+
+[output]
+layout = "table"
+rows = ["geo", "indicator_no"]  # one row per geography and indicator
+columns = "column"
+format = "csv"

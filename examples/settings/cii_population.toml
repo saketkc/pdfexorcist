@@ -1,0 +1,30 @@
+# pdfexorcist recipe: a rounded total, checked within a relative tolerance
+#
+# Column 3 of Crime in India Table 1A.1 is the mid-year population in lakhs,
+# rounded to 0.1. The 36 States and UTs add up to 13672.0; the page prints
+# 13671.8 for All India. tolerance = 0.0001 allows a gap of 0.01% of the
+# total. Written cell by cell, with every engine's reading, as JSON. Try it:
+#
+#   pdfexorcist extract tests/fixtures/cii/cii_2021_1A.1_p43.pdf --recipe examples/settings/cii_population.toml
+
+name = "Crime in India 1A.1, population"
+description = "Mid-year population (lakhs) by State/UT, checked against the All India total"
+sample = "../../tests/fixtures/cii/cii_2021_1A.1_p43.pdf"
+
+[pages]
+select = "1"
+
+[parser]
+type = "rows"
+min_values = 3
+
+[[checks]]
+column = "label"
+rule = "TOTAL ALL INDIA = rest"
+by = ["page", "col"]
+where = "col == 3 and label != 'TOTAL STATE(S)' and label != 'TOTAL UT(S)'"
+tolerance = 0.0001
+
+[output]
+layout = "cells"  # one row per cell: its key, value, status and votes
+format = "json"

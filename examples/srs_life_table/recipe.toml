@@ -1,0 +1,31 @@
+# pdfexorcist recipe: SRS abridged life tables (one State per page)
+#
+# Each page is titled "Kerala, 2019-23" and holds Total, Rural and Urban
+# blocks of 19 age rows, 12 values each (nqx, lx, nLx, ex for total, male,
+# female). srs_life_table.py keys cells by block and age, and keeps the State
+# from the title as an extra column: camelot returns the table without its
+# title, so a key holding the State would leave camelot out of every vote. Try it:
+#
+#   pdfexorcist extract tests/fixtures/srs/srs_2019-23.pdf --recipe examples/srs_life_table/recipe.toml
+
+name = "SRS abridged life table"
+description = "Abridged life tables by State, residence and sex (SRS, RGI)"
+sample = "../../tests/fixtures/srs/srs_2019-23.pdf"
+
+[engines]
+ocr = false
+
+[parser]
+type = "custom"
+function = "srs_life_table.py:parse"
+key = ["page", "category", "age", "col"]
+
+# l(x+n) = l(x) * (1 - nqx), within 3 for rounding
+[[checks]]
+function = "srs_life_table.py:survivorship"
+
+[output]
+layout = "table"
+rows = ["state", "category", "age"]
+columns = "col"
+format = "csv"

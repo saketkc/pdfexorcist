@@ -1,0 +1,128 @@
+{
+ "report_date": "2025-07-28",
+ "source": "BMC report image (OCR consensus: chandra+olmocr+qwenvl)",
+ "extraction": "ocr-consensus",
+ "lakes": [
+  {
+   "lake": "Upper Vaitarna",
+   "datum": "M.S.L.",
+   "fsl": 603.51,
+   "ldl": 595.44,
+   "fsl_useful_content_ml": 227047,
+   "years": {
+    "2025": {
+     "level": 602.2,
+     "useful_content_ml": 184926,
+     "pct_useful_content": 81.45,
+     "today_rain_mm": 31.0,
+     "total_rain_mm": 1273.0
+    }
+   }
+  },
+  {
+   "lake": "Modak Sagar",
+   "datum": "T.H.D.",
+   "fsl": 163.15,
+   "ldl": 143.26,
+   "fsl_useful_content_ml": 128925,
+   "years": {
+    "2025": {
+     "level": 163.16,
+     "useful_content_ml": 128925,
+     "pct_useful_content": 100.0,
+     "today_rain_mm": 35.0,
+     "total_rain_mm": 1975.0
+    }
+   }
+  },
+  {
+   "lake": "Tansa",
+   "datum": "T.H.D.",
+   "fsl": 128.63,
+   "ldl": 118.87,
+   "fsl_useful_content_ml": 145080,
+   "years": {
+    "2025": {
+     "level": 128.53,
+     "useful_content_ml": 143181,
+     "pct_useful_content": 98.69,
+     "today_rain_mm": 24.0,
+     "total_rain_mm": 1914.0
+    }
+   }
+  },
+  {
+   "lake": "Middle Vaitarna",
+   "datum": "T.H.D.",
+   "fsl": 285.0,
+   "ldl": 220.0,
+   "fsl_useful_content_ml": 193530,
+   "years": {
+    "2025": {
+     "level": 283.24,
+     "useful_content_ml": 183563,
+     "pct_useful_content": 94.85,
+     "today_rain_mm": 24.0,
+     "total_rain_mm": 2105.0
+    }
+   }
+  },
+  {
+   "lake": "Bhatsa",
+   "datum": "M.S.L.",
+   "fsl": 142.07,
+   "ldl": 104.9,
+   "fsl_useful_content_ml": 717037,
+   "years": {
+    "2025": {
+     "level": 138.35,
+     "useful_content_ml": 617413,
+     "pct_useful_content": 86.11,
+     "today_rain_mm": 6.0,
+     "total_rain_mm": 1784.0
+    }
+   }
+  },
+  {
+   "lake": "Vihar",
+   "datum": "T.H.D.",
+   "fsl": 80.12,
+   "ldl": 73.92,
+   "fsl_useful_content_ml": 27698,
+   "years": {
+    "2025": {
+     "level": 78.54,
+     "useful_content_ml": 19448,
+     "pct_useful_content": 70.21,
+     "today_rain_mm": 16.0,
+     "total_rain_mm": 1193.0
+    }
+   }
+  },
+  {
+   "lake": "Tulsi",
+   "datum": "T.H.D.",
+   "fsl": 139.17,
+   "ldl": 131.07,
+   "fsl_useful_content_ml": 8046,
+   "years": {
+    "2025": {
+     "level": 137.81,
+     "useful_content_ml": 6285,
+     "pct_useful_content": 78.11,
+     "today_rain_mm": 25.0,
+     "total_rain_mm": 1973.0
+    }
+   }
+  }
+ ],
+ "totals": {
+  "fsl_useful_content_ml": 1447363,
+  "years": {
+   "2025": {
+    "useful_content_ml": 1283741,
+    "pct_useful_content": 88.7
+   }
+  }
+ }
+}

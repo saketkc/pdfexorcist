@@ -1,0 +1,43 @@
+# pdfexorcist recipe: MCCD Table 2 (deaths by ICD-10 chapter x sex x State)
+#
+# Table 2 has Table 4's layout at chapter level: M/F/T blocks, the ICD range
+# in each block's label, State columns named by rotated headers. So it reuses
+# Table 4's parser (mccd_table4.py); only [pages] differs. Try it:
+#
+#   pdfexorcist extract tests/fixtures/mccd/mccd_2019_t2_p68-69.pdf --recipe examples/mccd/table2.toml
+
+name = "MCCD Table 2"
+description = "Medically certified deaths by ICD-10 chapter, sex and State/UT (RGI annual report)"
+sample = "../../tests/fixtures/mccd/mccd_2019_t2_p68-69.pdf"
+
+[pages]
+start = 'TABLE\s*[-–]?\s*2\s*[-–:.]'
+stop = 'TABLE\s*[-–]?\s*3\s*[-–:.]'
+# select = "21-"   # skip a contents page that names Table 2 too
+
+[engines]
+ocr = false
+
+[parser]
+type = "custom"
+function = "mccd_table4.py:parse"
+key = ["page", "code", "pocc", "sex", "col"]
+
+[postprocess]
+function = "mccd_table4.py:name_states"
+
+[[checks]]
+column = "sex"
+rule = "T >= M + F"
+by = ["page", "code", "pocc", "col"]
+
+[[checks]]
+column = "state"
+rule = "All States (Total) >= rest"
+by = ["page", "code", "pocc", "sex"]
+
+[output]
+layout = "table"
+rows = ["code", "pocc", "sex"]
+columns = "state"
+format = "csv"

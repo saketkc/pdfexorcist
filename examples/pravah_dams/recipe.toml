@@ -1,0 +1,42 @@
+# pdfexorcist recipe: Maharashtra WRD "Pravah" daily storage report, major dams
+#
+# From page 3, a row per dam under region and district headings: designed and
+# today's storage (Mcum), and live storage as a % of designed live, today and a
+# year ago. pravah_dams.py keys each value by the dam's name, joins names that
+# wrap onto a second line, and keeps the name, region and district as extra
+# columns. Try it:
+#
+#   pdfexorcist extract https://mwrdpravah.in/damsafety/control/pdfLatestReportEng --recipe examples/pravah_dams/recipe.toml
+#
+# The URL serves only the latest report. On the fixture (pages 5-8 of 3 October 2026):
+#
+#   pdfexorcist extract tests/fixtures/pravah/pravah_2026-10-03_p5-8.pdf --recipe examples/pravah_dams/recipe.toml
+
+name = "Pravah dam storage"
+description = "Daily live and gross storage of Maharashtra's major dams (WRD Pravah)"
+sample = "../../tests/fixtures/pravah/pravah_2026-10-03_p5-8.pdf"
+
+[engines]
+ocr = false
+
+[parser]
+type = "custom"
+function = "pravah_dams.py:parse"
+key = ["page", "id", "col"]
+
+# designed gross = dead + live; 0.02 for rounding (Pawana prints 272.11 for 272.13)
+[[checks]]
+column = "col"
+rule = "gross_cap = dead + live_cap"
+by = ["page", "id"]
+abs_tolerance = 0.02
+
+# today's % = 100 * live / designed live, to 2 decimals
+[[checks]]
+function = "pravah_dams.py:pct_of_live"
+
+[output]
+layout = "table"
+rows = ["dam"]  # the printed name; region and district follow it
+columns = "col"
+format = "csv"

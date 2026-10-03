@@ -1,0 +1,55 @@
+name: Install poppler
+description: >-
+  Put poppler's pdftotext on PATH (Linux: apt, macOS: Homebrew, Windows: the
+  poppler-windows build that Chocolatey's poppler package also ships).
+inputs:
+  windows-release:
+    description: Tag of github.com/oschwartz10612/poppler-windows to install on Windows.
+    default: v26.09.0-0
+runs:
+  using: composite
+  steps:
+    - name: Install poppler-utils (Linux)
+      if: runner.os == 'Linux'
+      shell: bash
+      run: |
+        sudo apt-get update -qq
+        sudo apt-get install -y -qq --no-install-recommends poppler-utils
+
+    - name: Install poppler (macOS)
+      if: runner.os == 'macOS'
+      shell: bash
+      env:
+        HOMEBREW_NO_AUTO_UPDATE: "1"
+        HOMEBREW_NO_INSTALL_CLEANUP: "1"
+        HOMEBREW_NO_INSTALLED_DEPENDENTS_CHECK: "1"
+      run: brew install poppler
+
+    - name: Install poppler (Windows)
+      if: runner.os == 'Windows'
+      shell: pwsh
+      env:
+        GH_TOKEN: ${{ github.token }}
+        POPPLER_TAG: ${{ inputs.windows-release }}
+      run: |
+        $dest = Join-Path $env:RUNNER_TEMP "poppler"
+        gh release download $env:POPPLER_TAG --repo oschwartz10612/poppler-windows `
+          --pattern "Release-*.zip" --dir $env:RUNNER_TEMP --clobber
+        if ($LASTEXITCODE -ne 0) { throw "poppler download failed" }
+        $zip = Get-ChildItem (Join-Path $env:RUNNER_TEMP "Release-*.zip") | Select-Object -First 1
+        Expand-Archive -Path $zip.FullName -DestinationPath $dest -Force
+        $exe = Get-ChildItem $dest -Recurse -Filter pdftotext.exe | Select-Object -First 1
+        if (-not $exe) { throw "pdftotext.exe not found in $($zip.Name)" }
+        $exe.DirectoryName | Out-File -FilePath $env:GITHUB_PATH -Encoding utf8 -Append
+        # Git Bash puts /mingw64/bin ahead of GITHUB_PATH, and it ships xpdf's
+        # pdftotext (exits 99 on -v, different layout). Remove it so bash steps
+        # and the tests they launch find poppler's.
+        Remove-Item "$env:ProgramFiles\Git\mingw64\bin\pdftotext.exe" -ErrorAction SilentlyContinue
+
+    - name: Check pdftotext
+      shell: bash
+      run: |
+        command -v pdftotext
+        version=$(pdftotext -v 2>&1 || true)
+        echo "$version"
+        case "$version" in *poppler*) ;; *) echo "::error::pdftotext is not poppler's"; exit 1 ;; esac

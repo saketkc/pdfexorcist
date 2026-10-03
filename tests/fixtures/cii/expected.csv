@@ -1,0 +1,897 @@
+fixture,row,state,col,value,confirmed
+cii_2021_1A.1_p43.pdf,29,A & N Islands,3,564,True
+cii_2021_1A.1_p43.pdf,totalallindia,All India,3,3225597,True
+cii_2021_1A.1_p43.pdf,1,Andhra Pradesh,3,119229,True
+cii_2021_1A.1_p43.pdf,2,Arunachal Pradesh,3,2590,True
+cii_2021_1A.1_p43.pdf,3,Assam,3,123512,True
+cii_2021_1A.1_p43.pdf,4,Bihar,3,197935,True
+cii_2021_1A.1_p43.pdf,30,Chandigarh,3,2819,True
+cii_2021_1A.1_p43.pdf,5,Chhattisgarh,3,61256,True
+cii_2021_1A.1_p43.pdf,31,DNH&DD,3,548,True
+cii_2021_1A.1_p43.pdf,32,Delhi,3,299475,True
+cii_2021_1A.1_p43.pdf,6,Goa,3,2465,True
+cii_2021_1A.1_p43.pdf,7,Gujarat,3,139503,True
+cii_2021_1A.1_p43.pdf,8,Haryana,3,111323,True
+cii_2021_1A.1_p43.pdf,9,Himachal Pradesh,3,14480,True
+cii_2021_1A.1_p43.pdf,33,Jammu & Kashmir,3,22404,True
+cii_2021_1A.1_p43.pdf,10,Jharkhand,3,50048,True
+cii_2021_1A.1_p43.pdf,11,Karnataka,3,120165,True
+cii_2021_1A.1_p43.pdf,12,Kerala,3,175810,True
+cii_2021_1A.1_p43.pdf,35,Lakshadweep,3,123,True
+cii_2021_1A.1_p43.pdf,13,Madhya Pradesh,3,246470,True
+cii_2021_1A.1_p43.pdf,14,Maharashtra,3,341084,True
+cii_2021_1A.1_p43.pdf,15,Manipur,3,2830,True
+cii_2021_1A.1_p43.pdf,16,Meghalaya,3,3125,True
+cii_2021_1A.1_p43.pdf,17,Mizoram,3,2379,True
+cii_2021_1A.1_p43.pdf,18,Nagaland,3,1117,True
+cii_2021_1A.1_p43.pdf,19,Odisha,3,96033,True
+cii_2021_1A.1_p43.pdf,36,Puducherry,3,3167,True
+cii_2021_1A.1_p43.pdf,20,Punjab,3,44697,True
+cii_2021_1A.1_p43.pdf,21,Rajasthan,3,225306,True
+cii_2021_1A.1_p43.pdf,22,Sikkim,3,632,True
+cii_2021_1A.1_p43.pdf,23,Tamil Nadu,3,168116,True
+cii_2021_1A.1_p43.pdf,24,Telangana,3,118338,True
+cii_2021_1A.1_p43.pdf,totalstates,Total (States),3,2896497,True
+cii_2021_1A.1_p43.pdf,totaluts,Total (UTs),3,329100,True
+cii_2021_1A.1_p43.pdf,25,Tripura,3,5336,True
+cii_2021_1A.1_p43.pdf,26,Uttar Pradesh,3,353131,True
+cii_2021_1A.1_p43.pdf,27,Uttarakhand,3,12081,True
+cii_2021_1A.1_p43.pdf,28,West Bengal,3,157506,True
+cii_2021_1A.1_p43.pdf,29,A & N Islands,4,482,True
+cii_2021_1A.1_p43.pdf,totalallindia,All India,4,4254356,True
+cii_2021_1A.1_p43.pdf,1,Andhra Pradesh,4,188997,True
+cii_2021_1A.1_p43.pdf,2,Arunachal Pradesh,4,2244,True
+cii_2021_1A.1_p43.pdf,3,Assam,4,111558,True
+cii_2021_1A.1_p43.pdf,4,Bihar,4,194698,True
+cii_2021_1A.1_p43.pdf,30,Chandigarh,4,2583,True
+cii_2021_1A.1_p43.pdf,5,Chhattisgarh,4,65216,True
+cii_2021_1A.1_p43.pdf,31,DNH&DD,4,441,True
+cii_2021_1A.1_p43.pdf,32,Delhi,4,249192,True
+cii_2021_1A.1_p43.pdf,6,Goa,4,3393,True
+cii_2021_1A.1_p43.pdf,7,Gujarat,4,381849,True
+cii_2021_1A.1_p43.pdf,8,Haryana,4,103276,True
+cii_2021_1A.1_p43.pdf,9,Himachal Pradesh,4,14803,True
+cii_2021_1A.1_p43.pdf,33,Jammu & Kashmir,4,25233,True
+cii_2021_1A.1_p43.pdf,10,Jharkhand,4,51033,True
+cii_2021_1A.1_p43.pdf,11,Karnataka,4,106350,True
+cii_2021_1A.1_p43.pdf,12,Kerala,4,149099,True
+cii_2021_1A.1_p43.pdf,34,Ladakh,4,387,True
+cii_2021_1A.1_p43.pdf,35,Lakshadweep,4,107,True
+cii_2021_1A.1_p43.pdf,13,Madhya Pradesh,4,283881,True
+cii_2021_1A.1_p43.pdf,14,Maharashtra,4,394017,True
+cii_2021_1A.1_p43.pdf,15,Manipur,4,2349,True
+cii_2021_1A.1_p43.pdf,16,Meghalaya,4,2871,True
+cii_2021_1A.1_p43.pdf,17,Mizoram,4,1787,True
+cii_2021_1A.1_p43.pdf,18,Nagaland,4,1022,True
+cii_2021_1A.1_p43.pdf,19,Odisha,4,108533,True
+cii_2021_1A.1_p43.pdf,36,Puducherry,4,6725,True
+cii_2021_1A.1_p43.pdf,20,Punjab,4,49870,True
+cii_2021_1A.1_p43.pdf,21,Rajasthan,4,193279,True
+cii_2021_1A.1_p43.pdf,22,Sikkim,4,504,True
+cii_2021_1A.1_p43.pdf,23,Tamil Nadu,4,891700,True
+cii_2021_1A.1_p43.pdf,24,Telangana,4,135885,True
+cii_2021_1A.1_p43.pdf,totalstates,Total (States),4,3969206,True
+cii_2021_1A.1_p43.pdf,totaluts,Total (UTs),4,285150,True
+cii_2021_1A.1_p43.pdf,25,Tripura,4,4010,True
+cii_2021_1A.1_p43.pdf,26,Uttar Pradesh,4,355110,True
+cii_2021_1A.1_p43.pdf,27,Uttarakhand,4,13812,True
+cii_2021_1A.1_p43.pdf,28,West Bengal,4,158060,True
+cii_2021_1A.1_p43.pdf,29,A & N Islands,5,386,True
+cii_2021_1A.1_p43.pdf,totalallindia,All India,5,3663360,True
+cii_2021_1A.1_p43.pdf,1,Andhra Pradesh,5,179611,True
+cii_2021_1A.1_p43.pdf,2,Arunachal Pradesh,5,2626,True
+cii_2021_1A.1_p43.pdf,3,Assam,5,119883,True
+cii_2021_1A.1_p43.pdf,4,Bihar,5,186006,True
+cii_2021_1A.1_p43.pdf,30,Chandigarh,5,2401,True
+cii_2021_1A.1_p43.pdf,5,Chhattisgarh,5,70519,True
+cii_2021_1A.1_p43.pdf,31,DNH&DD,5,490,True
+cii_2021_1A.1_p43.pdf,32,Delhi,5,291904,True
+cii_2021_1A.1_p43.pdf,6,Goa,5,2099,True
+cii_2021_1A.1_p43.pdf,7,Gujarat,5,273056,True
+cii_2021_1A.1_p43.pdf,8,Haryana,5,112720,True
+cii_2021_1A.1_p43.pdf,9,Himachal Pradesh,5,13041,True
+cii_2021_1A.1_p43.pdf,33,Jammu & Kashmir,5,27447,True
+cii_2021_1A.1_p43.pdf,10,Jharkhand,5,47684,True
+cii_2021_1A.1_p43.pdf,11,Karnataka,5,115728,True
+cii_2021_1A.1_p43.pdf,12,Kerala,5,142643,True
+cii_2021_1A.1_p43.pdf,34,Ladakh,5,519,True
+cii_2021_1A.1_p43.pdf,35,Lakshadweep,5,89,True
+cii_2021_1A.1_p43.pdf,13,Madhya Pradesh,5,304066,True
+cii_2021_1A.1_p43.pdf,14,Maharashtra,5,367218,True
+cii_2021_1A.1_p43.pdf,15,Manipur,5,2484,True
+cii_2021_1A.1_p43.pdf,16,Meghalaya,5,2672,True
+cii_2021_1A.1_p43.pdf,17,Mizoram,5,2467,True
+cii_2021_1A.1_p43.pdf,18,Nagaland,5,1033,True
+cii_2021_1A.1_p43.pdf,19,Odisha,5,124956,True
+cii_2021_1A.1_p43.pdf,36,Puducherry,5,3851,True
+cii_2021_1A.1_p43.pdf,20,Punjab,5,46454,True
+cii_2021_1A.1_p43.pdf,21,Rajasthan,5,214552,True
+cii_2021_1A.1_p43.pdf,22,Sikkim,5,532,True
+cii_2021_1A.1_p43.pdf,23,Tamil Nadu,5,322852,True
+cii_2021_1A.1_p43.pdf,24,Telangana,5,146131,True
+cii_2021_1A.1_p43.pdf,totalstates,Total (States),5,3336273,True
+cii_2021_1A.1_p43.pdf,totaluts,Total (UTs),5,327087,True
+cii_2021_1A.1_p43.pdf,25,Tripura,5,4133,True
+cii_2021_1A.1_p43.pdf,26,Uttar Pradesh,5,357905,True
+cii_2021_1A.1_p43.pdf,27,Uttarakhand,5,15704,True
+cii_2021_1A.1_p43.pdf,28,West Bengal,5,157498,True
+cii_2021_1A.1_p43.pdf,29,A & N Islands,6,4,True
+cii_2021_1A.1_p43.pdf,totalallindia,All India,6,13671.8,True
+cii_2021_1A.1_p43.pdf,1,Andhra Pradesh,6,528.5,True
+cii_2021_1A.1_p43.pdf,2,Arunachal Pradesh,6,15.4,True
+cii_2021_1A.1_p43.pdf,3,Assam,6,351.6,True
+cii_2021_1A.1_p43.pdf,4,Bihar,6,1237,True
+cii_2021_1A.1_p43.pdf,30,Chandigarh,6,12.1,True
+cii_2021_1A.1_p43.pdf,5,Chhattisgarh,6,296.1,True
+cii_2021_1A.1_p43.pdf,31,DNH&DD,6,11.1,True
+cii_2021_1A.1_p43.pdf,32,Delhi,6,207,True
+cii_2021_1A.1_p43.pdf,6,Goa,6,15.6,True
+cii_2021_1A.1_p43.pdf,7,Gujarat,6,700.8,True
+cii_2021_1A.1_p43.pdf,8,Haryana,6,296,True
+cii_2021_1A.1_p43.pdf,9,Himachal Pradesh,6,74.1,True
+cii_2021_1A.1_p43.pdf,33,Jammu & Kashmir,6,134.4,True
+cii_2021_1A.1_p43.pdf,10,Jharkhand,6,386.4,True
+cii_2021_1A.1_p43.pdf,11,Karnataka,6,669.9,True
+cii_2021_1A.1_p43.pdf,12,Kerala,6,355.4,True
+cii_2021_1A.1_p43.pdf,34,Ladakh,6,3,True
+cii_2021_1A.1_p43.pdf,35,Lakshadweep,6,0.7,True
+cii_2021_1A.1_p43.pdf,13,Madhya Pradesh,6,848.6,True
+cii_2021_1A.1_p43.pdf,14,Maharashtra,6,1247.6,True
+cii_2021_1A.1_p43.pdf,15,Manipur,6,31.7,True
+cii_2021_1A.1_p43.pdf,16,Meghalaya,6,33,True
+cii_2021_1A.1_p43.pdf,17,Mizoram,6,12.2,True
+cii_2021_1A.1_p43.pdf,18,Nagaland,6,22,True
+cii_2021_1A.1_p43.pdf,19,Odisha,6,457.9,True
+cii_2021_1A.1_p43.pdf,36,Puducherry,6,15.8,True
+cii_2021_1A.1_p43.pdf,20,Punjab,6,304,True
+cii_2021_1A.1_p43.pdf,21,Rajasthan,6,795.7,True
+cii_2021_1A.1_p43.pdf,22,Sikkim,6,6.8,True
+cii_2021_1A.1_p43.pdf,23,Tamil Nadu,6,764.8,True
+cii_2021_1A.1_p43.pdf,24,Telangana,6,377.7,True
+cii_2021_1A.1_p43.pdf,totalstates,Total (States),6,13283.6,True
+cii_2021_1A.1_p43.pdf,totaluts,Total (UTs),6,388.1,True
+cii_2021_1A.1_p43.pdf,25,Tripura,6,40.8,True
+cii_2021_1A.1_p43.pdf,26,Uttar Pradesh,6,2317,True
+cii_2021_1A.1_p43.pdf,27,Uttarakhand,6,114.4,True
+cii_2021_1A.1_p43.pdf,28,West Bengal,6,982.9,True
+cii_2021_1A.1_p43.pdf,29,A & N Islands,7,96.3,True
+cii_2021_1A.1_p43.pdf,totalallindia,All India,7,268,True
+cii_2021_1A.1_p43.pdf,1,Andhra Pradesh,7,339.9,True
+cii_2021_1A.1_p43.pdf,2,Arunachal Pradesh,7,170.9,True
+cii_2021_1A.1_p43.pdf,3,Assam,7,341,True
+cii_2021_1A.1_p43.pdf,4,Bihar,7,150.4,True
+cii_2021_1A.1_p43.pdf,30,Chandigarh,7,198.1,True
+cii_2021_1A.1_p43.pdf,5,Chhattisgarh,7,238.2,True
+cii_2021_1A.1_p43.pdf,31,DNH&DD,7,44.2,True
+cii_2021_1A.1_p43.pdf,32,Delhi,7,1410,True
+cii_2021_1A.1_p43.pdf,6,Goa,7,134.5,True
+cii_2021_1A.1_p43.pdf,7,Gujarat,7,389.7,True
+cii_2021_1A.1_p43.pdf,8,Haryana,7,380.8,True
+cii_2021_1A.1_p43.pdf,9,Himachal Pradesh,7,176.1,True
+cii_2021_1A.1_p43.pdf,33,Jammu & Kashmir,7,204.2,True
+cii_2021_1A.1_p43.pdf,10,Jharkhand,7,123.4,True
+cii_2021_1A.1_p43.pdf,11,Karnataka,7,172.8,True
+cii_2021_1A.1_p43.pdf,12,Kerala,7,401.4,True
+cii_2021_1A.1_p43.pdf,34,Ladakh,7,174.2,True
+cii_2021_1A.1_p43.pdf,35,Lakshadweep,7,130.9,True
+cii_2021_1A.1_p43.pdf,13,Madhya Pradesh,7,358.3,True
+cii_2021_1A.1_p43.pdf,14,Maharashtra,7,294.3,True
+cii_2021_1A.1_p43.pdf,15,Manipur,7,78.3,True
+cii_2021_1A.1_p43.pdf,16,Meghalaya,7,81.1,True
+cii_2021_1A.1_p43.pdf,17,Mizoram,7,202.4,True
+cii_2021_1A.1_p43.pdf,18,Nagaland,7,47,True
+cii_2021_1A.1_p43.pdf,19,Odisha,7,272.9,True
+cii_2021_1A.1_p43.pdf,36,Puducherry,7,243.1,True
+cii_2021_1A.1_p43.pdf,20,Punjab,7,152.8,True
+cii_2021_1A.1_p43.pdf,21,Rajasthan,7,269.6,True
+cii_2021_1A.1_p43.pdf,22,Sikkim,7,78.5,True
+cii_2021_1A.1_p43.pdf,23,Tamil Nadu,7,422.1,True
+cii_2021_1A.1_p43.pdf,24,Telangana,7,386.9,True
+cii_2021_1A.1_p43.pdf,totalstates,Total (States),7,251.2,True
+cii_2021_1A.1_p43.pdf,totaluts,Total (UTs),7,842.7,True
+cii_2021_1A.1_p43.pdf,25,Tripura,7,101.3,True
+cii_2021_1A.1_p43.pdf,26,Uttar Pradesh,7,154.5,True
+cii_2021_1A.1_p43.pdf,27,Uttarakhand,7,137.3,True
+cii_2021_1A.1_p43.pdf,28,West Bengal,7,160.2,True
+cii_2021_1A.1_p43.pdf,29,A & N Islands,8,88.2,True
+cii_2021_1A.1_p43.pdf,totalallindia,All India,8,72.3,True
+cii_2021_1A.1_p43.pdf,1,Andhra Pradesh,8,92.9,True
+cii_2021_1A.1_p43.pdf,2,Arunachal Pradesh,8,51.7,True
+cii_2021_1A.1_p43.pdf,3,Assam,8,38.2,True
+cii_2021_1A.1_p43.pdf,4,Bihar,8,70.5,True
+cii_2021_1A.1_p43.pdf,30,Chandigarh,8,67.7,True
+cii_2021_1A.1_p43.pdf,5,Chhattisgarh,8,80.2,True
+cii_2021_1A.1_p43.pdf,31,DNH&DD,8,76.2,True
+cii_2021_1A.1_p43.pdf,32,Delhi,8,31,True
+cii_2021_1A.1_p43.pdf,6,Goa,8,73.5,True
+cii_2021_1A.1_p43.pdf,7,Gujarat,8,95.9,True
+cii_2021_1A.1_p43.pdf,8,Haryana,8,49.1,True
+cii_2021_1A.1_p43.pdf,9,Himachal Pradesh,8,83.9,True
+cii_2021_1A.1_p43.pdf,33,Jammu & Kashmir,8,79.9,True
+cii_2021_1A.1_p43.pdf,10,Jharkhand,8,67.5,True
+cii_2021_1A.1_p43.pdf,11,Karnataka,8,78.9,True
+cii_2021_1A.1_p43.pdf,12,Kerala,8,91.8,True
+cii_2021_1A.1_p43.pdf,34,Ladakh,8,89.5,True
+cii_2021_1A.1_p43.pdf,35,Lakshadweep,8,48.1,True
+cii_2021_1A.1_p43.pdf,13,Madhya Pradesh,8,87.3,True
+cii_2021_1A.1_p43.pdf,14,Maharashtra,8,76.4,True
+cii_2021_1A.1_p43.pdf,15,Manipur,8,14.8,True
+cii_2021_1A.1_p43.pdf,16,Meghalaya,8,32.2,True
+cii_2021_1A.1_p43.pdf,17,Mizoram,8,69,True
+cii_2021_1A.1_p43.pdf,18,Nagaland,8,62.7,True
+cii_2021_1A.1_p43.pdf,19,Odisha,8,75.5,True
+cii_2021_1A.1_p43.pdf,36,Puducherry,8,93,True
+cii_2021_1A.1_p43.pdf,20,Punjab,8,68.2,True
+cii_2021_1A.1_p43.pdf,21,Rajasthan,8,51.5,True
+cii_2021_1A.1_p43.pdf,22,Sikkim,8,57,True
+cii_2021_1A.1_p43.pdf,23,Tamil Nadu,8,63,True
+cii_2021_1A.1_p43.pdf,24,Telangana,8,80.8,True
+cii_2021_1A.1_p43.pdf,totalstates,Total (States),8,75.6,True
+cii_2021_1A.1_p43.pdf,totaluts,Total (UTs),8,36.7,True
+cii_2021_1A.1_p43.pdf,25,Tripura,8,69.6,True
+cii_2021_1A.1_p43.pdf,26,Uttar Pradesh,8,75.5,True
+cii_2021_1A.1_p43.pdf,27,Uttarakhand,8,74.6,True
+cii_2021_1A.1_p43.pdf,28,West Bengal,8,91.9,True
+cii_2023_1A.4_p47.pdf,29,A & N Islands,12,23,True
+cii_2023_1A.4_p47.pdf,totalallindia,All India,12,157831,True
+cii_2023_1A.4_p47.pdf,1,Andhra Pradesh,12,7488,True
+cii_2023_1A.4_p47.pdf,2,Arunachal Pradesh,12,110,True
+cii_2023_1A.4_p47.pdf,3,Assam,12,2763,True
+cii_2023_1A.4_p47.pdf,4,Bihar,12,8286,True
+cii_2023_1A.4_p47.pdf,30,Chandigarh,12,65,True
+cii_2023_1A.4_p47.pdf,5,Chhattisgarh,12,5193,True
+cii_2023_1A.4_p47.pdf,32,Delhi,12,1432,True
+cii_2023_1A.4_p47.pdf,6,Goa,12,156,True
+cii_2023_1A.4_p47.pdf,7,Gujarat,12,7074,True
+cii_2023_1A.4_p47.pdf,8,Haryana,12,4994,True
+cii_2023_1A.4_p47.pdf,9,Himachal Pradesh,12,579,True
+cii_2023_1A.4_p47.pdf,33,Jammu & Kashmir,12,639,True
+cii_2023_1A.4_p47.pdf,10,Jharkhand,12,3765,True
+cii_2023_1A.4_p47.pdf,11,Karnataka,12,11584,True
+cii_2023_1A.4_p47.pdf,12,Kerala,12,3138,True
+cii_2023_1A.4_p47.pdf,34,Ladakh,12,49,True
+cii_2023_1A.4_p47.pdf,35,Lakshadweep,12,0,True
+cii_2023_1A.4_p47.pdf,13,Madhya Pradesh,12,12869,True
+cii_2023_1A.4_p47.pdf,14,Maharashtra,12,14163,True
+cii_2023_1A.4_p47.pdf,15,Manipur,12,70,True
+cii_2023_1A.4_p47.pdf,16,Meghalaya,12,123,True
+cii_2023_1A.4_p47.pdf,17,Mizoram,12,66,True
+cii_2023_1A.4_p47.pdf,18,Nagaland,12,40,True
+cii_2023_1A.4_p47.pdf,19,Odisha,12,5732,True
+cii_2023_1A.4_p47.pdf,36,Puducherry,12,145,True
+cii_2023_1A.4_p47.pdf,20,Punjab,12,3052,True
+cii_2023_1A.4_p47.pdf,21,Rajasthan,12,10822,True
+cii_2023_1A.4_p47.pdf,22,Sikkim,12,55,True
+cii_2023_1A.4_p47.pdf,23,Tamil Nadu,12,17520,True
+cii_2023_1A.4_p47.pdf,24,Telangana,12,7282,True
+cii_2023_1A.4_p47.pdf,totalstates,Total (States),12,155401,True
+cii_2023_1A.4_p47.pdf,totaluts,Total (UTs),12,2430,True
+cii_2023_1A.4_p47.pdf,25,Tripura,12,242,True
+cii_2023_1A.4_p47.pdf,26,Uttar Pradesh,12,22532,True
+cii_2023_1A.4_p47.pdf,27,Uttarakhand,12,992,True
+cii_2023_1A.4_p47.pdf,28,West Bengal,12,4711,True
+cii_2023_1A.4_p47.pdf,31,DNH&DD,12,77,True
+cii_2023_1A.4_p47.pdf,29,A & N Islands,13,36,True
+cii_2023_1A.4_p47.pdf,totalallindia,All India,13,173117,True
+cii_2023_1A.4_p47.pdf,1,Andhra Pradesh,13,8036,True
+cii_2023_1A.4_p47.pdf,2,Arunachal Pradesh,13,121,True
+cii_2023_1A.4_p47.pdf,3,Assam,13,2950,True
+cii_2023_1A.4_p47.pdf,4,Bihar,13,8873,True
+cii_2023_1A.4_p47.pdf,30,Chandigarh,13,67,True
+cii_2023_1A.4_p47.pdf,5,Chhattisgarh,13,5914,True
+cii_2023_1A.4_p47.pdf,32,Delhi,13,1903,True
+cii_2023_1A.4_p47.pdf,6,Goa,13,185,True
+cii_2023_1A.4_p47.pdf,7,Gujarat,13,8410,True
+cii_2023_1A.4_p47.pdf,8,Haryana,13,5475,True
+cii_2023_1A.4_p47.pdf,9,Himachal Pradesh,13,774,True
+cii_2023_1A.4_p47.pdf,33,Jammu & Kashmir,13,762,True
+cii_2023_1A.4_p47.pdf,10,Jharkhand,13,3888,True
+cii_2023_1A.4_p47.pdf,11,Karnataka,13,14414,True
+cii_2023_1A.4_p47.pdf,12,Kerala,13,3485,True
+cii_2023_1A.4_p47.pdf,34,Ladakh,13,49,True
+cii_2023_1A.4_p47.pdf,35,Lakshadweep,13,0,True
+cii_2023_1A.4_p47.pdf,13,Madhya Pradesh,13,13845,True
+cii_2023_1A.4_p47.pdf,14,Maharashtra,13,15198,True
+cii_2023_1A.4_p47.pdf,15,Manipur,13,83,True
+cii_2023_1A.4_p47.pdf,16,Meghalaya,13,127,True
+cii_2023_1A.4_p47.pdf,17,Mizoram,13,77,True
+cii_2023_1A.4_p47.pdf,18,Nagaland,13,52,True
+cii_2023_1A.4_p47.pdf,19,Odisha,13,5739,True
+cii_2023_1A.4_p47.pdf,36,Puducherry,13,156,True
+cii_2023_1A.4_p47.pdf,20,Punjab,13,3666,True
+cii_2023_1A.4_p47.pdf,21,Rajasthan,13,11496,True
+cii_2023_1A.4_p47.pdf,22,Sikkim,13,73,True
+cii_2023_1A.4_p47.pdf,23,Tamil Nadu,13,18564,True
+cii_2023_1A.4_p47.pdf,24,Telangana,13,7797,True
+cii_2023_1A.4_p47.pdf,totalstates,Total (States),13,170053,True
+cii_2023_1A.4_p47.pdf,totaluts,Total (UTs),13,3064,True
+cii_2023_1A.4_p47.pdf,25,Tripura,13,285,True
+cii_2023_1A.4_p47.pdf,26,Uttar Pradesh,13,23771,True
+cii_2023_1A.4_p47.pdf,27,Uttarakhand,13,1052,True
+cii_2023_1A.4_p47.pdf,28,West Bengal,13,5703,True
+cii_2023_1A.4_p47.pdf,31,DNH&DD,13,91,True
+cii_2023_1A.4_p47.pdf,29,A & N Islands,14,5.7,True
+cii_2023_1A.4_p47.pdf,totalallindia,All India,14,11.3,True
+cii_2023_1A.4_p47.pdf,1,Andhra Pradesh,14,14.1,True
+cii_2023_1A.4_p47.pdf,2,Arunachal Pradesh,14,7,True
+cii_2023_1A.4_p47.pdf,3,Assam,14,7.7,True
+cii_2023_1A.4_p47.pdf,4,Bihar,14,6.5,True
+cii_2023_1A.4_p47.pdf,30,Chandigarh,14,5.3,True
+cii_2023_1A.4_p47.pdf,5,Chhattisgarh,14,17.1,True
+cii_2023_1A.4_p47.pdf,32,Delhi,14,6.7,True
+cii_2023_1A.4_p47.pdf,6,Goa,14,9.9,True
+cii_2023_1A.4_p47.pdf,7,Gujarat,14,9.9,True
+cii_2023_1A.4_p47.pdf,8,Haryana,14,16.5,True
+cii_2023_1A.4_p47.pdf,9,Himachal Pradesh,14,7.7,True
+cii_2023_1A.4_p47.pdf,33,Jammu & Kashmir,14,4.7,True
+cii_2023_1A.4_p47.pdf,10,Jharkhand,14,9.5,True
+cii_2023_1A.4_p47.pdf,11,Karnataka,14,17.1,True
+cii_2023_1A.4_p47.pdf,12,Kerala,14,8.8,True
+cii_2023_1A.4_p47.pdf,34,Ladakh,14,16.3,True
+cii_2023_1A.4_p47.pdf,35,Lakshadweep,14,0,True
+cii_2023_1A.4_p47.pdf,13,Madhya Pradesh,14,14.8,True
+cii_2023_1A.4_p47.pdf,14,Maharashtra,14,11.2,True
+cii_2023_1A.4_p47.pdf,15,Manipur,14,2.2,True
+cii_2023_1A.4_p47.pdf,16,Meghalaya,14,3.7,True
+cii_2023_1A.4_p47.pdf,17,Mizoram,14,5.3,True
+cii_2023_1A.4_p47.pdf,18,Nagaland,14,1.8,True
+cii_2023_1A.4_p47.pdf,19,Odisha,14,12.4,True
+cii_2023_1A.4_p47.pdf,36,Puducherry,14,8.7,True
+cii_2023_1A.4_p47.pdf,20,Punjab,14,9.9,True
+cii_2023_1A.4_p47.pdf,21,Rajasthan,14,13.3,True
+cii_2023_1A.4_p47.pdf,22,Sikkim,14,8,True
+cii_2023_1A.4_p47.pdf,23,Tamil Nadu,14,22.8,True
+cii_2023_1A.4_p47.pdf,24,Telangana,14,19.1,True
+cii_2023_1A.4_p47.pdf,totalstates,Total (States),14,11.5,True
+cii_2023_1A.4_p47.pdf,totaluts,Total (UTs),14,6.1,True
+cii_2023_1A.4_p47.pdf,25,Tripura,14,5.8,True
+cii_2023_1A.4_p47.pdf,26,Uttar Pradesh,14,9.5,True
+cii_2023_1A.4_p47.pdf,27,Uttarakhand,14,8.5,True
+cii_2023_1A.4_p47.pdf,28,West Bengal,14,4.7,True
+cii_2023_1A.4_p47.pdf,31,DNH&DD,14,6,False
+cii_2023_1A.4_p47.pdf,29,A & N Islands,15,3,True
+cii_2023_1A.4_p47.pdf,totalallindia,All India,15,51780,True
+cii_2023_1A.4_p47.pdf,1,Andhra Pradesh,15,549,True
+cii_2023_1A.4_p47.pdf,2,Arunachal Pradesh,15,15,True
+cii_2023_1A.4_p47.pdf,3,Assam,15,1211,True
+cii_2023_1A.4_p47.pdf,4,Bihar,15,3137,True
+cii_2023_1A.4_p47.pdf,30,Chandigarh,15,26,True
+cii_2023_1A.4_p47.pdf,5,Chhattisgarh,15,1829,True
+cii_2023_1A.4_p47.pdf,32,Delhi,15,697,True
+cii_2023_1A.4_p47.pdf,6,Goa,15,33,True
+cii_2023_1A.4_p47.pdf,7,Gujarat,15,976,True
+cii_2023_1A.4_p47.pdf,8,Haryana,15,647,True
+cii_2023_1A.4_p47.pdf,9,Himachal Pradesh,15,56,True
+cii_2023_1A.4_p47.pdf,33,Jammu & Kashmir,15,176,True
+cii_2023_1A.4_p47.pdf,10,Jharkhand,15,2310,True
+cii_2023_1A.4_p47.pdf,11,Karnataka,15,1170,True
+cii_2023_1A.4_p47.pdf,12,Kerala,15,102,True
+cii_2023_1A.4_p47.pdf,34,Ladakh,15,5,True
+cii_2023_1A.4_p47.pdf,35,Lakshadweep,15,0,True
+cii_2023_1A.4_p47.pdf,13,Madhya Pradesh,15,7535,True
+cii_2023_1A.4_p47.pdf,14,Maharashtra,15,3747,True
+cii_2023_1A.4_p47.pdf,15,Manipur,15,45,True
+cii_2023_1A.4_p47.pdf,16,Meghalaya,15,30,True
+cii_2023_1A.4_p47.pdf,17,Mizoram,15,4,True
+cii_2023_1A.4_p47.pdf,18,Nagaland,15,7,True
+cii_2023_1A.4_p47.pdf,19,Odisha,15,563,True
+cii_2023_1A.4_p47.pdf,36,Puducherry,15,0,True
+cii_2023_1A.4_p47.pdf,20,Punjab,15,1590,True
+cii_2023_1A.4_p47.pdf,21,Rajasthan,15,3240,True
+cii_2023_1A.4_p47.pdf,22,Sikkim,15,4,True
+cii_2023_1A.4_p47.pdf,23,Tamil Nadu,15,1525,True
+cii_2023_1A.4_p47.pdf,24,Telangana,15,1607,True
+cii_2023_1A.4_p47.pdf,totalstates,Total (States),15,50837,True
+cii_2023_1A.4_p47.pdf,totaluts,Total (UTs),15,943,True
+cii_2023_1A.4_p47.pdf,25,Tripura,15,90,True
+cii_2023_1A.4_p47.pdf,26,Uttar Pradesh,15,18438,True
+cii_2023_1A.4_p47.pdf,27,Uttarakhand,15,313,True
+cii_2023_1A.4_p47.pdf,28,West Bengal,15,64,True
+cii_2023_1A.4_p47.pdf,31,DNH&DD,15,36,True
+cii_2023_1A.4_p47.pdf,29,A & N Islands,16,4,True
+cii_2023_1A.4_p47.pdf,totalallindia,All India,16,55334,True
+cii_2023_1A.4_p47.pdf,1,Andhra Pradesh,16,575,True
+cii_2023_1A.4_p47.pdf,2,Arunachal Pradesh,16,15,True
+cii_2023_1A.4_p47.pdf,3,Assam,16,1273,True
+cii_2023_1A.4_p47.pdf,4,Bihar,16,3270,True
+cii_2023_1A.4_p47.pdf,30,Chandigarh,16,26,True
+cii_2023_1A.4_p47.pdf,5,Chhattisgarh,16,2072,True
+cii_2023_1A.4_p47.pdf,32,Delhi,16,794,True
+cii_2023_1A.4_p47.pdf,6,Goa,16,42,True
+cii_2023_1A.4_p47.pdf,7,Gujarat,16,1088,True
+cii_2023_1A.4_p47.pdf,8,Haryana,16,704,True
+cii_2023_1A.4_p47.pdf,9,Himachal Pradesh,16,77,True
+cii_2023_1A.4_p47.pdf,33,Jammu & Kashmir,16,234,True
+cii_2023_1A.4_p47.pdf,10,Jharkhand,16,2420,True
+cii_2023_1A.4_p47.pdf,11,Karnataka,16,1331,True
+cii_2023_1A.4_p47.pdf,12,Kerala,16,110,True
+cii_2023_1A.4_p47.pdf,34,Ladakh,16,5,True
+cii_2023_1A.4_p47.pdf,35,Lakshadweep,16,0,True
+cii_2023_1A.4_p47.pdf,13,Madhya Pradesh,16,8118,True
+cii_2023_1A.4_p47.pdf,14,Maharashtra,16,3909,True
+cii_2023_1A.4_p47.pdf,15,Manipur,16,50,True
+cii_2023_1A.4_p47.pdf,16,Meghalaya,16,33,True
+cii_2023_1A.4_p47.pdf,17,Mizoram,16,4,True
+cii_2023_1A.4_p47.pdf,18,Nagaland,16,8,True
+cii_2023_1A.4_p47.pdf,19,Odisha,16,563,True
+cii_2023_1A.4_p47.pdf,36,Puducherry,16,0,True
+cii_2023_1A.4_p47.pdf,20,Punjab,16,1866,True
+cii_2023_1A.4_p47.pdf,21,Rajasthan,16,3477,True
+cii_2023_1A.4_p47.pdf,22,Sikkim,16,4,True
+cii_2023_1A.4_p47.pdf,23,Tamil Nadu,16,1596,True
+cii_2023_1A.4_p47.pdf,24,Telangana,16,1634,True
+cii_2023_1A.4_p47.pdf,totalstates,Total (States),16,54235,True
+cii_2023_1A.4_p47.pdf,totaluts,Total (UTs),16,1099,True
+cii_2023_1A.4_p47.pdf,25,Tripura,16,97,True
+cii_2023_1A.4_p47.pdf,26,Uttar Pradesh,16,19514,True
+cii_2023_1A.4_p47.pdf,27,Uttarakhand,16,313,True
+cii_2023_1A.4_p47.pdf,28,West Bengal,16,72,True
+cii_2023_1A.4_p47.pdf,31,DNH&DD,16,36,True
+cii_2023_1A.4_p47.pdf,29,A & N Islands,17,0.7,True
+cii_2023_1A.4_p47.pdf,totalallindia,All India,17,3.7,True
+cii_2023_1A.4_p47.pdf,1,Andhra Pradesh,17,1,True
+cii_2023_1A.4_p47.pdf,2,Arunachal Pradesh,17,1,True
+cii_2023_1A.4_p47.pdf,3,Assam,17,3.4,True
+cii_2023_1A.4_p47.pdf,4,Bihar,17,2.5,True
+cii_2023_1A.4_p47.pdf,30,Chandigarh,17,2.1,True
+cii_2023_1A.4_p47.pdf,5,Chhattisgarh,17,6,True
+cii_2023_1A.4_p47.pdf,32,Delhi,17,3.2,True
+cii_2023_1A.4_p47.pdf,6,Goa,17,2.1,True
+cii_2023_1A.4_p47.pdf,7,Gujarat,17,1.4,True
+cii_2023_1A.4_p47.pdf,8,Haryana,17,2.1,True
+cii_2023_1A.4_p47.pdf,9,Himachal Pradesh,17,0.7,True
+cii_2023_1A.4_p47.pdf,33,Jammu & Kashmir,17,1.3,True
+cii_2023_1A.4_p47.pdf,10,Jharkhand,17,5.8,True
+cii_2023_1A.4_p47.pdf,11,Karnataka,17,1.7,True
+cii_2023_1A.4_p47.pdf,12,Kerala,17,0.3,True
+cii_2023_1A.4_p47.pdf,34,Ladakh,17,1.7,True
+cii_2023_1A.4_p47.pdf,35,Lakshadweep,17,0,True
+cii_2023_1A.4_p47.pdf,13,Madhya Pradesh,17,8.7,True
+cii_2023_1A.4_p47.pdf,14,Maharashtra,17,3,True
+cii_2023_1A.4_p47.pdf,15,Manipur,17,1.4,True
+cii_2023_1A.4_p47.pdf,16,Meghalaya,17,0.9,True
+cii_2023_1A.4_p47.pdf,17,Mizoram,17,0.3,True
+cii_2023_1A.4_p47.pdf,18,Nagaland,17,0.3,True
+cii_2023_1A.4_p47.pdf,19,Odisha,17,1.2,True
+cii_2023_1A.4_p47.pdf,36,Puducherry,17,0,True
+cii_2023_1A.4_p47.pdf,20,Punjab,17,5.2,True
+cii_2023_1A.4_p47.pdf,21,Rajasthan,17,4,True
+cii_2023_1A.4_p47.pdf,22,Sikkim,17,0.6,True
+cii_2023_1A.4_p47.pdf,23,Tamil Nadu,17,2,True
+cii_2023_1A.4_p47.pdf,24,Telangana,17,4.2,True
+cii_2023_1A.4_p47.pdf,totalstates,Total (States),17,3.8,True
+cii_2023_1A.4_p47.pdf,totaluts,Total (UTs),17,2.4,True
+cii_2023_1A.4_p47.pdf,25,Tripura,17,2.2,True
+cii_2023_1A.4_p47.pdf,26,Uttar Pradesh,17,7.8,True
+cii_2023_1A.4_p47.pdf,27,Uttarakhand,17,2.7,True
+cii_2023_1A.4_p47.pdf,28,West Bengal,17,0.1,True
+cii_2023_1A.4_p47.pdf,31,DNH&DD,17,2.8,False
+cii_2023_1A.4_p47.pdf,29,A & N Islands,18,20,True
+cii_2023_1A.4_p47.pdf,totalallindia,All India,18,106051,True
+cii_2023_1A.4_p47.pdf,1,Andhra Pradesh,18,6939,True
+cii_2023_1A.4_p47.pdf,2,Arunachal Pradesh,18,95,True
+cii_2023_1A.4_p47.pdf,3,Assam,18,1552,True
+cii_2023_1A.4_p47.pdf,4,Bihar,18,5149,True
+cii_2023_1A.4_p47.pdf,30,Chandigarh,18,39,True
+cii_2023_1A.4_p47.pdf,5,Chhattisgarh,18,3364,True
+cii_2023_1A.4_p47.pdf,32,Delhi,18,735,True
+cii_2023_1A.4_p47.pdf,6,Goa,18,123,True
+cii_2023_1A.4_p47.pdf,7,Gujarat,18,6098,True
+cii_2023_1A.4_p47.pdf,8,Haryana,18,4347,True
+cii_2023_1A.4_p47.pdf,9,Himachal Pradesh,18,523,True
+cii_2023_1A.4_p47.pdf,33,Jammu & Kashmir,18,463,True
+cii_2023_1A.4_p47.pdf,10,Jharkhand,18,1455,True
+cii_2023_1A.4_p47.pdf,11,Karnataka,18,10414,True
+cii_2023_1A.4_p47.pdf,12,Kerala,18,3036,True
+cii_2023_1A.4_p47.pdf,34,Ladakh,18,44,True
+cii_2023_1A.4_p47.pdf,35,Lakshadweep,18,0,True
+cii_2023_1A.4_p47.pdf,13,Madhya Pradesh,18,5334,True
+cii_2023_1A.4_p47.pdf,14,Maharashtra,18,10416,True
+cii_2023_1A.4_p47.pdf,15,Manipur,18,25,True
+cii_2023_1A.4_p47.pdf,16,Meghalaya,18,93,True
+cii_2023_1A.4_p47.pdf,17,Mizoram,18,62,True
+cii_2023_1A.4_p47.pdf,18,Nagaland,18,33,True
+cii_2023_1A.4_p47.pdf,19,Odisha,18,5169,True
+cii_2023_1A.4_p47.pdf,36,Puducherry,18,145,True
+cii_2023_1A.4_p47.pdf,20,Punjab,18,1462,True
+cii_2023_1A.4_p47.pdf,21,Rajasthan,18,7582,True
+cii_2023_1A.4_p47.pdf,22,Sikkim,18,51,True
+cii_2023_1A.4_p47.pdf,23,Tamil Nadu,18,15995,True
+cii_2023_1A.4_p47.pdf,24,Telangana,18,5675,True
+cii_2023_1A.4_p47.pdf,totalstates,Total (States),18,104564,True
+cii_2023_1A.4_p47.pdf,totaluts,Total (UTs),18,1487,True
+cii_2023_1A.4_p47.pdf,25,Tripura,18,152,True
+cii_2023_1A.4_p47.pdf,26,Uttar Pradesh,18,4094,True
+cii_2023_1A.4_p47.pdf,27,Uttarakhand,18,679,True
+cii_2023_1A.4_p47.pdf,28,West Bengal,18,4647,True
+cii_2023_1A.4_p47.pdf,31,DNH&DD,18,41,True
+cii_2023_1A.4_p47.pdf,29,A & N Islands,19,32,True
+cii_2023_1A.4_p47.pdf,totalallindia,All India,19,117783,True
+cii_2023_1A.4_p47.pdf,1,Andhra Pradesh,19,7461,True
+cii_2023_1A.4_p47.pdf,2,Arunachal Pradesh,19,106,True
+cii_2023_1A.4_p47.pdf,3,Assam,19,1677,True
+cii_2023_1A.4_p47.pdf,4,Bihar,19,5603,True
+cii_2023_1A.4_p47.pdf,30,Chandigarh,19,41,True
+cii_2023_1A.4_p47.pdf,5,Chhattisgarh,19,3842,True
+cii_2023_1A.4_p47.pdf,32,Delhi,19,1109,True
+cii_2023_1A.4_p47.pdf,6,Goa,19,143,True
+cii_2023_1A.4_p47.pdf,7,Gujarat,19,7322,True
+cii_2023_1A.4_p47.pdf,8,Haryana,19,4771,True
+cii_2023_1A.4_p47.pdf,9,Himachal Pradesh,19,697,True
+cii_2023_1A.4_p47.pdf,33,Jammu & Kashmir,19,528,True
+cii_2023_1A.4_p47.pdf,10,Jharkhand,19,1468,True
+cii_2023_1A.4_p47.pdf,11,Karnataka,19,13083,True
+cii_2023_1A.4_p47.pdf,12,Kerala,19,3375,True
+cii_2023_1A.4_p47.pdf,34,Ladakh,19,44,True
+cii_2023_1A.4_p47.pdf,35,Lakshadweep,19,0,True
+cii_2023_1A.4_p47.pdf,13,Madhya Pradesh,19,5727,True
+cii_2023_1A.4_p47.pdf,14,Maharashtra,19,11289,True
+cii_2023_1A.4_p47.pdf,15,Manipur,19,33,True
+cii_2023_1A.4_p47.pdf,16,Meghalaya,19,94,True
+cii_2023_1A.4_p47.pdf,17,Mizoram,19,73,True
+cii_2023_1A.4_p47.pdf,18,Nagaland,19,44,True
+cii_2023_1A.4_p47.pdf,19,Odisha,19,5176,True
+cii_2023_1A.4_p47.pdf,36,Puducherry,19,156,True
+cii_2023_1A.4_p47.pdf,20,Punjab,19,1800,True
+cii_2023_1A.4_p47.pdf,21,Rajasthan,19,8019,True
+cii_2023_1A.4_p47.pdf,22,Sikkim,19,69,True
+cii_2023_1A.4_p47.pdf,23,Tamil Nadu,19,16968,True
+cii_2023_1A.4_p47.pdf,24,Telangana,19,6163,True
+cii_2023_1A.4_p47.pdf,totalstates,Total (States),19,115818,True
+cii_2023_1A.4_p47.pdf,totaluts,Total (UTs),19,1965,True
+cii_2023_1A.4_p47.pdf,25,Tripura,19,188,True
+cii_2023_1A.4_p47.pdf,26,Uttar Pradesh,19,4257,True
+cii_2023_1A.4_p47.pdf,27,Uttarakhand,19,739,True
+cii_2023_1A.4_p47.pdf,28,West Bengal,19,5631,True
+cii_2023_1A.4_p47.pdf,31,DNH&DD,19,55,True
+cii_2023_1A.4_p47.pdf,29,A & N Islands,20,5,True
+cii_2023_1A.4_p47.pdf,totalallindia,All India,20,7.6,True
+cii_2023_1A.4_p47.pdf,1,Andhra Pradesh,20,13,True
+cii_2023_1A.4_p47.pdf,2,Arunachal Pradesh,20,6.1,True
+cii_2023_1A.4_p47.pdf,3,Assam,20,4.3,True
+cii_2023_1A.4_p47.pdf,4,Bihar,20,4,True
+cii_2023_1A.4_p47.pdf,30,Chandigarh,20,3.2,True
+cii_2023_1A.4_p47.pdf,5,Chhattisgarh,20,11.1,True
+cii_2023_1A.4_p47.pdf,32,Delhi,20,3.4,True
+cii_2023_1A.4_p47.pdf,6,Goa,20,7.8,True
+cii_2023_1A.4_p47.pdf,7,Gujarat,20,8.5,True
+cii_2023_1A.4_p47.pdf,8,Haryana,20,14.3,True
+cii_2023_1A.4_p47.pdf,9,Himachal Pradesh,20,7,True
+cii_2023_1A.4_p47.pdf,33,Jammu & Kashmir,20,3.4,True
+cii_2023_1A.4_p47.pdf,10,Jharkhand,20,3.7,True
+cii_2023_1A.4_p47.pdf,11,Karnataka,20,15.4,True
+cii_2023_1A.4_p47.pdf,12,Kerala,20,8.5,True
+cii_2023_1A.4_p47.pdf,34,Ladakh,20,14.6,True
+cii_2023_1A.4_p47.pdf,35,Lakshadweep,20,0,True
+cii_2023_1A.4_p47.pdf,13,Madhya Pradesh,20,6.1,True
+cii_2023_1A.4_p47.pdf,14,Maharashtra,20,8.2,True
+cii_2023_1A.4_p47.pdf,15,Manipur,20,0.8,True
+cii_2023_1A.4_p47.pdf,16,Meghalaya,20,2.8,True
+cii_2023_1A.4_p47.pdf,17,Mizoram,20,5,True
+cii_2023_1A.4_p47.pdf,18,Nagaland,20,1.5,True
+cii_2023_1A.4_p47.pdf,19,Odisha,20,11.1,True
+cii_2023_1A.4_p47.pdf,36,Puducherry,20,8.7,True
+cii_2023_1A.4_p47.pdf,20,Punjab,20,4.7,True
+cii_2023_1A.4_p47.pdf,21,Rajasthan,20,9.3,True
+cii_2023_1A.4_p47.pdf,22,Sikkim,20,7.4,True
+cii_2023_1A.4_p47.pdf,23,Tamil Nadu,20,20.8,True
+cii_2023_1A.4_p47.pdf,24,Telangana,20,14.9,True
+cii_2023_1A.4_p47.pdf,totalstates,Total (States),20,7.7,True
+cii_2023_1A.4_p47.pdf,totaluts,Total (UTs),20,3.7,True
+cii_2023_1A.4_p47.pdf,25,Tripura,20,3.7,True
+cii_2023_1A.4_p47.pdf,26,Uttar Pradesh,20,1.7,True
+cii_2023_1A.4_p47.pdf,27,Uttarakhand,20,5.8,True
+cii_2023_1A.4_p47.pdf,28,West Bengal,20,4.7,True
+cii_2023_1A.4_p47.pdf,31,DNH&DD,20,3.2,False
+cii_2024_1C.2_p264.pdf,29,A & N Islands,3,7,True
+cii_2024_1C.2_p264.pdf,totalallindia,All India,3,29536,True
+cii_2024_1C.2_p264.pdf,1,Andhra Pradesh,3,441,True
+cii_2024_1C.2_p264.pdf,2,Arunachal Pradesh,3,76,True
+cii_2024_1C.2_p264.pdf,3,Assam,3,927,True
+cii_2024_1C.2_p264.pdf,4,Bihar,3,1165,True
+cii_2024_1C.2_p264.pdf,30,Chandigarh,3,96,True
+cii_2024_1C.2_p264.pdf,5,Chhattisgarh,3,1171,True
+cii_2024_1C.2_p264.pdf,32,Delhi,3,1058,True
+cii_2024_1C.2_p264.pdf,6,Goa,3,105,True
+cii_2024_1C.2_p264.pdf,7,Gujarat,3,661,True
+cii_2024_1C.2_p264.pdf,8,Haryana,3,1391,True
+cii_2024_1C.2_p264.pdf,9,Himachal Pradesh,3,324,True
+cii_2024_1C.2_p264.pdf,33,Jammu & Kashmir,3,261,True
+cii_2024_1C.2_p264.pdf,10,Jharkhand,3,1073,True
+cii_2024_1C.2_p264.pdf,11,Karnataka,3,671,True
+cii_2024_1C.2_p264.pdf,12,Kerala,3,940,True
+cii_2024_1C.2_p264.pdf,34,Ladakh,3,1,True
+cii_2024_1C.2_p264.pdf,35,Lakshadweep,3,2,True
+cii_2024_1C.2_p264.pdf,13,Madhya Pradesh,3,3061,True
+cii_2024_1C.2_p264.pdf,14,Maharashtra,3,3091,True
+cii_2024_1C.2_p264.pdf,15,Manipur,3,19,True
+cii_2024_1C.2_p264.pdf,16,Meghalaya,3,57,True
+cii_2024_1C.2_p264.pdf,17,Mizoram,3,20,True
+cii_2024_1C.2_p264.pdf,18,Nagaland,3,14,True
+cii_2024_1C.2_p264.pdf,19,Odisha,3,1268,True
+cii_2024_1C.2_p264.pdf,36,Puducherry,3,9,True
+cii_2024_1C.2_p264.pdf,20,Punjab,3,475,True
+cii_2024_1C.2_p264.pdf,21,Rajasthan,3,4871,True
+cii_2024_1C.2_p264.pdf,22,Sikkim,3,7,True
+cii_2024_1C.2_p264.pdf,23,Tamil Nadu,3,419,True
+cii_2024_1C.2_p264.pdf,24,Telangana,3,1148,True
+cii_2024_1C.2_p264.pdf,totalstates,Total (States),3,28091,True
+cii_2024_1C.2_p264.pdf,totaluts,Total (UTs),3,1445,True
+cii_2024_1C.2_p264.pdf,25,Tripura,3,64,True
+cii_2024_1C.2_p264.pdf,26,Uttar Pradesh,3,3209,True
+cii_2024_1C.2_p264.pdf,27,Uttarakhand,3,305,True
+cii_2024_1C.2_p264.pdf,28,West Bengal,3,1118,True
+cii_2024_1C.2_p264.pdf,31,DNH&DD,3,11,True
+cii_2024_1C.2_p264.pdf,29,A & N Islands,4,0,True
+cii_2024_1C.2_p264.pdf,totalallindia,All India,4,2561,True
+cii_2024_1C.2_p264.pdf,1,Andhra Pradesh,4,102,True
+cii_2024_1C.2_p264.pdf,2,Arunachal Pradesh,4,8,True
+cii_2024_1C.2_p264.pdf,3,Assam,4,155,True
+cii_2024_1C.2_p264.pdf,4,Bihar,4,45,True
+cii_2024_1C.2_p264.pdf,30,Chandigarh,4,2,True
+cii_2024_1C.2_p264.pdf,5,Chhattisgarh,4,5,True
+cii_2024_1C.2_p264.pdf,32,Delhi,4,1,True
+cii_2024_1C.2_p264.pdf,6,Goa,4,1,True
+cii_2024_1C.2_p264.pdf,7,Gujarat,4,0,True
+cii_2024_1C.2_p264.pdf,8,Haryana,4,110,True
+cii_2024_1C.2_p264.pdf,9,Himachal Pradesh,4,4,True
+cii_2024_1C.2_p264.pdf,33,Jammu & Kashmir,4,9,True
+cii_2024_1C.2_p264.pdf,10,Jharkhand,4,93,True
+cii_2024_1C.2_p264.pdf,11,Karnataka,4,10,True
+cii_2024_1C.2_p264.pdf,12,Kerala,4,47,True
+cii_2024_1C.2_p264.pdf,34,Ladakh,4,1,True
+cii_2024_1C.2_p264.pdf,35,Lakshadweep,4,0,True
+cii_2024_1C.2_p264.pdf,13,Madhya Pradesh,4,26,True
+cii_2024_1C.2_p264.pdf,14,Maharashtra,4,0,True
+cii_2024_1C.2_p264.pdf,15,Manipur,4,0,True
+cii_2024_1C.2_p264.pdf,16,Meghalaya,4,3,True
+cii_2024_1C.2_p264.pdf,17,Mizoram,4,1,True
+cii_2024_1C.2_p264.pdf,18,Nagaland,4,1,True
+cii_2024_1C.2_p264.pdf,19,Odisha,4,118,True
+cii_2024_1C.2_p264.pdf,36,Puducherry,4,0,True
+cii_2024_1C.2_p264.pdf,20,Punjab,4,20,True
+cii_2024_1C.2_p264.pdf,21,Rajasthan,4,778,True
+cii_2024_1C.2_p264.pdf,22,Sikkim,4,0,True
+cii_2024_1C.2_p264.pdf,23,Tamil Nadu,4,33,True
+cii_2024_1C.2_p264.pdf,24,Telangana,4,59,True
+cii_2024_1C.2_p264.pdf,totalstates,Total (States),4,2548,True
+cii_2024_1C.2_p264.pdf,totaluts,Total (UTs),4,13,True
+cii_2024_1C.2_p264.pdf,25,Tripura,4,9,True
+cii_2024_1C.2_p264.pdf,26,Uttar Pradesh,4,108,True
+cii_2024_1C.2_p264.pdf,27,Uttarakhand,4,3,True
+cii_2024_1C.2_p264.pdf,28,West Bengal,4,809,True
+cii_2024_1C.2_p264.pdf,31,DNH&DD,4,0,True
+cii_2024_1C.2_p264.pdf,29,A & N Islands,5,0,True
+cii_2024_1C.2_p264.pdf,totalallindia,All India,5,140,True
+cii_2024_1C.2_p264.pdf,1,Andhra Pradesh,5,0,True
+cii_2024_1C.2_p264.pdf,2,Arunachal Pradesh,5,0,True
+cii_2024_1C.2_p264.pdf,3,Assam,5,3,True
+cii_2024_1C.2_p264.pdf,4,Bihar,5,1,True
+cii_2024_1C.2_p264.pdf,30,Chandigarh,5,1,True
+cii_2024_1C.2_p264.pdf,5,Chhattisgarh,5,19,True
+cii_2024_1C.2_p264.pdf,32,Delhi,5,2,True
+cii_2024_1C.2_p264.pdf,6,Goa,5,0,True
+cii_2024_1C.2_p264.pdf,7,Gujarat,5,4,True
+cii_2024_1C.2_p264.pdf,8,Haryana,5,12,True
+cii_2024_1C.2_p264.pdf,9,Himachal Pradesh,5,0,True
+cii_2024_1C.2_p264.pdf,33,Jammu & Kashmir,5,4,True
+cii_2024_1C.2_p264.pdf,10,Jharkhand,5,5,True
+cii_2024_1C.2_p264.pdf,11,Karnataka,5,5,True
+cii_2024_1C.2_p264.pdf,12,Kerala,5,0,True
+cii_2024_1C.2_p264.pdf,34,Ladakh,5,0,True
+cii_2024_1C.2_p264.pdf,35,Lakshadweep,5,0,True
+cii_2024_1C.2_p264.pdf,13,Madhya Pradesh,5,27,True
+cii_2024_1C.2_p264.pdf,14,Maharashtra,5,19,True
+cii_2024_1C.2_p264.pdf,15,Manipur,5,2,True
+cii_2024_1C.2_p264.pdf,16,Meghalaya,5,0,True
+cii_2024_1C.2_p264.pdf,17,Mizoram,5,1,True
+cii_2024_1C.2_p264.pdf,18,Nagaland,5,0,True
+cii_2024_1C.2_p264.pdf,19,Odisha,5,0,True
+cii_2024_1C.2_p264.pdf,36,Puducherry,5,0,True
+cii_2024_1C.2_p264.pdf,20,Punjab,5,5,True
+cii_2024_1C.2_p264.pdf,21,Rajasthan,5,14,True
+cii_2024_1C.2_p264.pdf,22,Sikkim,5,0,True
+cii_2024_1C.2_p264.pdf,23,Tamil Nadu,5,3,True
+cii_2024_1C.2_p264.pdf,24,Telangana,5,3,True
+cii_2024_1C.2_p264.pdf,totalstates,Total (States),5,133,True
+cii_2024_1C.2_p264.pdf,totaluts,Total (UTs),5,7,True
+cii_2024_1C.2_p264.pdf,25,Tripura,5,0,True
+cii_2024_1C.2_p264.pdf,26,Uttar Pradesh,5,4,True
+cii_2024_1C.2_p264.pdf,27,Uttarakhand,5,2,True
+cii_2024_1C.2_p264.pdf,28,West Bengal,5,4,True
+cii_2024_1C.2_p264.pdf,31,DNH&DD,5,0,True
+cii_2024_1C.2_p264.pdf,29,A & N Islands,6,0,True
+cii_2024_1C.2_p264.pdf,totalallindia,All India,6,56,True
+cii_2024_1C.2_p264.pdf,1,Andhra Pradesh,6,2,True
+cii_2024_1C.2_p264.pdf,2,Arunachal Pradesh,6,0,True
+cii_2024_1C.2_p264.pdf,3,Assam,6,1,True
+cii_2024_1C.2_p264.pdf,4,Bihar,6,0,True
+cii_2024_1C.2_p264.pdf,30,Chandigarh,6,0,True
+cii_2024_1C.2_p264.pdf,5,Chhattisgarh,6,6,True
+cii_2024_1C.2_p264.pdf,32,Delhi,6,0,True
+cii_2024_1C.2_p264.pdf,6,Goa,6,0,True
+cii_2024_1C.2_p264.pdf,7,Gujarat,6,2,True
+cii_2024_1C.2_p264.pdf,8,Haryana,6,8,True
+cii_2024_1C.2_p264.pdf,9,Himachal Pradesh,6,0,True
+cii_2024_1C.2_p264.pdf,33,Jammu & Kashmir,6,1,True
+cii_2024_1C.2_p264.pdf,10,Jharkhand,6,5,True
+cii_2024_1C.2_p264.pdf,11,Karnataka,6,8,True
+cii_2024_1C.2_p264.pdf,12,Kerala,6,0,True
+cii_2024_1C.2_p264.pdf,34,Ladakh,6,0,True
+cii_2024_1C.2_p264.pdf,35,Lakshadweep,6,0,True
+cii_2024_1C.2_p264.pdf,13,Madhya Pradesh,6,4,True
+cii_2024_1C.2_p264.pdf,14,Maharashtra,6,3,True
+cii_2024_1C.2_p264.pdf,15,Manipur,6,0,True
+cii_2024_1C.2_p264.pdf,16,Meghalaya,6,2,True
+cii_2024_1C.2_p264.pdf,17,Mizoram,6,0,True
+cii_2024_1C.2_p264.pdf,18,Nagaland,6,0,True
+cii_2024_1C.2_p264.pdf,19,Odisha,6,0,True
+cii_2024_1C.2_p264.pdf,36,Puducherry,6,0,True
+cii_2024_1C.2_p264.pdf,20,Punjab,6,1,True
+cii_2024_1C.2_p264.pdf,21,Rajasthan,6,6,True
+cii_2024_1C.2_p264.pdf,22,Sikkim,6,0,True
+cii_2024_1C.2_p264.pdf,23,Tamil Nadu,6,1,True
+cii_2024_1C.2_p264.pdf,24,Telangana,6,5,True
+cii_2024_1C.2_p264.pdf,totalstates,Total (States),6,55,True
+cii_2024_1C.2_p264.pdf,totaluts,Total (UTs),6,1,True
+cii_2024_1C.2_p264.pdf,25,Tripura,6,0,True
+cii_2024_1C.2_p264.pdf,26,Uttar Pradesh,6,1,True
+cii_2024_1C.2_p264.pdf,27,Uttarakhand,6,0,True
+cii_2024_1C.2_p264.pdf,28,West Bengal,6,0,True
+cii_2024_1C.2_p264.pdf,31,DNH&DD,6,0,True
+cii_2024_1C.2_p264.pdf,29,A & N Islands,7,0,True
+cii_2024_1C.2_p264.pdf,totalallindia,All India,7,5737,True
+cii_2024_1C.2_p264.pdf,1,Andhra Pradesh,7,72,True
+cii_2024_1C.2_p264.pdf,2,Arunachal Pradesh,7,1,True
+cii_2024_1C.2_p264.pdf,3,Assam,7,94,True
+cii_2024_1C.2_p264.pdf,4,Bihar,7,1078,True
+cii_2024_1C.2_p264.pdf,30,Chandigarh,7,3,True
+cii_2024_1C.2_p264.pdf,5,Chhattisgarh,7,54,True
+cii_2024_1C.2_p264.pdf,32,Delhi,7,109,True
+cii_2024_1C.2_p264.pdf,6,Goa,7,2,True
+cii_2024_1C.2_p264.pdf,7,Gujarat,7,16,True
+cii_2024_1C.2_p264.pdf,8,Haryana,7,177,True
+cii_2024_1C.2_p264.pdf,9,Himachal Pradesh,7,0,True
+cii_2024_1C.2_p264.pdf,33,Jammu & Kashmir,7,7,True
+cii_2024_1C.2_p264.pdf,10,Jharkhand,7,206,True
+cii_2024_1C.2_p264.pdf,11,Karnataka,7,112,True
+cii_2024_1C.2_p264.pdf,12,Kerala,7,1,True
+cii_2024_1C.2_p264.pdf,34,Ladakh,7,0,True
+cii_2024_1C.2_p264.pdf,35,Lakshadweep,7,0,True
+cii_2024_1C.2_p264.pdf,13,Madhya Pradesh,7,450,True
+cii_2024_1C.2_p264.pdf,14,Maharashtra,7,143,True
+cii_2024_1C.2_p264.pdf,15,Manipur,7,0,True
+cii_2024_1C.2_p264.pdf,16,Meghalaya,7,0,True
+cii_2024_1C.2_p264.pdf,17,Mizoram,7,0,True
+cii_2024_1C.2_p264.pdf,18,Nagaland,7,0,True
+cii_2024_1C.2_p264.pdf,19,Odisha,7,200,True
+cii_2024_1C.2_p264.pdf,36,Puducherry,7,0,True
+cii_2024_1C.2_p264.pdf,20,Punjab,7,39,True
+cii_2024_1C.2_p264.pdf,21,Rajasthan,7,386,True
+cii_2024_1C.2_p264.pdf,22,Sikkim,7,0,True
+cii_2024_1C.2_p264.pdf,23,Tamil Nadu,7,7,True
+cii_2024_1C.2_p264.pdf,24,Telangana,7,144,True
+cii_2024_1C.2_p264.pdf,totalstates,Total (States),7,5618,True
+cii_2024_1C.2_p264.pdf,totaluts,Total (UTs),7,119,True
+cii_2024_1C.2_p264.pdf,25,Tripura,7,20,True
+cii_2024_1C.2_p264.pdf,26,Uttar Pradesh,7,2038,True
+cii_2024_1C.2_p264.pdf,27,Uttarakhand,7,41,True
+cii_2024_1C.2_p264.pdf,28,West Bengal,7,337,True
+cii_2024_1C.2_p264.pdf,31,DNH&DD,7,0,True
+cii_2024_1C.2_p264.pdf,29,A & N Islands,8,11,True
+cii_2024_1C.2_p264.pdf,totalallindia,All India,8,27049,True
+cii_2024_1C.2_p264.pdf,1,Andhra Pradesh,8,898,True
+cii_2024_1C.2_p264.pdf,2,Arunachal Pradesh,8,50,True
+cii_2024_1C.2_p264.pdf,3,Assam,8,933,True
+cii_2024_1C.2_p264.pdf,4,Bihar,8,2787,True
+cii_2024_1C.2_p264.pdf,30,Chandigarh,8,22,True
+cii_2024_1C.2_p264.pdf,5,Chhattisgarh,8,1024,True
+cii_2024_1C.2_p264.pdf,32,Delhi,8,504,True
+cii_2024_1C.2_p264.pdf,6,Goa,8,30,True
+cii_2024_1C.2_p264.pdf,7,Gujarat,8,964,True
+cii_2024_1C.2_p264.pdf,8,Haryana,8,956,True
+cii_2024_1C.2_p264.pdf,9,Himachal Pradesh,8,84,True
+cii_2024_1C.2_p264.pdf,33,Jammu & Kashmir,8,90,True
+cii_2024_1C.2_p264.pdf,10,Jharkhand,8,1472,True
+cii_2024_1C.2_p264.pdf,11,Karnataka,8,1228,True
+cii_2024_1C.2_p264.pdf,12,Kerala,8,338,True
+cii_2024_1C.2_p264.pdf,34,Ladakh,8,1,True
+cii_2024_1C.2_p264.pdf,35,Lakshadweep,8,0,True
+cii_2024_1C.2_p264.pdf,13,Madhya Pradesh,8,1813,True
+cii_2024_1C.2_p264.pdf,14,Maharashtra,8,2168,True
+cii_2024_1C.2_p264.pdf,15,Manipur,8,83,True
+cii_2024_1C.2_p264.pdf,16,Meghalaya,8,84,True
+cii_2024_1C.2_p264.pdf,17,Mizoram,8,37,True
+cii_2024_1C.2_p264.pdf,18,Nagaland,8,17,True
+cii_2024_1C.2_p264.pdf,19,Odisha,8,1258,True
+cii_2024_1C.2_p264.pdf,36,Puducherry,8,27,True
+cii_2024_1C.2_p264.pdf,20,Punjab,8,762,True
+cii_2024_1C.2_p264.pdf,21,Rajasthan,8,1607,True
+cii_2024_1C.2_p264.pdf,22,Sikkim,8,14,True
+cii_2024_1C.2_p264.pdf,23,Tamil Nadu,8,1565,True
+cii_2024_1C.2_p264.pdf,24,Telangana,8,1040,True
+cii_2024_1C.2_p264.pdf,totalstates,Total (States),8,26383,True
+cii_2024_1C.2_p264.pdf,totaluts,Total (UTs),8,666,True
+cii_2024_1C.2_p264.pdf,25,Tripura,8,116,True
+cii_2024_1C.2_p264.pdf,26,Uttar Pradesh,8,3218,True
+cii_2024_1C.2_p264.pdf,27,Uttarakhand,8,213,True
+cii_2024_1C.2_p264.pdf,28,West Bengal,8,1624,True
+cii_2024_1C.2_p264.pdf,31,DNH&DD,8,11,True
+cii_2024_1C.2_p264.pdf,29,A & N Islands,9,3,True
+cii_2024_1C.2_p264.pdf,totalallindia,All India,9,3868,True
+cii_2024_1C.2_p264.pdf,1,Andhra Pradesh,9,117,True
+cii_2024_1C.2_p264.pdf,2,Arunachal Pradesh,9,4,True
+cii_2024_1C.2_p264.pdf,3,Assam,9,69,True
+cii_2024_1C.2_p264.pdf,4,Bihar,9,124,True
+cii_2024_1C.2_p264.pdf,30,Chandigarh,9,5,True
+cii_2024_1C.2_p264.pdf,5,Chhattisgarh,9,60,True
+cii_2024_1C.2_p264.pdf,32,Delhi,9,51,True
+cii_2024_1C.2_p264.pdf,6,Goa,9,17,True
+cii_2024_1C.2_p264.pdf,7,Gujarat,9,170,True
+cii_2024_1C.2_p264.pdf,8,Haryana,9,104,True
+cii_2024_1C.2_p264.pdf,9,Himachal Pradesh,9,14,True
+cii_2024_1C.2_p264.pdf,33,Jammu & Kashmir,9,18,True
+cii_2024_1C.2_p264.pdf,10,Jharkhand,9,74,True
+cii_2024_1C.2_p264.pdf,11,Karnataka,9,143,True
+cii_2024_1C.2_p264.pdf,12,Kerala,9,107,True
+cii_2024_1C.2_p264.pdf,34,Ladakh,9,0,True
+cii_2024_1C.2_p264.pdf,35,Lakshadweep,9,0,True
+cii_2024_1C.2_p264.pdf,13,Madhya Pradesh,9,207,True
+cii_2024_1C.2_p264.pdf,14,Maharashtra,9,367,True
+cii_2024_1C.2_p264.pdf,15,Manipur,9,3,True
+cii_2024_1C.2_p264.pdf,16,Meghalaya,9,5,True
+cii_2024_1C.2_p264.pdf,17,Mizoram,9,5,True
+cii_2024_1C.2_p264.pdf,18,Nagaland,9,4,True
+cii_2024_1C.2_p264.pdf,19,Odisha,9,61,True
+cii_2024_1C.2_p264.pdf,36,Puducherry,9,1,True
+cii_2024_1C.2_p264.pdf,20,Punjab,9,284,True
+cii_2024_1C.2_p264.pdf,21,Rajasthan,9,58,True
+cii_2024_1C.2_p264.pdf,22,Sikkim,9,2,True
+cii_2024_1C.2_p264.pdf,23,Tamil Nadu,9,193,True
+cii_2024_1C.2_p264.pdf,24,Telangana,9,260,True
+cii_2024_1C.2_p264.pdf,totalstates,Total (States),9,3790,True
+cii_2024_1C.2_p264.pdf,totaluts,Total (UTs),9,78,True
+cii_2024_1C.2_p264.pdf,25,Tripura,9,2,True
+cii_2024_1C.2_p264.pdf,26,Uttar Pradesh,9,1100,True
+cii_2024_1C.2_p264.pdf,27,Uttarakhand,9,43,True
+cii_2024_1C.2_p264.pdf,28,West Bengal,9,193,True
+cii_2024_1C.2_p264.pdf,31,DNH&DD,9,0,True
+cii_2024_1C.2_p264.pdf,29,A & N Islands,10,14,True
+cii_2024_1C.2_p264.pdf,totalallindia,All India,10,58844,True
+cii_2024_1C.2_p264.pdf,1,Andhra Pradesh,10,1523,True
+cii_2024_1C.2_p264.pdf,2,Arunachal Pradesh,10,21,True
+cii_2024_1C.2_p264.pdf,3,Assam,10,983,True
+cii_2024_1C.2_p264.pdf,4,Bihar,10,10309,True
+cii_2024_1C.2_p264.pdf,30,Chandigarh,10,59,True
+cii_2024_1C.2_p264.pdf,5,Chhattisgarh,10,877,True
+cii_2024_1C.2_p264.pdf,32,Delhi,10,898,True
+cii_2024_1C.2_p264.pdf,6,Goa,10,29,True
+cii_2024_1C.2_p264.pdf,7,Gujarat,10,839,True
+cii_2024_1C.2_p264.pdf,8,Haryana,10,945,True
+cii_2024_1C.2_p264.pdf,9,Himachal Pradesh,10,75,True
+cii_2024_1C.2_p264.pdf,33,Jammu & Kashmir,10,407,True
+cii_2024_1C.2_p264.pdf,10,Jharkhand,10,2447,True
+cii_2024_1C.2_p264.pdf,11,Karnataka,10,2968,True
+cii_2024_1C.2_p264.pdf,12,Kerala,10,1066,True
+cii_2024_1C.2_p264.pdf,34,Ladakh,10,4,True
+cii_2024_1C.2_p264.pdf,35,Lakshadweep,10,0,True
+cii_2024_1C.2_p264.pdf,13,Madhya Pradesh,10,1897,True
+cii_2024_1C.2_p264.pdf,14,Maharashtra,10,3682,True
+cii_2024_1C.2_p264.pdf,15,Manipur,10,339,True
+cii_2024_1C.2_p264.pdf,16,Meghalaya,10,59,True
+cii_2024_1C.2_p264.pdf,17,Mizoram,10,19,True
+cii_2024_1C.2_p264.pdf,18,Nagaland,10,16,True
+cii_2024_1C.2_p264.pdf,19,Odisha,10,5079,True
+cii_2024_1C.2_p264.pdf,36,Puducherry,10,16,True
+cii_2024_1C.2_p264.pdf,20,Punjab,10,1158,True
+cii_2024_1C.2_p264.pdf,21,Rajasthan,10,2915,True
+cii_2024_1C.2_p264.pdf,22,Sikkim,10,5,True
+cii_2024_1C.2_p264.pdf,23,Tamil Nadu,10,2657,True
+cii_2024_1C.2_p264.pdf,24,Telangana,10,1531,True
+cii_2024_1C.2_p264.pdf,totalstates,Total (States),10,57435,True
+cii_2024_1C.2_p264.pdf,totaluts,Total (UTs),10,1409,True
+cii_2024_1C.2_p264.pdf,25,Tripura,10,80,True
+cii_2024_1C.2_p264.pdf,26,Uttar Pradesh,10,3728,True
+cii_2024_1C.2_p264.pdf,27,Uttarakhand,10,213,True
+cii_2024_1C.2_p264.pdf,28,West Bengal,10,11975,True
+cii_2024_1C.2_p264.pdf,31,DNH&DD,10,11,True

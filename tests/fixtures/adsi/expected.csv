@@ -1,0 +1,737 @@
+fixture,serial,row,metric,value,note
+2023_t1.2_p35.pdf,1,andhrapradesh,nature,154.0,
+2023_t1.2_p35.pdf,1,andhrapradesh,other,16885.0,
+2023_t1.2_p35.pdf,1,andhrapradesh,total,17039.0,
+2023_t1.2_p35.pdf,1,andhrapradesh,share,3.8,
+2023_t1.2_p35.pdf,1,andhrapradesh,pop,532.2,
+2023_t1.2_p35.pdf,1,andhrapradesh,rate,32.0,
+2023_t1.2_p35.pdf,2,arunachalpradesh,nature,20.0,State missing before the fix (one of 14)
+2023_t1.2_p35.pdf,2,arunachalpradesh,other,321.0,State missing before the fix (one of 14)
+2023_t1.2_p35.pdf,2,arunachalpradesh,total,341.0,State missing before the fix (one of 14)
+2023_t1.2_p35.pdf,2,arunachalpradesh,share,0.1,State missing before the fix (one of 14)
+2023_t1.2_p35.pdf,2,arunachalpradesh,pop,15.7,State missing before the fix (one of 14)
+2023_t1.2_p35.pdf,2,arunachalpradesh,rate,21.8,State missing before the fix (one of 14)
+2023_t1.2_p35.pdf,3,assam,nature,37.0,
+2023_t1.2_p35.pdf,3,assam,other,5311.0,
+2023_t1.2_p35.pdf,3,assam,total,5348.0,
+2023_t1.2_p35.pdf,3,assam,share,1.2,
+2023_t1.2_p35.pdf,3,assam,pop,358.2,
+2023_t1.2_p35.pdf,3,assam,rate,14.9,
+2023_t1.2_p35.pdf,4,bihar,nature,679.0,State missing before the fix (one of 14)
+2023_t1.2_p35.pdf,4,bihar,other,15802.0,State missing before the fix (one of 14)
+2023_t1.2_p35.pdf,4,bihar,total,16481.0,State missing before the fix (one of 14)
+2023_t1.2_p35.pdf,4,bihar,share,3.7,State missing before the fix (one of 14)
+2023_t1.2_p35.pdf,4,bihar,pop,1273.7,State missing before the fix (one of 14)
+2023_t1.2_p35.pdf,4,bihar,rate,12.9,State missing before the fix (one of 14)
+2023_t1.2_p35.pdf,5,chhattisgarh,nature,230.0,
+2023_t1.2_p35.pdf,5,chhattisgarh,other,15781.0,
+2023_t1.2_p35.pdf,5,chhattisgarh,total,16011.0,
+2023_t1.2_p35.pdf,5,chhattisgarh,share,3.6,
+2023_t1.2_p35.pdf,5,chhattisgarh,pop,302.9,
+2023_t1.2_p35.pdf,5,chhattisgarh,rate,52.9,
+2023_t1.2_p35.pdf,6,goa,nature,0.0,State missing before the fix (one of 14)
+2023_t1.2_p35.pdf,6,goa,other,724.0,State missing before the fix (one of 14)
+2023_t1.2_p35.pdf,6,goa,total,724.0,State missing before the fix (one of 14)
+2023_t1.2_p35.pdf,6,goa,share,0.2,State missing before the fix (one of 14)
+2023_t1.2_p35.pdf,6,goa,pop,15.8,State missing before the fix (one of 14)
+2023_t1.2_p35.pdf,6,goa,rate,45.9,State missing before the fix (one of 14)
+2023_t1.2_p35.pdf,7,gujarat,nature,104.0,
+2023_t1.2_p35.pdf,7,gujarat,other,22911.0,
+2023_t1.2_p35.pdf,7,gujarat,total,23015.0,
+2023_t1.2_p35.pdf,7,gujarat,share,5.2,
+2023_t1.2_p35.pdf,7,gujarat,pop,717.9,
+2023_t1.2_p35.pdf,7,gujarat,rate,32.1,
+2023_t1.2_p35.pdf,8,haryana,nature,201.0,State missing before the fix (one of 14)
+2023_t1.2_p35.pdf,8,haryana,other,16087.0,State missing before the fix (one of 14)
+2023_t1.2_p35.pdf,8,haryana,total,16288.0,State missing before the fix (one of 14)
+2023_t1.2_p35.pdf,8,haryana,share,3.7,State missing before the fix (one of 14)
+2023_t1.2_p35.pdf,8,haryana,pop,303.3,State missing before the fix (one of 14)
+2023_t1.2_p35.pdf,8,haryana,rate,53.7,State missing before the fix (one of 14)
+2023_t1.2_p35.pdf,9,himachalpradesh,nature,145.0,
+2023_t1.2_p35.pdf,9,himachalpradesh,other,2912.0,
+2023_t1.2_p35.pdf,9,himachalpradesh,total,3057.0,
+2023_t1.2_p35.pdf,9,himachalpradesh,share,0.7,
+2023_t1.2_p35.pdf,9,himachalpradesh,pop,74.8,
+2023_t1.2_p35.pdf,9,himachalpradesh,rate,40.9,
+2023_t1.2_p35.pdf,10,jharkhand,nature,401.0,State missing before the fix (one of 14)
+2023_t1.2_p35.pdf,10,jharkhand,other,7999.0,State missing before the fix (one of 14)
+2023_t1.2_p35.pdf,10,jharkhand,total,8400.0,State missing before the fix (one of 14)
+2023_t1.2_p35.pdf,10,jharkhand,share,1.9,State missing before the fix (one of 14)
+2023_t1.2_p35.pdf,10,jharkhand,pop,396.3,State missing before the fix (one of 14)
+2023_t1.2_p35.pdf,10,jharkhand,rate,21.2,State missing before the fix (one of 14)
+2023_t1.2_p35.pdf,11,karnataka,nature,74.0,
+2023_t1.2_p35.pdf,11,karnataka,other,29907.0,
+2023_t1.2_p35.pdf,11,karnataka,total,29981.0,
+2023_t1.2_p35.pdf,11,karnataka,share,6.8,
+2023_t1.2_p35.pdf,11,karnataka,pop,678.3,
+2023_t1.2_p35.pdf,11,karnataka,rate,44.2,
+2023_t1.2_p35.pdf,12,kerala,nature,15.0,State missing before the fix (one of 14)
+2023_t1.2_p35.pdf,12,kerala,other,14936.0,State missing before the fix (one of 14)
+2023_t1.2_p35.pdf,12,kerala,total,14951.0,State missing before the fix (one of 14)
+2023_t1.2_p35.pdf,12,kerala,share,3.4,State missing before the fix (one of 14)
+2023_t1.2_p35.pdf,12,kerala,pop,358.2,State missing before the fix (one of 14)
+2023_t1.2_p35.pdf,12,kerala,rate,41.7,State missing before the fix (one of 14)
+2023_t1.2_p35.pdf,13,madhyapradesh,nature,789.0,
+2023_t1.2_p35.pdf,13,madhyapradesh,other,42531.0,
+2023_t1.2_p35.pdf,13,madhyapradesh,total,43320.0,
+2023_t1.2_p35.pdf,13,madhyapradesh,share,9.8,
+2023_t1.2_p35.pdf,13,madhyapradesh,pop,869.2,
+2023_t1.2_p35.pdf,13,madhyapradesh,rate,49.8,
+2023_t1.2_p35.pdf,14,maharashtra,nature,312.0,State missing before the fix (one of 14)
+2023_t1.2_p35.pdf,14,maharashtra,other,69497.0,State missing before the fix (one of 14)
+2023_t1.2_p35.pdf,14,maharashtra,total,69809.0,State missing before the fix (one of 14)
+2023_t1.2_p35.pdf,14,maharashtra,share,15.7,State missing before the fix (one of 14)
+2023_t1.2_p35.pdf,14,maharashtra,pop,1267.1,State missing before the fix (one of 14)
+2023_t1.2_p35.pdf,14,maharashtra,rate,55.1,State missing before the fix (one of 14)
+2023_t1.2_p35.pdf,15,manipur,nature,0.0,
+2023_t1.2_p35.pdf,15,manipur,other,195.0,
+2023_t1.2_p35.pdf,15,manipur,total,195.0,
+2023_t1.2_p35.pdf,15,manipur,share,0.0,
+2023_t1.2_p35.pdf,15,manipur,pop,32.3,
+2023_t1.2_p35.pdf,15,manipur,rate,6.0,
+2023_t1.2_p35.pdf,16,meghalaya,nature,17.0,State missing before the fix (one of 14)
+2023_t1.2_p35.pdf,16,meghalaya,other,488.0,State missing before the fix (one of 14)
+2023_t1.2_p35.pdf,16,meghalaya,total,505.0,State missing before the fix (one of 14)
+2023_t1.2_p35.pdf,16,meghalaya,share,0.1,State missing before the fix (one of 14)
+2023_t1.2_p35.pdf,16,meghalaya,pop,33.6,State missing before the fix (one of 14)
+2023_t1.2_p35.pdf,16,meghalaya,rate,15.0,State missing before the fix (one of 14)
+2023_t1.2_p35.pdf,17,mizoram,nature,5.0,
+2023_t1.2_p35.pdf,17,mizoram,other,297.0,
+2023_t1.2_p35.pdf,17,mizoram,total,302.0,
+2023_t1.2_p35.pdf,17,mizoram,share,0.1,
+2023_t1.2_p35.pdf,17,mizoram,pop,12.4,
+2023_t1.2_p35.pdf,17,mizoram,rate,24.3,
+2023_t1.2_p35.pdf,18,nagaland,nature,0.0,State missing before the fix (one of 14)
+2023_t1.2_p35.pdf,18,nagaland,other,72.0,State missing before the fix (one of 14)
+2023_t1.2_p35.pdf,18,nagaland,total,72.0,State missing before the fix (one of 14)
+2023_t1.2_p35.pdf,18,nagaland,share,0.0,State missing before the fix (one of 14)
+2023_t1.2_p35.pdf,18,nagaland,pop,22.4,State missing before the fix (one of 14)
+2023_t1.2_p35.pdf,18,nagaland,rate,3.2,State missing before the fix (one of 14)
+2023_t1.2_p35.pdf,19,odisha,nature,1351.0,
+2023_t1.2_p35.pdf,19,odisha,other,20954.0,
+2023_t1.2_p35.pdf,19,odisha,total,22305.0,
+2023_t1.2_p35.pdf,19,odisha,share,5.0,
+2023_t1.2_p35.pdf,19,odisha,pop,463.7,
+2023_t1.2_p35.pdf,19,odisha,rate,48.1,
+2023_t1.2_p35.pdf,20,punjab,nature,260.0,State missing before the fix (one of 14)
+2023_t1.2_p35.pdf,20,punjab,other,10838.0,State missing before the fix (one of 14)
+2023_t1.2_p35.pdf,20,punjab,total,11098.0,State missing before the fix (one of 14)
+2023_t1.2_p35.pdf,20,punjab,share,2.5,State missing before the fix (one of 14)
+2023_t1.2_p35.pdf,20,punjab,pop,308.0,State missing before the fix (one of 14)
+2023_t1.2_p35.pdf,20,punjab,rate,36.0,State missing before the fix (one of 14)
+2023_t1.2_p35.pdf,21,rajasthan,nature,146.0,
+2023_t1.2_p35.pdf,21,rajasthan,other,30004.0,
+2023_t1.2_p35.pdf,21,rajasthan,total,30150.0,
+2023_t1.2_p35.pdf,21,rajasthan,share,6.8,
+2023_t1.2_p35.pdf,21,rajasthan,pop,813.2,
+2023_t1.2_p35.pdf,21,rajasthan,rate,37.1,
+2023_t1.2_p35.pdf,22,sikkim,nature,34.0,State missing before the fix (one of 14)
+2023_t1.2_p35.pdf,22,sikkim,other,306.0,State missing before the fix (one of 14)
+2023_t1.2_p35.pdf,22,sikkim,total,340.0,State missing before the fix (one of 14)
+2023_t1.2_p35.pdf,22,sikkim,share,0.1,State missing before the fix (one of 14)
+2023_t1.2_p35.pdf,22,sikkim,pop,6.9,State missing before the fix (one of 14)
+2023_t1.2_p35.pdf,22,sikkim,rate,49.2,State missing before the fix (one of 14)
+2023_t1.2_p35.pdf,23,tamilnadu,nature,118.0,
+2023_t1.2_p35.pdf,23,tamilnadu,other,32679.0,
+2023_t1.2_p35.pdf,23,tamilnadu,total,32797.0,
+2023_t1.2_p35.pdf,23,tamilnadu,share,7.4,
+2023_t1.2_p35.pdf,23,tamilnadu,pop,769.4,
+2023_t1.2_p35.pdf,23,tamilnadu,rate,42.6,
+2023_t1.2_p35.pdf,24,telangana,nature,137.0,State missing before the fix (one of 14)
+2023_t1.2_p35.pdf,24,telangana,other,13237.0,State missing before the fix (one of 14)
+2023_t1.2_p35.pdf,24,telangana,total,13374.0,State missing before the fix (one of 14)
+2023_t1.2_p35.pdf,24,telangana,share,3.0,State missing before the fix (one of 14)
+2023_t1.2_p35.pdf,24,telangana,pop,381.4,State missing before the fix (one of 14)
+2023_t1.2_p35.pdf,24,telangana,rate,35.1,State missing before the fix (one of 14)
+2023_t1.2_p35.pdf,25,tripura,nature,9.0,
+2023_t1.2_p35.pdf,25,tripura,other,651.0,
+2023_t1.2_p35.pdf,25,tripura,total,660.0,
+2023_t1.2_p35.pdf,25,tripura,share,0.1,
+2023_t1.2_p35.pdf,25,tripura,pop,41.6,
+2023_t1.2_p35.pdf,25,tripura,rate,15.9,
+2023_t1.2_p35.pdf,26,uttarpradesh,nature,852.0,State missing before the fix (one of 14)
+2023_t1.2_p35.pdf,26,uttarpradesh,other,42355.0,State missing before the fix (one of 14)
+2023_t1.2_p35.pdf,26,uttarpradesh,total,43207.0,State missing before the fix (one of 14)
+2023_t1.2_p35.pdf,26,uttarpradesh,share,9.7,State missing before the fix (one of 14)
+2023_t1.2_p35.pdf,26,uttarpradesh,pop,2364.8,State missing before the fix (one of 14)
+2023_t1.2_p35.pdf,26,uttarpradesh,rate,18.3,State missing before the fix (one of 14)
+2023_t1.2_p35.pdf,27,uttarakhand,nature,68.0,
+2023_t1.2_p35.pdf,27,uttarakhand,other,2400.0,
+2023_t1.2_p35.pdf,27,uttarakhand,total,2468.0,
+2023_t1.2_p35.pdf,27,uttarakhand,share,0.6,
+2023_t1.2_p35.pdf,27,uttarakhand,pop,116.8,
+2023_t1.2_p35.pdf,27,uttarakhand,rate,21.1,
+2023_t1.2_p35.pdf,28,westbengal,nature,176.0,State missing before the fix (one of 14)
+2023_t1.2_p35.pdf,28,westbengal,other,14646.0,State missing before the fix (one of 14)
+2023_t1.2_p35.pdf,28,westbengal,total,14822.0,State missing before the fix (one of 14)
+2023_t1.2_p35.pdf,28,westbengal,share,3.3,State missing before the fix (one of 14)
+2023_t1.2_p35.pdf,28,westbengal,pop,992.4,State missing before the fix (one of 14)
+2023_t1.2_p35.pdf,28,westbengal,rate,14.9,State missing before the fix (one of 14)
+2023_t1.2_p35.pdf,,totalstates,nature,6334.0,
+2023_t1.2_p35.pdf,,totalstates,other,430726.0,
+2023_t1.2_p35.pdf,,totalstates,total,437060.0,
+2023_t1.2_p35.pdf,,totalstates,share,98.4,
+2023_t1.2_p35.pdf,,totalstates,pop,13522.4,
+2023_t1.2_p35.pdf,,totalstates,rate,32.3,
+2023_t1.2_p35.pdf,29,anislands,nature,1.0,
+2023_t1.2_p35.pdf,29,anislands,other,183.0,
+2023_t1.2_p35.pdf,29,anislands,total,184.0,
+2023_t1.2_p35.pdf,29,anislands,share,0.0,
+2023_t1.2_p35.pdf,29,anislands,pop,4.0,
+2023_t1.2_p35.pdf,29,anislands,rate,45.7,
+2023_t1.2_p35.pdf,30,chandigarh,nature,0.0,
+2023_t1.2_p35.pdf,30,chandigarh,other,312.0,
+2023_t1.2_p35.pdf,30,chandigarh,total,312.0,
+2023_t1.2_p35.pdf,30,chandigarh,share,0.1,
+2023_t1.2_p35.pdf,30,chandigarh,pop,12.4,
+2023_t1.2_p35.pdf,30,chandigarh,rate,25.3,
+2023_t1.2_p35.pdf,31,dnhavelianddamandiu,nature,3.0,
+2023_t1.2_p35.pdf,31,dnhavelianddamandiu,other,242.0,
+2023_t1.2_p35.pdf,31,dnhavelianddamandiu,total,245.0,
+2023_t1.2_p35.pdf,31,dnhavelianddamandiu,share,0.1,
+2023_t1.2_p35.pdf,31,dnhavelianddamandiu,pop,12.9,
+2023_t1.2_p35.pdf,31,dnhavelianddamandiu,rate,18.9,
+2023_t1.2_p35.pdf,32,delhiut,nature,0.0,
+2023_t1.2_p35.pdf,32,delhiut,other,3508.0,
+2023_t1.2_p35.pdf,32,delhiut,total,3508.0,
+2023_t1.2_p35.pdf,32,delhiut,share,0.8,
+2023_t1.2_p35.pdf,32,delhiut,pop,214.9,
+2023_t1.2_p35.pdf,32,delhiut,rate,16.3,
+2023_t1.2_p35.pdf,33,jammukashmir,nature,12.0,
+2023_t1.2_p35.pdf,33,jammukashmir,other,1450.0,
+2023_t1.2_p35.pdf,33,jammukashmir,total,1462.0,
+2023_t1.2_p35.pdf,33,jammukashmir,share,0.3,
+2023_t1.2_p35.pdf,33,jammukashmir,pop,136.4,
+2023_t1.2_p35.pdf,33,jammukashmir,rate,10.7,
+2023_t1.2_p35.pdf,34,ladakh,nature,94.0,
+2023_t1.2_p35.pdf,34,ladakh,other,133.0,
+2023_t1.2_p35.pdf,34,ladakh,total,227.0,
+2023_t1.2_p35.pdf,34,ladakh,share,0.1,
+2023_t1.2_p35.pdf,34,ladakh,pop,3.0,
+2023_t1.2_p35.pdf,34,ladakh,rate,75.4,
+2023_t1.2_p35.pdf,35,lakshadweep,nature,0.0,
+2023_t1.2_p35.pdf,35,lakshadweep,other,3.0,
+2023_t1.2_p35.pdf,35,lakshadweep,total,3.0,
+2023_t1.2_p35.pdf,35,lakshadweep,share,0.0,
+2023_t1.2_p35.pdf,35,lakshadweep,pop,0.7,
+2023_t1.2_p35.pdf,35,lakshadweep,rate,4.3,
+2023_t1.2_p35.pdf,36,puducherry,nature,0.0,
+2023_t1.2_p35.pdf,36,puducherry,other,1103.0,
+2023_t1.2_p35.pdf,36,puducherry,total,1103.0,
+2023_t1.2_p35.pdf,36,puducherry,share,0.2,
+2023_t1.2_p35.pdf,36,puducherry,pop,16.6,
+2023_t1.2_p35.pdf,36,puducherry,rate,66.5,
+2023_t1.2_p35.pdf,,totaluts,nature,110.0,
+2023_t1.2_p35.pdf,,totaluts,other,6934.0,
+2023_t1.2_p35.pdf,,totaluts,total,7044.0,
+2023_t1.2_p35.pdf,,totaluts,share,1.6,
+2023_t1.2_p35.pdf,,totaluts,pop,400.9,
+2023_t1.2_p35.pdf,,totaluts,rate,17.6,
+2023_t1.2_p35.pdf,,totalallindia,nature,6444.0,
+2023_t1.2_p35.pdf,,totalallindia,other,437660.0,
+2023_t1.2_p35.pdf,,totalallindia,total,444104.0,
+2023_t1.2_p35.pdf,,totalallindia,share,100.0,
+2023_t1.2_p35.pdf,,totalallindia,pop,13923.3,
+2023_t1.2_p35.pdf,,totalallindia,rate,31.9,
+2024_t1.2_p35.pdf,1,andhrapradesh,nature,187.0,
+2024_t1.2_p35.pdf,1,andhrapradesh,other,16841.0,
+2024_t1.2_p35.pdf,1,andhrapradesh,total,17028.0,
+2024_t1.2_p35.pdf,1,andhrapradesh,share,3.6,
+2024_t1.2_p35.pdf,1,andhrapradesh,pop,534.0,split number: 534.0 stored as 5 + 34.0
+2024_t1.2_p35.pdf,1,andhrapradesh,rate,31.9,
+2024_t1.2_p35.pdf,2,arunachalpradesh,nature,14.0,
+2024_t1.2_p35.pdf,2,arunachalpradesh,other,357.0,
+2024_t1.2_p35.pdf,2,arunachalpradesh,total,371.0,
+2024_t1.2_p35.pdf,2,arunachalpradesh,share,0.1,
+2024_t1.2_p35.pdf,2,arunachalpradesh,pop,15.8,
+2024_t1.2_p35.pdf,2,arunachalpradesh,rate,23.5,
+2024_t1.2_p35.pdf,3,assam,nature,49.0,
+2024_t1.2_p35.pdf,3,assam,other,5649.0,
+2024_t1.2_p35.pdf,3,assam,total,5698.0,
+2024_t1.2_p35.pdf,3,assam,share,1.2,
+2024_t1.2_p35.pdf,3,assam,pop,361.6,
+2024_t1.2_p35.pdf,3,assam,rate,15.8,
+2024_t1.2_p35.pdf,4,bihar,nature,1028.0,"label truncated before the fix (BIH, HIM, JAM...)"
+2024_t1.2_p35.pdf,4,bihar,other,18620.0,"label truncated before the fix (BIH, HIM, JAM...)"
+2024_t1.2_p35.pdf,4,bihar,total,19648.0,"label truncated before the fix (BIH, HIM, JAM...)"
+2024_t1.2_p35.pdf,4,bihar,share,4.2,"label truncated before the fix (BIH, HIM, JAM...)"
+2024_t1.2_p35.pdf,4,bihar,pop,1292.1,split number: 1292.1 stored as 1 + 292.1
+2024_t1.2_p35.pdf,4,bihar,rate,15.2,"label truncated before the fix (BIH, HIM, JAM...)"
+2024_t1.2_p35.pdf,5,chhattisgarh,nature,315.0,
+2024_t1.2_p35.pdf,5,chhattisgarh,other,16936.0,
+2024_t1.2_p35.pdf,5,chhattisgarh,total,17251.0,
+2024_t1.2_p35.pdf,5,chhattisgarh,share,3.7,
+2024_t1.2_p35.pdf,5,chhattisgarh,pop,306.4,
+2024_t1.2_p35.pdf,5,chhattisgarh,rate,56.3,
+2024_t1.2_p35.pdf,6,goa,nature,1.0,
+2024_t1.2_p35.pdf,6,goa,other,639.0,
+2024_t1.2_p35.pdf,6,goa,total,640.0,
+2024_t1.2_p35.pdf,6,goa,share,0.1,
+2024_t1.2_p35.pdf,6,goa,pop,15.9,
+2024_t1.2_p35.pdf,6,goa,rate,40.4,
+2024_t1.2_p35.pdf,7,gujarat,nature,144.0,
+2024_t1.2_p35.pdf,7,gujarat,other,23790.0,
+2024_t1.2_p35.pdf,7,gujarat,total,23934.0,
+2024_t1.2_p35.pdf,7,gujarat,share,5.1,
+2024_t1.2_p35.pdf,7,gujarat,pop,726.5,
+2024_t1.2_p35.pdf,7,gujarat,rate,32.9,
+2024_t1.2_p35.pdf,8,haryana,nature,238.0,
+2024_t1.2_p35.pdf,8,haryana,other,18070.0,
+2024_t1.2_p35.pdf,8,haryana,total,18308.0,
+2024_t1.2_p35.pdf,8,haryana,share,3.9,
+2024_t1.2_p35.pdf,8,haryana,pop,306.9,
+2024_t1.2_p35.pdf,8,haryana,rate,59.6,
+2024_t1.2_p35.pdf,9,himachalpradesh,nature,115.0,"label truncated before the fix (BIH, HIM, JAM...)"
+2024_t1.2_p35.pdf,9,himachalpradesh,other,3089.0,"label truncated before the fix (BIH, HIM, JAM...)"
+2024_t1.2_p35.pdf,9,himachalpradesh,total,3204.0,"label truncated before the fix (BIH, HIM, JAM...)"
+2024_t1.2_p35.pdf,9,himachalpradesh,share,0.7,"label truncated before the fix (BIH, HIM, JAM...)"
+2024_t1.2_p35.pdf,9,himachalpradesh,pop,75.2,"label truncated before the fix (BIH, HIM, JAM...)"
+2024_t1.2_p35.pdf,9,himachalpradesh,rate,42.6,"label truncated before the fix (BIH, HIM, JAM...)"
+2024_t1.2_p35.pdf,10,jharkhand,nature,521.0,"label truncated before the fix (BIH, HIM, JAM...)"
+2024_t1.2_p35.pdf,10,jharkhand,other,8246.0,"label truncated before the fix (BIH, HIM, JAM...)"
+2024_t1.2_p35.pdf,10,jharkhand,total,8767.0,"label truncated before the fix (BIH, HIM, JAM...)"
+2024_t1.2_p35.pdf,10,jharkhand,share,1.9,"label truncated before the fix (BIH, HIM, JAM...)"
+2024_t1.2_p35.pdf,10,jharkhand,pop,401.3,"label truncated before the fix (BIH, HIM, JAM...)"
+2024_t1.2_p35.pdf,10,jharkhand,rate,21.8,"label truncated before the fix (BIH, HIM, JAM...)"
+2024_t1.2_p35.pdf,11,karnataka,nature,103.0,
+2024_t1.2_p35.pdf,11,karnataka,other,30931.0,
+2024_t1.2_p35.pdf,11,karnataka,total,31034.0,
+2024_t1.2_p35.pdf,11,karnataka,share,6.6,
+2024_t1.2_p35.pdf,11,karnataka,pop,682.6,
+2024_t1.2_p35.pdf,11,karnataka,rate,45.5,
+2024_t1.2_p35.pdf,12,kerala,nature,172.0,
+2024_t1.2_p35.pdf,12,kerala,other,16622.0,
+2024_t1.2_p35.pdf,12,kerala,total,16794.0,
+2024_t1.2_p35.pdf,12,kerala,share,3.6,
+2024_t1.2_p35.pdf,12,kerala,pop,359.7,
+2024_t1.2_p35.pdf,12,kerala,rate,46.7,
+2024_t1.2_p35.pdf,13,madhyapradesh,nature,1085.0,
+2024_t1.2_p35.pdf,13,madhyapradesh,other,44610.0,
+2024_t1.2_p35.pdf,13,madhyapradesh,total,45695.0,
+2024_t1.2_p35.pdf,13,madhyapradesh,share,9.8,
+2024_t1.2_p35.pdf,13,madhyapradesh,pop,879.5,
+2024_t1.2_p35.pdf,13,madhyapradesh,rate,52.0,
+2024_t1.2_p35.pdf,14,maharashtra,nature,357.0,
+2024_t1.2_p35.pdf,14,maharashtra,other,75450.0,
+2024_t1.2_p35.pdf,14,maharashtra,total,75807.0,
+2024_t1.2_p35.pdf,14,maharashtra,share,16.2,
+2024_t1.2_p35.pdf,14,maharashtra,pop,1276.8,
+2024_t1.2_p35.pdf,14,maharashtra,rate,59.4,
+2024_t1.2_p35.pdf,15,manipur,nature,1.0,
+2024_t1.2_p35.pdf,15,manipur,other,215.0,
+2024_t1.2_p35.pdf,15,manipur,total,216.0,
+2024_t1.2_p35.pdf,15,manipur,share,0.0,
+2024_t1.2_p35.pdf,15,manipur,pop,32.6,
+2024_t1.2_p35.pdf,15,manipur,rate,6.6,
+2024_t1.2_p35.pdf,16,meghalaya,nature,29.0,
+2024_t1.2_p35.pdf,16,meghalaya,other,585.0,
+2024_t1.2_p35.pdf,16,meghalaya,total,614.0,
+2024_t1.2_p35.pdf,16,meghalaya,share,0.1,
+2024_t1.2_p35.pdf,16,meghalaya,pop,33.9,
+2024_t1.2_p35.pdf,16,meghalaya,rate,18.1,
+2024_t1.2_p35.pdf,17,mizoram,nature,3.0,"label truncated before the fix (BIH, HIM, JAM...)"
+2024_t1.2_p35.pdf,17,mizoram,other,304.0,"label truncated before the fix (BIH, HIM, JAM...)"
+2024_t1.2_p35.pdf,17,mizoram,total,307.0,"label truncated before the fix (BIH, HIM, JAM...)"
+2024_t1.2_p35.pdf,17,mizoram,share,0.1,"label truncated before the fix (BIH, HIM, JAM...)"
+2024_t1.2_p35.pdf,17,mizoram,pop,12.5,"label truncated before the fix (BIH, HIM, JAM...)"
+2024_t1.2_p35.pdf,17,mizoram,rate,24.5,"label truncated before the fix (BIH, HIM, JAM...)"
+2024_t1.2_p35.pdf,18,nagaland,nature,1.0,
+2024_t1.2_p35.pdf,18,nagaland,other,43.0,
+2024_t1.2_p35.pdf,18,nagaland,total,44.0,
+2024_t1.2_p35.pdf,18,nagaland,share,0.0,
+2024_t1.2_p35.pdf,18,nagaland,pop,22.6,
+2024_t1.2_p35.pdf,18,nagaland,rate,1.9,
+2024_t1.2_p35.pdf,19,odisha,nature,1494.0,
+2024_t1.2_p35.pdf,19,odisha,other,21943.0,
+2024_t1.2_p35.pdf,19,odisha,total,23437.0,
+2024_t1.2_p35.pdf,19,odisha,share,5.0,
+2024_t1.2_p35.pdf,19,odisha,pop,466.6,
+2024_t1.2_p35.pdf,19,odisha,rate,50.2,
+2024_t1.2_p35.pdf,20,punjab,nature,371.0,
+2024_t1.2_p35.pdf,20,punjab,other,11742.0,
+2024_t1.2_p35.pdf,20,punjab,total,12113.0,
+2024_t1.2_p35.pdf,20,punjab,share,2.6,
+2024_t1.2_p35.pdf,20,punjab,pop,309.9,
+2024_t1.2_p35.pdf,20,punjab,rate,39.1,
+2024_t1.2_p35.pdf,21,rajasthan,nature,212.0,
+2024_t1.2_p35.pdf,21,rajasthan,other,30582.0,
+2024_t1.2_p35.pdf,21,rajasthan,total,30794.0,
+2024_t1.2_p35.pdf,21,rajasthan,share,6.6,
+2024_t1.2_p35.pdf,21,rajasthan,pop,821.9,
+2024_t1.2_p35.pdf,21,rajasthan,rate,37.5,
+2024_t1.2_p35.pdf,22,sikkim,nature,12.0,"label truncated before the fix (BIH, HIM, JAM...)"
+2024_t1.2_p35.pdf,22,sikkim,other,315.0,"label truncated before the fix (BIH, HIM, JAM...)"
+2024_t1.2_p35.pdf,22,sikkim,total,327.0,"label truncated before the fix (BIH, HIM, JAM...)"
+2024_t1.2_p35.pdf,22,sikkim,share,0.1,"label truncated before the fix (BIH, HIM, JAM...)"
+2024_t1.2_p35.pdf,22,sikkim,pop,7.0,"label truncated before the fix (BIH, HIM, JAM...)"
+2024_t1.2_p35.pdf,22,sikkim,rate,46.9,"label truncated before the fix (BIH, HIM, JAM...)"
+2024_t1.2_p35.pdf,23,tamilnadu,nature,74.0,
+2024_t1.2_p35.pdf,23,tamilnadu,other,33673.0,
+2024_t1.2_p35.pdf,23,tamilnadu,total,33747.0,
+2024_t1.2_p35.pdf,23,tamilnadu,share,7.2,
+2024_t1.2_p35.pdf,23,tamilnadu,pop,771.7,
+2024_t1.2_p35.pdf,23,tamilnadu,rate,43.7,
+2024_t1.2_p35.pdf,24,telangana,nature,222.0,"label truncated before the fix (BIH, HIM, JAM...)"
+2024_t1.2_p35.pdf,24,telangana,other,13236.0,"label truncated before the fix (BIH, HIM, JAM...)"
+2024_t1.2_p35.pdf,24,telangana,total,13458.0,"label truncated before the fix (BIH, HIM, JAM...)"
+2024_t1.2_p35.pdf,24,telangana,share,2.9,"label truncated before the fix (BIH, HIM, JAM...)"
+2024_t1.2_p35.pdf,24,telangana,pop,383.2,split number: 383.2 stored as 3 + 83.2
+2024_t1.2_p35.pdf,24,telangana,rate,35.1,"label truncated before the fix (BIH, HIM, JAM...)"
+2024_t1.2_p35.pdf,25,tripura,nature,37.0,"label truncated before the fix (BIH, HIM, JAM...)"
+2024_t1.2_p35.pdf,25,tripura,other,636.0,"label truncated before the fix (BIH, HIM, JAM...)"
+2024_t1.2_p35.pdf,25,tripura,total,673.0,"label truncated before the fix (BIH, HIM, JAM...)"
+2024_t1.2_p35.pdf,25,tripura,share,0.1,"label truncated before the fix (BIH, HIM, JAM...)"
+2024_t1.2_p35.pdf,25,tripura,pop,41.9,"label truncated before the fix (BIH, HIM, JAM...)"
+2024_t1.2_p35.pdf,25,tripura,rate,16.0,"label truncated before the fix (BIH, HIM, JAM...)"
+2024_t1.2_p35.pdf,26,uttarpradesh,nature,801.0,
+2024_t1.2_p35.pdf,26,uttarpradesh,other,42186.0,
+2024_t1.2_p35.pdf,26,uttarpradesh,total,42987.0,
+2024_t1.2_p35.pdf,26,uttarpradesh,share,9.2,
+2024_t1.2_p35.pdf,26,uttarpradesh,pop,2388.8,
+2024_t1.2_p35.pdf,26,uttarpradesh,rate,18.0,
+2024_t1.2_p35.pdf,27,uttarakhand,nature,69.0,
+2024_t1.2_p35.pdf,27,uttarakhand,other,2595.0,
+2024_t1.2_p35.pdf,27,uttarakhand,total,2664.0,
+2024_t1.2_p35.pdf,27,uttarakhand,share,0.6,
+2024_t1.2_p35.pdf,27,uttarakhand,pop,118.0,
+2024_t1.2_p35.pdf,27,uttarakhand,rate,22.6,
+2024_t1.2_p35.pdf,28,westbengal,nature,185.0,
+2024_t1.2_p35.pdf,28,westbengal,other,14401.0,
+2024_t1.2_p35.pdf,28,westbengal,total,14586.0,
+2024_t1.2_p35.pdf,28,westbengal,share,3.1,
+2024_t1.2_p35.pdf,28,westbengal,pop,997.2,
+2024_t1.2_p35.pdf,28,westbengal,rate,14.6,
+2024_t1.2_p35.pdf,,totalstates,nature,7840.0,
+2024_t1.2_p35.pdf,,totalstates,other,452306.0,
+2024_t1.2_p35.pdf,,totalstates,total,460146.0,
+2024_t1.2_p35.pdf,,totalstates,share,98.4,
+2024_t1.2_p35.pdf,,totalstates,pop,13641.9,
+2024_t1.2_p35.pdf,,totalstates,rate,33.7,
+2024_t1.2_p35.pdf,29,anislands,nature,0.0,
+2024_t1.2_p35.pdf,29,anislands,other,206.0,
+2024_t1.2_p35.pdf,29,anislands,total,206.0,
+2024_t1.2_p35.pdf,29,anislands,share,0.0,
+2024_t1.2_p35.pdf,29,anislands,pop,4.0,
+2024_t1.2_p35.pdf,29,anislands,rate,51.0,
+2024_t1.2_p35.pdf,30,chandigarh,nature,0.0,
+2024_t1.2_p35.pdf,30,chandigarh,other,834.0,
+2024_t1.2_p35.pdf,30,chandigarh,total,834.0,
+2024_t1.2_p35.pdf,30,chandigarh,share,0.2,
+2024_t1.2_p35.pdf,30,chandigarh,pop,12.5,
+2024_t1.2_p35.pdf,30,chandigarh,rate,66.9,
+2024_t1.2_p35.pdf,31,dnhavelianddamandiu,nature,4.0,
+2024_t1.2_p35.pdf,31,dnhavelianddamandiu,other,330.0,
+2024_t1.2_p35.pdf,31,dnhavelianddamandiu,total,334.0,
+2024_t1.2_p35.pdf,31,dnhavelianddamandiu,share,0.1,
+2024_t1.2_p35.pdf,31,dnhavelianddamandiu,pop,13.9,
+2024_t1.2_p35.pdf,31,dnhavelianddamandiu,rate,24.1,
+2024_t1.2_p35.pdf,32,delhiut,nature,1.0,
+2024_t1.2_p35.pdf,32,delhiut,other,3721.0,
+2024_t1.2_p35.pdf,32,delhiut,total,3722.0,
+2024_t1.2_p35.pdf,32,delhiut,share,0.8,
+2024_t1.2_p35.pdf,32,delhiut,pop,218.8,
+2024_t1.2_p35.pdf,32,delhiut,rate,17.0,
+2024_t1.2_p35.pdf,33,jammukashmir,nature,39.0,"label truncated before the fix (BIH, HIM, JAM...)"
+2024_t1.2_p35.pdf,33,jammukashmir,other,1172.0,"label truncated before the fix (BIH, HIM, JAM...)"
+2024_t1.2_p35.pdf,33,jammukashmir,total,1211.0,"label truncated before the fix (BIH, HIM, JAM...)"
+2024_t1.2_p35.pdf,33,jammukashmir,share,0.3,"label truncated before the fix (BIH, HIM, JAM...)"
+2024_t1.2_p35.pdf,33,jammukashmir,pop,137.3,"label truncated before the fix (BIH, HIM, JAM...)"
+2024_t1.2_p35.pdf,33,jammukashmir,rate,8.8,"label truncated before the fix (BIH, HIM, JAM...)"
+2024_t1.2_p35.pdf,34,ladakh,nature,19.0,"label truncated before the fix (BIH, HIM, JAM...)"
+2024_t1.2_p35.pdf,34,ladakh,other,174.0,"label truncated before the fix (BIH, HIM, JAM...)"
+2024_t1.2_p35.pdf,34,ladakh,total,193.0,"label truncated before the fix (BIH, HIM, JAM...)"
+2024_t1.2_p35.pdf,34,ladakh,share,0.0,"label truncated before the fix (BIH, HIM, JAM...)"
+2024_t1.2_p35.pdf,34,ladakh,pop,3.0,"label truncated before the fix (BIH, HIM, JAM...)"
+2024_t1.2_p35.pdf,34,ladakh,rate,63.9,"label truncated before the fix (BIH, HIM, JAM...)"
+2024_t1.2_p35.pdf,35,lakshadweep,nature,0.0,"label truncated before the fix (BIH, HIM, JAM...)"
+2024_t1.2_p35.pdf,35,lakshadweep,other,2.0,"label truncated before the fix (BIH, HIM, JAM...)"
+2024_t1.2_p35.pdf,35,lakshadweep,total,2.0,"label truncated before the fix (BIH, HIM, JAM...)"
+2024_t1.2_p35.pdf,35,lakshadweep,share,0.0,"label truncated before the fix (BIH, HIM, JAM...)"
+2024_t1.2_p35.pdf,35,lakshadweep,pop,0.7,"label truncated before the fix (BIH, HIM, JAM...)"
+2024_t1.2_p35.pdf,35,lakshadweep,rate,2.9,"label truncated before the fix (BIH, HIM, JAM...)"
+2024_t1.2_p35.pdf,36,puducherry,nature,0.0,
+2024_t1.2_p35.pdf,36,puducherry,other,1209.0,
+2024_t1.2_p35.pdf,36,puducherry,total,1209.0,
+2024_t1.2_p35.pdf,36,puducherry,share,0.3,
+2024_t1.2_p35.pdf,36,puducherry,pop,17.0,
+2024_t1.2_p35.pdf,36,puducherry,rate,71.3,
+2024_t1.2_p35.pdf,,totaluts,nature,63.0,
+2024_t1.2_p35.pdf,,totaluts,other,7648.0,
+2024_t1.2_p35.pdf,,totaluts,total,7711.0,
+2024_t1.2_p35.pdf,,totaluts,share,1.6,
+2024_t1.2_p35.pdf,,totaluts,pop,407.2,
+2024_t1.2_p35.pdf,,totaluts,rate,18.9,
+2024_t1.2_p35.pdf,,totalallindia,nature,7903.0,
+2024_t1.2_p35.pdf,,totalallindia,other,459954.0,
+2024_t1.2_p35.pdf,,totalallindia,total,467857.0,
+2024_t1.2_p35.pdf,,totalallindia,share,100.0,
+2024_t1.2_p35.pdf,,totalallindia,pop,14049.1,
+2024_t1.2_p35.pdf,,totalallindia,rate,33.3,
+2024_t2.2_p238.pdf,1,andhrapradesh,total,8302.0,table missing before the fix (title uses an en dash)
+2024_t2.2_p238.pdf,1,andhrapradesh,share,4.9,table missing before the fix (title uses an en dash)
+2024_t2.2_p238.pdf,1,andhrapradesh,pop,534.02,table missing before the fix (title uses an en dash)
+2024_t2.2_p238.pdf,1,andhrapradesh,rate,15.5,table missing before the fix (title uses an en dash)
+2024_t2.2_p238.pdf,2,arunachalpradesh,total,93.0,
+2024_t2.2_p238.pdf,2,arunachalpradesh,share,0.1,
+2024_t2.2_p238.pdf,2,arunachalpradesh,pop,15.8,
+2024_t2.2_p238.pdf,2,arunachalpradesh,rate,5.9,
+2024_t2.2_p238.pdf,3,assam,total,3203.0,
+2024_t2.2_p238.pdf,3,assam,share,1.9,
+2024_t2.2_p238.pdf,3,assam,pop,361.59,
+2024_t2.2_p238.pdf,3,assam,rate,8.9,
+2024_t2.2_p238.pdf,4,bihar,total,1337.0,
+2024_t2.2_p238.pdf,4,bihar,share,0.8,
+2024_t2.2_p238.pdf,4,bihar,pop,1292.05,
+2024_t2.2_p238.pdf,4,bihar,rate,1.0,
+2024_t2.2_p238.pdf,5,chhattisgarh,total,7962.0,
+2024_t2.2_p238.pdf,5,chhattisgarh,share,4.7,
+2024_t2.2_p238.pdf,5,chhattisgarh,pop,306.38,
+2024_t2.2_p238.pdf,5,chhattisgarh,rate,26.0,
+2024_t2.2_p238.pdf,6,goa,total,298.0,
+2024_t2.2_p238.pdf,6,goa,share,0.2,
+2024_t2.2_p238.pdf,6,goa,pop,15.85,
+2024_t2.2_p238.pdf,6,goa,rate,18.8,
+2024_t2.2_p238.pdf,7,gujarat,total,8984.0,
+2024_t2.2_p238.pdf,7,gujarat,share,5.3,
+2024_t2.2_p238.pdf,7,gujarat,pop,726.53,
+2024_t2.2_p238.pdf,7,gujarat,rate,12.4,
+2024_t2.2_p238.pdf,8,haryana,total,3360.0,
+2024_t2.2_p238.pdf,8,haryana,share,2.0,
+2024_t2.2_p238.pdf,8,haryana,pop,306.94,
+2024_t2.2_p238.pdf,8,haryana,rate,10.9,
+2024_t2.2_p238.pdf,9,himachalpradesh,total,813.0,
+2024_t2.2_p238.pdf,9,himachalpradesh,share,0.5,
+2024_t2.2_p238.pdf,9,himachalpradesh,pop,75.18,
+2024_t2.2_p238.pdf,9,himachalpradesh,rate,10.8,
+2024_t2.2_p238.pdf,10,jharkhand,total,1991.0,
+2024_t2.2_p238.pdf,10,jharkhand,share,1.2,
+2024_t2.2_p238.pdf,10,jharkhand,pop,401.29,
+2024_t2.2_p238.pdf,10,jharkhand,rate,5.0,
+2024_t2.2_p238.pdf,11,karnataka,total,13151.0,
+2024_t2.2_p238.pdf,11,karnataka,share,7.7,
+2024_t2.2_p238.pdf,11,karnataka,pop,682.56,
+2024_t2.2_p238.pdf,11,karnataka,rate,19.3,
+2024_t2.2_p238.pdf,12,kerala,total,10865.0,
+2024_t2.2_p238.pdf,12,kerala,share,6.4,
+2024_t2.2_p238.pdf,12,kerala,pop,359.67,
+2024_t2.2_p238.pdf,12,kerala,rate,30.2,
+2024_t2.2_p238.pdf,13,madhyapradesh,total,15491.0,
+2024_t2.2_p238.pdf,13,madhyapradesh,share,9.1,
+2024_t2.2_p238.pdf,13,madhyapradesh,pop,879.54,
+2024_t2.2_p238.pdf,13,madhyapradesh,rate,17.6,
+2024_t2.2_p238.pdf,14,maharashtra,total,22174.0,
+2024_t2.2_p238.pdf,14,maharashtra,share,13.0,
+2024_t2.2_p238.pdf,14,maharashtra,pop,1276.84,
+2024_t2.2_p238.pdf,14,maharashtra,rate,17.4,
+2024_t2.2_p238.pdf,15,manipur,total,42.0,
+2024_t2.2_p238.pdf,15,manipur,share,0.0,
+2024_t2.2_p238.pdf,15,manipur,pop,32.6,
+2024_t2.2_p238.pdf,15,manipur,rate,1.3,
+2024_t2.2_p238.pdf,16,meghalaya,total,200.0,
+2024_t2.2_p238.pdf,16,meghalaya,share,0.1,
+2024_t2.2_p238.pdf,16,meghalaya,pop,33.87,
+2024_t2.2_p238.pdf,16,meghalaya,rate,5.9,
+2024_t2.2_p238.pdf,17,mizoram,total,106.0,
+2024_t2.2_p238.pdf,17,mizoram,share,0.1,
+2024_t2.2_p238.pdf,17,mizoram,pop,12.52,
+2024_t2.2_p238.pdf,17,mizoram,rate,8.5,
+2024_t2.2_p238.pdf,18,nagaland,total,11.0,
+2024_t2.2_p238.pdf,18,nagaland,share,0.0,
+2024_t2.2_p238.pdf,18,nagaland,pop,22.58,
+2024_t2.2_p238.pdf,18,nagaland,rate,0.5,
+2024_t2.2_p238.pdf,19,odisha,total,5791.0,
+2024_t2.2_p238.pdf,19,odisha,share,3.4,
+2024_t2.2_p238.pdf,19,odisha,pop,466.63,
+2024_t2.2_p238.pdf,19,odisha,rate,12.4,
+2024_t2.2_p238.pdf,20,punjab,total,2229.0,
+2024_t2.2_p238.pdf,20,punjab,share,1.3,
+2024_t2.2_p238.pdf,20,punjab,pop,309.92,
+2024_t2.2_p238.pdf,20,punjab,rate,7.2,
+2024_t2.2_p238.pdf,21,rajasthan,total,5530.0,
+2024_t2.2_p238.pdf,21,rajasthan,share,3.2,
+2024_t2.2_p238.pdf,21,rajasthan,pop,821.88,
+2024_t2.2_p238.pdf,21,rajasthan,rate,6.7,
+2024_t2.2_p238.pdf,22,sikkim,total,253.0,
+2024_t2.2_p238.pdf,22,sikkim,share,0.1,
+2024_t2.2_p238.pdf,22,sikkim,pop,6.97,
+2024_t2.2_p238.pdf,22,sikkim,rate,36.3,
+2024_t2.2_p238.pdf,23,tamilnadu,total,19965.0,
+2024_t2.2_p238.pdf,23,tamilnadu,share,11.7,
+2024_t2.2_p238.pdf,23,tamilnadu,pop,771.65,
+2024_t2.2_p238.pdf,23,tamilnadu,rate,25.9,
+2024_t2.2_p238.pdf,24,telangana,total,10975.0,
+2024_t2.2_p238.pdf,24,telangana,share,6.4,
+2024_t2.2_p238.pdf,24,telangana,pop,383.17,
+2024_t2.2_p238.pdf,24,telangana,rate,28.6,
+2024_t2.2_p238.pdf,25,tripura,total,615.0,
+2024_t2.2_p238.pdf,25,tripura,share,0.4,
+2024_t2.2_p238.pdf,25,tripura,pop,41.94,
+2024_t2.2_p238.pdf,25,tripura,rate,14.7,
+2024_t2.2_p238.pdf,26,uttarpradesh,total,9180.0,
+2024_t2.2_p238.pdf,26,uttarpradesh,share,5.4,
+2024_t2.2_p238.pdf,26,uttarpradesh,pop,2388.75,
+2024_t2.2_p238.pdf,26,uttarpradesh,rate,3.8,
+2024_t2.2_p238.pdf,27,uttarakhand,total,844.0,
+2024_t2.2_p238.pdf,27,uttarakhand,share,0.5,
+2024_t2.2_p238.pdf,27,uttarakhand,pop,117.95,
+2024_t2.2_p238.pdf,27,uttarakhand,rate,7.2,
+2024_t2.2_p238.pdf,28,westbengal,total,12931.0,
+2024_t2.2_p238.pdf,28,westbengal,share,7.6,
+2024_t2.2_p238.pdf,28,westbengal,pop,997.23,
+2024_t2.2_p238.pdf,28,westbengal,rate,13.0,
+2024_t2.2_p238.pdf,,totalstates,total,166696.0,
+2024_t2.2_p238.pdf,,totalstates,share,97.6,
+2024_t2.2_p238.pdf,,totalstates,pop,13641.9,
+2024_t2.2_p238.pdf,,totalstates,rate,12.2,
+2024_t2.2_p238.pdf,29,anislands,total,164.0,
+2024_t2.2_p238.pdf,29,anislands,share,0.1,
+2024_t2.2_p238.pdf,29,anislands,pop,4.04,
+2024_t2.2_p238.pdf,29,anislands,rate,40.6,
+2024_t2.2_p238.pdf,30,chandigarh,total,96.0,
+2024_t2.2_p238.pdf,30,chandigarh,share,0.1,
+2024_t2.2_p238.pdf,30,chandigarh,pop,12.47,
+2024_t2.2_p238.pdf,30,chandigarh,rate,7.7,
+2024_t2.2_p238.pdf,31,dnhavelianddamandiu,total,193.0,
+2024_t2.2_p238.pdf,31,dnhavelianddamandiu,share,0.1,
+2024_t2.2_p238.pdf,31,dnhavelianddamandiu,pop,13.87,
+2024_t2.2_p238.pdf,31,dnhavelianddamandiu,rate,13.9,
+2024_t2.2_p238.pdf,32,delhiut,total,2905.0,
+2024_t2.2_p238.pdf,32,delhiut,share,1.7,
+2024_t2.2_p238.pdf,32,delhiut,pop,218.84,
+2024_t2.2_p238.pdf,32,delhiut,rate,13.3,
+2024_t2.2_p238.pdf,33,jammukashmir,total,236.0,
+2024_t2.2_p238.pdf,33,jammukashmir,share,0.1,
+2024_t2.2_p238.pdf,33,jammukashmir,pop,137.33,
+2024_t2.2_p238.pdf,33,jammukashmir,rate,1.7,
+2024_t2.2_p238.pdf,34,ladakh,total,16.0,
+2024_t2.2_p238.pdf,34,ladakh,share,0.0,
+2024_t2.2_p238.pdf,34,ladakh,pop,3.02,
+2024_t2.2_p238.pdf,34,ladakh,rate,5.3,
+2024_t2.2_p238.pdf,35,lakshadweep,total,3.0,
+2024_t2.2_p238.pdf,35,lakshadweep,share,0.0,
+2024_t2.2_p238.pdf,35,lakshadweep,pop,0.69,
+2024_t2.2_p238.pdf,35,lakshadweep,rate,4.3,
+2024_t2.2_p238.pdf,36,puducherry,total,437.0,
+2024_t2.2_p238.pdf,36,puducherry,share,0.3,
+2024_t2.2_p238.pdf,36,puducherry,pop,16.95,
+2024_t2.2_p238.pdf,36,puducherry,rate,25.8,
+2024_t2.2_p238.pdf,,totaluts,total,4050.0,
+2024_t2.2_p238.pdf,,totaluts,share,2.4,
+2024_t2.2_p238.pdf,,totaluts,pop,407.21,
+2024_t2.2_p238.pdf,,totaluts,rate,9.9,
+2024_t2.2_p238.pdf,,totalallindia,total,170746.0,table missing before the fix (title uses an en dash)
+2024_t2.2_p238.pdf,,totalallindia,share,100.0,table missing before the fix (title uses an en dash)
+2024_t2.2_p238.pdf,,totalallindia,pop,14049.11,table missing before the fix (title uses an en dash)
+2024_t2.2_p238.pdf,,totalallindia,rate,12.2,table missing before the fix (title uses an en dash)
+1995_t2A_p6.pdf,1,andhrapradesh,total,12293.0,
+1995_t2A_p6.pdf,1,andhrapradesh,share,5.53,
+1995_t2A_p6.pdf,1,andhrapradesh,pop,717.1,
+1995_t2A_p6.pdf,1,andhrapradesh,rate,17.14,
+1995_t2A_p6.pdf,2,arunachalpradesh,total,114.0,
+1995_t2A_p6.pdf,2,arunachalpradesh,pop,0.05,
+1995_t2A_p6.pdf,3,assam,total,2591.0,
+1995_t2A_p6.pdf,3,assam,share,1.16,
+1995_t2A_p6.pdf,3,assam,pop,246.1,
+1995_t2A_p6.pdf,3,assam,rate,10.53,
+1995_t2A_p6.pdf,4,bihar,share,3.55,
+1995_t2A_p6.pdf,4,bihar,pop,949.1,
+1995_t2A_p6.pdf,4,bihar,rate,8.32,
+1995_t2A_p6.pdf,5,goa,share,0.41,
+1995_t2A_p6.pdf,5,goa,pop,12.7,
+1995_t2A_p6.pdf,5,goa,rate,71.02,
+1995_t2A_p6.pdf,6,gujarat,total,13617.0,
+1995_t2A_p6.pdf,6,gujarat,share,6.12,
+1995_t2A_p6.pdf,6,gujarat,pop,446.1,
+1995_t2A_p6.pdf,7,haryana,total,3987.0,
+1995_t2A_p6.pdf,7,haryana,share,1.79,
+1995_t2A_p6.pdf,7,haryana,pop,180.7,
+1995_t2A_p6.pdf,7,haryana,rate,22.06,
+1995_t2A_p6.pdf,8,himachalpradesh,total,1204.0,was 1264; printed 1204
+1995_t2A_p6.pdf,8,himachalpradesh,share,0.54,
+1995_t2A_p6.pdf,8,himachalpradesh,rate,21.46,
+1995_t2A_p6.pdf,9,jammukashmir,total,1253.0,
+1995_t2A_p6.pdf,9,jammukashmir,pop,85.1,
+1995_t2A_p6.pdf,9,jammukashmir,rate,14.72,
+1995_t2A_p6.pdf,10,karnataka,total,13622.0,
+1995_t2A_p6.pdf,10,karnataka,share,6.12,
+1995_t2A_p6.pdf,11,kerala,total,6096.0,
+1995_t2A_p6.pdf,11,kerala,share,2.74,
+1995_t2A_p6.pdf,11,kerala,pop,309.1,
+1995_t2A_p6.pdf,11,kerala,rate,19.72,
+1995_t2A_p6.pdf,12,madhyapradesh,total,25692.0,
+1995_t2A_p6.pdf,12,madhyapradesh,share,11.55,
+1995_t2A_p6.pdf,12,madhyapradesh,pop,721.4,
+1995_t2A_p6.pdf,12,madhyapradesh,rate,35.61,
+1995_t2A_p6.pdf,13,maharashtra,share,24.7,
+1995_t2A_p6.pdf,13,maharashtra,pop,859.1,
+1995_t2A_p6.pdf,13,maharashtra,rate,63.96,
+1995_t2A_p6.pdf,14,manipur,total,239.0,
+1995_t2A_p6.pdf,14,manipur,share,0.11,
+1995_t2A_p6.pdf,14,manipur,pop,20.3,
+1995_t2A_p6.pdf,14,manipur,rate,11.77,
+1995_t2A_p6.pdf,15,meghalaya,total,210.0,
+1995_t2A_p6.pdf,15,meghalaya,share,0.09,
+1995_t2A_p6.pdf,15,meghalaya,pop,19.6,
+1995_t2A_p6.pdf,15,meghalaya,rate,10.71,
+1995_t2A_p6.pdf,16,mizoram,total,117.0,
+1995_t2A_p6.pdf,16,mizoram,pop,7.9,
+1995_t2A_p6.pdf,16,mizoram,rate,14.81,
+1995_t2A_p6.pdf,17,nagaland,total,78.0,
+1995_t2A_p6.pdf,17,nagaland,share,0.04,
+1995_t2A_p6.pdf,17,nagaland,rate,5.61,
+1995_t2A_p6.pdf,18,orissa,total,5419.0,
+1995_t2A_p6.pdf,18,orissa,share,2.44,
+1995_t2A_p6.pdf,18,orissa,pop,342.7,
+1995_t2A_p6.pdf,18,orissa,rate,15.81,
+1995_t2A_p6.pdf,19,punjab,total,3658.0,
+1995_t2A_p6.pdf,19,punjab,share,1.64,
+1995_t2A_p6.pdf,19,punjab,pop,216.0,
+1995_t2A_p6.pdf,19,punjab,rate,16.94,
+1995_t2A_p6.pdf,20,rajasthan,total,12422.0,
+1995_t2A_p6.pdf,20,rajasthan,share,5.58,
+1995_t2A_p6.pdf,20,rajasthan,pop,482.1,
+1995_t2A_p6.pdf,20,rajasthan,rate,25.77,
+1995_t2A_p6.pdf,21,sikkim,total,153.0,was 4887; printed 153
+1995_t2A_p6.pdf,21,sikkim,share,0.07,
+1995_t2A_p6.pdf,21,sikkim,pop,4.7,
+1995_t2A_p6.pdf,22,tamilnadu,total,17421.0,was 17437; printed 17421
+1995_t2A_p6.pdf,22,tamilnadu,share,7.83,
+1995_t2A_p6.pdf,22,tamilnadu,pop,582.9,
+1995_t2A_p6.pdf,22,tamilnadu,rate,29.89,
+1995_t2A_p6.pdf,23,tripura,share,0.14,
+1995_t2A_p6.pdf,23,tripura,rate,9.97,
+1995_t2A_p6.pdf,24,uttarpradesh,total,20147.0,
+1995_t2A_p6.pdf,24,uttarpradesh,pop,1501.2,
+1995_t2A_p6.pdf,24,uttarpradesh,rate,13.42,
+1995_t2A_p6.pdf,25,westbengal,total,11515.0,
+1995_t2A_p6.pdf,25,westbengal,share,5.18,
+1995_t2A_p6.pdf,25,westbengal,pop,732.7,
+1995_t2A_p6.pdf,25,westbengal,rate,15.72,
+1995_t2A_p6.pdf,,totalstates,total,215898.0,
+1995_t2A_p6.pdf,,totalstates,share,97.04,
+1995_t2A_p6.pdf,,totalstates,pop,9027.2,
+1995_t2A_p6.pdf,,totalstates,rate,23.92,
+1995_t2A_p6.pdf,26,anislands,total,108.0,
+1995_t2A_p6.pdf,26,anislands,share,0.05,
+1995_t2A_p6.pdf,26,anislands,rate,32.73,
+1995_t2A_p6.pdf,27,chandigarh,total,259.0,
+1995_t2A_p6.pdf,27,chandigarh,share,0.12,
+1995_t2A_p6.pdf,27,chandigarh,rate,33.21,
+1995_t2A_p6.pdf,28,dnhaveli,total,82.0,
+1995_t2A_p6.pdf,28,dnhaveli,share,0.04,
+1995_t2A_p6.pdf,28,dnhaveli,pop,1.6,
+1995_t2A_p6.pdf,28,dnhaveli,rate,51.25,
+1995_t2A_p6.pdf,29,damandiu,total,76.0,
+1995_t2A_p6.pdf,29,damandiu,share,0.03,
+1995_t2A_p6.pdf,29,damandiu,rate,69.09,
+1995_t2A_p6.pdf,30,delhi,total,5547.0,
+1995_t2A_p6.pdf,30,delhi,share,2.49,
+1995_t2A_p6.pdf,30,delhi,pop,109.7,
+1995_t2A_p6.pdf,30,delhi,rate,50.57,
+1995_t2A_p6.pdf,31,lakshadweep,total,6.0,
+1995_t2A_p6.pdf,31,lakshadweep,share,0.0,
+1995_t2A_p6.pdf,31,lakshadweep,pop,0.6,
+1995_t2A_p6.pdf,31,lakshadweep,rate,10.0,
+1995_t2A_p6.pdf,,totaluts,total,6589.0,
+1995_t2A_p6.pdf,,totaluts,share,2.96,
+1995_t2A_p6.pdf,,totaluts,pop,132.9,

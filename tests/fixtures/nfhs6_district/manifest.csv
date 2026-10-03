@@ -1,0 +1,5 @@
+fixture,source_pdf,source_pages,state,district,title,note
+nfhs6_anantapur_p15-17.pdf,districts/raw/pdf/1.pdf,15-17,Andhra Pradesh,Anantapur,"Anantapur, Andhra Pradesh",An ordinary district with NFHS-6 and NFHS-5 columns; the first district of the Andhra Pradesh compendium. Bracketed and '*' cells in both columns (17: (13.0) and *).
+nfhs6_mumbai_p79-81.pdf,districts/raw/pdf/14.pdf,79-81,Maharashtra,Mumbai,"Mumbai, Maharashtra","The most '*' cells of any district with both columns (41 suppressed, 16 bracketed), Maharashtra compendium."
+nfhs6_jhargram_p51-53.pdf,districts/raw/pdf/28.pdf,51-53,West Bengal,Jhargram,"Jhargram, West Bengal","A district with no NFHS-5 column (one value per row), West Bengal compendium. The most cells nfhs6 accepted on 3 of 4 extractors (47: camelot read none of them)."
+nfhs6_gaurela_pendra_marwahi_p59-61.pdf,districts/raw/pdf/5.pdf,59-61,Chhattisgarh,Gaurela-Pendra-Marwahi,"Gaurela-pendra-marwahi, Chhattisgarh","No NFHS-5 column, Chhattisgarh compendium; 27 cells on 3 of 4 extractors (camelot missing). Prints 3 as '12' and 4 as '99', without a decimal (checked on the page): the only whole-number values among all districts."

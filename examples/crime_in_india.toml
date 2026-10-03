@@ -1,0 +1,47 @@
+# pdfexorcist recipe: a State/UT table from NCRB's Crime in India
+#
+# A generic text-layer table: each line is a State's name followed by its
+# numbers, so the built-in "rows" parser reads it, and the table's own
+# arithmetic is checked. Try it on the test fixture:
+#
+#   pdfexorcist extract tests/fixtures/cii/cii_2021_1A.1_p43.pdf --recipe examples/crime_in_india.toml
+#
+# Every setting is explained in the README, section "Recipe reference".
+
+name = "Crime in India: State/UT table"
+description = "Cases by State/UT (columns 0-2: three years), population, rate, charge-sheeting"
+sample = "../tests/fixtures/cii/cii_2021_1A.1_p43.pdf"
+
+[pages]
+# Every page by default. A whole volume holds many tables: pick yours with
+# select = "43" (page numbers), or by the text on the page:
+# match = 'Table\s*1A\.1'
+
+[engines]
+ocr = false  # the PDF has a text layer: the five default engines read it exactly
+
+[normalize]
+remove_commas = true          # "1,020" -> "1020", so sums can be checked
+remove_footnote_marks = true  # "490+" -> "490"
+
+[parser]
+type = "rows"   # a label, then its values in reading order
+min_values = 3  # skip titles and footnotes, which carry one or two numbers
+
+# The table's own arithmetic, in each count column (0-2); population (3) is
+# rounded and rates (4, 5) do not add, so they are left out.
+[[checks]]
+column = "label"   # totals and parts are rows, named by their label
+rule = "TOTAL ALL INDIA = TOTAL STATE(S) + TOTAL UT(S)"
+by = ["page", "col"]  # checked separately in each column of each page
+where = "col <= 2"
+
+[[checks]]
+column = "label"
+rule = "TOTAL ALL INDIA >= rest"  # no row may exceed the national total
+by = ["page", "col"]
+where = "col <= 2 and label != 'TOTAL STATE(S)' and label != 'TOTAL UT(S)'"
+
+[output]
+layout = "table"  # one row per State/UT, one column per value
+format = "csv"

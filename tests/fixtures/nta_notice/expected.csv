@@ -1,0 +1,616 @@
+table,row,col,value
+highlights,Number of Candidates registered,2019,1519375
+highlights,Number of Candidates registered,2020,1597435
+highlights,Number of Candidates registered,2021,1614777
+highlights,Number of Candidates registered,2022,1872343
+highlights,Number of Candidates registered,2023,2087462
+highlights,Number of Candidates registered,2024,2406079
+highlights,Number of Candidates Present,2019,1410755
+highlights,Number of Candidates Present,2020,1366945
+highlights,Number of Candidates Present,2021,1544273
+highlights,Number of Candidates Present,2022,1764571
+highlights,Number of Candidates Present,2023,2038596
+highlights,Number of Candidates Present,2024,2333297
+highlights,Number of Candidates Absent,2019,108620
+highlights,Number of Candidates Absent,2020,230490
+highlights,Number of Candidates Absent,2021,70504
+highlights,Number of Candidates Absent,2022,107772
+highlights,Number of Candidates Absent,2023,48866
+highlights,Number of Candidates Absent,2024,72782
+highlights,Indian Nationals,2019,1516066
+highlights,Indian Nationals,2020,1593907
+highlights,Indian Nationals,2021,1612276
+highlights,Indian Nationals,2022,1870015
+highlights,Indian Nationals,2023,2036316
+highlights,Indian Nationals,2024,2402774
+highlights,NRIs,2019,1884
+highlights,NRIs,2020,1869
+highlights,NRIs,2021,1054
+highlights,NRIs,2022,910
+highlights,NRIs,2023,852
+highlights,NRIs,2024,1304
+highlights,OCIs,2019,675
+highlights,OCIs,2020,732
+highlights,OCIs,2021,564
+highlights,OCIs,2022,647
+highlights,OCIs,2023,642
+highlights,OCIs,2024,805
+highlights,PIO,2019,63
+highlights,PIO,2020,49
+highlights,PIO,2021,---
+highlights,PIO,2022,-
+highlights,PIO,2023,--
+highlights,PIO,2024,-
+highlights,Foreigners,2019,687
+highlights,Foreigners,2020,878
+highlights,Foreigners,2021,883
+highlights,Foreigners,2022,771
+highlights,Foreigners,2023,786
+highlights,Foreigners,2024,1196
+highlights,Male,2019,680414
+highlights,Male,2020,716586
+highlights,Male,2021,710988
+highlights,Male,2022,807538
+highlights,Male,2023,902936
+highlights,Male,2024,1029198
+highlights,Female,2019,838955
+highlights,Female,2020,880843
+highlights,Female,2021,903774
+highlights,Female,2022,1064794
+highlights,Female,2023,1184513
+highlights,Female,2024,1376863
+highlights,Third Gender,2019,6
+highlights,Third Gender,2020,6
+highlights,Third Gender,2021,15
+highlights,Third Gender,2022,11
+highlights,Third Gender,2023,13
+highlights,Third Gender,2024,18
+highlights,Un-Reserved,2019,534072
+highlights,Un-Reserved,2020,475534
+highlights,Un-Reserved,2021,46-853
+highlights,Un-Reserved,2022,565964
+highlights,Un-Reserved,2023,592110
+highlights,Un-Reserved,2024,647260
+highlights,SC,2019,211303
+highlights,SC,2020,221253
+highlights,SC,2021,235667
+highlights,SC,2022,268750
+highlights,SC,2023,294995
+highlights,SC,2024,356727
+highlights,ST,2019,96456
+highlights,ST,2020,100519
+highlights,ST,2021,100900
+highlights,ST,2022,113830
+highlights,ST,2023,126121
+highlights,ST,2024,157115
+highlights,OBC,2019,677544
+highlights,OBC,2020,706214
+highlights,OBC,2021,693652
+highlights,OBC,2022,791135
+highlights,OBC,2023,873173
+highlights,OBC,2024,1054277
+highlights,EWS,2019,---
+highlights,EWS,2020,93915
+highlights,EWS,2021,123705
+highlights,EWS,2022,132664
+highlights,EWS,2023,152197
+highlights,EWS,2024,190700
+highlights,Number of Cities,2019,154
+highlights,Number of Cities,2020,155
+highlights,Number of Cities,2021,202
+highlights,Number of Cities,2022,497
+highlights,Number of Cities,2023,499
+highlights,Number of Cities,2024,571
+highlights,Number of Languages,2019,11
+highlights,Number of Languages,2020,11
+highlights,Number of Languages,2021,13
+highlights,Number of Languages,2022,13
+highlights,Number of Languages,2023,13
+highlights,Number of Languages,2024,13
+highlights,Number of Centres,2019,2546
+highlights,Number of Centres,2020,3862
+highlights,Number of Centres,2021,3858
+highlights,Number of Centres,2022,3570
+highlights,Number of Centres,2023,4097
+highlights,Number of Centres,2024,4750
+highlights,Number of Centre / Deputy Centre Superintendent,2019,5970
+highlights,Number of Centre / Deputy Centre Superintendent,2020,9680
+highlights,Number of Centre / Deputy Centre Superintendent,2021,9740
+highlights,Number of Centre / Deputy Centre Superintendent,2022,3570/7877
+highlights,Number of Centre / Deputy Centre Superintendent,2023,4097/7826
+highlights,Number of Centre / Deputy Centre Superintendent,2024,4750/6520
+highlights,Number of invigilators,2019,128000
+highlights,Number of invigilators,2020,266240
+highlights,Number of invigilators,2021,269140
+highlights,Number of invigilators,2022,156504
+highlights,Number of invigilators,2023,173954
+highlights,Number of invigilators,2024,210105
+highlights,Number of Observers,2019,3600
+highlights,Number of Observers,2020,5818
+highlights,Number of Observers,2021,5880
+highlights,Number of Observers,2022,3911
+highlights,Number of Observers,2023,5804
+highlights,Number of Observers,2024,7500
+highlights,Number of City Coordinators,2019,163
+highlights,Number of City Coordinators,2020,195
+highlights,Number of City Coordinators,2021,202
+highlights,Number of City Coordinators,2022,494
+highlights,Number of City Coordinators,2023,528
+highlights,Number of City Coordinators,2024,587
+change,Total Candidates,2023,2059006
+change,Total Candidates,2024,2406079
+change,Total Candidates,change_pct,16.85
+change,Male,2023,889428
+change,Male,2024,1029154
+change,Male,change_pct,15.71
+change,Female,2023,1168411
+change,Female,2024,1376831
+change,Female,change_pct,17.84
+change,Third gender,2023,13
+change,Third gender,2024,18
+change,Third gender,change_pct,38.46
+change,General,2023,598376
+change,General,2024,647236
+change,General,change_pct,8.17
+change,SC,2023,297955
+change,SC,2024,356721
+change,SC,change_pct,19.72
+change,ST,2023,130425
+change,ST,2024,157106
+change,ST,change_pct,20.46
+change,OBC-NCL,2023,877692
+change,OBC-NCL,2024,1054246
+change,OBC-NCL,change_pct,20.12
+change,Gen-EWS,2023,153363
+change,Gen-EWS,2024,190694
+change,Gen-EWS,change_pct,24.34
+language,English,2019,1204968
+language,English,2020,1263273
+language,English,2021,1265520
+language,English,2022,1476024
+language,English,2023,1672914
+language,English,2024,1892355
+language,Hindi,2019,179857
+language,Hindi,2020,204399
+language,Hindi,2021,228641
+language,Hindi,2022,258827
+language,Hindi,2023,276180
+language,Hindi,2024,357908
+language,Assamese,2019,1796
+language,Assamese,2020,5328
+language,Assamese,2021,4596
+language,Assamese,2022,4063
+language,Assamese,2023,3324
+language,Assamese,2024,3769
+language,Bengali,2019,4750
+language,Bengali,2020,36593
+language,Bengali,2021,35110
+language,Bengali,2022,42663
+language,Bengali,2023,43890
+language,Bengali,2024,48265
+language,Gujarati,2019,59395
+language,Gujarati,2020,59055
+language,Gujarati,2021,49942
+language,Gujarati,2022,49638
+language,Gujarati,2023,53027
+language,Gujarati,2024,58836
+language,Kannada,2019,2305
+language,Kannada,2020,1005
+language,Kannada,2021,963
+language,Kannada,2022,1193
+language,Kannada,2023,704
+language,Kannada,2024,1065
+language,Marathi,2019,31239
+language,Marathi,2020,6258
+language,Marathi,2021,2913
+language,Marathi,2022,2368
+language,Marathi,2023,1833
+language,Marathi,2024,1759
+language,Malayalam,2019,NA
+language,Malayalam,2020,NA
+language,Malayalam,2021,3031
+language,Malayalam,2022,1510
+language,Malayalam,2023,1003
+language,Malayalam,2024,958
+language,Odia,2019,31490
+language,Odia,2020,822
+language,Odia,2021,1016
+language,Odia,2022,822
+language,Odia,2023,988
+language,Odia,2024,1312
+language,Punjabi,2019,NA
+language,Punjabi,2020,NA
+language,Punjabi,2021,104
+language,Punjabi,2022,96
+language,Punjabi,2023,73
+language,Punjabi,2024,214
+language,Tamil,2019,1017
+language,Tamil,2020,17101
+language,Tamil,2021,19868
+language,Tamil,2022,31965
+language,Tamil,2023,30536
+language,Tamil,2024,36333
+language,Telugu,2019,700
+language,Telugu,2020,1624
+language,Telugu,2021,1251
+language,Telugu,2022,1264
+language,Telugu,2023,1295
+language,Telugu,2024,1684
+language,Urdu,2019,1858
+language,Urdu,2020,1977
+language,Urdu,2021,1822
+language,Urdu,2022,1910
+language,Urdu,2023,1695
+language,Urdu,2024,1545
+gender,Male,2023_registered,902936
+gender,Male,2023_appeared,881967
+gender,Male,2023_qualified,490374
+gender,Male,2024_registered,1029198
+gender,Male,2024_appeared,998298
+gender,Male,2024_qualified,547036
+gender,Female,2023_registered,1184513
+gender,Female,2023_appeared,1156618
+gender,Female,2023_qualified,655599
+gender,Female,2024_registered,1376863
+gender,Female,2024_appeared,1334982
+gender,Female,2024_qualified,769222
+gender,Third gender,2023_registered,13
+gender,Third gender,2023_appeared,11
+gender,Third gender,2023_qualified,3
+gender,Third gender,2024_registered,18
+gender,Third gender,2024_appeared,17
+gender,Third gender,2024_qualified,10
+gender,Total,2023_registered,2087462
+gender,Total,2023_appeared,2038596
+gender,Total,2023_qualified,1145976
+gender,Total,2024_registered,2406079
+gender,Total,2024_appeared,2333297
+gender,Total,2024_qualified,1316268
+category,OBC,2023_registered,890150
+category,OBC,2023_appeared,873173
+category,OBC,2023_qualified,525194
+category,OBC,2024_registered,1054277
+category,OBC,2024_appeared,1026388
+category,OBC,2024_qualified,618890
+category,SC,2023_registered,303318
+category,SC,2023_appeared,294995
+category,SC,2023_qualified,153674
+category,SC,2024_registered,356727
+category,SC,2024_appeared,344327
+category,SC,2024_qualified,178738
+category,ST,2023_registered,132490
+category,ST,2023_appeared,126121
+category,ST,2023_qualified,56381
+category,ST,2024_registered,157115
+category,ST,2024_appeared,150181
+category,ST,2024_qualified,68479
+category,General,2023_registered,607131
+category,General,2023_appeared,592110
+category,General,2023_qualified,312405
+category,General,2024_registered,647260
+category,General,2024_appeared,625477
+category,General,2024_qualified,333932
+category,EWS,2023_registered,154373
+category,EWS,2023_appeared,152197
+category,EWS,2023_qualified,98322
+category,EWS,2024_registered,190700
+category,EWS,2024_appeared,186924
+category,EWS,2024_qualified,116229
+category,Total,2023_registered,2087462
+category,Total,2023_appeared,2038596
+category,Total,2023_qualified,1145976
+category,Total,2024_registered,2406079
+category,Total,2024_appeared,2333297
+category,Total,2024_qualified,1316268
+pwbd,PwD,2023_registered,8037
+pwbd,PwD,2023_appeared,7819
+pwbd,PwD,2023_qualified,3508
+pwbd,PwD,2024_registered,9901
+pwbd,PwD,2024_appeared,9514
+pwbd,PwD,2024_qualified,4120
+nationality,Indian,2023_registered,2085096
+nationality,Indian,2023_appeared,2036316
+nationality,Indian,2023_qualified,1144399
+nationality,Indian,2024_registered,2402774
+nationality,Indian,2024_appeared,2330225
+nationality,Indian,2024_qualified,1314160
+nationality,Foreign Nationals,2023_registered,815
+nationality,Foreign Nationals,2023_appeared,786
+nationality,Foreign Nationals,2023_qualified,521
+nationality,Foreign Nationals,2024_registered,1196
+nationality,Foreign Nationals,2024_appeared,1122
+nationality,Foreign Nationals,2024_qualified,694
+nationality,NRI,2023_registered,877
+nationality,NRI,2023_appeared,852
+nationality,NRI,2023_qualified,533
+nationality,NRI,2024_registered,1304
+nationality,NRI,2024_appeared,1214
+nationality,NRI,2024_qualified,798
+nationality,OCI,2023_registered,674
+nationality,OCI,2023_appeared,642
+nationality,OCI,2023_qualified,523
+nationality,OCI,2024_registered,805
+nationality,OCI,2024_appeared,736
+nationality,OCI,2024_qualified,616
+nationality,Total,2023_registered,2087462
+nationality,Total,2023_appeared,2038596
+nationality,Total,2023_qualified,1145976
+nationality,Total,2024_registered,2406079
+nationality,Total,2024_appeared,2333297
+nationality,Total,2024_qualified,1316268
+qualifying,UR/EWS,criteria,50th Percentile
+qualifying,UR/EWS,2023_marks,720-137
+qualifying,UR/EWS,2023_qualified,1014372
+qualifying,UR/EWS,2024_marks,720-164
+qualifying,UR/EWS,2024_qualified,1165904
+qualifying,OBC,criteria,40th Percentile
+qualifying,OBC,2023_marks,136-107
+qualifying,OBC,2023_qualified,88592
+qualifying,OBC,2024_marks,163-129
+qualifying,OBC,2024_qualified,100769
+qualifying,SC,criteria,40th Percentile
+qualifying,SC,2023_marks,136-107
+qualifying,SC,2023_qualified,29918
+qualifying,SC,2024_marks,163-129
+qualifying,SC,2024_qualified,34326
+qualifying,ST,criteria,40th Percentile
+qualifying,ST,2023_marks,136-107
+qualifying,ST,2023_qualified,12437
+qualifying,ST,2024_marks,163-129
+qualifying,ST,2024_qualified,14478
+qualifying,UR / EWS & PH,criteria,45th Percentile
+qualifying,UR / EWS & PH,2023_marks,136-121
+qualifying,UR / EWS & PH,2023_qualified,405
+qualifying,UR / EWS & PH,2024_marks,163-146
+qualifying,UR / EWS & PH,2024_qualified,455
+qualifying,OBC & PH,criteria,40th Percentile
+qualifying,OBC & PH,2023_marks,120-107
+qualifying,OBC & PH,2023_qualified,179
+qualifying,OBC & PH,2024_marks,145-129
+qualifying,OBC & PH,2024_qualified,270
+qualifying,SC & PH,criteria,40th Percentile
+qualifying,SC & PH,2023_marks,120-107
+qualifying,SC & PH,2023_qualified,50
+qualifying,SC & PH,2024_marks,145-129
+qualifying,SC & PH,2024_qualified,55
+qualifying,ST & PH,criteria,40th Percentile
+qualifying,ST & PH,2023_marks,120-108
+qualifying,ST & PH,2023_qualified,23
+qualifying,ST & PH,2024_marks,145-129
+qualifying,ST & PH,2024_qualified,11
+qualifying,Total,2023_qualified,1145976
+qualifying,Total,2024_qualified,1316268
+state,Andaman & Nicobar Islands,2023_registered,1046
+state,Andaman & Nicobar Islands,2023_appeared,1025
+state,Andaman & Nicobar Islands,2023_qualified,537
+state,Andaman & Nicobar Islands,2024_registered,1177
+state,Andaman & Nicobar Islands,2024_appeared,1122
+state,Andaman & Nicobar Islands,2024_qualified,612
+state,Andhra Pradesh,2023_registered,69690
+state,Andhra Pradesh,2023_appeared,68578
+state,Andhra Pradesh,2023_qualified,42836
+state,Andhra Pradesh,2024_registered,66522
+state,Andhra Pradesh,2024_appeared,64931
+state,Andhra Pradesh,2024_qualified,43858
+state,Arunachal Pradesh,2023_registered,4811
+state,Arunachal Pradesh,2023_appeared,4624
+state,Arunachal Pradesh,2023_qualified,2296
+state,Arunachal Pradesh,2024_registered,5228
+state,Arunachal Pradesh,2024_appeared,4998
+state,Arunachal Pradesh,2024_qualified,2570
+state,Assam,2023_registered,39206
+state,Assam,2023_appeared,38153
+state,Assam,2023_qualified,19133
+state,Assam,2024_registered,46068
+state,Assam,2024_appeared,44193
+state,Assam,2024_qualified,21085
+state,Bihar,2023_registered,121647
+state,Bihar,2023_appeared,118533
+state,Bihar,2023_qualified,64916
+state,Bihar,2024_registered,154461
+state,Bihar,2024_appeared,149542
+state,Bihar,2024_qualified,74743
+state,Chandigarh,2023_registered,3160
+state,Chandigarh,2023_appeared,3098
+state,Chandigarh,2023_qualified,2219
+state,Chandigarh,2024_registered,3579
+state,Chandigarh,2024_appeared,3485
+state,Chandigarh,2024_qualified,2541
+state,Chhattisgarh,2023_registered,42130
+state,Chhattisgarh,2023_appeared,41196
+state,Chhattisgarh,2023_qualified,19610
+state,Chhattisgarh,2024_registered,45213
+state,Chhattisgarh,2024_appeared,43873
+state,Chhattisgarh,2024_qualified,22344
+state,Dadra & Nagar Haveli,2023_registered,1062
+state,Dadra & Nagar Haveli,2023_appeared,1028
+state,Dadra & Nagar Haveli,2023_qualified,588
+state,Dadra & Nagar Haveli,2024_registered,1143
+state,Dadra & Nagar Haveli,2024_appeared,1122
+state,Dadra & Nagar Haveli,2024_qualified,694
+state,Daman & Diu,2023_registered,491
+state,Daman & Diu,2023_appeared,460
+state,Daman & Diu,2023_qualified,257
+state,Daman & Diu,2024_registered,619
+state,Daman & Diu,2024_appeared,612
+state,Daman & Diu,2024_qualified,323
+state,Delhi,2023_registered,55890
+state,Delhi,2023_appeared,54701
+state,Delhi,2023_qualified,39764
+state,Delhi,2024_registered,68139
+state,Delhi,2024_appeared,66133
+state,Delhi,2024_qualified,46794
+state,Goa,2023_registered,4370
+state,Goa,2023_appeared,4277
+state,Goa,2023_qualified,2204
+state,Goa,2024_registered,5229
+state,Goa,2024_appeared,5003
+state,Goa,2024_qualified,2586
+state,Gujarat,2023_registered,79040
+state,Gujarat,2023_appeared,73180
+state,Gujarat,2023_qualified,49915
+state,Gujarat,2024_registered,88022
+state,Gujarat,2024_appeared,86424
+state,Gujarat,2024_qualified,57197
+state,Haryana,2023_registered,45197
+state,Haryana,2023_appeared,44217
+state,Haryana,2023_qualified,29794
+state,Haryana,2024_registered,54162
+state,Haryana,2024_appeared,52744
+state,Haryana,2024_qualified,34347
+state,Himachal Pradesh,2023_registered,18830
+state,Himachal Pradesh,2023_appeared,18448
+state,Himachal Pradesh,2023_qualified,10962
+state,Himachal Pradesh,2024_registered,20447
+state,Himachal Pradesh,2024_appeared,19837
+state,Himachal Pradesh,2024_qualified,12079
+state,Jammu and Kashmir,2023_registered,37276
+state,Jammu and Kashmir,2023_appeared,36431
+state,Jammu and Kashmir,2023_qualified,20564
+state,Jammu and Kashmir,2024_registered,48545
+state,Jammu and Kashmir,2024_appeared,47228
+state,Jammu and Kashmir,2024_qualified,24565
+state,Jharkhand,2023_registered,29793
+state,Jharkhand,2023_appeared,29135
+state,Jharkhand,2023_qualified,17894
+state,Jharkhand,2024_registered,37478
+state,Jharkhand,2024_appeared,36244
+state,Jharkhand,2024_qualified,20541
+state,Karnataka,2023_registered,134381
+state,Karnataka,2023_appeared,131318
+state,Karnataka,2023_qualified,75248
+state,Karnataka,2024_registered,155148
+state,Karnataka,2024_appeared,150171
+state,Karnataka,2024_qualified,89088
+state,Kerala,2023_registered,137396
+state,Kerala,2023_appeared,133450
+state,Kerala,2023_qualified,75362
+state,Kerala,2024_registered,144811
+state,Kerala,2024_appeared,136974
+state,Kerala,2024_qualified,86681
+state,Lakshadweep,2023_registered,361
+state,Lakshadweep,2023_appeared,349
+state,Lakshadweep,2023_qualified,167
+state,Lakshadweep,2024_registered,331
+state,Lakshadweep,2024_appeared,307
+state,Lakshadweep,2024_qualified,181
+state,Madhya Pradesh,2023_registered,104265
+state,Madhya Pradesh,2023_appeared,102161
+state,Madhya Pradesh,2023_qualified,49324
+state,Madhya Pradesh,2024_registered,136098
+state,Madhya Pradesh,2024_appeared,131525
+state,Madhya Pradesh,2024_qualified,60073
+state,Maharashtra,2023_registered,277903
+state,Maharashtra,2023_appeared,273819
+state,Maharashtra,2023_qualified,131008
+state,Maharashtra,2024_registered,282051
+state,Maharashtra,2024_appeared,275457
+state,Maharashtra,2024_qualified,142665
+state,Manipur,2023_registered,8777
+state,Manipur,2023_appeared,7736
+state,Manipur,2023_qualified,4556
+state,Manipur,2024_registered,10332
+state,Manipur,2024_appeared,9963
+state,Manipur,2024_qualified,5859
+state,Meghalaya,2023_registered,3428
+state,Meghalaya,2023_appeared,3271
+state,Meghalaya,2023_qualified,1603
+state,Meghalaya,2024_registered,4009
+state,Meghalaya,2024_appeared,3815
+state,Meghalaya,2024_qualified,1837
+state,Mizoram,2023_registered,2024
+state,Mizoram,2023_appeared,1951
+state,Mizoram,2023_qualified,913
+state,Mizoram,2024_registered,2595
+state,Mizoram,2024_appeared,2469
+state,Mizoram,2024_qualified,1179
+state,Nagaland,2023_registered,3020
+state,Nagaland,2023_appeared,2945
+state,Nagaland,2023_qualified,1648
+state,Nagaland,2024_registered,3668
+state,Nagaland,2024_appeared,3479
+state,Nagaland,2024_qualified,1934
+state,Odisha,2023_registered,57092
+state,Odisha,2023_appeared,55866
+state,Odisha,2023_qualified,28330
+state,Odisha,2024_registered,66369
+state,Odisha,2024_appeared,64333
+state,Odisha,2024_qualified,32617
+state,Puducherry,2023_registered,5797
+state,Puducherry,2023_appeared,5715
+state,Puducherry,2023_qualified,3140
+state,Puducherry,2024_registered,6461
+state,Puducherry,2024_appeared,6318
+state,Puducherry,2024_qualified,3431
+state,Punjab,2023_registered,18846
+state,Punjab,2023_appeared,18430
+state,Punjab,2023_qualified,12043
+state,Punjab,2024_registered,27061
+state,Punjab,2024_appeared,26268
+state,Punjab,2024_qualified,15743
+state,Rajasthan,2023_registered,148364
+state,Rajasthan,2023_appeared,145824
+state,Rajasthan,2023_qualified,100316
+state,Rajasthan,2024_registered,178756
+state,Rajasthan,2024_appeared,174893
+state,Rajasthan,2024_qualified,121240
+state,Sikkim,2023_registered,1324
+state,Sikkim,2023_appeared,1292
+state,Sikkim,2023_qualified,632
+state,Sikkim,2024_registered,1722
+state,Sikkim,2024_appeared,1655
+state,Sikkim,2024_qualified,804
+state,Tamil Nadu,2023_registered,147583
+state,Tamil Nadu,2023_appeared,144516
+state,Tamil Nadu,2023_qualified,78693
+state,Tamil Nadu,2024_registered,158449
+state,Tamil Nadu,2024_appeared,152920
+state,Tamil Nadu,2024_qualified,89426
+state,Telangana,2023_registered,73883
+state,Telangana,2023_appeared,72842
+state,Telangana,2023_qualified,42654
+state,Telangana,2024_registered,79813
+state,Telangana,2024_appeared,77849
+state,Telangana,2024_qualified,47371
+state,Tripura,2023_registered,4839
+state,Tripura,2023_appeared,4701
+state,Tripura,2023_qualified,2334
+state,Tripura,2024_registered,5308
+state,Tripura,2024_appeared,5071
+state,Tripura,2024_qualified,2399
+state,Uttar Pradesh,2023_registered,273572
+state,Uttar Pradesh,2023_appeared,267383
+state,Uttar Pradesh,2023_qualified,139961
+state,Uttar Pradesh,2024_registered,344599
+state,Uttar Pradesh,2024_appeared,335004
+state,Uttar Pradesh,2024_qualified,165047
+state,Uttarakhand,2023_registered,19250
+state,Uttarakhand,2023_appeared,18788
+state,Uttarakhand,2023_qualified,10843
+state,Uttarakhand,2024_registered,22973
+state,Uttarakhand,2024_appeared,22244
+state,Uttarakhand,2024_qualified,12422
+state,West Bengal,2023_registered,104923
+state,West Bengal,2023_appeared,102557
+state,West Bengal,2023_qualified,59053
+state,West Bengal,2024_registered,120070
+state,West Bengal,2024_appeared,116110
+state,West Bengal,2024_qualified,63135
+state,Ladakh,2023_registered,774
+state,Ladakh,2023_appeared,740
+state,Ladakh,2023_qualified,422
+state,Ladakh,2024_registered,1146
+state,Ladakh,2024_appeared,1083
+state,Ladakh,2024_qualified,619
+state,Others (including Outside India),2023_registered,6021
+state,Others (including Outside India),2023_appeared,5858
+state,Others (including Outside India),2023_qualified,4237
+state,Others (including Outside India),2024_registered,8277
+state,Others (including Outside India),2024_appeared,7898
+state,Others (including Outside India),2024_qualified,5638
+state,Total,2023_registered,2087462
+state,Total,2023_appeared,2038596
+state,Total,2023_qualified,1145976
+state,Total,2024_registered,2406079
+state,Total,2024_appeared,2333297
+state,Total,2024_qualified,1316268
