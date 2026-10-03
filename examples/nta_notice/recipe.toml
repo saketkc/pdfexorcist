@@ -1,0 +1,66 @@
+# pdfexorcist recipe: every statistics table of the NEET (UG) 2024 result press release
+#
+# Pages 2-6 hold nine tables: Table 1 (highlights 2019-2024), an unnumbered
+# 2023 vs 2024 summary, then Tables 2-8 (language, gender, category, PwBD,
+# nationality, qualifying criteria, State). nta_notice.py keys each value by
+# (table, row, col), so one run reads all nine and one CSV holds them, a block
+# of rows per table. Try it:
+#
+#   pdfexorcist extract https://www.nta.ac.in/Download/Notice/Notice_20240604195244.pdf --recipe examples/nta_notice/recipe.toml -o neet2024.csv
+
+name = "NEET (UG) 2024 result press release"
+description = "Candidates registered, appeared and qualified by year, language, gender, category, nationality and State (NTA)"
+sample = "../../tests/fixtures/nta_notice/nta_notice_2024_p2-6.pdf"
+
+[pages]
+match = 'Highlights of NEET|Registered\s+Appeared'  # pages 2-6; the toppers lists follow
+
+[engines]
+ocr = false
+
+[normalize]
+remove_commas = true  # Table 1 prints 2,10,105 invigilators in 2024
+
+[parser]
+type = "custom"
+function = "nta_notice.py:parse"
+key = ["table", "row", "col"]
+
+# Table 1, each year: registered = present + absent
+[[checks]]
+column = "row"
+rule = "Number of Candidates registered = Number of Candidates Present + Number of Candidates Absent"
+by = ["col"]
+where = "table == 'highlights'"
+name = "Table 1: registered = present + absent"
+
+# Table 1, each year: the genders add up to registered
+[[checks]]
+column = "row"
+rule = "Number of Candidates registered = Male + Female + Third Gender"
+by = ["col"]
+where = "table == 'highlights'"
+name = "Table 1: registered = male + female + third gender"
+
+# >= since 2023 counts present candidates; 2019 has no EWS; a non-number part (2021's 46-853) fails
+[[checks]]
+column = "row"
+rule = "Number of Candidates registered >= Un-Reserved + SC + ST + OBC + EWS"
+by = ["col"]
+where = "table == 'highlights' and col != '2019'"
+missing = "fail"
+name = "Table 1: registered >= categories"
+
+# Tables 3, 4, 6, 7 and 8: the rows above Total add up to it, in each column
+[[checks]]
+column = "row"
+rule = "Total = rest"
+by = ["table", "col"]
+where = "table in ['gender', 'category', 'nationality', 'qualifying', 'state']"
+name = "Total = rows above"
+
+[output]
+layout = "table"
+rows = ["table", "row"]  # one row per table row, tables one after another
+columns = "col"          # years, or 2023/2024 x registered/appeared/qualified
+format = "csv"

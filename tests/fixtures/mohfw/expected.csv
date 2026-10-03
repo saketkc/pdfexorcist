@@ -1,0 +1,613 @@
+fixture,state,year,age,sex,value,censusindia
+mohfw_india_p165-166.pdf,India,2011,0-4,Male,62145,62151
+mohfw_india_p165-166.pdf,India,2011,10-14,Male,67537,67554
+mohfw_india_p165-166.pdf,India,2011,15-19,Male,63986,63994
+mohfw_india_p165-166.pdf,India,2011,20-24,Male,57844,57845
+mohfw_india_p165-166.pdf,India,2011,25-29,Male,51429,51425
+mohfw_india_p165-166.pdf,India,2011,30-34,Male,46072,46065
+mohfw_india_p165-166.pdf,India,2011,35-39,Male,42172,42166
+mohfw_india_p165-166.pdf,India,2011,40-44,Male,37681,37672
+mohfw_india_p165-166.pdf,India,2011,45-49,Male,32038,32032
+mohfw_india_p165-166.pdf,India,2011,5-9,Male,65412,65422
+mohfw_india_p165-166.pdf,India,2011,50-54,Male,25919,25914
+mohfw_india_p165-166.pdf,India,2011,55-59,Male,20944,20940
+mohfw_india_p165-166.pdf,India,2011,60-64,Male,17518,17515
+mohfw_india_p165-166.pdf,India,2011,65-69,Male,13612,13615
+mohfw_india_p165-166.pdf,India,2011,70-74,Male,10546,10546
+mohfw_india_p165-166.pdf,India,2011,75-79,Male,5471,5471
+mohfw_india_p165-166.pdf,India,2011,80+,Male,2946,2943
+mohfw_india_p165-166.pdf,India,2016,0-4,Male,61594,62872
+mohfw_india_p165-166.pdf,India,2016,10-14,Male,65160,65142
+mohfw_india_p165-166.pdf,India,2016,15-19,Male,67241,67223
+mohfw_india_p165-166.pdf,India,2016,20-24,Male,63545,63521
+mohfw_india_p165-166.pdf,India,2016,25-29,Male,57310,57272
+mohfw_india_p165-166.pdf,India,2016,30-34,Male,50834,50782
+mohfw_india_p165-166.pdf,India,2016,35-39,Male,45364,45318
+mohfw_india_p165-166.pdf,India,2016,40-44,Male,41320,41280
+mohfw_india_p165-166.pdf,India,2016,45-49,Male,36643,36602
+mohfw_india_p165-166.pdf,India,2016,5-9,Male,61536,61499
+mohfw_india_p165-166.pdf,India,2016,50-54,Male,30773,30738
+mohfw_india_p165-166.pdf,India,2016,55-59,Male,24428,24403
+mohfw_india_p165-166.pdf,India,2016,60-64,Male,19154,19133
+mohfw_india_p165-166.pdf,India,2016,65-69,Male,15214,15198
+mohfw_india_p165-166.pdf,India,2016,70-74,Male,11012,11002
+mohfw_india_p165-166.pdf,India,2016,75-79,Male,7718,7703
+mohfw_india_p165-166.pdf,India,2016,80+,Male,4501,4496
+mohfw_india_p165-166.pdf,India,2021,0-4,Male,59938,60153
+mohfw_india_p165-166.pdf,India,2021,10-14,Male,61225,61266
+mohfw_india_p165-166.pdf,India,2021,15-19,Male,64788,64862
+mohfw_india_p165-166.pdf,India,2021,20-24,Male,66701,66770
+mohfw_india_p165-166.pdf,India,2021,25-29,Male,62893,62944
+mohfw_india_p165-166.pdf,India,2021,30-34,Male,56606,56614
+mohfw_india_p165-166.pdf,India,2021,35-39,Male,50043,50027
+mohfw_india_p165-166.pdf,India,2021,40-44,Male,44459,44450
+mohfw_india_p165-166.pdf,India,2021,45-49,Male,40217,40204
+mohfw_india_p165-166.pdf,India,2021,5-9,Male,60959,62276
+mohfw_india_p165-166.pdf,India,2021,50-54,Male,35253,35235
+mohfw_india_p165-166.pdf,India,2021,55-59,Male,29096,29082
+mohfw_india_p165-166.pdf,India,2021,60-64,Male,22480,22465
+mohfw_india_p165-166.pdf,India,2021,65-69,Male,16833,16823
+mohfw_india_p165-166.pdf,India,2021,70-74,Male,12551,12546
+mohfw_india_p165-166.pdf,India,2021,75-79,Male,8274,8269
+mohfw_india_p165-166.pdf,India,2021,80+,Male,6643,6637
+mohfw_india_p165-166.pdf,India,2026,0-4,Male,56522,56943
+mohfw_india_p165-166.pdf,India,2026,10-14,Male,60713,62068
+mohfw_india_p165-166.pdf,India,2026,15-19,Male,60943,61038
+mohfw_india_p165-166.pdf,India,2026,20-24,Male,64343,64463
+mohfw_india_p165-166.pdf,India,2026,25-29,Male,66100,66201
+mohfw_india_p165-166.pdf,India,2026,30-34,Male,62210,62271
+mohfw_india_p165-166.pdf,India,2026,35-39,Male,55823,55840
+mohfw_india_p165-166.pdf,India,2026,40-44,Male,49147,49144
+mohfw_india_p165-166.pdf,India,2026,45-49,Male,43378,43374
+mohfw_india_p165-166.pdf,India,2026,5-9,Male,59409,59652
+mohfw_india_p165-166.pdf,India,2026,50-54,Male,38806,38803
+mohfw_india_p165-166.pdf,India,2026,55-59,Male,33468,33466
+mohfw_india_p165-166.pdf,India,2026,60-64,Male,26936,26934
+mohfw_india_p165-166.pdf,India,2026,65-69,Male,19942,19954
+mohfw_india_p165-166.pdf,India,2026,70-74,Male,14080,14104
+mohfw_india_p165-166.pdf,India,2026,75-79,Male,9595,9615
+mohfw_india_p165-166.pdf,India,2026,80+,Male,8190,8205
+mohfw_india_p165-166.pdf,India,2031,0-4,Male,52846,53431
+mohfw_india_p165-166.pdf,India,2031,10-14,Male,59229,59500
+mohfw_india_p165-166.pdf,India,2031,15-19,Male,60494,61878
+mohfw_india_p165-166.pdf,India,2031,20-24,Male,60588,60719
+mohfw_india_p165-166.pdf,India,2031,25-29,Male,63835,63970
+mohfw_india_p165-166.pdf,India,2031,30-34,Male,65469,65561
+mohfw_india_p165-166.pdf,India,2031,35-39,Male,61452,61499
+mohfw_india_p165-166.pdf,India,2031,40-44,Male,54930,54936
+mohfw_india_p165-166.pdf,India,2031,45-49,Male,48064,48049
+mohfw_india_p165-166.pdf,India,2031,5-9,Male,56100,56553
+mohfw_india_p165-166.pdf,India,2031,50-54,Male,41975,41968
+mohfw_india_p165-166.pdf,India,2031,55-59,Male,36977,36980
+mohfw_india_p165-166.pdf,India,2031,60-64,Male,31154,31158
+mohfw_india_p165-166.pdf,India,2031,65-69,Male,24103,24126
+mohfw_india_p165-166.pdf,India,2031,70-74,Male,16893,16941
+mohfw_india_p165-166.pdf,India,2031,75-79,Male,10932,10980
+mohfw_india_p165-166.pdf,India,2031,80+,Male,9852,9897
+mohfw_india_p165-166.pdf,India,2036,0-4,Male,49580,50519
+mohfw_india_p165-166.pdf,India,2036,10-14,Male,56048,56512
+mohfw_india_p165-166.pdf,India,2036,15-19,Male,59140,59432
+mohfw_india_p165-166.pdf,India,2036,20-24,Male,60271,61671
+mohfw_india_p165-166.pdf,India,2036,25-29,Male,60243,60367
+mohfw_india_p165-166.pdf,India,2036,30-34,Male,63375,63466
+mohfw_india_p165-166.pdf,India,2036,35-39,Male,64840,64879
+mohfw_india_p165-166.pdf,India,2036,40-44,Male,60642,60631
+mohfw_india_p165-166.pdf,India,2036,45-49,Male,53889,53839
+mohfw_india_p165-166.pdf,India,2036,5-9,Male,52587,53185
+mohfw_india_p165-166.pdf,India,2036,50-54,Male,46672,46615
+mohfw_india_p165-166.pdf,India,2036,55-59,Male,40167,40135
+mohfw_india_p165-166.pdf,India,2036,60-64,Male,34615,34600
+mohfw_india_p165-166.pdf,India,2036,65-69,Male,28103,28119
+mohfw_india_p165-166.pdf,India,2036,70-74,Male,20642,20703
+mohfw_india_p165-166.pdf,India,2036,75-79,Male,13285,13358
+mohfw_india_p165-166.pdf,India,2036,80+,Male,11603,11670
+mohfw_india_p165-166.pdf,India,2011,0-4,Female,57682,57690
+mohfw_india_p165-166.pdf,India,2011,10-14,Female,61158,61170
+mohfw_india_p165-166.pdf,India,2011,15-19,Female,57763,57770
+mohfw_india_p165-166.pdf,India,2011,20-24,Female,53767,53769
+mohfw_india_p165-166.pdf,India,2011,25-29,Female,49657,49655
+mohfw_india_p165-166.pdf,India,2011,30-34,Female,45203,45198
+mohfw_india_p165-166.pdf,India,2011,35-39,Female,40965,40959
+mohfw_india_p165-166.pdf,India,2011,40-44,Female,35675,35670
+mohfw_india_p165-166.pdf,India,2011,45-49,Female,29727,29722
+mohfw_india_p165-166.pdf,India,2011,5-9,Female,59896,59906
+mohfw_india_p165-166.pdf,India,2011,50-54,Female,24168,24162
+mohfw_india_p165-166.pdf,India,2011,55-59,Female,20466,20466
+mohfw_india_p165-166.pdf,India,2011,60-64,Female,17845,17844
+mohfw_india_p165-166.pdf,India,2011,65-69,Female,13935,13808
+mohfw_india_p165-166.pdf,India,2011,70-74,Female,10882,10837
+mohfw_india_p165-166.pdf,India,2011,75-79,Female,5277,5377
+mohfw_india_p165-166.pdf,India,2011,80+,Female,3518,3582
+mohfw_india_p165-166.pdf,India,2016,0-4,Female,54919,56038
+mohfw_india_p165-166.pdf,India,2016,10-14,Female,59763,59682
+mohfw_india_p165-166.pdf,India,2016,15-19,Female,60965,60871
+mohfw_india_p165-166.pdf,India,2016,20-24,Female,57456,57356
+mohfw_india_p165-166.pdf,India,2016,25-29,Female,53441,53357
+mohfw_india_p165-166.pdf,India,2016,30-34,Female,49341,49250
+mohfw_india_p165-166.pdf,India,2016,35-39,Female,44875,44787
+mohfw_india_p165-166.pdf,India,2016,40-44,Female,40586,40497
+mohfw_india_p165-166.pdf,India,2016,45-49,Female,35191,35107
+mohfw_india_p165-166.pdf,India,2016,5-9,Female,57084,56969
+mohfw_india_p165-166.pdf,India,2016,50-54,Female,29088,29016
+mohfw_india_p165-166.pdf,India,2016,55-59,Female,23356,23307
+mohfw_india_p165-166.pdf,India,2016,60-64,Female,19324,19288
+mohfw_india_p165-166.pdf,India,2016,65-69,Female,16149,16114
+mohfw_india_p165-166.pdf,India,2016,70-74,Female,11849,11723
+mohfw_india_p165-166.pdf,India,2016,75-79,Female,8429,8367
+mohfw_india_p165-166.pdf,India,2016,80+,Female,5072,5161
+mohfw_india_p165-166.pdf,India,2021,0-4,Female,53707,54120
+mohfw_india_p165-166.pdf,India,2021,10-14,Female,56906,56785
+mohfw_india_p165-166.pdf,India,2021,15-19,Female,59525,59420
+mohfw_india_p165-166.pdf,India,2021,20-24,Female,60603,60474
+mohfw_india_p165-166.pdf,India,2021,25-29,Female,57073,56956
+mohfw_india_p165-166.pdf,India,2021,30-34,Female,53069,52961
+mohfw_india_p165-166.pdf,India,2021,35-39,Female,48958,48836
+mohfw_india_p165-166.pdf,India,2021,40-44,Female,44442,44315
+mohfw_india_p165-166.pdf,India,2021,45-49,Female,40031,39903
+mohfw_india_p165-166.pdf,India,2021,5-9,Female,54345,55390
+mohfw_india_p165-166.pdf,India,2021,50-54,Female,34452,34331
+mohfw_india_p165-166.pdf,India,2021,55-59,Female,28156,28062
+mohfw_india_p165-166.pdf,India,2021,60-64,Female,22139,22079
+mohfw_india_p165-166.pdf,India,2021,65-69,Female,17637,17583
+mohfw_india_p165-166.pdf,India,2021,70-74,Female,13951,13904
+mohfw_india_p165-166.pdf,India,2021,75-79,Female,9422,9294
+mohfw_india_p165-166.pdf,India,2021,80+,Female,7968,7970
+mohfw_india_p165-166.pdf,India,2026,0-4,Female,50923,51767
+mohfw_india_p165-166.pdf,India,2026,10-14,Female,54243,55232
+mohfw_india_p165-166.pdf,India,2026,15-19,Female,56754,56562
+mohfw_india_p165-166.pdf,India,2026,20-24,Female,59258,59066
+mohfw_india_p165-166.pdf,India,2026,25-29,Female,60288,60085
+mohfw_india_p165-166.pdf,India,2026,30-34,Female,56760,56562
+mohfw_india_p165-166.pdf,India,2026,35-39,Female,52737,52547
+mohfw_india_p165-166.pdf,India,2026,40-44,Female,48564,48361
+mohfw_india_p165-166.pdf,India,2026,45-49,Female,43917,43710
+mohfw_india_p165-166.pdf,India,2026,5-9,Female,53246,53560
+mohfw_india_p165-166.pdf,India,2026,50-54,Female,39282,39082
+mohfw_india_p165-166.pdf,India,2026,55-59,Female,33453,33282
+mohfw_india_p165-166.pdf,India,2026,60-64,Female,26821,26700
+mohfw_india_p165-166.pdf,India,2026,65-69,Female,20377,20300
+mohfw_india_p165-166.pdf,India,2026,70-74,Female,15446,15394
+mohfw_india_p165-166.pdf,India,2026,75-79,Female,11325,11266
+mohfw_india_p165-166.pdf,India,2026,80+,Female,10437,10357
+mohfw_india_p165-166.pdf,India,2031,0-4,Female,47844,49052
+mohfw_india_p165-166.pdf,India,2031,10-14,Female,53205,53430
+mohfw_india_p165-166.pdf,India,2031,15-19,Female,54161,55038
+mohfw_india_p165-166.pdf,India,2031,20-24,Female,56571,56263
+mohfw_india_p165-166.pdf,India,2031,25-29,Female,59026,58725
+mohfw_india_p165-166.pdf,India,2031,30-34,Female,60036,59700
+mohfw_india_p165-166.pdf,India,2031,35-39,Female,56481,56154
+mohfw_india_p165-166.pdf,India,2031,40-44,Female,52388,52074
+mohfw_india_p165-166.pdf,India,2031,45-49,Female,48068,47746
+mohfw_india_p165-166.pdf,India,2031,5-9,Female,50568,51292
+mohfw_india_p165-166.pdf,India,2031,50-54,Female,43181,42866
+mohfw_india_p165-166.pdf,India,2031,55-59,Female,38244,37965
+mohfw_india_p165-166.pdf,India,2031,60-64,Female,31997,31787
+mohfw_india_p165-166.pdf,India,2031,65-69,Female,24855,24718
+mohfw_india_p165-166.pdf,India,2031,70-74,Female,18042,17981
+mohfw_india_p165-166.pdf,India,2031,75-79,Female,12740,12701
+mohfw_india_p165-166.pdf,India,2031,80+,Female,13219,13137
+mohfw_india_p165-166.pdf,India,2036,0-4,Female,44849,46311
+mohfw_india_p165-166.pdf,India,2036,10-14,Female,50567,51190
+mohfw_india_p165-166.pdf,India,2036,15-19,Female,53167,53270
+mohfw_india_p165-166.pdf,India,2036,20-24,Female,54035,54786
+mohfw_india_p165-166.pdf,India,2036,25-29,Female,56402,55972
+mohfw_india_p165-166.pdf,India,2036,30-34,Female,58833,58383
+mohfw_india_p165-166.pdf,India,2036,35-39,Female,59797,59299
+mohfw_india_p165-166.pdf,India,2036,40-44,Female,56164,55678
+mohfw_india_p165-166.pdf,India,2036,45-49,Female,51916,51451
+mohfw_india_p165-166.pdf,India,2036,5-9,Female,47572,48657
+mohfw_india_p165-166.pdf,India,2036,50-54,Female,47338,46881
+mohfw_india_p165-166.pdf,India,2036,55-59,Female,42135,41721
+mohfw_india_p165-166.pdf,India,2036,60-64,Female,36713,36373
+mohfw_india_p165-166.pdf,India,2036,65-69,Female,29839,29601
+mohfw_india_p165-166.pdf,India,2036,70-74,Female,22229,22111
+mohfw_india_p165-166.pdf,India,2036,75-79,Female,15099,15053
+mohfw_india_p165-166.pdf,India,2036,80+,Female,15933,15850
+mohfw_uttarakhand_p182.pdf,Uttarakhand,2011,0-4,Male,511,511
+mohfw_uttarakhand_p182.pdf,Uttarakhand,2011,10-14,Male,590,590
+mohfw_uttarakhand_p182.pdf,Uttarakhand,2011,15-19,Male,567,567
+mohfw_uttarakhand_p182.pdf,Uttarakhand,2011,20-24,Male,490,490
+mohfw_uttarakhand_p182.pdf,Uttarakhand,2011,25-29,Male,407,407
+mohfw_uttarakhand_p182.pdf,Uttarakhand,2011,30-34,Male,355,355
+mohfw_uttarakhand_p182.pdf,Uttarakhand,2011,35-39,Male,324,324
+mohfw_uttarakhand_p182.pdf,Uttarakhand,2011,40-44,Male,288,288
+mohfw_uttarakhand_p182.pdf,Uttarakhand,2011,45-49,Male,246,246
+mohfw_uttarakhand_p182.pdf,Uttarakhand,2011,5-9,Male,554,554
+mohfw_uttarakhand_p182.pdf,Uttarakhand,2011,50-54,Male,201,201
+mohfw_uttarakhand_p182.pdf,Uttarakhand,2011,55-59,Male,168,168
+mohfw_uttarakhand_p182.pdf,Uttarakhand,2011,60-64,Male,147,147
+mohfw_uttarakhand_p182.pdf,Uttarakhand,2011,65-69,Male,115,115
+mohfw_uttarakhand_p182.pdf,Uttarakhand,2011,70-74,Male,90,90
+mohfw_uttarakhand_p182.pdf,Uttarakhand,2011,75-79,Male,54,54
+mohfw_uttarakhand_p182.pdf,Uttarakhand,2011,80+,Male,29,29
+mohfw_uttarakhand_p182.pdf,Uttarakhand,2016,0-4,Male,471,471
+mohfw_uttarakhand_p182.pdf,Uttarakhand,2016,10-14,Male,557,557
+mohfw_uttarakhand_p182.pdf,Uttarakhand,2016,15-19,Male,595,595
+mohfw_uttarakhand_p182.pdf,Uttarakhand,2016,20-24,Male,574,574
+mohfw_uttarakhand_p182.pdf,Uttarakhand,2016,25-29,Male,493,493
+mohfw_uttarakhand_p182.pdf,Uttarakhand,2016,30-34,Male,409,409
+mohfw_uttarakhand_p182.pdf,Uttarakhand,2016,35-39,Male,355,355
+mohfw_uttarakhand_p182.pdf,Uttarakhand,2016,40-44,Male,320,320
+mohfw_uttarakhand_p182.pdf,Uttarakhand,2016,45-49,Male,283,283
+mohfw_uttarakhand_p182.pdf,Uttarakhand,2016,5-9,Male,514,514
+mohfw_uttarakhand_p182.pdf,Uttarakhand,2016,50-54,Male,238,238
+mohfw_uttarakhand_p182.pdf,Uttarakhand,2016,55-59,Male,191,191
+mohfw_uttarakhand_p182.pdf,Uttarakhand,2016,60-64,Male,153,153
+mohfw_uttarakhand_p182.pdf,Uttarakhand,2016,65-69,Male,129,129
+mohfw_uttarakhand_p182.pdf,Uttarakhand,2016,70-74,Male,97,97
+mohfw_uttarakhand_p182.pdf,Uttarakhand,2016,75-79,Male,69,69
+mohfw_uttarakhand_p182.pdf,Uttarakhand,2016,80+,Male,48,48
+mohfw_uttarakhand_p182.pdf,Uttarakhand,2021,0-4,Male,468,468
+mohfw_uttarakhand_p182.pdf,Uttarakhand,2021,10-14,Male,517,517
+mohfw_uttarakhand_p182.pdf,Uttarakhand,2021,15-19,Male,564,564
+mohfw_uttarakhand_p182.pdf,Uttarakhand,2021,20-24,Male,603,603
+mohfw_uttarakhand_p182.pdf,Uttarakhand,2021,25-29,Male,577,577
+mohfw_uttarakhand_p182.pdf,Uttarakhand,2021,30-34,Male,494,494
+mohfw_uttarakhand_p182.pdf,Uttarakhand,2021,35-39,Male,408,408
+mohfw_uttarakhand_p182.pdf,Uttarakhand,2021,40-44,Male,352,352
+mohfw_uttarakhand_p182.pdf,Uttarakhand,2021,45-49,Male,316,316
+mohfw_uttarakhand_p182.pdf,Uttarakhand,2021,5-9,Male,474,474
+mohfw_uttarakhand_p182.pdf,Uttarakhand,2021,50-54,Male,274,274
+mohfw_uttarakhand_p182.pdf,Uttarakhand,2021,55-59,Male,226,226
+mohfw_uttarakhand_p182.pdf,Uttarakhand,2021,60-64,Male,176,176
+mohfw_uttarakhand_p182.pdf,Uttarakhand,2021,65-69,Male,136,136
+mohfw_uttarakhand_p182.pdf,Uttarakhand,2021,70-74,Male,110,110
+mohfw_uttarakhand_p182.pdf,Uttarakhand,2021,75-79,Male,75,75
+mohfw_uttarakhand_p182.pdf,Uttarakhand,2021,80+,Male,66,66
+mohfw_uttarakhand_p182.pdf,Uttarakhand,2026,0-4,Male,450,450
+mohfw_uttarakhand_p182.pdf,Uttarakhand,2026,10-14,Male,479,479
+mohfw_uttarakhand_p182.pdf,Uttarakhand,2026,15-19,Male,525,525
+mohfw_uttarakhand_p182.pdf,Uttarakhand,2026,20-24,Male,573,573
+mohfw_uttarakhand_p182.pdf,Uttarakhand,2026,25-29,Male,607,607
+mohfw_uttarakhand_p182.pdf,Uttarakhand,2026,30-34,Male,579,579
+mohfw_uttarakhand_p182.pdf,Uttarakhand,2026,35-39,Male,493,493
+mohfw_uttarakhand_p182.pdf,Uttarakhand,2026,40-44,Male,405,405
+mohfw_uttarakhand_p182.pdf,Uttarakhand,2026,45-49,Male,347,347
+mohfw_uttarakhand_p182.pdf,Uttarakhand,2026,5-9,Male,472,472
+mohfw_uttarakhand_p182.pdf,Uttarakhand,2026,50-54,Male,306,306
+mohfw_uttarakhand_p182.pdf,Uttarakhand,2026,55-59,Male,262,262
+mohfw_uttarakhand_p182.pdf,Uttarakhand,2026,60-64,Male,210,210
+mohfw_uttarakhand_p182.pdf,Uttarakhand,2026,65-69,Male,158,158
+mohfw_uttarakhand_p182.pdf,Uttarakhand,2026,70-74,Male,117,117
+mohfw_uttarakhand_p182.pdf,Uttarakhand,2026,75-79,Male,87,87
+mohfw_uttarakhand_p182.pdf,Uttarakhand,2026,80+,Male,81,81
+mohfw_uttarakhand_p182.pdf,Uttarakhand,2031,0-4,Male,428,428
+mohfw_uttarakhand_p182.pdf,Uttarakhand,2031,10-14,Male,477,477
+mohfw_uttarakhand_p182.pdf,Uttarakhand,2031,15-19,Male,487,487
+mohfw_uttarakhand_p182.pdf,Uttarakhand,2031,20-24,Male,535,535
+mohfw_uttarakhand_p182.pdf,Uttarakhand,2031,25-29,Male,578,578
+mohfw_uttarakhand_p182.pdf,Uttarakhand,2031,30-34,Male,609,609
+mohfw_uttarakhand_p182.pdf,Uttarakhand,2031,35-39,Male,578,578
+mohfw_uttarakhand_p182.pdf,Uttarakhand,2031,40-44,Male,490,490
+mohfw_uttarakhand_p182.pdf,Uttarakhand,2031,45-49,Male,400,400
+mohfw_uttarakhand_p182.pdf,Uttarakhand,2031,5-9,Male,455,455
+mohfw_uttarakhand_p182.pdf,Uttarakhand,2031,50-54,Male,338,338
+mohfw_uttarakhand_p182.pdf,Uttarakhand,2031,55-59,Male,294,294
+mohfw_uttarakhand_p182.pdf,Uttarakhand,2031,60-64,Male,244,244
+mohfw_uttarakhand_p182.pdf,Uttarakhand,2031,65-69,Male,190,190
+mohfw_uttarakhand_p182.pdf,Uttarakhand,2031,70-74,Male,137,137
+mohfw_uttarakhand_p182.pdf,Uttarakhand,2031,75-79,Male,94,94
+mohfw_uttarakhand_p182.pdf,Uttarakhand,2031,80+,Male,96,96
+mohfw_uttarakhand_p182.pdf,Uttarakhand,2036,0-4,Male,401,401
+mohfw_uttarakhand_p182.pdf,Uttarakhand,2036,10-14,Male,460,460
+mohfw_uttarakhand_p182.pdf,Uttarakhand,2036,15-19,Male,486,486
+mohfw_uttarakhand_p182.pdf,Uttarakhand,2036,20-24,Male,499,499
+mohfw_uttarakhand_p182.pdf,Uttarakhand,2036,25-29,Male,541,541
+mohfw_uttarakhand_p182.pdf,Uttarakhand,2036,30-34,Male,581,581
+mohfw_uttarakhand_p182.pdf,Uttarakhand,2036,35-39,Male,609,609
+mohfw_uttarakhand_p182.pdf,Uttarakhand,2036,40-44,Male,574,574
+mohfw_uttarakhand_p182.pdf,Uttarakhand,2036,45-49,Male,484,484
+mohfw_uttarakhand_p182.pdf,Uttarakhand,2036,5-9,Male,432,432
+mohfw_uttarakhand_p182.pdf,Uttarakhand,2036,50-54,Male,390,390
+mohfw_uttarakhand_p182.pdf,Uttarakhand,2036,55-59,Male,324,324
+mohfw_uttarakhand_p182.pdf,Uttarakhand,2036,60-64,Male,275,275
+mohfw_uttarakhand_p182.pdf,Uttarakhand,2036,65-69,Male,223,223
+mohfw_uttarakhand_p182.pdf,Uttarakhand,2036,70-74,Male,167,167
+mohfw_uttarakhand_p182.pdf,Uttarakhand,2036,75-79,Male,111,111
+mohfw_uttarakhand_p182.pdf,Uttarakhand,2036,80+,Male,109,109
+mohfw_uttarakhand_p182.pdf,Uttarakhand,2011,0-4,Female,454,454
+mohfw_uttarakhand_p182.pdf,Uttarakhand,2011,10-14,Female,530,530
+mohfw_uttarakhand_p182.pdf,Uttarakhand,2011,15-19,Female,525,525
+mohfw_uttarakhand_p182.pdf,Uttarakhand,2011,20-24,Female,481,481
+mohfw_uttarakhand_p182.pdf,Uttarakhand,2011,25-29,Female,417,417
+mohfw_uttarakhand_p182.pdf,Uttarakhand,2011,30-34,Female,364,364
+mohfw_uttarakhand_p182.pdf,Uttarakhand,2011,35-39,Female,326,326
+mohfw_uttarakhand_p182.pdf,Uttarakhand,2011,40-44,Female,285,285
+mohfw_uttarakhand_p182.pdf,Uttarakhand,2011,45-49,Female,240,240
+mohfw_uttarakhand_p182.pdf,Uttarakhand,2011,5-9,Female,495,495
+mohfw_uttarakhand_p182.pdf,Uttarakhand,2011,50-54,Female,200,200
+mohfw_uttarakhand_p182.pdf,Uttarakhand,2011,55-59,Female,174,174
+mohfw_uttarakhand_p182.pdf,Uttarakhand,2011,60-64,Female,152,152
+mohfw_uttarakhand_p182.pdf,Uttarakhand,2011,65-69,Female,117,117
+mohfw_uttarakhand_p182.pdf,Uttarakhand,2011,70-74,Female,94,94
+mohfw_uttarakhand_p182.pdf,Uttarakhand,2011,75-79,Female,57,57
+mohfw_uttarakhand_p182.pdf,Uttarakhand,2011,80+,Female,38,38
+mohfw_uttarakhand_p182.pdf,Uttarakhand,2016,0-4,Female,394,394
+mohfw_uttarakhand_p182.pdf,Uttarakhand,2016,10-14,Female,495,495
+mohfw_uttarakhand_p182.pdf,Uttarakhand,2016,15-19,Female,535,535
+mohfw_uttarakhand_p182.pdf,Uttarakhand,2016,20-24,Female,536,536
+mohfw_uttarakhand_p182.pdf,Uttarakhand,2016,25-29,Female,482,482
+mohfw_uttarakhand_p182.pdf,Uttarakhand,2016,30-34,Female,416,416
+mohfw_uttarakhand_p182.pdf,Uttarakhand,2016,35-39,Female,363,363
+mohfw_uttarakhand_p182.pdf,Uttarakhand,2016,40-44,Female,324,324
+mohfw_uttarakhand_p182.pdf,Uttarakhand,2016,45-49,Female,281,281
+mohfw_uttarakhand_p182.pdf,Uttarakhand,2016,5-9,Female,453,453
+mohfw_uttarakhand_p182.pdf,Uttarakhand,2016,50-54,Female,235,235
+mohfw_uttarakhand_p182.pdf,Uttarakhand,2016,55-59,Female,194,194
+mohfw_uttarakhand_p182.pdf,Uttarakhand,2016,60-64,Female,165,165
+mohfw_uttarakhand_p182.pdf,Uttarakhand,2016,65-69,Female,142,142
+mohfw_uttarakhand_p182.pdf,Uttarakhand,2016,70-74,Female,104,104
+mohfw_uttarakhand_p182.pdf,Uttarakhand,2016,75-79,Female,77,77
+mohfw_uttarakhand_p182.pdf,Uttarakhand,2016,80+,Female,61,61
+mohfw_uttarakhand_p182.pdf,Uttarakhand,2021,0-4,Female,401,401
+mohfw_uttarakhand_p182.pdf,Uttarakhand,2021,10-14,Female,454,454
+mohfw_uttarakhand_p182.pdf,Uttarakhand,2021,15-19,Female,501,501
+mohfw_uttarakhand_p182.pdf,Uttarakhand,2021,20-24,Female,547,547
+mohfw_uttarakhand_p182.pdf,Uttarakhand,2021,25-29,Female,538,538
+mohfw_uttarakhand_p182.pdf,Uttarakhand,2021,30-34,Female,482,482
+mohfw_uttarakhand_p182.pdf,Uttarakhand,2021,35-39,Female,415,415
+mohfw_uttarakhand_p182.pdf,Uttarakhand,2021,40-44,Female,360,360
+mohfw_uttarakhand_p182.pdf,Uttarakhand,2021,45-49,Female,320,320
+mohfw_uttarakhand_p182.pdf,Uttarakhand,2021,5-9,Female,394,394
+mohfw_uttarakhand_p182.pdf,Uttarakhand,2021,50-54,Female,276,276
+mohfw_uttarakhand_p182.pdf,Uttarakhand,2021,55-59,Female,229,229
+mohfw_uttarakhand_p182.pdf,Uttarakhand,2021,60-64,Female,185,185
+mohfw_uttarakhand_p182.pdf,Uttarakhand,2021,65-69,Female,155,155
+mohfw_uttarakhand_p182.pdf,Uttarakhand,2021,70-74,Female,127,127
+mohfw_uttarakhand_p182.pdf,Uttarakhand,2021,75-79,Female,87,87
+mohfw_uttarakhand_p182.pdf,Uttarakhand,2021,80+,Female,90,90
+mohfw_uttarakhand_p182.pdf,Uttarakhand,2026,0-4,Female,395,395
+mohfw_uttarakhand_p182.pdf,Uttarakhand,2026,10-14,Female,395,395
+mohfw_uttarakhand_p182.pdf,Uttarakhand,2026,15-19,Female,460,460
+mohfw_uttarakhand_p182.pdf,Uttarakhand,2026,20-24,Female,513,513
+mohfw_uttarakhand_p182.pdf,Uttarakhand,2026,25-29,Female,549,549
+mohfw_uttarakhand_p182.pdf,Uttarakhand,2026,30-34,Female,538,538
+mohfw_uttarakhand_p182.pdf,Uttarakhand,2026,35-39,Female,481,481
+mohfw_uttarakhand_p182.pdf,Uttarakhand,2026,40-44,Female,413,413
+mohfw_uttarakhand_p182.pdf,Uttarakhand,2026,45-49,Female,356,356
+mohfw_uttarakhand_p182.pdf,Uttarakhand,2026,5-9,Female,401,401
+mohfw_uttarakhand_p182.pdf,Uttarakhand,2026,50-54,Female,314,314
+mohfw_uttarakhand_p182.pdf,Uttarakhand,2026,55-59,Female,269,269
+mohfw_uttarakhand_p182.pdf,Uttarakhand,2026,60-64,Female,219,219
+mohfw_uttarakhand_p182.pdf,Uttarakhand,2026,65-69,Female,174,174
+mohfw_uttarakhand_p182.pdf,Uttarakhand,2026,70-74,Female,140,140
+mohfw_uttarakhand_p182.pdf,Uttarakhand,2026,75-79,Female,107,107
+mohfw_uttarakhand_p182.pdf,Uttarakhand,2026,80+,Female,115,115
+mohfw_uttarakhand_p182.pdf,Uttarakhand,2031,0-4,Female,385,385
+mohfw_uttarakhand_p182.pdf,Uttarakhand,2031,10-14,Female,403,403
+mohfw_uttarakhand_p182.pdf,Uttarakhand,2031,15-19,Female,402,402
+mohfw_uttarakhand_p182.pdf,Uttarakhand,2031,20-24,Female,475,475
+mohfw_uttarakhand_p182.pdf,Uttarakhand,2031,25-29,Female,516,516
+mohfw_uttarakhand_p182.pdf,Uttarakhand,2031,30-34,Female,549,549
+mohfw_uttarakhand_p182.pdf,Uttarakhand,2031,35-39,Female,537,537
+mohfw_uttarakhand_p182.pdf,Uttarakhand,2031,40-44,Female,478,478
+mohfw_uttarakhand_p182.pdf,Uttarakhand,2031,45-49,Female,408,408
+mohfw_uttarakhand_p182.pdf,Uttarakhand,2031,5-9,Female,396,396
+mohfw_uttarakhand_p182.pdf,Uttarakhand,2031,50-54,Female,350,350
+mohfw_uttarakhand_p182.pdf,Uttarakhand,2031,55-59,Female,307,307
+mohfw_uttarakhand_p182.pdf,Uttarakhand,2031,60-64,Female,259,259
+mohfw_uttarakhand_p182.pdf,Uttarakhand,2031,65-69,Female,208,208
+mohfw_uttarakhand_p182.pdf,Uttarakhand,2031,70-74,Female,159,159
+mohfw_uttarakhand_p182.pdf,Uttarakhand,2031,75-79,Female,120,120
+mohfw_uttarakhand_p182.pdf,Uttarakhand,2031,80+,Female,145,145
+mohfw_uttarakhand_p182.pdf,Uttarakhand,2036,0-4,Female,360,360
+mohfw_uttarakhand_p182.pdf,Uttarakhand,2036,10-14,Female,397,397
+mohfw_uttarakhand_p182.pdf,Uttarakhand,2036,15-19,Female,410,410
+mohfw_uttarakhand_p182.pdf,Uttarakhand,2036,20-24,Female,418,418
+mohfw_uttarakhand_p182.pdf,Uttarakhand,2036,25-29,Female,478,478
+mohfw_uttarakhand_p182.pdf,Uttarakhand,2036,30-34,Female,517,517
+mohfw_uttarakhand_p182.pdf,Uttarakhand,2036,35-39,Female,548,548
+mohfw_uttarakhand_p182.pdf,Uttarakhand,2036,40-44,Female,534,534
+mohfw_uttarakhand_p182.pdf,Uttarakhand,2036,45-49,Female,473,473
+mohfw_uttarakhand_p182.pdf,Uttarakhand,2036,5-9,Female,386,386
+mohfw_uttarakhand_p182.pdf,Uttarakhand,2036,50-54,Female,402,402
+mohfw_uttarakhand_p182.pdf,Uttarakhand,2036,55-59,Female,343,343
+mohfw_uttarakhand_p182.pdf,Uttarakhand,2036,60-64,Female,296,296
+mohfw_uttarakhand_p182.pdf,Uttarakhand,2036,65-69,Female,246,246
+mohfw_uttarakhand_p182.pdf,Uttarakhand,2036,70-74,Female,191,191
+mohfw_uttarakhand_p182.pdf,Uttarakhand,2036,75-79,Female,138,138
+mohfw_uttarakhand_p182.pdf,Uttarakhand,2036,80+,Female,172,172
+mohfw_uttar_pradesh_p198.pdf,Uttar Pradesh,2011,0-4,Male,11748,11748
+mohfw_uttar_pradesh_p198.pdf,Uttar Pradesh,2011,10-14,Male,13340,13340
+mohfw_uttar_pradesh_p198.pdf,Uttar Pradesh,2011,15-19,Male,12025,12025
+mohfw_uttar_pradesh_p198.pdf,Uttar Pradesh,2011,20-24,Male,9727,9727
+mohfw_uttar_pradesh_p198.pdf,Uttar Pradesh,2011,25-29,Male,7757,7757
+mohfw_uttar_pradesh_p198.pdf,Uttar Pradesh,2011,30-34,Male,6738,6738
+mohfw_uttar_pradesh_p198.pdf,Uttar Pradesh,2011,35-39,Male,6209,6209
+mohfw_uttar_pradesh_p198.pdf,Uttar Pradesh,2011,40-44,Male,5438,5438
+mohfw_uttar_pradesh_p198.pdf,Uttar Pradesh,2011,45-49,Male,4470,4470
+mohfw_uttar_pradesh_p198.pdf,Uttar Pradesh,2011,5-9,Male,12816,12816
+mohfw_uttar_pradesh_p198.pdf,Uttar Pradesh,2011,50-54,Male,3568,3568
+mohfw_uttar_pradesh_p198.pdf,Uttar Pradesh,2011,55-59,Male,2973,2973
+mohfw_uttar_pradesh_p198.pdf,Uttar Pradesh,2011,60-64,Male,2653,2653
+mohfw_uttar_pradesh_p198.pdf,Uttar Pradesh,2011,65-69,Male,2123,2123
+mohfw_uttar_pradesh_p198.pdf,Uttar Pradesh,2011,70-74,Male,1665,1665
+mohfw_uttar_pradesh_p198.pdf,Uttar Pradesh,2011,75-79,Male,801,801
+mohfw_uttar_pradesh_p198.pdf,Uttar Pradesh,2011,80+,Male,431,431
+mohfw_uttar_pradesh_p198.pdf,Uttar Pradesh,2016,0-4,Male,13209,13209
+mohfw_uttar_pradesh_p198.pdf,Uttar Pradesh,2016,10-14,Male,12654,12654
+mohfw_uttar_pradesh_p198.pdf,Uttar Pradesh,2016,15-19,Male,13110,13110
+mohfw_uttar_pradesh_p198.pdf,Uttar Pradesh,2016,20-24,Male,11704,11704
+mohfw_uttar_pradesh_p198.pdf,Uttar Pradesh,2016,25-29,Male,9470,9470
+mohfw_uttar_pradesh_p198.pdf,Uttar Pradesh,2016,30-34,Male,7543,7543
+mohfw_uttar_pradesh_p198.pdf,Uttar Pradesh,2016,35-39,Male,6538,6538
+mohfw_uttar_pradesh_p198.pdf,Uttar Pradesh,2016,40-44,Male,6010,6010
+mohfw_uttar_pradesh_p198.pdf,Uttar Pradesh,2016,45-49,Male,5217,5217
+mohfw_uttar_pradesh_p198.pdf,Uttar Pradesh,2016,5-9,Male,11454,11454
+mohfw_uttar_pradesh_p198.pdf,Uttar Pradesh,2016,50-54,Male,4247,4247
+mohfw_uttar_pradesh_p198.pdf,Uttar Pradesh,2016,55-59,Male,3315,3315
+mohfw_uttar_pradesh_p198.pdf,Uttar Pradesh,2016,60-64,Male,2672,2672
+mohfw_uttar_pradesh_p198.pdf,Uttar Pradesh,2016,65-69,Male,2223,2223
+mohfw_uttar_pradesh_p198.pdf,Uttar Pradesh,2016,70-74,Male,1646,1646
+mohfw_uttar_pradesh_p198.pdf,Uttar Pradesh,2016,75-79,Male,1161,1161
+mohfw_uttar_pradesh_p198.pdf,Uttar Pradesh,2016,80+,Male,638,638
+mohfw_uttar_pradesh_p198.pdf,Uttar Pradesh,2021,0-4,Male,12620,12620
+mohfw_uttar_pradesh_p198.pdf,Uttar Pradesh,2021,10-14,Male,11299,11299
+mohfw_uttar_pradesh_p198.pdf,Uttar Pradesh,2021,15-19,Male,12422,12422
+mohfw_uttar_pradesh_p198.pdf,Uttar Pradesh,2021,20-24,Male,12773,12773
+mohfw_uttar_pradesh_p198.pdf,Uttar Pradesh,2021,25-29,Male,11424,11424
+mohfw_uttar_pradesh_p198.pdf,Uttar Pradesh,2021,30-34,Male,9236,9236
+mohfw_uttar_pradesh_p198.pdf,Uttar Pradesh,2021,35-39,Male,7336,7336
+mohfw_uttar_pradesh_p198.pdf,Uttar Pradesh,2021,40-44,Male,6345,6345
+mohfw_uttar_pradesh_p198.pdf,Uttar Pradesh,2021,45-49,Male,5787,5787
+mohfw_uttar_pradesh_p198.pdf,Uttar Pradesh,2021,5-9,Male,12912,12912
+mohfw_uttar_pradesh_p198.pdf,Uttar Pradesh,2021,50-54,Male,4981,4981
+mohfw_uttar_pradesh_p198.pdf,Uttar Pradesh,2021,55-59,Male,3974,3974
+mohfw_uttar_pradesh_p198.pdf,Uttar Pradesh,2021,60-64,Male,3012,3012
+mohfw_uttar_pradesh_p198.pdf,Uttar Pradesh,2021,65-69,Male,2285,2285
+mohfw_uttar_pradesh_p198.pdf,Uttar Pradesh,2021,70-74,Male,1780,1780
+mohfw_uttar_pradesh_p198.pdf,Uttar Pradesh,2021,75-79,Male,1199,1199
+mohfw_uttar_pradesh_p198.pdf,Uttar Pradesh,2021,80+,Male,960,960
+mohfw_uttar_pradesh_p198.pdf,Uttar Pradesh,2026,0-4,Male,11311,
+mohfw_uttar_pradesh_p198.pdf,Uttar Pradesh,2026,10-14,Male,12749,
+mohfw_uttar_pradesh_p198.pdf,Uttar Pradesh,2026,15-19,Male,11067,
+mohfw_uttar_pradesh_p198.pdf,Uttar Pradesh,2026,20-24,Male,12081,
+mohfw_uttar_pradesh_p198.pdf,Uttar Pradesh,2026,25-29,Male,12480,
+mohfw_uttar_pradesh_p198.pdf,Uttar Pradesh,2026,30-34,Male,11170,
+mohfw_uttar_pradesh_p198.pdf,Uttar Pradesh,2026,35-39,Male,9009,
+mohfw_uttar_pradesh_p198.pdf,Uttar Pradesh,2026,40-44,Male,7136,
+mohfw_uttar_pradesh_p198.pdf,Uttar Pradesh,2026,45-49,Male,6125,
+mohfw_uttar_pradesh_p198.pdf,Uttar Pradesh,2026,5-9,Male,12344,
+mohfw_uttar_pradesh_p198.pdf,Uttar Pradesh,2026,50-54,Male,5544,
+mohfw_uttar_pradesh_p198.pdf,Uttar Pradesh,2026,55-59,Male,4686,
+mohfw_uttar_pradesh_p198.pdf,Uttar Pradesh,2026,60-64,Male,3640,
+mohfw_uttar_pradesh_p198.pdf,Uttar Pradesh,2026,65-69,Male,2614,
+mohfw_uttar_pradesh_p198.pdf,Uttar Pradesh,2026,70-74,Male,1869,
+mohfw_uttar_pradesh_p198.pdf,Uttar Pradesh,2026,75-79,Male,1332,
+mohfw_uttar_pradesh_p198.pdf,Uttar Pradesh,2026,80+,Male,1171,
+mohfw_uttar_pradesh_p198.pdf,Uttar Pradesh,2031,0-4,Male,10015,
+mohfw_uttar_pradesh_p198.pdf,Uttar Pradesh,2031,10-14,Male,12183,
+mohfw_uttar_pradesh_p198.pdf,Uttar Pradesh,2031,15-19,Male,12507,
+mohfw_uttar_pradesh_p198.pdf,Uttar Pradesh,2031,20-24,Male,10727,
+mohfw_uttar_pradesh_p198.pdf,Uttar Pradesh,2031,25-29,Male,11792,
+mohfw_uttar_pradesh_p198.pdf,Uttar Pradesh,2031,30-34,Male,12217,
+mohfw_uttar_pradesh_p198.pdf,Uttar Pradesh,2031,35-39,Male,10925,
+mohfw_uttar_pradesh_p198.pdf,Uttar Pradesh,2031,40-44,Male,8790,
+mohfw_uttar_pradesh_p198.pdf,Uttar Pradesh,2031,45-49,Male,6910,
+mohfw_uttar_pradesh_p198.pdf,Uttar Pradesh,2031,5-9,Male,11064,
+mohfw_uttar_pradesh_p198.pdf,Uttar Pradesh,2031,50-54,Male,5887,
+mohfw_uttar_pradesh_p198.pdf,Uttar Pradesh,2031,55-59,Male,5241,
+mohfw_uttar_pradesh_p198.pdf,Uttar Pradesh,2031,60-64,Male,4325,
+mohfw_uttar_pradesh_p198.pdf,Uttar Pradesh,2031,65-69,Male,3203,
+mohfw_uttar_pradesh_p198.pdf,Uttar Pradesh,2031,70-74,Male,2179,
+mohfw_uttar_pradesh_p198.pdf,Uttar Pradesh,2031,75-79,Male,1431,
+mohfw_uttar_pradesh_p198.pdf,Uttar Pradesh,2031,80+,Male,1376,
+mohfw_uttar_pradesh_p198.pdf,Uttar Pradesh,2036,0-4,Male,9267,
+mohfw_uttar_pradesh_p198.pdf,Uttar Pradesh,2036,10-14,Male,10908,
+mohfw_uttar_pradesh_p198.pdf,Uttar Pradesh,2036,15-19,Male,11940,
+mohfw_uttar_pradesh_p198.pdf,Uttar Pradesh,2036,20-24,Male,12154,
+mohfw_uttar_pradesh_p198.pdf,Uttar Pradesh,2036,25-29,Male,10447,
+mohfw_uttar_pradesh_p198.pdf,Uttar Pradesh,2036,30-34,Male,11537,
+mohfw_uttar_pradesh_p198.pdf,Uttar Pradesh,2036,35-39,Male,11967,
+mohfw_uttar_pradesh_p198.pdf,Uttar Pradesh,2036,40-44,Male,10683,
+mohfw_uttar_pradesh_p198.pdf,Uttar Pradesh,2036,45-49,Male,8536,
+mohfw_uttar_pradesh_p198.pdf,Uttar Pradesh,2036,5-9,Male,9789,
+mohfw_uttar_pradesh_p198.pdf,Uttar Pradesh,2036,50-54,Male,6657,
+mohfw_uttar_pradesh_p198.pdf,Uttar Pradesh,2036,55-59,Male,5582,
+mohfw_uttar_pradesh_p198.pdf,Uttar Pradesh,2036,60-64,Male,4861,
+mohfw_uttar_pradesh_p198.pdf,Uttar Pradesh,2036,65-69,Male,3838,
+mohfw_uttar_pradesh_p198.pdf,Uttar Pradesh,2036,70-74,Male,2701,
+mohfw_uttar_pradesh_p198.pdf,Uttar Pradesh,2036,75-79,Male,1691,
+mohfw_uttar_pradesh_p198.pdf,Uttar Pradesh,2036,80+,Male,1555,
+mohfw_uttar_pradesh_p198.pdf,Uttar Pradesh,2011,0-4,Female,10689,10689
+mohfw_uttar_pradesh_p198.pdf,Uttar Pradesh,2011,10-14,Female,11825,11825
+mohfw_uttar_pradesh_p198.pdf,Uttar Pradesh,2011,15-19,Female,10541,10541
+mohfw_uttar_pradesh_p198.pdf,Uttar Pradesh,2011,20-24,Female,8616,8616
+mohfw_uttar_pradesh_p198.pdf,Uttar Pradesh,2011,25-29,Female,7289,7289
+mohfw_uttar_pradesh_p198.pdf,Uttar Pradesh,2011,30-34,Female,6631,6631
+mohfw_uttar_pradesh_p198.pdf,Uttar Pradesh,2011,35-39,Female,5965,5965
+mohfw_uttar_pradesh_p198.pdf,Uttar Pradesh,2011,40-44,Female,5014,5014
+mohfw_uttar_pradesh_p198.pdf,Uttar Pradesh,2011,45-49,Female,4029,4029
+mohfw_uttar_pradesh_p198.pdf,Uttar Pradesh,2011,5-9,Female,11473,11473
+mohfw_uttar_pradesh_p198.pdf,Uttar Pradesh,2011,50-54,Female,3260,3260
+mohfw_uttar_pradesh_p198.pdf,Uttar Pradesh,2011,55-59,Female,2880,2880
+mohfw_uttar_pradesh_p198.pdf,Uttar Pradesh,2011,60-64,Female,2568,2568
+mohfw_uttar_pradesh_p198.pdf,Uttar Pradesh,2011,65-69,Female,1965,1965
+mohfw_uttar_pradesh_p198.pdf,Uttar Pradesh,2011,70-74,Female,1503,1503
+mohfw_uttar_pradesh_p198.pdf,Uttar Pradesh,2011,75-79,Female,650,650
+mohfw_uttar_pradesh_p198.pdf,Uttar Pradesh,2011,80+,Female,434,434
+mohfw_uttar_pradesh_p198.pdf,Uttar Pradesh,2016,0-4,Female,11506,11506
+mohfw_uttar_pradesh_p198.pdf,Uttar Pradesh,2016,10-14,Female,11363,11363
+mohfw_uttar_pradesh_p198.pdf,Uttar Pradesh,2016,15-19,Female,11609,11609
+mohfw_uttar_pradesh_p198.pdf,Uttar Pradesh,2016,20-24,Female,10167,10167
+mohfw_uttar_pradesh_p198.pdf,Uttar Pradesh,2016,25-29,Female,8433,8433
+mohfw_uttar_pradesh_p198.pdf,Uttar Pradesh,2016,30-34,Female,7164,7164
+mohfw_uttar_pradesh_p198.pdf,Uttar Pradesh,2016,35-39,Female,6524,6524
+mohfw_uttar_pradesh_p198.pdf,Uttar Pradesh,2016,40-44,Female,5863,5863
+mohfw_uttar_pradesh_p198.pdf,Uttar Pradesh,2016,45-49,Female,4913,4913
+mohfw_uttar_pradesh_p198.pdf,Uttar Pradesh,2016,5-9,Female,10396,10396
+mohfw_uttar_pradesh_p198.pdf,Uttar Pradesh,2016,50-54,Female,3906,3906
+mohfw_uttar_pradesh_p198.pdf,Uttar Pradesh,2016,55-59,Female,3114,3114
+mohfw_uttar_pradesh_p198.pdf,Uttar Pradesh,2016,60-64,Female,2687,2687
+mohfw_uttar_pradesh_p198.pdf,Uttar Pradesh,2016,65-69,Female,2285,2285
+mohfw_uttar_pradesh_p198.pdf,Uttar Pradesh,2016,70-74,Female,1635,1635
+mohfw_uttar_pradesh_p198.pdf,Uttar Pradesh,2016,75-79,Female,1112,1112
+mohfw_uttar_pradesh_p198.pdf,Uttar Pradesh,2016,80+,Female,601,601
+mohfw_uttar_pradesh_p198.pdf,Uttar Pradesh,2021,0-4,Female,11125,11125
+mohfw_uttar_pradesh_p198.pdf,Uttar Pradesh,2021,10-14,Female,10296,10296
+mohfw_uttar_pradesh_p198.pdf,Uttar Pradesh,2021,15-19,Female,11144,11144
+mohfw_uttar_pradesh_p198.pdf,Uttar Pradesh,2021,20-24,Female,11213,11213
+mohfw_uttar_pradesh_p198.pdf,Uttar Pradesh,2021,25-29,Female,9971,9971
+mohfw_uttar_pradesh_p198.pdf,Uttar Pradesh,2021,30-34,Female,8301,8301
+mohfw_uttar_pradesh_p198.pdf,Uttar Pradesh,2021,35-39,Female,7057,7057
+mohfw_uttar_pradesh_p198.pdf,Uttar Pradesh,2021,40-44,Female,6423,6423
+mohfw_uttar_pradesh_p198.pdf,Uttar Pradesh,2021,45-49,Female,5756,5756
+mohfw_uttar_pradesh_p198.pdf,Uttar Pradesh,2021,5-9,Female,11218,11218
+mohfw_uttar_pradesh_p198.pdf,Uttar Pradesh,2021,50-54,Female,4777,4777
+mohfw_uttar_pradesh_p198.pdf,Uttar Pradesh,2021,55-59,Female,3747,3747
+mohfw_uttar_pradesh_p198.pdf,Uttar Pradesh,2021,60-64,Female,2925,2925
+mohfw_uttar_pradesh_p198.pdf,Uttar Pradesh,2021,65-69,Female,2421,2421
+mohfw_uttar_pradesh_p198.pdf,Uttar Pradesh,2021,70-74,Female,1944,1944
+mohfw_uttar_pradesh_p198.pdf,Uttar Pradesh,2021,75-79,Female,1258,1258
+mohfw_uttar_pradesh_p198.pdf,Uttar Pradesh,2021,80+,Female,989,989
+mohfw_uttar_pradesh_p198.pdf,Uttar Pradesh,2026,0-4,Female,10097,
+mohfw_uttar_pradesh_p198.pdf,Uttar Pradesh,2026,10-14,Female,11116,
+mohfw_uttar_pradesh_p198.pdf,Uttar Pradesh,2026,15-19,Female,10075,
+mohfw_uttar_pradesh_p198.pdf,Uttar Pradesh,2026,20-24,Female,10738,
+mohfw_uttar_pradesh_p198.pdf,Uttar Pradesh,2026,25-29,Female,11009,
+mohfw_uttar_pradesh_p198.pdf,Uttar Pradesh,2026,30-34,Female,9828,
+mohfw_uttar_pradesh_p198.pdf,Uttar Pradesh,2026,35-39,Female,8187,
+mohfw_uttar_pradesh_p198.pdf,Uttar Pradesh,2026,40-44,Female,6954,
+mohfw_uttar_pradesh_p198.pdf,Uttar Pradesh,2026,45-49,Female,6313,
+mohfw_uttar_pradesh_p198.pdf,Uttar Pradesh,2026,5-9,Female,10862,
+mohfw_uttar_pradesh_p198.pdf,Uttar Pradesh,2026,50-54,Female,5608,
+mohfw_uttar_pradesh_p198.pdf,Uttar Pradesh,2026,55-59,Female,4597,
+mohfw_uttar_pradesh_p198.pdf,Uttar Pradesh,2026,60-64,Female,3537,
+mohfw_uttar_pradesh_p198.pdf,Uttar Pradesh,2026,65-69,Female,2659,
+mohfw_uttar_pradesh_p198.pdf,Uttar Pradesh,2026,70-74,Female,2091,
+mohfw_uttar_pradesh_p198.pdf,Uttar Pradesh,2026,75-79,Female,1535,
+mohfw_uttar_pradesh_p198.pdf,Uttar Pradesh,2026,80+,Female,1325,
+mohfw_uttar_pradesh_p198.pdf,Uttar Pradesh,2031,0-4,Female,9056,
+mohfw_uttar_pradesh_p198.pdf,Uttar Pradesh,2031,10-14,Female,10764,
+mohfw_uttar_pradesh_p198.pdf,Uttar Pradesh,2031,15-19,Female,10887,
+mohfw_uttar_pradesh_p198.pdf,Uttar Pradesh,2031,20-24,Female,9667,
+mohfw_uttar_pradesh_p198.pdf,Uttar Pradesh,2031,25-29,Female,10542,
+mohfw_uttar_pradesh_p198.pdf,Uttar Pradesh,2031,30-34,Female,10863,
+mohfw_uttar_pradesh_p198.pdf,Uttar Pradesh,2031,35-39,Female,9705,
+mohfw_uttar_pradesh_p198.pdf,Uttar Pradesh,2031,40-44,Female,8078,
+mohfw_uttar_pradesh_p198.pdf,Uttar Pradesh,2031,45-49,Female,6843,
+mohfw_uttar_pradesh_p198.pdf,Uttar Pradesh,2031,5-9,Female,9869,
+mohfw_uttar_pradesh_p198.pdf,Uttar Pradesh,2031,50-54,Female,6162,
+mohfw_uttar_pradesh_p198.pdf,Uttar Pradesh,2031,55-59,Female,5414,
+mohfw_uttar_pradesh_p198.pdf,Uttar Pradesh,2031,60-64,Female,4361,
+mohfw_uttar_pradesh_p198.pdf,Uttar Pradesh,2031,65-69,Female,3244,
+mohfw_uttar_pradesh_p198.pdf,Uttar Pradesh,2031,70-74,Female,2329,
+mohfw_uttar_pradesh_p198.pdf,Uttar Pradesh,2031,75-79,Female,1689,
+mohfw_uttar_pradesh_p198.pdf,Uttar Pradesh,2031,80+,Female,1716,
+mohfw_uttar_pradesh_p198.pdf,Uttar Pradesh,2036,0-4,Female,8392,
+mohfw_uttar_pradesh_p198.pdf,Uttar Pradesh,2036,10-14,Female,9777,
+mohfw_uttar_pradesh_p198.pdf,Uttar Pradesh,2036,15-19,Female,10533,
+mohfw_uttar_pradesh_p198.pdf,Uttar Pradesh,2036,20-24,Female,10466,
+mohfw_uttar_pradesh_p198.pdf,Uttar Pradesh,2036,25-29,Female,9482,
+mohfw_uttar_pradesh_p198.pdf,Uttar Pradesh,2036,30-34,Female,10405,
+mohfw_uttar_pradesh_p198.pdf,Uttar Pradesh,2036,35-39,Female,10736,
+mohfw_uttar_pradesh_p198.pdf,Uttar Pradesh,2036,40-44,Female,9586,
+mohfw_uttar_pradesh_p198.pdf,Uttar Pradesh,2036,45-49,Female,7958,
+mohfw_uttar_pradesh_p198.pdf,Uttar Pradesh,2036,5-9,Female,8856,
+mohfw_uttar_pradesh_p198.pdf,Uttar Pradesh,2036,50-54,Female,6690,
+mohfw_uttar_pradesh_p198.pdf,Uttar Pradesh,2036,55-59,Female,5962,
+mohfw_uttar_pradesh_p198.pdf,Uttar Pradesh,2036,60-64,Female,5155,
+mohfw_uttar_pradesh_p198.pdf,Uttar Pradesh,2036,65-69,Female,4027,
+mohfw_uttar_pradesh_p198.pdf,Uttar Pradesh,2036,70-74,Female,2872,
+mohfw_uttar_pradesh_p198.pdf,Uttar Pradesh,2036,75-79,Female,1913,
+mohfw_uttar_pradesh_p198.pdf,Uttar Pradesh,2036,80+,Female,2067,

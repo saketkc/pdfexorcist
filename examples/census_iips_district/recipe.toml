@@ -1,0 +1,36 @@
+# pdfexorcist recipe: IIPS district population projections, 2012-2031
+#
+# Each district fills two pages of two blocks; a block is five years of
+# Males / Females for "All ages", single ages 0-14 and five-year groups to
+# 80+. Some headers are misprinted (a 2012-2016 block headed 2027-2031, a
+# Prakasam block headed "District: Guntur"), so cells are keyed by the
+# block's place on the page and the year as printed, and the district is
+# taken from the table title. Try it:
+#
+#   pdfexorcist extract tests/fixtures/iips/iips_p281_rajasthan_sirohi.pdf --recipe examples/census_iips_district/recipe.toml
+
+name = "IIPS district projection"
+description = "District population by age and sex, 2012-2031 (IIPS, 2022)"
+sample = "../../tests/fixtures/iips/iips_p281_rajasthan_sirohi.pdf"
+
+[engines]
+ocr = false
+
+[parser]
+type = "custom"
+function = "iips_district_projection.py:parse"
+key = ["page", "block", "year", "sex", "age"]
+
+# Each age group is rounded to a whole person: 29 of them may miss
+# "All ages" by up to 14.5.
+[[checks]]
+column = "age"
+rule = "All ages = rest"
+by = ["page", "block", "year", "sex"]
+abs_tolerance = 14.5
+
+[output]
+layout = "table"
+rows = ["district", "block", "year", "age"]
+columns = "sex"
+format = "csv"

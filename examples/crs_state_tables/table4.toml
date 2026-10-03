@@ -1,0 +1,35 @@
+# pdfexorcist recipe: CRS State Table 4 only, picked by page number
+#
+# recipe.toml with [pages] select = "2": the fixture holds Table 1 on page 1
+# and Table 4 (still births) on page 2. The output keeps the page number of
+# the original file. Try it:
+#
+#   pdfexorcist extract tests/fixtures/crs/crs_2023_t1_t4.pdf --recipe examples/crs_state_tables/table4.toml
+
+name = "CRS State Table 4"
+description = "Still births registered by State/UT, sex and residence"
+sample = "../../tests/fixtures/crs/crs_2023_t1_t4.pdf"
+
+[pages]
+select = "2"
+
+[parser]
+type = "custom"
+function = "crs_state_table.py:parse"
+key = ["page", "state", "col"]
+
+[[checks]]
+column = "sex"
+rule = "Person >= Male + Female"
+by = ["page", "state", "area"]
+
+[[checks]]
+column = "area"
+rule = "Total >= Rural + Urban"
+by = ["page", "state", "sex"]
+
+[output]
+layout = "table"
+rows = ["page", "label"]
+columns = "col"
+format = "csv"

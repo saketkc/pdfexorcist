@@ -1,0 +1,45 @@
+# pdfexorcist recipe: CRS State Tables 1-4 (births, deaths, infant deaths and
+# still births registered, by sex and residence)
+#
+# One table a page: a row per State/UT, then nine values (Rural, Urban and
+# Total, each by Male, Female and Person). crs_state_table.py next to this file
+# names each row's State (one name wraps around its row) and splits each
+# value's column into area and sex for the checks. Try it:
+#
+#   pdfexorcist extract tests/fixtures/crs/crs_2023_t1_t4.pdf --recipe examples/crs_state_tables/recipe.toml
+#
+# On a whole "Vital Statistics of India based on the CRS" report, [pages]
+# finds the four tables by their titles.
+
+name = "CRS State Tables 1-4"
+description = "Registered births, deaths, infant deaths and still births by State/UT, sex and residence"
+sample = "../../tests/fixtures/crs/crs_2023_t1_t4.pdf"
+
+[pages]
+match = 'TABLE\s*-?\s*[1-4]\s*:\s*NUMBER OF .{0,30}REGISTERED BY SEX'
+
+[engines]
+ocr = false  # a text layer: the five default engines, 3 must agree
+
+[parser]
+type = "custom"
+function = "crs_state_table.py:parse"
+key = ["page", "state", "col"]
+
+# The table's own arithmetic. ">=" because some States count Others/Not
+# stated only in Person or Total (the report's footnote).
+[[checks]]
+column = "sex"
+rule = "Person >= Male + Female"
+by = ["page", "state", "area"]
+
+[[checks]]
+column = "area"
+rule = "Total >= Rural + Urban"
+by = ["page", "state", "sex"]
+
+[output]
+layout = "table"
+rows = ["page", "label"]  # one row per table and State/UT
+columns = "col"           # Rural_Male ... Total_Person
+format = "csv"

@@ -1,0 +1,5 @@
+fixture,fixture_page,source_pdf,edition,source_page,state,note
+srs_2019-23.pdf,1,SRS-Abridged_Life_Tables_2019-2023.pdf,2019-23,25,India,"Fix: the India Urban table had 18 of 19 rows; age 1-5 was added from the PDF."
+srs_2019-23.pdf,2,SRS-Abridged_Life_Tables_2019-2023.pdf,2019-23,31,Gujarat,"Fix: 19 Gujarat rows had category NULL; their values are this page's Total block."
+srs_2019-23.pdf,3,SRS-Abridged_Life_Tables_2019-2023.pdf,2019-23,47,West Bengal,"Fix: Urban female columns (74 cells) per Corrigendum_SRS_ABL_2019-23.pdf; this is the re-uploaded report (urban female e0 76.3, first upload 73.5)."
+srs_2010-14_uttrakhand.pdf,1,SRS-Abridged_Life_Tables_2010-2014.pdf,2010-14,49,Uttarakhand,"Ordinary page, no fix. Older layout; report spelling 'Uttrakhand'; the Total block prints its 80-85 row as '80+85'."

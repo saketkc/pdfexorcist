@@ -1,0 +1,67 @@
+name: Docs
+
+# Pull requests: build the site with -W (a broken link, a bad docstring or a
+# missing reference fails). Pushes to main: build, then deploy to GitHub Pages.
+# Needs Settings > Pages > Source: GitHub Actions.
+on:
+  pull_request:
+    paths:
+      - "docs/**"
+      - "pdfexorcist/**"
+      - "CHANGELOG.md"
+      - ".github/workflows/docs.yml"
+  push:
+    branches: [main]
+    paths:
+      - "docs/**"
+      - "pdfexorcist/**"
+      - "CHANGELOG.md"
+      - ".github/workflows/docs.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: docs-${{ github.ref }}
+  cancel-in-progress: ${{ github.event_name == 'pull_request' }}
+
+jobs:
+  build:
+    name: Build
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@v7
+        with:
+          python-version: "3.13"
+          cache: pip
+          cache-dependency-path: |
+            docs/requirements.txt
+            pyproject.toml
+      # autodoc imports pdfexorcist; the base install is enough (no OCR engines)
+      - run: pip install -r docs/requirements.txt .
+      - run: sphinx-build -W --keep-going -b html docs site
+      - if: github.event_name != 'pull_request'
+        uses: actions/upload-pages-artifact@v5
+        with:
+          path: site/
+
+  deploy:
+    name: Deploy
+    if: github.event_name != 'pull_request' && github.ref == 'refs/heads/main'
+    needs: build
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    permissions:
+      pages: write
+      id-token: write
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - id: deployment
+        uses: actions/deploy-pages@v5

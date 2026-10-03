@@ -1,0 +1,37 @@
+# pdfexorcist recipe: NTA list of NEET (UG) 2026 toppers (a scan)
+#
+# "List of Top 138 candidates scoring equal to or more than 690 marks" is
+# scanned, with no text layer, so only OCR engines can read it. Names,
+# "OBC-NCL (Central List)" and two-word States wrap onto the lines above
+# their row; nta_toppers.py next to this recipe joins them to the row and keys
+# each value by the printed Sr. No. Pages 1-6 hold the list; later pages hold
+# shorter lists (female, male, EWS, SC ... toppers). Try it (needs at least
+# two OCR engines; see: pdfexorcist engines):
+#
+#   pdfexorcist extract https://cdnbbsr.s3waas.gov.in/s37bc1ec1d9c3426357e69acd5bf320061/uploads/2026/07/20260716180970800.pdf --recipe examples/nta_toppers/recipe.toml --pages 1-6
+
+name = "NEET (UG) 2026 top 138"
+description = "NTA list of NEET (UG) 2026 re-examination candidates scoring 690 or more: rank, percentile, category, State"
+sample = "../../tests/fixtures/nta/neet_2026_top138_p1-2.pdf"
+
+[engines]
+# engines from three labs, so misreads are independent; Tesseract reads the rules as text
+use = ["paddleocr", "ocrmac", "glmocr"]
+# min_agree: by default a strict majority of the engines that run, at least 2.
+
+[parser]
+type = "custom"
+function = "nta_toppers.py:parse"
+key = ["sr_no", "field"]
+
+[[checks]]
+function = "nta_toppers.py:rank_rises"
+
+[[checks]]
+function = "nta_toppers.py:percentile_falls"
+
+[output]
+layout = "table"
+rows = ["sr_no"]
+columns = "field"
+format = "csv"

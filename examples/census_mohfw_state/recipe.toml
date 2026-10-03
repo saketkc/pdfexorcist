@@ -1,0 +1,47 @@
+# pdfexorcist recipe: MoHFW population projections 2011-2036, Table 18
+#
+# One State per page: two blocks of three years, each year a Person, Male
+# and Female column, rows 0-1, 0-4, 5-9 ... 80+, Total, in thousands with
+# Indian digit grouping (1,19,827). Cells are keyed by year, age and sex
+# only, not page or title: India's table starts under Table 17 and runs onto
+# the next page, and Uttarakhand's page is titled PUNJAB. Try it:
+#
+#   pdfexorcist extract tests/fixtures/mohfw/mohfw_india_p165-166.pdf --recipe examples/census_mohfw_state/recipe.toml
+
+name = "MoHFW State projection"
+description = "Projected population by age and sex, 2011-2036, Table 18 (MoHFW, 2019)"
+sample = "../../tests/fixtures/mohfw/mohfw_uttarakhand_p182.pdf"
+
+[engines]
+ocr = false
+
+[parser]
+type = "custom"
+function = "mohfw_state_projection.py:parse"  # also removes the commas
+key = ["year", "age", "sex"]
+
+# Figures are rounded to the thousand, so sums get a tolerance of half a
+# thousand per part.
+[[checks]]
+column = "sex"
+rule = "Person = Male + Female"
+by = ["year", "age"]
+abs_tolerance = 1
+
+[[checks]]
+column = "age"
+rule = "Total = rest"
+by = ["year", "sex"]
+where = "age != '0-1'"  # 0-1 is part of 0-4
+abs_tolerance = 8.5
+
+[[checks]]
+column = "age"
+rule = "0-4 >= 0-1"
+by = ["year", "sex"]
+
+[output]
+layout = "table"
+rows = ["year", "age"]
+columns = "sex"
+format = "csv"

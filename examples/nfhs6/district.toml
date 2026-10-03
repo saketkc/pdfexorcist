@@ -1,0 +1,37 @@
+# pdfexorcist recipe: NFHS-6 district fact sheets, "Key Indicators" pages
+#
+# Each State's compendium of the National Family Health Survey 2023-24 (IIPS)
+# prints 93 indicators per district over three pages: NFHS-6 Total and NFHS-5
+# Total, or NFHS-6 Total alone for a district NFHS-5 did not report on. The
+# compendium opens with the State's own sheet (four columns); the same parser
+# reads both. Rows are keyed by the printed indicator number, so the recipe
+# points to nfhs6_factsheet.py next to it. Try it:
+#
+#   pdfexorcist extract tests/fixtures/nfhs6_district/nfhs6_jhargram_p51-53.pdf --recipe examples/nfhs6/district.toml
+
+name = "NFHS-6 district fact sheets"
+description = "NFHS-6 Key Indicators for each district of a State compendium: NFHS-6 Total and NFHS-5 Total"
+sample = "../../tests/fixtures/nfhs6_district/nfhs6_anantapur_p15-17.pdf"
+
+[pages]
+# On a whole compendium, only the indicator pages (the State's and each district's).
+match = 'Key\s+Indicators'
+
+[engines]
+ocr = false  # a text layer: the five default engines, 3 must agree
+
+[parser]
+type = "custom"
+function = "nfhs6_factsheet.py:parse"
+# page, the printed indicator number (1-93 on a district sheet), and the
+# column (nfhs6_total, nfhs5_total); values stay as printed: "(45.6)", "*"
+key = ["page", "indicator_no", "column"]
+
+[[checks]]
+function = "nfhs6_factsheet.py:checks"  # no percentage over 100
+
+[output]
+layout = "table"
+rows = ["geo", "indicator_no"]  # "Anantapur, Andhra Pradesh", 1 .. 93
+columns = "column"
+format = "csv"

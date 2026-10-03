@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64">
+  <!-- a page holding a 3 x 3 table: two cells agreed, one left blank for review -->
+  <defs>
+    <linearGradient id="g" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#5BB8F5"/>
+      <stop offset="1" stop-color="#2E86D0"/>
+    </linearGradient>
+  </defs>
+  <path d="M14 4h26l12 12v42a2 2 0 0 1-2 2H14a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2z"
+        fill="none" stroke="url(#g)" stroke-width="5" stroke-linejoin="round"/>
+  <path d="M40 4v12h12" fill="none" stroke="url(#g)" stroke-width="5" stroke-linejoin="round"/>
+  <g fill="#2E86D0">
+    <rect x="19" y="24" width="8" height="6" rx="1"/>
+    <rect x="29" y="24" width="8" height="6" rx="1"/>
+    <rect x="39" y="24" width="7" height="6" rx="1"/>
+    <rect x="19" y="34" width="8" height="6" rx="1"/>
+    <rect x="39" y="34" width="7" height="6" rx="1"/>
+    <rect x="19" y="44" width="8" height="6" rx="1"/>
+    <rect x="29" y="44" width="8" height="6" rx="1"/>
+    <rect x="39" y="44" width="7" height="6" rx="1"/>
+  </g>
+  <rect x="29.75" y="34.75" width="6.5" height="4.5" rx="1" fill="none"
+        stroke="#5BB8F5" stroke-width="1.5" stroke-dasharray="2 1.5"/>
+</svg>

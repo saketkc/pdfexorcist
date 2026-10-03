@@ -1,0 +1,43 @@
+# pdfexorcist recipe: numbers printed with raised dots, Unicode minus signs,
+# footnote marks and brackets, cleaned before the vote and checked after it.
+#
+# tests/fixtures/synthetic/cleaning.pdf is a small synthetic table (made by
+# tests/fixtures/synthetic/make_fixtures.py) that prints 65·3, −4·0, 13·4*
+# and (7·0). Try it:
+#
+#   pdfexorcist extract tests/fixtures/synthetic/cleaning.pdf --recipe examples/settings/cleaning.toml
+
+name = "Values by region, cleaned"
+description = "Synthetic table: A, B and Total by region"
+sample = "../../tests/fixtures/synthetic/cleaning.pdf"
+
+[normalize]
+raised_dots = true             # "65·3" -> "65.3"
+minus_signs = true             # "−4.0" -> "-4.0"
+remove_footnote_marks = true   # "13.4*" -> "13.4"
+
+[parser]
+type = "rows"
+
+[postprocess]
+function = "numbers.py:add_number"   # adds `number`: "(7.0)" -> 7.0
+
+# The checks read `number`, not `value`: "(7.0)" is not a number, so a check
+# on `value` would skip the South row.
+[[checks]]
+column = "col"
+total = 2
+parts = [0, 1]
+by = ["page", "row"]
+value = "number"
+name = "Total = A + B"
+
+[[checks]]
+column = "label"
+rule = "All regions = rest"
+by = ["page", "col"]
+value = "number"
+
+[output]
+layout = "table"
+format = "csv"

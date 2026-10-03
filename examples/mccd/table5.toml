@@ -1,0 +1,47 @@
+# pdfexorcist recipe: MCCD Table 5 (deaths by ICD-10 chapter x sex x age group)
+#
+# One page, all States together. Blocks are keyed by the chapter's Roman
+# numeral; the age groups are printed flat above the columns, so
+# name_ages() reads them after the vote. Try it:
+#
+#   pdfexorcist extract tests/fixtures/mccd/mccd_2018_t5_p104.pdf --recipe examples/mccd/table5.toml
+
+name = "MCCD Table 5"
+description = "Medically certified deaths by ICD-10 chapter, sex and age group, all States (RGI annual report)"
+sample = "../../tests/fixtures/mccd/mccd_2018_t5_p104.pdf"
+
+[pages]
+start = 'TABLE\s*5\s*:'
+stop = 'TABLE\s*6\s*[-–:]'
+
+[engines]
+ocr = false
+
+[parser]
+type = "custom"
+function = "mccd_tables.py:parse"
+key = ["page", "group", "sex", "col"]
+
+[postprocess]
+function = "mccd_tables.py:name_ages"  # adds "age": <1, 1-4, ..., 70+, N.S., TOTAL
+
+[[checks]]
+column = "sex"
+rule = "T >= M + F"
+by = ["page", "group", "col"]
+
+[[checks]]
+column = "age"
+rule = "TOTAL = rest"  # the age groups and N.S. add up to TOTAL
+by = ["page", "group", "sex"]
+
+[[checks]]
+column = "group"
+rule = "ALL = rest"  # the chapters add up to ALL CAUSES
+by = ["page", "sex", "col"]
+
+[output]
+layout = "table"
+rows = ["group", "sex"]
+columns = "age"
+format = "csv"

@@ -1,0 +1,56 @@
+# pdfexorcist recipe: MCCD Table 4 (deaths by cause x sex x State)
+#
+# A layout the generic parsers cannot read: each cause is a block of M, F and
+# T rows, and the State columns are named only by rotated headers. So this
+# recipe points to Python next to it (mccd_table4.py): parse() turns lines
+# into cells, and name_states() adds the State after the vote. Try it:
+#
+#   pdfexorcist extract tests/fixtures/mccd/mccd_2014.pdf --recipe examples/mccd/table4.toml
+#
+# For a whole "Annual Report on MCCD" PDF, the [pages] patterns find Table 4.
+
+name = "MCCD Table 4"
+description = "Medically certified deaths by cause, sex and State/UT (RGI annual report)"
+sample = "../../tests/fixtures/mccd/mccd_2014.pdf"
+
+[pages]
+# Table 4 runs from its title to Table 5's title (that page is left out).
+# Regular expressions, case-insensitive; '.*' may span lines.
+start = 'TABLE\s*[-–]?\s*4\s*[-–:.].*STATES'
+stop = 'TABLE\s*[-–]?\s*5\s*[-–:.]'
+# The contents page of a full report names Table 4 too; start the search
+# after it with page numbers:
+# select = "21-"
+
+[engines]
+ocr = false  # a text layer: the five default engines, 3 must agree
+
+[parser]
+type = "custom"
+function = "mccd_table4.py:parse"
+# The columns that identify one cell: page, ICD code, the code's occurrence
+# on the page, sex, and the column's place in the row.
+key = ["page", "code", "pocc", "sex", "col"]
+
+# After the vote: add a "state" column read from each page's header.
+[postprocess]
+function = "mccd_table4.py:name_states"
+
+# Totals: T is at least M + F (some reports count transgender deaths in T),
+# and no State exceeds All States (Total). ">=" because a cell the engines
+# disagreed on is missing from the sum.
+[[checks]]
+column = "sex"
+rule = "T >= M + F"
+by = ["page", "code", "pocc", "col"]
+
+[[checks]]
+column = "state"
+rule = "All States (Total) >= rest"
+by = ["page", "code", "pocc", "sex"]  # per page: some years print the whole spread on each page
+
+[output]
+layout = "table"
+rows = ["code", "pocc", "sex"]  # one row per cause and sex
+columns = "state"               # one column per State
+format = "csv"

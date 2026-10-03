@@ -1,0 +1,36 @@
+# pdfexorcist recipe: NFHS-5 district fact sheets, "Key Indicators" pages
+#
+# Each State's NFHS-5 (2019-21) compendium from IIPS prints 104 indicators per
+# district over three pages: NFHS-5 Total and NFHS-4 Total, or NFHS-5 Total
+# alone where NFHS-4 has no comparable estimate. The compendium opens with the
+# State's own sheet (four columns); the same parser reads both. Try it:
+#
+#   pdfexorcist extract tests/fixtures/nfhs5_district/nfhs5_kangra_p31-33.pdf --recipe examples/nfhs5/district.toml
+
+name = "NFHS-5 district fact sheets"
+description = "NFHS-5 Key Indicators for each district of a State compendium: NFHS-5 Total and NFHS-4 Total"
+sample = "../../tests/fixtures/nfhs5_district/nfhs5_kangra_p31-33.pdf"
+
+[pages]
+# On a whole compendium, only the indicator pages: "Kangra, Himachal Pradesh -
+# Key Indicators" (some titles use an en dash), not the contents page.
+match = '[-–]\s*Key\s+Indicators'
+
+[engines]
+ocr = false  # a text layer: the five default engines, 3 must agree
+
+[parser]
+type = "custom"
+function = "nfhs5_factsheet.py:parse"
+# page, the printed indicator number (1-104 on a district sheet), and the
+# column (nfhs5_total, nfhs4_total); values stay as printed: "(45.6)", "*", "na"
+key = ["page", "indicator_no", "column"]
+
+[[checks]]
+function = "nfhs5_factsheet.py:checks"  # no percentage over 100
+
+[output]
+layout = "table"
+rows = ["geo", "indicator_no"]  # "Kangra, Himachal Pradesh", 1 .. 104
+columns = "column"
+format = "csv"

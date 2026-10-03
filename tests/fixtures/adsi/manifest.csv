@@ -1,0 +1,5 @@
+fixture,source_pdf,year,table,source_page,note
+2023_t1.2_p35.pdf,data/2023.pdf,2023,1.2,35,"Born-digital. Accidental deaths by Forces of Nature / Other Causes, State/UT-wise. 14 States were missing from the parquet before the fix."
+2024_t1.2_p35.pdf,data/2024.pdf,2024,1.2,35,"Born-digital. Same table; State rows were unusable before the fix: truncated labels (TEL, JAM, HIM) and split numbers (534.0 as 5 + 34.0)."
+2024_t2.2_p238.pdf,data/2024.pdf,2024,2.2,238,"Born-digital. Incidence and rate of suicides; missing before the fix because the title uses an en dash (Table – 2.2)."
+1995_t2A_p6.pdf,data/1995.pdf.orig,1995,2(A),6,"Scanned (no text layer). Expected values: Chandra + Tesseract agreement from data/ocr_scans/wide_xpos.csv; Himachal Pradesh was 1264 (printed 1204). States/UTs and their totals only; the Total (All-India) row and Pondicherry were not verified there, and the page also prints cities."

@@ -1,0 +1,7 @@
+# The sdist carries the full test suite (parsers, fixtures) and the example
+# recipes, so it can be tested where it is built. The wheel holds only the
+# package ([tool.setuptools] packages in pyproject.toml).
+include CHANGELOG.md
+graft tests
+graft examples
+global-exclude __pycache__ *.py[cod] .DS_Store

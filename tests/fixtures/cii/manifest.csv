@@ -1,0 +1,4 @@
+fixture,source_pdf,year,table,source_page,note
+cii_2021_1A.1_p43.pdf,2021_vol1.pdf,2021,1A.1,43,"IPC crimes 2019-2021, rate and chargesheeting rate. DNH&DD name on the row line, ""Daman & Diu+"" wrapped below; the row was already in the parquet (as ""Dadra & Nagar Haveli""). Ladakh 2019 printed ""-""."
+cii_2023_1A.4_p47.pdf,2023_vol1.pdf,2023,1A.4,47,"IPC crime heads (I/V/R triples, cols 12-20; col12=15+18, col13=16+19). DNH&DD name over two lines around a bare ""31"" row; the row was missing and restored by fix_dnhdd_rows.py."
+cii_2024_1C.2_p264.pdf,2024_vol1.pdf,2024,1C.2,264,"Violent crimes 2024, eight count columns. DNH&DD name over two lines; the row was missing and restored by fix_dnhdd_rows.py."

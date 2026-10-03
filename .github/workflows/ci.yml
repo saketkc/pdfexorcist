@@ -1,0 +1,235 @@
+name: CI
+
+on:
+  push:
+    branches: ["**"] # tags go through release.yml, which calls this workflow
+  pull_request:
+  workflow_dispatch:
+  workflow_call: # release.yml runs the whole suite before publishing
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.event_name }}-${{ github.ref }}
+  cancel-in-progress: true
+
+env:
+  FORCE_COLOR: "1"
+  PIP_DISABLE_PIP_VERSION_CHECK: "1"
+  UV_PYTHON_PREFERENCE: only-system # test the interpreter setup-python installed
+
+jobs:
+  lint:
+    name: Lint (ruff, mypy)
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@v7
+        with:
+          python-version: "3.13"
+      - uses: astral-sh/setup-uv@c18668ad3cf93ea998bef934396af7bb5c839dc7 # v10.2.0
+        with:
+          python-version: "3.13"
+          activate-environment: true
+          enable-cache: true
+          cache-dependency-glob: pyproject.toml
+          cache-suffix: lint
+      # ruff and mypy versions are pinned in pyproject.toml [dependency-groups] lint,
+      # so a local `uv pip install --group lint` runs exactly what CI runs.
+      # mypy needs the package's dependencies installed to check calls into them.
+      - name: Install pdfexorcist and the pinned linters
+        run: uv pip install -e . --group lint
+      - name: ruff check
+        run: ruff check --output-format github pdfexorcist tests examples .github/scripts
+      # !cancelled(): every check reports in one run; any failure still fails the job
+      - name: ruff format --check
+        if: ${{ !cancelled() }}
+        run: ruff format --check --diff pdfexorcist tests examples .github/scripts
+      - name: mypy
+        if: ${{ !cancelled() }}
+        run: mypy
+
+  test:
+    name: Test ${{ matrix.os }} py${{ matrix.python }}
+    runs-on: ${{ matrix.os }}
+    timeout-minutes: 30
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          # Linux x86_64: every supported Python
+          - { os: ubuntu-latest, python: "3.10" }
+          - { os: ubuntu-latest, python: "3.11" }
+          - { os: ubuntu-latest, python: "3.12" }
+          - { os: ubuntu-latest, python: "3.13" }
+          - { os: ubuntu-latest, python: "3.14" }
+          # Linux arm64
+          - { os: ubuntu-24.04-arm, python: "3.10" }
+          - { os: ubuntu-24.04-arm, python: "3.13" }
+          # macOS arm64 (Apple Silicon)
+          - { os: macos-latest, python: "3.10" }
+          - { os: macos-latest, python: "3.13" }
+          # macOS x86_64 (macos-13 is retired; macos-15-intel is the Intel image)
+          - { os: macos-15-intel, python: "3.10" }
+          - { os: macos-15-intel, python: "3.13" }
+          # Windows x86_64. PYTHONUTF8: pdftotext output is decoded with the
+          # locale codec (cp1252) otherwise; drop once extractors.pdftotext
+          # passes encoding="utf-8".
+          - { os: windows-latest, python: "3.10", utf8: "1" }
+          - { os: windows-latest, python: "3.13", utf8: "1" }
+          # windows-11-arm is left out: opencv-python-headless (camelot's
+          # lattice flavor, the deskew step) has no win_arm64 wheels, and
+          # pandas none for Python 3.10.
+    env:
+      PYTHONUTF8: ${{ matrix.utf8 || '' }}
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          persist-credentials: false
+
+      - uses: ./.github/actions/setup-poppler
+
+      - uses: actions/setup-python@v7
+        with:
+          python-version: ${{ matrix.python }}
+
+      - uses: astral-sh/setup-uv@c18668ad3cf93ea998bef934396af7bb5c839dc7 # v10.2.0
+        with:
+          python-version: ${{ matrix.python }}
+          activate-environment: true
+          enable-cache: true
+          cache-dependency-glob: pyproject.toml
+          cache-suffix: py${{ matrix.python }}
+
+      - name: Install pdfexorcist and pytest
+        shell: bash
+        run: uv pip install -e . pytest
+
+      - name: Versions
+        shell: bash
+        run: |
+          python -VV
+          python -c "import platform; print(platform.platform(), platform.machine())"
+          uv pip list
+
+      - name: pytest
+        shell: bash
+        run: python -m pytest -q tests -ra --junitxml=reports/junit.xml
+
+      - name: Upload test report
+        if: failure()
+        uses: actions/upload-artifact@v7
+        with:
+          name: pytest-${{ matrix.os }}-py${{ matrix.python }}
+          path: reports/
+          if-no-files-found: ignore
+          retention-days: 14
+
+  build:
+    name: Build sdist and wheel
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          persist-credentials: false
+      - uses: astral-sh/setup-uv@c18668ad3cf93ea998bef934396af7bb5c839dc7 # v10.2.0
+        with:
+          enable-cache: false
+      - name: uv build
+        run: uv build
+      - name: twine check --strict
+        run: uvx twine check --strict dist/*
+      - name: Wheel holds the package only; sdist holds the test suite too
+        run: |
+          ls -l dist
+          test "$(find dist -name '*-py3-none-any.whl' | wc -l)" -eq 1
+          test "$(find dist -name '*.tar.gz' | wc -l)" -eq 1
+          unzip -Z1 dist/*.whl > wheel.txt
+          tar tzf dist/*.tar.gz > sdist.txt
+          grep -qx 'pdfexorcist/cli.py' wheel.txt
+          grep -qx 'pdfexorcist/py.typed' wheel.txt
+          if grep -Ev '^pdfexorcist(/|-[^/]+\.dist-info/)' wheel.txt; then
+            echo "::error::the wheel holds files outside the package (listed above)"
+            exit 1
+          fi
+          grep -q '/tests/conftest.py$' sdist.txt
+          grep -q '/tests/fixtures/cii/cii_2021_1A.1_p43.pdf$' sdist.txt
+      - uses: actions/upload-artifact@v7
+        with:
+          name: dist
+          path: dist/
+          if-no-files-found: error
+          retention-days: 14
+
+  install-smoke:
+    name: Installed wheel ${{ matrix.os }}
+    needs: build
+    runs-on: ${{ matrix.os }}
+    timeout-minutes: 20
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, ubuntu-24.04-arm, macos-latest, macos-15-intel, windows-latest]
+    env:
+      PYTHONUTF8: ${{ matrix.os == 'windows-latest' && '1' || '' }} # see the test job
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          persist-credentials: false
+          sparse-checkout: |
+            .github
+            tests/fixtures/cii
+
+      - uses: actions/download-artifact@v8
+        with:
+          name: dist
+          path: dist
+
+      - uses: ./.github/actions/setup-poppler
+
+      - uses: actions/setup-python@v7
+        with:
+          python-version: "3.13"
+
+      - uses: astral-sh/setup-uv@c18668ad3cf93ea998bef934396af7bb5c839dc7 # v10.2.0
+        with:
+          enable-cache: false
+
+      - name: Install the wheel into a clean venv
+        shell: bash
+        run: |
+          uv venv --python 3.13 "$RUNNER_TEMP/smoke"
+          uv pip install --python "$RUNNER_TEMP/smoke" dist/*.whl
+
+      - name: Smoke-test the installed CLI
+        shell: bash
+        run: bash .github/scripts/cli_smoke.sh "$RUNNER_TEMP/smoke" tests/fixtures/cii/cii_2021_1A.1_p43.pdf
+
+  sdist-install:
+    name: Install from sdist
+    needs: build
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/download-artifact@v8
+        with:
+          name: dist
+          path: dist
+      - uses: actions/setup-python@v7
+        with:
+          python-version: "3.13"
+      - uses: astral-sh/setup-uv@c18668ad3cf93ea998bef934396af7bb5c839dc7 # v10.2.0
+        with:
+          enable-cache: false
+      - name: Build and install from the sdist
+        run: |
+          uv venv --python 3.13 "$RUNNER_TEMP/sdist"
+          uv pip install --python "$RUNNER_TEMP/sdist" dist/*.tar.gz
+          cd "$RUNNER_TEMP"
+          "$RUNNER_TEMP/sdist/bin/python" -c "import pdfexorcist; print(pdfexorcist.__file__); assert 'site-packages' in pdfexorcist.__file__"
+          "$RUNNER_TEMP/sdist/bin/pdfexorcist" --help

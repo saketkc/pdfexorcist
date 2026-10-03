@@ -1,0 +1,126 @@
+name: Release
+
+# Push a tag vX.Y.Z (or a prerelease such as vX.Y.Zrc1) whose version matches
+# pyproject.toml. The tag is checked first, then
+# the full CI suite runs: it builds the sdist and wheel once, checks them with
+# twine --strict and smoke-tests the installed wheel. Those same files go to
+# TestPyPI (a rehearsal), then to PyPI by trusted publishing (no API token),
+# each from its protected environment, and a GitHub Release is created with
+# the files attached and generated notes.
+#
+# Run it by hand (Actions > Release > Run workflow) to rehearse on TestPyPI
+# only: nothing goes to PyPI or GitHub Releases without a tag push.
+on:
+  push:
+    tags: ["v*"]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: release-${{ github.ref }}
+  cancel-in-progress: false # never stop a publish half-way
+
+jobs:
+  version:
+    name: Tag matches the package version
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    outputs:
+      version: ${{ steps.v.outputs.version }}
+      prerelease: ${{ steps.v.outputs.prerelease }}
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@v7
+        with:
+          python-version: "3.13"
+      - id: v
+        name: Compare the tag with pyproject.toml
+        env:
+          REF_TYPE: ${{ github.ref_type }}
+          TAG: ${{ github.ref_name }}
+        run: |
+          version=$(python -c "import tomllib; print(tomllib.load(open('pyproject.toml', 'rb'))['project']['version'])")
+          echo "pyproject.toml version $version; $REF_TYPE $TAG"
+          if [ "$REF_TYPE" = tag ] && [ "$TAG" != "v$version" ]; then
+            echo "::error::tag $TAG does not match the pyproject.toml version (expected v$version)"
+            exit 1
+          fi
+          # PEP 440 pre- and dev-releases (1.2.0a1, 1.2.0b2, 1.2.0rc1, 1.2.0.dev3)
+          if [[ $version =~ (a|b|rc|\.dev)[0-9]+$ ]]; then prerelease=true; else prerelease=false; fi
+          { echo "version=$version"; echo "prerelease=$prerelease"; } >> "$GITHUB_OUTPUT"
+
+  ci:
+    name: CI
+    needs: version
+    uses: ./.github/workflows/ci.yml # its build job uploads the `dist` artifact used below
+
+  testpypi:
+    name: Publish to TestPyPI
+    needs: [version, ci]
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    environment:
+      name: testpypi
+      url: https://test.pypi.org/project/pdfexorcist/${{ needs.version.outputs.version }}/
+    permissions:
+      id-token: write # trusted publishing
+    steps:
+      - uses: actions/download-artifact@v8
+        with:
+          name: dist
+          path: dist
+      - uses: pypa/gh-action-pypi-publish@release/v1
+        with:
+          repository-url: https://test.pypi.org/legacy/
+          skip-existing: true # a rehearsal may run more than once per version
+
+  pypi:
+    name: Publish to PyPI
+    needs: [version, testpypi]
+    if: github.event_name == 'push' && github.ref_type == 'tag'
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    environment:
+      name: pypi
+      url: https://pypi.org/project/pdfexorcist/${{ needs.version.outputs.version }}/
+    permissions:
+      id-token: write # trusted publishing
+    steps:
+      - uses: actions/download-artifact@v8
+        with:
+          name: dist
+          path: dist
+      - uses: pypa/gh-action-pypi-publish@release/v1
+
+  github-release:
+    name: GitHub Release
+    needs: [version, pypi]
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    permissions:
+      contents: write # create the release and attach the files
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          persist-credentials: false
+      - uses: actions/download-artifact@v8
+        with:
+          name: dist
+          path: dist
+      - name: Create the release
+        env:
+          GH_TOKEN: ${{ github.token }}
+          TAG: ${{ github.ref_name }}
+          VERSION: ${{ needs.version.outputs.version }}
+          PRERELEASE: ${{ needs.version.outputs.prerelease }}
+        run: |
+          # this version's CHANGELOG.md section, then GitHub's generated notes
+          python3 .github/scripts/changelog.py notes "$VERSION" > notes.md || : > notes.md
+          flags=()
+          if [ "$PRERELEASE" = true ]; then flags+=(--prerelease); fi
+          gh release create "$TAG" dist/* --repo "$GITHUB_REPOSITORY" --verify-tag \
+            --title "pdfexorcist $VERSION" --notes-file notes.md --generate-notes "${flags[@]}"
