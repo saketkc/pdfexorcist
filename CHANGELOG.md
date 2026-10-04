@@ -7,7 +7,7 @@ All notable changes to pdfexorcist are listed here. The format follows
 Add each change under [Unreleased] as you make it. The Prepare release
 workflow moves those entries into a dated section.
 
-## [Unreleased]
+## [0.1.1 - 4 Oct 2026]
 
 ### Added
 
