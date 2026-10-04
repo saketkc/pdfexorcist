@@ -197,6 +197,7 @@ def test_png_is_written(cii, tmp_path):
         assert im.width > cii.image.width and im.height > cii.image.height
 
 
+@pytest.mark.usefixtures("wide_console")  # the error must not wrap
 def test_show_output(tmp_path):
     pdf = tmp_path / "cii.pdf"
     pdf.write_bytes(CII.read_bytes())

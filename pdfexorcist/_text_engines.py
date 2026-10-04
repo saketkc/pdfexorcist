@@ -1,5 +1,6 @@
 """Text-layer engines."""
 
+import gc
 import logging
 import re
 import shutil
@@ -110,6 +111,14 @@ def _n_values(lines: list) -> int:
 @register("camelot")
 def camelot_(pdf: Path) -> Iterator[Page]:
     """Extract tables with Camelot's best flavor."""
+    try:
+        yield from _camelot_pages(pdf)
+    finally:
+        # camelot 2 holds the PDF open in ref cycles; Windows cannot delete an open file
+        gc.collect()
+
+
+def _camelot_pages(pdf: Path) -> Iterator[Page]:
     import camelot
     import pymupdf
 

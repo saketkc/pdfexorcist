@@ -16,6 +16,7 @@ concurrency:
 
 env:
   FORCE_COLOR: "1"
+  PY_COLORS: "1" # pytest colour; conftest drops FORCE_COLOR
   PIP_DISABLE_PIP_VERSION_CHECK: "1"
   UV_PYTHON_PREFERENCE: only-system # test the interpreter setup-python installed
 

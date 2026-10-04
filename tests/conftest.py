@@ -1,7 +1,12 @@
 """Test setup."""
 
+import os
 import sys
 from pathlib import Path
+
+# plain text in tests; read on import, and typer forces colour under GITHUB_ACTIONS
+os.environ.pop("FORCE_COLOR", None)
+os.environ["_TYPER_FORCE_DISABLE_TERMINAL"] = "1"
 
 import pytest
 from cli_helpers import STATES, make_pdf
