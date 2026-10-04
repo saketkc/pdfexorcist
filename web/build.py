@@ -32,7 +32,11 @@ APP = [
 VENDOR = ["pdftotext.js", "pdftotext.wasm", "pdfium.cjs", "pdfium.wasm"]
 LICENSES = ["pdftotext.COPYING", "pdftotext.COPYING3", "pdfium.LICENSE"]  # GPL: ship them
 WHEELS = Path.home() / ".cache" / "pdfexorcist-web" / "wheels"
-ASSETS = {"favicon.svg": "docs/assets/favicon.svg", "logo.svg": "docs/assets/logo/logo.svg"}
+ASSETS = {
+    "favicon.svg": "docs/assets/favicon.svg",
+    "logo.svg": "docs/assets/logo/logo.svg",
+    "social-preview.png": "docs/assets/logo/social-preview.png",
+}
 REDIRECT = """<!doctype html>
 <meta charset="utf-8">
 <title>Moved</title>
