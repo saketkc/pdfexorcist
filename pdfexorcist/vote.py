@@ -171,15 +171,20 @@ _POOLS: dict[int, Any] = {}  # spawned workers import pdfexorcist once per sessi
 
 
 def _pool(workers: int) -> Any:
-    """Return a process pool retained until exit."""
+    """Return a process pool retained until exit, or None where processes cannot start."""
     if workers not in _POOLS:
         import atexit
         import multiprocessing
         from concurrent.futures import ProcessPoolExecutor
 
         ctx = multiprocessing.get_context("spawn")  # fork is unsafe with threads and GPU state
-        _POOLS[workers] = ProcessPoolExecutor(max_workers=workers, mp_context=ctx)
-        atexit.register(_POOLS[workers].shutdown)
+        try:
+            _POOLS[workers] = ProcessPoolExecutor(max_workers=workers, mp_context=ctx)
+        except NotImplementedError as e:  # Pyodide
+            logger.warning("worker processes are not available (%s); reading in this process", e)
+            _POOLS[workers] = None
+        else:
+            atexit.register(_POOLS[workers].shutdown)
     return _POOLS[workers]
 
 
@@ -190,9 +195,11 @@ def _read_all(
     report: Callable[[str, str, object], None],
     tmp: Path,
 ) -> dict[str, list | Exception]:
-    """Read every engine; retain failures as exception values."""
+    """Read every engine; retain failures as exception values. {} where processes cannot start."""
     import pymupdf
 
+    if _pool(workers) is None:  # extract() reads each engine itself
+        return {}
     known = [n for n in names if n in EXTRACTORS]
     pooled = [
         n

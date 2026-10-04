@@ -63,11 +63,12 @@ def to_table(
     )
     good = ok[~clashes[ok.index]].drop_duplicates(where)
     grid = good.set_index(where)["value"].unstack(columns)
-    order = res.loc[placeable, index].drop_duplicates()
+    # rows and columns with no agreed value go to the review file only
+    order = ok[index].drop_duplicates()
     grid = grid.reindex(
         pd.MultiIndex.from_frame(order) if len(index) > 1 else pd.Index(order[index[0]])
     )
-    seen = list(dict.fromkeys(res.loc[placeable, columns]))
+    seen = list(dict.fromkeys(ok[columns]))
     try:
         cols = sorted(seen, key=float)
     except (TypeError, ValueError):
@@ -165,7 +166,8 @@ def summarise(
     plan: Any, res: pd.DataFrame, prog: Any, result: dict[str, Any], notes: list[str]
 ) -> dict[str, Any]:
     """JSON-ready run summary."""
-    verified = int((res.status == "verified").sum())
+    is_verified = res.status == "verified"
+    verified = int(is_verified.sum())
     failed_mask = res.get("failed", pd.Series("", index=res.index)).fillna("") != ""
     by_check: dict[str, int] = {}
     for f in res.loc[failed_mask, "failed"]:
@@ -176,9 +178,11 @@ def summarise(
         **prog.skipped,
     }
     table = result["table"]
+    agreed = res.loc[is_verified, "n_agree"].value_counts().sort_index(ascending=False)
     return {
         "input": str(plan.src),
         "outputs": [str(p) for p in result["written"]],
+        "review": str(plan.review) if plan.review in result["written"] else None,
         "format": plan.fmt,
         "layout": result["layout"],
         "pages": plan.pages,
@@ -187,9 +191,11 @@ def summarise(
         "cells": {
             "total": len(res),
             "verified": verified,
-            "unresolved": int((res.status != "verified").sum()),
+            "unresolved": len(res) - verified,
             "failed_checks": int(failed_mask.sum()),
         },
+        # verified cells by how many engines read their value
+        "agreement": {str(n): int(c) for n, c in agreed.items()},
         "table": None if table is None else {"rows": len(table), "columns": int(table.shape[1])},
         "checks": by_check,
         "checks_run": list(res.attrs.get("checks_run", [])),

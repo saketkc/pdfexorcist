@@ -1,0 +1,26 @@
+[
+  {
+    "id": "nfhs6-india",
+    "kicker": "NFHS-6 · State fact sheet",
+    "title": "India",
+    "blurb": "101 indicators, urban, rural and total, with NFHS-5 for comparison.",
+    "pdf": "tests/fixtures/nfhs6_state/nfhs6_india_p26-28.pdf",
+    "recipe": "examples/nfhs6/state.toml"
+  },
+  {
+    "id": "nfhs6-jhargram",
+    "kicker": "NFHS-6 · District fact sheet",
+    "title": "Jhargram, West Bengal",
+    "blurb": "Each indicator for NFHS-6 and NFHS-5.",
+    "pdf": "tests/fixtures/nfhs6_district/nfhs6_jhargram_p51-53.pdf",
+    "recipe": "examples/nfhs6/district.toml"
+  },
+  {
+    "id": "mccd-table9",
+    "kicker": "MCCD 2019 · Table 9",
+    "title": "Deaths by cause, 2008–2019",
+    "blurb": "Medically certified deaths by cause and sex. One 2018 total is misprinted, and the checks flag it.",
+    "pdf": "tests/fixtures/mccd/mccd_2019_t9_p194.pdf",
+    "recipe": "examples/mccd/table9.toml"
+  }
+]

@@ -1,0 +1,276 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>pdfexorcist</title>
+  <meta name="description" content="Extract tables from PDFs in your browser. Five independent engines read each cell; a value is kept when at least 3 agree. Your PDF is not uploaded.">
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Albert+Sans:ital,wght@0,300..800;1,300..800&display=swap" rel="stylesheet">
+  <!-- same tag as docs/conf.py -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-VQKXEP0RRR"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-VQKXEP0RRR');
+  </script>
+  <script>
+    // the saved theme, before first paint
+    try {
+      const t = localStorage.getItem('theme');
+      if (t === 'light' || t === 'dark') document.documentElement.dataset.theme = t;
+    } catch {}
+  </script>
+  <style>
+    :root {
+      color-scheme: light dark;
+      --bg: light-dark(#f8f5ee, #17151f);
+      --surface: light-dark(#fffdf8, #1f1c29);
+      --sunk: light-dark(#efe9dc, #13111a);
+      --ink: light-dark(#17151f, #f4efe3);
+      --muted: light-dark(#625d6b, #a9a3b2);
+      --line: light-dark(#e2dbca, #332f3f);
+      --agree: light-dark(#1b8f56, #45cf8c);
+      --agree-fill: #2bb673;
+      --review: light-dark(#c21d32, #f2697b);
+      --review-wash: light-dark(#fbe9e9, #3a1d26);
+    }
+    :root[data-theme="light"] { color-scheme: light; }
+    :root[data-theme="dark"] { color-scheme: dark; }
+
+    * { box-sizing: border-box; }
+    html { -webkit-text-size-adjust: 100%; }
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--ink);
+      font: 400 1rem/1.55 'Albert Sans', system-ui, -apple-system, 'Segoe UI', sans-serif;
+      font-feature-settings: 'tnum' 1;
+      -webkit-font-smoothing: antialiased;
+    }
+    a { color: inherit; }
+    button, input, select { font: inherit; color: inherit; }
+    :focus-visible { outline: 2px solid var(--agree); outline-offset: 3px; border-radius: 6px; }
+    .wrap { width: min(1200px, 100% - 32px); margin-inline: auto; }
+
+    /* header */
+    header { padding: 20px 0; }
+    header .wrap { display: flex; align-items: center; gap: 24px; }
+    .brand { display: flex; align-items: center; gap: 10px; text-decoration: none; font-weight: 650; letter-spacing: -0.01em; font-size: 1.05rem; }
+    .brand img { width: 30px; height: 35px; }
+    nav { margin-left: auto; display: flex; align-items: center; gap: 4px; }
+    nav a, .ghost {
+      text-decoration: none; color: var(--muted); padding: 6px 10px; border-radius: 8px;
+      background: none; border: 0; cursor: pointer; font-size: .95rem;
+    }
+    nav a:hover, .ghost:hover { color: var(--ink); background: var(--sunk); }
+    .theme svg { width: 18px; height: 18px; display: block; }
+
+    /* home */
+    .hero { padding: clamp(40px, 9vh, 104px) 0 clamp(32px, 6vh, 64px); max-width: 780px; }
+    h1 {
+      font-size: clamp(2.4rem, 1.4rem + 4.2vw, 4.4rem); line-height: 1.02;
+      letter-spacing: -0.035em; font-weight: 700; margin: 0 0 24px; text-wrap: balance;
+    }
+    h1 em { font-style: normal; color: var(--agree); }
+    .lede { font-size: clamp(1.08rem, 1rem + .35vw, 1.25rem); color: var(--muted); max-width: 640px; margin: 0; text-wrap: pretty; }
+    .private { margin: 18px 0 0; font-size: .95rem; color: var(--muted); }
+    .private strong { color: var(--agree); font-weight: 650; }
+    .engines { display: flex; align-items: center; gap: 10px; margin-top: 28px; font-size: .9rem; color: var(--muted); }
+    .dots { display: inline-flex; gap: 4px; }
+    .dots i { width: 9px; height: 9px; border-radius: 2px; background: var(--line); transition: background .4s; }
+    .dots.ready i { background: var(--agree-fill); }
+    .dots.busy i { animation: pulse 1.4s ease-in-out infinite; }
+    .dots.busy i:nth-child(2) { animation-delay: .12s; }
+    .dots.busy i:nth-child(3) { animation-delay: .24s; }
+    .dots.busy i:nth-child(4) { animation-delay: .36s; }
+    .dots.busy i:nth-child(5) { animation-delay: .48s; }
+    @keyframes pulse { 0%, 100% { background: var(--line); } 50% { background: var(--agree-fill); } }
+
+    h2 { font-size: .8rem; text-transform: uppercase; letter-spacing: .09em; font-weight: 650; color: var(--muted); margin: 0 0 14px; }
+    .examples { list-style: none; margin: 0; padding: 0; border-top: 1px solid var(--line); }
+    .example {
+      display: grid; grid-template-columns: 112px 1fr auto; gap: 24px; align-items: center;
+      width: 100%; text-align: left; padding: 20px 8px; background: none; border: 0;
+      border-bottom: 1px solid var(--line); cursor: pointer; border-radius: 0;
+      transition: background .2s;
+    }
+    .example:hover { background: var(--surface); }
+    .example:hover .go { transform: translateX(4px); color: var(--agree); }
+    .thumb {
+      width: 112px; aspect-ratio: 0.72; border-radius: 4px; background: var(--surface);
+      box-shadow: 0 0 0 1px var(--line), 0 8px 20px -12px rgb(23 21 31 / .35);
+      overflow: hidden; display: grid; place-items: center;
+    }
+    .thumb canvas { width: 100%; height: auto; display: block; }
+    .kicker { font-size: .82rem; color: var(--muted); font-weight: 550; }
+    .example .title { display: block; font-size: 1.3rem; font-weight: 650; letter-spacing: -0.015em; margin: 2px 0 4px; }
+    .example .blurb { color: var(--muted); max-width: 60ch; display: block; }
+    .go { font-size: 1.4rem; color: var(--muted); transition: transform .3s cubic-bezier(.22,1,.36,1), color .2s; padding-right: 8px; }
+
+    .own { margin: 56px 0 96px; }
+    .drop {
+      border: 1.5px dashed var(--line); border-radius: 14px; padding: 32px;
+      display: flex; gap: 20px; align-items: center; flex-wrap: wrap; transition: border-color .2s, background .2s;
+    }
+    .drop.over { border-color: var(--agree); background: var(--surface); }
+    .drop p { margin: 0; flex: 1 1 280px; color: var(--muted); }
+    .drop p strong { color: var(--ink); font-weight: 600; display: block; font-size: 1.1rem; }
+    .button {
+      display: inline-flex; align-items: center; gap: 8px; padding: 10px 18px; border-radius: 999px;
+      background: var(--ink); color: var(--bg); border: 0; cursor: pointer; font-weight: 600; text-decoration: none;
+      transition: transform .15s;
+    }
+    .button:active { transform: scale(.97); }
+    .button.quiet { background: var(--sunk); color: var(--ink); }
+    details.options { margin-top: 14px; color: var(--muted); font-size: .95rem; }
+    details.options summary { cursor: pointer; width: max-content; }
+    .fields { display: flex; gap: 20px; flex-wrap: wrap; margin-top: 12px; }
+    .fields label { display: grid; gap: 4px; font-size: .85rem; }
+    .fields select, .fields input, .pick input {
+      background: var(--surface); border: 1px solid var(--line); border-radius: 8px; padding: 8px 10px; min-width: 220px;
+    }
+
+    /* work */
+    .bar { display: flex; align-items: center; gap: 16px; padding: 12px 0 24px; flex-wrap: wrap; }
+    .bar .doc { min-width: 0; }
+    .bar .doc .title { font-size: clamp(1.4rem, 1rem + 1.4vw, 2rem); font-weight: 700; letter-spacing: -0.02em; line-height: 1.1; display: block; }
+    .work { display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); gap: clamp(20px, 3vw, 40px); align-items: start; padding-bottom: 80px; }
+    .pages {
+      position: sticky; top: 16px; max-height: calc(100vh - 32px); overflow: auto; display: grid; gap: 14px;
+      padding: 14px; background: var(--sunk); border-radius: 14px;
+    }
+    .pages figure { margin: 0; scroll-margin-top: 8px; }
+    .pages canvas { width: 100%; height: auto; display: block; border-radius: 3px; box-shadow: 0 1px 3px rgb(23 21 31 / .18); background: #fff; transition: box-shadow .4s; }
+    .pages figure.flash canvas { box-shadow: 0 0 0 3px var(--review); }
+    .pages figcaption { font-size: .78rem; color: var(--muted); padding: 6px 2px 0; display: flex; justify-content: space-between; }
+    .pages .more { text-align: center; color: var(--muted); font-size: .85rem; padding: 4px; }
+    .pages .slot { aspect-ratio: 0.71; border-radius: 3px; background: var(--surface); }
+    .result { min-width: 0; }
+    .running { padding: 28px 0; }
+    .running p { margin: 10px 0 0; color: var(--muted); }
+    .say { font-size: clamp(1.25rem, 1rem + .9vw, 1.6rem); line-height: 1.3; letter-spacing: -0.015em; margin: 0 0 8px; text-wrap: pretty; }
+    .say b { font-weight: 700; }
+    .say .ok { color: var(--agree); }
+    .say .no { color: var(--review); }
+    .sub { color: var(--muted); margin: 0 0 22px; }
+    .actions { display: flex; gap: 10px; flex-wrap: wrap; margin: 0 0 28px; }
+    .voters { display: flex; flex-wrap: wrap; gap: 6px 18px; font-size: .88rem; color: var(--muted); margin: 0 0 28px; padding: 0; list-style: none; }
+    .voters li::before { content: ''; display: inline-block; width: 8px; height: 8px; border-radius: 2px; background: var(--agree-fill); margin-right: 7px; }
+    .voters b { color: var(--ink); font-weight: 600; }
+    .alert { border-radius: 12px; background: var(--review-wash); padding: 14px 16px; margin: 0 0 24px; }
+    .alert.calm { background: var(--sunk); }
+    .link { background: none; border: 0; padding: 0; color: var(--agree); font-weight: 600; cursor: pointer; text-decoration: underline; text-underline-offset: 3px; }
+    .check-pages { display: flex; flex-wrap: wrap; align-items: center; gap: 6px; margin: 0 0 24px; color: var(--muted); font-size: .9rem; }
+    .chip { border: 1px solid var(--line); background: var(--surface); border-radius: 999px; padding: 3px 11px; cursor: pointer; font-size: .85rem; font-variant-numeric: tabular-nums; }
+    .chip:hover { border-color: var(--review); color: var(--review); }
+    .progress { list-style: none; padding: 0; margin: 18px 0 24px; display: grid; gap: 10px; max-width: 520px; }
+    .progress li { display: grid; grid-template-columns: 110px 1fr; gap: 2px 12px; align-items: center; font-size: .92rem; color: var(--muted); }
+    .progress b { color: var(--ink); font-weight: 600; }
+    .progress .meter { grid-column: 1 / -1; display: block; height: 4px; border-radius: 3px; background: linear-gradient(90deg, var(--agree-fill) calc(var(--done, 0) * 100%), var(--line) 0); }
+    .progress li.done span { color: var(--agree); }
+    .pick { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; color: var(--muted); font-size: .95rem; }
+    .pick input { min-width: 0; width: 140px; }
+    .alert b { color: var(--review); }
+    .alert ul { margin: 6px 0 0; padding-left: 18px; }
+    h3 { font-size: 1.05rem; font-weight: 650; margin: 32px 0 10px; letter-spacing: -0.01em; }
+    .table { overflow: auto; max-height: 70vh; border: 1px solid var(--line); border-radius: 12px; background: var(--surface); }
+    table { border-collapse: collapse; width: 100%; font-size: .88rem; }
+    th, td { padding: 7px 12px; text-align: right; white-space: nowrap; border-bottom: 1px solid var(--line); }
+    th { position: sticky; top: 0; background: var(--surface); font-weight: 600; box-shadow: 0 1px 0 var(--line); z-index: 1; }
+    th:first-child, td:first-child { text-align: left; }
+    td.key { text-align: left; color: var(--muted); }
+    td.blank { background: repeating-linear-gradient(-45deg, var(--review-wash) 0 6px, transparent 6px 12px); }
+    tr:last-child td { border-bottom: 0; }
+    td.votes { text-align: left; white-space: normal; min-width: 220px; }
+    .error { color: var(--review); }
+    footer { color: var(--muted); font-size: .85rem; padding: 32px 0 48px; border-top: 1px solid var(--line); }
+    footer .wrap { display: flex; gap: 16px; flex-wrap: wrap; justify-content: space-between; }
+    [hidden] { display: none !important; }
+    .fade { animation: fade .5s cubic-bezier(.22,1,.36,1) both; }
+    @keyframes fade { from { opacity: 0; transform: translateY(8px); } }
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before { animation: none !important; transition: none !important; }
+    }
+    @media (max-width: 760px) {
+      .example { grid-template-columns: 72px 1fr; gap: 16px; }
+      .thumb { width: 72px; }
+      .go { display: none; }
+      .work { grid-template-columns: 1fr; }
+      .pages { position: static; max-height: 60vh; }
+      nav .hide-sm { display: none; }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="wrap">
+      <a class="brand" href="./"><img src="assets/logo.svg" alt="">pdfexorcist</a>
+      <nav>
+        <a href="cli/">Docs</a>
+        <a class="hide-sm" href="https://github.com/saketkc/pdfexorcist">GitHub</a>
+        <button class="ghost theme" id="theme" type="button" aria-label="Switch between light and dark">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><circle cx="12" cy="12" r="8"/><path d="M12 4a8 8 0 0 1 0 16z" fill="currentColor"/></svg>
+        </button>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section id="home" class="wrap">
+      <div class="hero">
+        <h1>Extract tables from PDFs, <em>with provenance.</em></h1>
+        <p class="lede">Five independent PDF engines extract the table. A cell's value is kept when at least 3 of the 5 agree on it (3 of 4 where pdftotext cannot run); otherwise the cell is left blank, with each engine's reading.</p>
+        <p class="private"><strong>Your PDF is not uploaded.</strong> It is read in this browser tab and stays on your computer.</p>
+        <p class="engines" aria-live="polite"><span class="dots busy" id="dots"><i></i><i></i><i></i><i></i><i></i></span><span id="engine-status">Loading the engines…</span></p>
+      </div>
+
+      <h2>Examples</h2>
+      <ul class="examples" id="examples"></ul>
+
+      <div class="own">
+        <h2>Your PDF</h2>
+        <div class="drop" id="drop">
+          <p><strong>Drop a PDF here</strong>Any PDF with a text layer. For scans, use the command-line tool.</p>
+          <label class="button" for="file">Choose a PDF</label>
+          <input type="file" id="file" accept="application/pdf,.pdf" hidden>
+        </div>
+        <details class="options">
+          <summary>Options</summary>
+          <div class="fields">
+            <label>Recipe
+              <select id="recipe"><option value="">None: one row per label</option></select>
+            </label>
+            <label>Pages
+              <input id="pages" placeholder="All, or e.g. 3-5" inputmode="numeric">
+            </label>
+          </div>
+        </details>
+      </div>
+    </section>
+
+    <section id="work" class="wrap" hidden>
+      <div class="bar">
+        <button class="ghost" id="back" type="button">← Back</button>
+        <div class="doc"><span class="kicker" id="doc-kicker"></span><span class="title" id="doc-title"></span></div>
+      </div>
+      <div class="work">
+        <div class="pages" id="pages-view" aria-label="The PDF"></div>
+        <div class="result" id="result" aria-live="polite"></div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="wrap">
+      <span><a href="http://saketlab.org/">Saket Lab</a></span>
+      <span>Files stay on your computer. The page loads its code from this site and jsDelivr, and counts visits with Google Analytics.</span>
+      <span><a href="cli/installation.html">Command-line tool</a> for scans and batches</span>
+    </div>
+  </footer>
+  <script type="module" src="app.js"></script>
+</body>
+</html>

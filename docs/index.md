@@ -14,6 +14,8 @@ description: "Extract tables from PDFs, scans and photos by majority vote across
 
 A cell the engines disagree on is left blank, never guessed, and listed for review with every engine's reading.
 
+To try it without installing anything, [run it in your browser](https://saketkc.github.io/pdfexorcist/): the same five engines, on your own computer.
+
 ## Quick start
 
 ### From the command line

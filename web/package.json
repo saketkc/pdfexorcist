@@ -1,0 +1,16 @@
+{
+  "name": "pdfexorcist-web",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "pdfexorcist in the browser: the package in Pyodide, with pdftotext and PDFium as WebAssembly",
+  "scripts": {
+    "test": "node test/pytest.mjs -q",
+    "parity": "node test/parity.mjs",
+    "site": "node test/site.mjs"
+  },
+  "devDependencies": {
+    "playwright-core": "^1.63.0",
+    "pyodide": "314.0.7"
+  }
+}

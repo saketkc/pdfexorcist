@@ -40,6 +40,10 @@ coverage.xml
 site/
 docs/_build/
 
+# Browser build: npm's installs. web/vendor and web/pymupdf hold the wasm and wheels
+# the site deploys, so they stay tracked.
+web/node_modules/
+
 # Notebooks, editors, OS
 .ipynb_checkpoints/
 .idea/

@@ -48,11 +48,11 @@ mac = ["pdfexorcist[ocrmac]"]
 mlx = ["pdfexorcist[glmocr]"]
 
 [project.urls]
-Homepage = "https://github.com/saketlab/pdfexorcist"
-Documentation = "https://saketlab.github.io/pdfexorcist/"
-Repository = "https://github.com/saketlab/pdfexorcist"
-Issues = "https://github.com/saketlab/pdfexorcist/issues"
-Changelog = "https://saketlab.github.io/pdfexorcist/changelog.html"
+Homepage = "https://github.com/saketkc/pdfexorcist"
+Documentation = "https://saketkc.github.io/pdfexorcist/cli/"
+Repository = "https://github.com/saketkc/pdfexorcist"
+Issues = "https://github.com/saketkc/pdfexorcist/issues"
+Changelog = "https://saketkc.github.io/pdfexorcist/cli/changelog.html"
 
 [project.scripts]
 pdfexorcist = "pdfexorcist.cli:main"

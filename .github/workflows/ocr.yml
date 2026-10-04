@@ -1,12 +1,12 @@
 name: OCR
 
-# Opt-in engines on CPU. Manual or weekly only, and never blocking: PaddleOCR
-# downloads its models at run time, and no runner has a GPU for chandra.
+# Opt-in OCR engines on CPU; manual or weekly, never blocking.
+# PaddleOCR downloads models at run time; no runner has a GPU for chandra.
 on:
   workflow_dispatch:
     inputs:
       paddle:
-        description: Also install PaddleOCR and run the slow OCR regression tests
+        description: Also run the slow PaddleOCR regression tests
         type: boolean
         default: false
   schedule:
@@ -25,7 +25,7 @@ env:
 
 jobs:
   tesseract:
-    name: Tesseract smoke (ubuntu)
+    name: Tesseract smoke
     runs-on: ubuntu-latest
     timeout-minutes: 20
     steps:
@@ -47,11 +47,11 @@ jobs:
           cache-suffix: ocr
       - run: uv pip install -e .
       - run: tesseract --version
-      - name: Tesseract reads the CII fixture page
+      - name: OCR smoke test
         run: python .github/scripts/ocr_smoke.py tests/fixtures/cii/cii_2021_1A.1_p43.pdf
 
   paddle:
-    name: PaddleOCR + Tesseract OCR tests (ubuntu, advisory)
+    name: PaddleOCR + Tesseract tests (advisory)
     if: github.event_name == 'schedule' || inputs.paddle
     runs-on: ubuntu-latest
     timeout-minutes: 60
@@ -73,10 +73,10 @@ jobs:
           enable-cache: true
           cache-dependency-glob: pyproject.toml
           cache-suffix: paddle
-      - name: Install pdfexorcist[paddleocr]
+      - name: Install
         run: |
           uv pip install -e ".[paddleocr]" pytest
-          # PaddleOCR needs opencv-contrib-python as the only cv2 wheel (README)
+          # PaddleOCR needs opencv-contrib-python as the only cv2 wheel
           uv pip uninstall opencv-python opencv-python-headless || true
           uv pip install --reinstall --no-deps opencv-contrib-python==4.10.0.84
       - name: OCR regression tests

@@ -3,7 +3,7 @@
 [![PyPI](https://img.shields.io/pypi/v/pdfexorcist)](https://pypi.org/project/pdfexorcist/)
 [![Python](https://img.shields.io/pypi/pyversions/pdfexorcist)](https://pypi.org/project/pdfexorcist/)
 [![CI](https://github.com/saketkc/pdfexorcist/actions/workflows/ci.yml/badge.svg)](https://github.com/saketkc/pdfexorcist/actions/workflows/ci.yml)
-[![Docs](https://img.shields.io/badge/docs-saketkc.github.io-blue)](https://saketkc.github.io/pdfexorcist/)
+[![Docs](https://img.shields.io/badge/docs-saketkc.github.io-blue)](https://saketkc.github.io/pdfexorcist/cli/)
 [![License: MIT](https://img.shields.io/badge/license-MIT-green)](https://github.com/saketkc/pdfexorcist/blob/main/LICENSE)
 
 `pdfexorcist` extracts tables from PDFs, scans and photos. It runs
@@ -16,7 +16,9 @@ uvx pdfexorcist extract report.pdf      # writes report.csv
 ![pdfexorcist show: agreed cells in green, cells the engines disagree on in orange](https://raw.githubusercontent.com/saketkc/pdfexorcist/main/docs/assets/show-page.png)
 
 
-Docs: https://saketkc.github.io/pdfexorcist/
+Try it in your browser, nothing to install: https://saketkc.github.io/pdfexorcist/
+
+Docs: https://saketkc.github.io/pdfexorcist/cli/
 
 
 ## Install with uv
@@ -118,7 +120,7 @@ Modaksagar,Kokan,Thane,4,02/10/2026,07:33 AM,76.06,128.92,204.98,101.17,177.23,7
 Tansa,Kokan,Thane,5,02/10/2026,07:35 AM,12.08,172.52,184.60,164.83,176.91,95.54,99.55
 ```
 
-Details: [Pravah example](https://saketkc.github.io/pdfexorcist/examples/pravah.html).
+Details: [Pravah example](https://saketkc.github.io/pdfexorcist/cli/examples/pravah.html).
 
 ### Several tables in one PDF
 
@@ -148,7 +150,7 @@ state,Total,2087462,2038596,1145976,2406079,2333297,1316268
 ```
 
 The recipe reports the printed `46-853` value as a failed check. Details:
-[NEET 2024 example](https://saketkc.github.io/pdfexorcist/examples/nta-notice.html).
+[NEET 2024 example](https://saketkc.github.io/pdfexorcist/cli/examples/nta-notice.html).
 
 ### A scanned list
 
@@ -177,7 +179,7 @@ sr_no,rank,percentile,category,state
 ```
 
 The checks require ranks to rise and percentiles to fall. Details:
-[NEET toppers example](https://saketkc.github.io/pdfexorcist/examples/nta.html).
+[NEET toppers example](https://saketkc.github.io/pdfexorcist/cli/examples/nta.html).
 
 `pdfexorcist.extract(url)` accepts file links and downloads into
 `$PDFEXORCIST_CACHE` (default `~/.cache/pdfexorcist`).

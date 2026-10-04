@@ -150,12 +150,14 @@ def test_extract_json_summary(states_pdf):
         "pdfexorcist",
         "input",
         "outputs",
+        "review",
         "format",
         "layout",
         "pages",
         "engines",
         "min_agree",
         "cells",
+        "agreement",
         "table",
         "checks",
         "checks_run",
@@ -163,7 +165,8 @@ def test_extract_json_summary(states_pdf):
         "exit_code",
     } <= set(s)
     assert s["cells"]["verified"] == 9 and s["cells"]["unresolved"] == 0
-    assert s["exit_code"] == 0 and s["outputs"] == ["states.csv"]
+    assert sum(s["agreement"].values()) == 9
+    assert s["exit_code"] == 0 and s["outputs"] == ["states.csv"] and s["review"] is None
     assert len(s["engines"]["used"]) >= 3
     assert r.stderr == ""
 
@@ -270,3 +273,29 @@ def test_parallel_output(states_pdf):
     assert run(["extract", "states.pdf", "-q", "-o", "two.csv", "--jobs", "2"]).exit_code == 0
     assert Path("one.csv").read_text() == Path("two.csv").read_text()
     assert run(["extract", "states.pdf", "-q", "-j", "0"]).exit_code == 2  # at least 1
+
+
+def test_table_leaves_out_rows_and_columns_with_no_agreed_value(tmp_path):
+    """CWC basin table: header words and stray columns go to the review file only."""
+    pdf = tmp_path / "bull.pdf"
+    shutil.copy(FIXTURES / "cwc" / "cwc_2018-02-01_p4.pdf", pdf)
+    r = run(["extract", str(pdf), "--json", "-q"])
+    s = json.loads(r.stdout)
+    assert r.exit_code == 0 and s["cells"]["unresolved"] > 0
+    t = pd.read_csv(tmp_path / "bull.csv", dtype=str).set_index("label")
+    assert len(t) == 14 and list(t.columns) == ["page", *map(str, range(8))]
+    assert t.loc["GANGA"].tolist() == [
+        "1",
+        "28.096",
+        "12.859",
+        "45.77%",
+        "17.358",
+        "61.78%",
+        "12.678",
+        "45.12%",
+        "1.43",
+    ]
+    assert t.loc["TOTAL", "1"] == "69.887"
+    assert not t.drop(columns="page").isna().all(axis=1).any()  # no all-blank row
+    review = pd.read_csv(tmp_path / "bull.review.csv", dtype=str)
+    assert len(review) == s["cells"]["unresolved"]

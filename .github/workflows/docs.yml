@@ -1,13 +1,15 @@
 name: Docs
 
-# Pull requests: build the site with -W (a broken link, a bad docstring or a
-# missing reference fails). Pushes to main: build, then deploy to GitHub Pages.
-# Needs Settings > Pages > Source: GitHub Actions.
+# PRs: build with -W (warnings fail). main: build and deploy to Pages
+# (Settings > Pages > Source: GitHub Actions).
+# The site: the app (web/) at the root, the docs under cli/.
 on:
   pull_request:
     paths:
       - "docs/**"
       - "pdfexorcist/**"
+      - "examples/**"
+      - "web/**"
       - "CHANGELOG.md"
       - ".github/workflows/docs.yml"
   push:
@@ -15,6 +17,8 @@ on:
     paths:
       - "docs/**"
       - "pdfexorcist/**"
+      - "examples/**"
+      - "web/**"
       - "CHANGELOG.md"
       - ".github/workflows/docs.yml"
   workflow_dispatch:
@@ -42,9 +46,10 @@ jobs:
           cache-dependency-path: |
             docs/requirements.txt
             pyproject.toml
-      # autodoc imports pdfexorcist; the base install is enough (no OCR engines)
+      # autodoc needs only the base install
       - run: pip install -r docs/requirements.txt .
-      - run: sphinx-build -W --keep-going -b html docs site
+      - run: sphinx-build -W --keep-going -b html docs site/cli
+      - run: python web/build.py site
       - if: github.event_name != 'pull_request'
         uses: actions/upload-pages-artifact@v5
         with:

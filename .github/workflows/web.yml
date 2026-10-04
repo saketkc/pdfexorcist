@@ -1,0 +1,43 @@
+name: Web
+
+# The test suite in Pyodide, with the browser build's engines.
+on:
+  pull_request:
+    paths: &paths
+      - "pdfexorcist/**"
+      - "tests/**"
+      - "examples/**"
+      - "web/**"
+      - ".github/workflows/web.yml"
+  push:
+    branches: [main]
+    paths: *paths
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: web-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  pytest:
+    name: pytest in Pyodide
+    runs-on: ubuntu-latest
+    timeout-minutes: 40
+    defaults:
+      run:
+        working-directory: web
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@v6
+        with:
+          node-version: "26" # JSPI without a flag
+          cache: npm
+          cache-dependency-path: web/package-lock.json
+      - run: npm ci
+      # test_fetch.py needs threads, which Pyodide lacks
+      - run: node test/pytest.mjs -q -ra --ignore=tests/test_fetch.py

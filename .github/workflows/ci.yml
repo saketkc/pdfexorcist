@@ -2,10 +2,10 @@ name: CI
 
 on:
   push:
-    branches: ["**"] # tags go through release.yml, which calls this workflow
+    branches: ["**"] # tags: release.yml calls this workflow
   pull_request:
   workflow_dispatch:
-  workflow_call: # release.yml runs the whole suite before publishing
+  workflow_call:
 
 permissions:
   contents: read
@@ -16,9 +16,9 @@ concurrency:
 
 env:
   FORCE_COLOR: "1"
-  PY_COLORS: "1" # pytest colour; conftest drops FORCE_COLOR
+  PY_COLORS: "1" # pytest; conftest drops FORCE_COLOR
   PIP_DISABLE_PIP_VERSION_CHECK: "1"
-  UV_PYTHON_PREFERENCE: only-system # test the interpreter setup-python installed
+  UV_PYTHON_PREFERENCE: only-system # use setup-python's interpreter
 
 jobs:
   lint:
@@ -39,14 +39,12 @@ jobs:
           enable-cache: true
           cache-dependency-glob: pyproject.toml
           cache-suffix: lint
-      # ruff and mypy versions are pinned in pyproject.toml [dependency-groups] lint,
-      # so a local `uv pip install --group lint` runs exactly what CI runs.
-      # mypy needs the package's dependencies installed to check calls into them.
-      - name: Install pdfexorcist and the pinned linters
+      # linters pinned in pyproject.toml [dependency-groups] lint; mypy needs the deps
+      - name: Install
         run: uv pip install -e . --group lint
       - name: ruff check
         run: ruff check --output-format github pdfexorcist tests examples .github/scripts
-      # !cancelled(): every check reports in one run; any failure still fails the job
+      # !cancelled(): run every check even if one fails
       - name: ruff format --check
         if: ${{ !cancelled() }}
         run: ruff format --check --diff pdfexorcist tests examples .github/scripts
@@ -62,7 +60,7 @@ jobs:
       fail-fast: false
       matrix:
         include:
-          # Linux x86_64: every supported Python
+          # every supported Python on Linux x86_64
           - { os: ubuntu-latest, python: "3.10" }
           - { os: ubuntu-latest, python: "3.11" }
           - { os: ubuntu-latest, python: "3.12" }
@@ -71,20 +69,18 @@ jobs:
           # Linux arm64
           - { os: ubuntu-24.04-arm, python: "3.10" }
           - { os: ubuntu-24.04-arm, python: "3.13" }
-          # macOS arm64 (Apple Silicon)
+          # macOS arm64
           - { os: macos-latest, python: "3.10" }
           - { os: macos-latest, python: "3.13" }
-          # macOS x86_64 (macos-13 is retired; macos-15-intel is the Intel image)
+          # macOS x86_64
           - { os: macos-15-intel, python: "3.10" }
           - { os: macos-15-intel, python: "3.13" }
-          # Windows x86_64. PYTHONUTF8: pdftotext output is decoded with the
-          # locale codec (cp1252) otherwise; drop once extractors.pdftotext
-          # passes encoding="utf-8".
+          # Windows x86_64. PYTHONUTF8: else pdftotext output decodes as cp1252;
+          # drop once extractors.pdftotext passes encoding="utf-8".
           - { os: windows-latest, python: "3.10", utf8: "1" }
           - { os: windows-latest, python: "3.13", utf8: "1" }
-          # windows-11-arm is left out: opencv-python-headless (camelot's
-          # lattice flavor, the deskew step) has no win_arm64 wheels, and
-          # pandas none for Python 3.10.
+          # no windows-11-arm: no win_arm64 wheels for opencv-python-headless,
+          # nor pandas on 3.10.
     env:
       PYTHONUTF8: ${{ matrix.utf8 || '' }}
     steps:
@@ -106,7 +102,7 @@ jobs:
           cache-dependency-glob: pyproject.toml
           cache-suffix: py${{ matrix.python }}
 
-      - name: Install pdfexorcist and pytest
+      - name: Install
         shell: bash
         run: uv pip install -e . pytest
 
@@ -145,7 +141,7 @@ jobs:
         run: uv build
       - name: twine check --strict
         run: uvx twine check --strict dist/*
-      - name: Wheel holds the package only; sdist holds the test suite too
+      - name: Check wheel and sdist contents
         run: |
           ls -l dist
           test "$(find dist -name '*-py3-none-any.whl' | wc -l)" -eq 1
@@ -155,7 +151,7 @@ jobs:
           grep -qx 'pdfexorcist/cli.py' wheel.txt
           grep -qx 'pdfexorcist/py.typed' wheel.txt
           if grep -Ev '^pdfexorcist(/|-[^/]+\.dist-info/)' wheel.txt; then
-            echo "::error::the wheel holds files outside the package (listed above)"
+            echo "::error::wheel has files outside the package (above)"
             exit 1
           fi
           grep -q '/tests/conftest.py$' sdist.txt
@@ -177,7 +173,7 @@ jobs:
       matrix:
         os: [ubuntu-latest, ubuntu-24.04-arm, macos-latest, macos-15-intel, windows-latest]
     env:
-      PYTHONUTF8: ${{ matrix.os == 'windows-latest' && '1' || '' }} # see the test job
+      PYTHONUTF8: ${{ matrix.os == 'windows-latest' && '1' || '' }} # see test job
     steps:
       - uses: actions/checkout@v7
         with:
@@ -201,13 +197,13 @@ jobs:
         with:
           enable-cache: false
 
-      - name: Install the wheel into a clean venv
+      - name: Install wheel in a clean venv
         shell: bash
         run: |
           uv venv --python 3.13 "$RUNNER_TEMP/smoke"
           uv pip install --python "$RUNNER_TEMP/smoke" dist/*.whl
 
-      - name: Smoke-test the installed CLI
+      - name: Smoke-test CLI
         shell: bash
         run: bash .github/scripts/cli_smoke.sh "$RUNNER_TEMP/smoke" tests/fixtures/cii/cii_2021_1A.1_p43.pdf
 
@@ -227,7 +223,7 @@ jobs:
       - uses: astral-sh/setup-uv@c18668ad3cf93ea998bef934396af7bb5c839dc7 # v10.2.0
         with:
           enable-cache: false
-      - name: Build and install from the sdist
+      - name: Install sdist and import
         run: |
           uv venv --python 3.13 "$RUNNER_TEMP/sdist"
           uv pip install --python "$RUNNER_TEMP/sdist" dist/*.tar.gz
