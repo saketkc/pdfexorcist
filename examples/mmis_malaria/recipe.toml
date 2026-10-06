@@ -1,0 +1,45 @@
+# pdfexorcist recipe: NCVBDC Monthly Malaria Situation (MMIS) report
+#
+# Each State/UT gets four trend graphs (BSE, TPC, TPR, PF), two a page, and under
+# each graph a small table: the month row, then "Current Year" and "3 Year Average".
+# mmis.py keys each value by the graph's place on the page, the series and the
+# month, and keeps the graph's area and indicator, read from its title, as extra
+# columns. Try it on a whole report:
+#
+#   pdfexorcist extract https://ncvbdc.mohfw.gov.in/Doc/MMIS/October-2023/MMISReport-Category-II-October-2023.pdf --recipe examples/mmis_malaria/recipe.toml
+#
+# On the fixture (Category II, Chhattisgarh and West Bengal, from October 2023):
+#
+#   pdfexorcist extract tests/fixtures/mmis/mmis_cat2_2023-10_p3-4_7-8_17-18.pdf --recipe examples/mmis_malaria/recipe.toml
+
+name = "MMIS monthly malaria situation"
+description = "Month-wise BSE, TPC, TPR and PF by State/UT, from the tables under the trend graphs (NCVBDC)"
+sample = "../../tests/fixtures/mmis/mmis_cat2_2023-10_p3-4_7-8_17-18.pdf"
+
+[pages]
+match = 'GRAPH \d: MONTH WISE TREND'
+
+[engines]
+ocr = false
+
+[parser]
+type = "custom"
+function = "mmis.py:parse"
+key = ["page", "block", "series", "month"]
+
+# TPR is TPC per 100 slides examined, printed to 2 decimals
+[[checks]]
+function = "mmis.py:tpr"
+
+[[checks]]
+function = "mmis.py:pf_within_tpc"
+
+# a table pasted under the wrong graph
+[[checks]]
+function = "mmis.py:label_matches_title"
+
+[output]
+layout = "table"
+rows = ["area", "indicator", "series"]
+columns = "month"
+format = "csv"

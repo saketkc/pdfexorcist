@@ -135,6 +135,7 @@ def test_fake_bold():
     ]
     assert [t for _, t in group_words(words)[0]] == ["Goa", "17"]
     assert is_value("N.A.")
+    assert is_value("2E+05")  # Excel's display of a number too wide for its cell (MCCD 2013)
 
 
 def test_missing_parts_can_fail():

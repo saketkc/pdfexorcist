@@ -22,5 +22,13 @@
     "blurb": "Medically certified deaths by cause and sex. One 2018 total is misprinted, and the checks flag it.",
     "pdf": "tests/fixtures/mccd/mccd_2019_t9_p194.pdf",
     "recipe": "examples/mccd/table9.toml"
+  },
+  {
+    "id": "mmis-chhattisgarh",
+    "kicker": "NCVBDC MMIS · October 2023",
+    "title": "Malaria by month, under the graphs",
+    "blurb": "BSE, TPC, TPR and PF for Category II, Chhattisgarh and West Bengal. One table sits under the wrong graph, and the checks flag it.",
+    "pdf": "tests/fixtures/mmis/mmis_cat2_2023-10_p3-4_7-8_17-18.pdf",
+    "recipe": "examples/mmis_malaria/recipe.toml"
   }
 ]

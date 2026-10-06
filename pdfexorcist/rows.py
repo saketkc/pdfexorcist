@@ -11,9 +11,10 @@ from .cells import Box, BoxCell, token_boxes, union
 Cell = tuple[float, str]  # engines may pass a BoxCell: the same pair plus .box
 Page = tuple[int, list[list[Cell]]]
 
-# nc: "no cases" in the NFHS-5 national report
+# nc: "no cases" in the NFHS-5 national report; 2E+05: Excel's display of a number too
+# wide for its cell (MCCD 2013). A placeholder: its true value is not printed.
 VALUE = re.compile(
-    r"^\(?[-−]?\d[\d,]*([.·]\d+)?%?\)?[*#@$]?$|^(\*|-|–|—|\.\.\.?|…|--|na|NA|nc|NC|n/a|N/A|N\.A\.|n\.a\.|#REF!|#VALUE!|#N/A|#DIV/0!|#NAME\?)$"
+    r"^\(?[-−]?\d[\d,]*([.·]\d+)?%?\)?[*#@$]?$|^(\*|-|–|—|\.\.\.?|…|--|na|NA|nc|NC|n/a|N/A|N\.A\.|n\.a\.|#REF!|#VALUE!|#N/A|#DIV/0!|#NAME\?|\d(\.\d+)?E\+\d+)$"
 )
 KEY = ["page", "row", "col"]
 
