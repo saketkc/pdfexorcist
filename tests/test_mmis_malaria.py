@@ -74,3 +74,24 @@ def test_tpr_check_allows_rounded_averages() -> None:
     assert not tpr(cells("avg3", "0.39")).any()  # as printed: 160.5 / 41562 rounds up
     assert tpr(cells("current", "0.39")).all()  # counts are exact
     assert tpr(cells("avg3", "0.40")).all()
+
+
+def test_2025_labels_wrapped_titles_and_blank_months() -> None:
+    """Pin the 2025 row names, a title on two lines, OCR junk before a label, and a blank
+    month inside a row (Ladakh's June 2024): values go under their month by x, not by order."""
+    from mmis import parse
+
+    xs = [100 + 40 * i for i in range(12)]
+    lines = [
+        [(0, "GRAPH 1: MONTH WISE TREND OF TESTED IN THE DADRA AND NAGAR HAVELI AND")],
+        [(0, "DAMAN AND DIU")],
+        [(x, m) for x, m in zip(xs, MONTHS, strict=True)],
+        [(0, "ag Tested Current Year")] + [(xs[i], str(i)) for i in (0, 1, 2, 3, 4, 6, 7)],
+        [(0, "Tested Avg Last 3 Years")] + [(x, "9") for x in xs],
+    ]
+    rows = list(parse([(1, lines)]))
+    got = {(r["series"], r["month"]): r["value"] for r in rows}
+    assert {r["area"] for r in rows} == {"THE DADRA AND NAGAR HAVELI AND DAMAN AND DIU"}
+    assert {r["indicator"] for r in rows} == {"TESTED"}
+    assert ("current", "Jun") not in got and got[("current", "Jul")] == "6"
+    assert got[("current", "Aug")] == "7" and len(got) == 7 + 12

@@ -171,10 +171,10 @@ export function close({ py }, doc) {
 }
 
 /** one CLI call on the doc's PDF; returns [code, stdout] */
-async function cli({ py, glue }, cmd, doc, argv, recipe, progress) {
+async function cli({ py, glue }, cmd, doc, argv, progress) {
   const path = documents.get(doc);
   if (!path) throw new Error('This PDF is no longer open; choose it again.');
-  const args = py.toPy([cmd, path, ...argv, ...(recipe ? ['--recipe', recipe] : [])]);
+  const args = py.toPy([cmd, path, ...argv]);
   try {
     const res = await glue.run.callPromising(args, progress); // callPromising: run_sync waits on wasm programs
     try {
@@ -190,11 +190,12 @@ async function cli({ py, glue }, cmd, doc, argv, recipe, progress) {
 /** engines: names to run, or undefined for the defaults */
 const only = (engines) => (engines ? ['--engines', engines.join(',')] : []);
 const pagesArg = (pages) => (pages ? ['--pages', pages] : []);
+const recipeArg = (recipe) => (recipe ? ['--recipe', recipe] : []);
 
 /** the CLI's show view of one page: every voted cell boxed, as self-contained HTML */
 export async function show(ctx, { doc, page, recipe, engines }) {
   const out = '/work/grid.html';
-  const [code, stdout] = await cli(ctx, 'show', doc, ['--page', String(page), '-o', out, '--force', '-q', ...only(engines)], recipe);
+  const [code, stdout] = await cli(ctx, 'show', doc, ['--page', String(page), '-o', out, '--force', '-q', ...only(engines), ...recipeArg(recipe)]);
   if (code) throw new Error(stdout.trim() || `pdfexorcist show stopped with exit code ${code}`);
   return { html: ctx.py.FS.readFile(out, { encoding: 'utf8' }) };
 }
@@ -202,18 +203,20 @@ export async function show(ctx, { doc, page, recipe, engines }) {
 /** pdfexorcist charts; returns the summary and the CSV text */
 export async function charts(ctx, { doc, pages }) {
   const out = '/work/out/charts.csv';
-  const [, stdout] = await cli(ctx, 'charts', doc, ['-o', out, '--json', '--force', ...pagesArg(pages)]);
+  const flags = pagesArg(pages);
+  const [, stdout] = await cli(ctx, 'charts', doc, ['-o', out, '--json', '--force', ...flags]);
   const summary = JSON.parse(stdout);
-  return { summary, table: summary.outputs && ctx.py.FS.readFile(out, { encoding: 'utf8' }) };
+  return { summary, table: summary.outputs && ctx.py.FS.readFile(out, { encoding: 'utf8' }), flags };
 }
 
 /** recipe: a shipped recipe's short name; returns the summary, and the table and review as text */
 export async function extract(ctx, { doc, recipe, pages, engines, progress }) {
   const { py } = ctx;
   for (const f of ls(py.FS, '/work/out')) py.FS.unlink(`/work/out/${f}`);
-  const argv = ['-o', '/work/out/', '--json', '-q', '--force', ...pagesArg(pages), ...only(engines)];
-  const [, stdout] = await cli(ctx, 'extract', doc, argv, recipe, progress);
+  const flags = [...pagesArg(pages), ...only(engines), ...recipeArg(recipe)];
+  const argv = ['-o', '/work/out/', '--json', '-q', '--force', ...flags];
+  const [, stdout] = await cli(ctx, 'extract', doc, argv, progress);
   const summary = JSON.parse(stdout);
   const text = (path) => path && py.FS.readFile(path, { encoding: 'utf8' });
-  return { summary, table: text(summary.outputs?.[0]), review: text(summary.review) };
+  return { summary, table: text(summary.outputs?.[0]), review: text(summary.review), flags };
 }

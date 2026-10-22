@@ -22,6 +22,8 @@ min_agree = 2
 kind = "image"
 title = 'GRAPH \d+: MONTH WISE TREND'
 names = ["Current Year", "Average 3 years"]  # an OCR reading snaps to the nearest
+require_line = true  # labels sit off their months: a value is kept only where its line agrees
+line_tolerance = 0.02  # of the y axis
 
 [[checks]]
 function = "charts_checks.py:tpr"

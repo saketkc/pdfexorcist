@@ -9,6 +9,7 @@ from typing import Any, Literal, overload
 
 import pandas as pd
 
+from . import grid
 from ._clean import clean_pdf, cut
 from ._families import _family, _family_vote, default_min_agree
 from ._prepare import _pages, as_pdf, fit_page_boxes
@@ -366,7 +367,8 @@ def extract(
                     lines = EXTRACTORS[name](pdf)
                 if return_readings:
                     lines = kept.lines[name] = list(lines)
-                rows = list(parse(iter(lines)))
+                with grid.reading(pdf):  # a parser may read the drawn cells (grid.py)
+                    rows = list(parse(iter(lines)))
             except Exception as e:  # noqa: BLE001 - one engine must not sink the others
                 logger.warning("skipping %s: %s: %s", name, type(e).__name__, e)
                 report(name, "skipped", f"{type(e).__name__}: {e}")

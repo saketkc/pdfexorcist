@@ -25,6 +25,7 @@ SCHEMA: dict[str, tuple[tuple, str]] = {
     "color_distance": ((int, float), "a number, like 70"),
     "box_height": ((list,), "two pixel sizes, like [12, 60]"),
     "line_tolerance": ((int, float), "a number, like 0.05"),
+    "require_line": ((bool,), "true or false"),
     "cells": _T,
 }
 
@@ -45,6 +46,7 @@ class ChartSettings:
     color_distance: float = 70.0  # RGB distance of a pixel from its series color
     box_height: tuple[int, int] = (12, 60)  # pixel heights of a value box
     line_tolerance: float = 0.05  # largest value-to-line difference, as a part of the axis
+    require_line: bool = False  # a value with no line to check it against fails a check
     cells: Callable | None = None  # user function: where the values are (_chart_image.Cell)
 
 
@@ -68,7 +70,9 @@ def chart_settings(
     for name, style in table.get("crop", {}).items():
         if style not in CROPS:
             raise err(f"[charts] crop.{name} must be {' or '.join(CROPS)}", "crop")
-    given: dict[str, Any] = {k: table[k] for k in ("kind", "title", "crop") if k in table}
+    given: dict[str, Any] = {
+        k: table[k] for k in ("kind", "title", "crop", "require_line") if k in table
+    }
     if "box_height" in table:
         h = table["box_height"]
         if len(h) != 2 or not all(isinstance(v, int) and v > 0 for v in h):

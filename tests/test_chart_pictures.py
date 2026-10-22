@@ -140,11 +140,12 @@ def test_pictures_with_ocr(tmp_path: Path) -> None:
             got = s.loc[month] if month in s.index else None
             if got is not None and got.value == want:
                 right += 1
-            elif got is not None and got.status == "verified":
-                assert got.failed == "value off its line", (which, month, got.value)
+            elif got is not None and got.status == "verified":  # flagged by a check
+                assert isinstance(got.failed, str) and got.failed, (which, month, got.value)
     assert right >= 20
     tpc = df[(df.page == 1) & (df.chart == 2) & df.series.str.contains("Average")]
-    assert (tpc.failed == "value off its line").sum() >= 8  # its labels and its line disagree
+    off = tpc.failed.fillna("").str.contains("value off its line")
+    assert off.sum() >= 8  # its labels and its line disagree
 
 
 def test_legend_names_snap_to_the_settings() -> None:

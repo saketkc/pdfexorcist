@@ -30,6 +30,7 @@ class Word(NamedTuple):
     x1: float
     y1: float
     text: str
+    block: int = -1  # MuPDF's text block: the lines of a wrapped title share one
 
     @property
     def mid(self) -> float:
@@ -140,7 +141,7 @@ def _y_axis(ticks: list[Word], grid: list[float]) -> tuple[float, float]:
     worst = max(abs(a + b * y - v) for y, v in zip(ys, vs, strict=True))
     if step and worst <= step / 10:
         return a, b
-    decimals = max(len(w.text.rstrip("%").partition(".")[2]) for w in ticks)
+    decimals = max(_decimals(w.text) for w in ticks)
     nice = _nice_axis(ys, vs, decimals)
     if nice is None:
         raise ChartError(
@@ -148,6 +149,11 @@ def _y_axis(ticks: list[Word], grid: list[float]) -> tuple[float, float]:
             "to them (a log axis?)"
         )
     return nice
+
+
+def _decimals(text: str) -> int:
+    """Digits printed after the point: "12.5%" has 1."""
+    return len(text.rstrip("%").partition(".")[2])
 
 
 def _shown(v: float, decimals: int) -> float:
@@ -187,7 +193,8 @@ def _nice_axis(ys: list[float], vs: list[float], decimals: int) -> tuple[float, 
 
 
 def heading(words: list[Word], box: Any, others: Sequence = ()) -> str:
-    """The line just over the box and within its width, unless it belongs to another box."""
+    """The line just over the box and within its width, unless it belongs to another box,
+    with the lines over it in its text block (a title wrapped onto two lines)."""
     above = [
         w
         for w in words
@@ -196,7 +203,18 @@ def heading(words: list[Word], box: Any, others: Sequence = ()) -> str:
         and w.x0 < box.x1
         and not any(_contains(o, w) for o in others)
     ]
-    return " ".join(w.text for w in _rows(above)[-1]) if above else ""
+    if not above:
+        return ""
+    rows = _rows(above)
+    blocks = {w.block for w in rows[-1]} - {-1}
+    first = len(rows) - 1
+    while first and blocks and {w.block for w in rows[first - 1]} <= blocks:
+        first -= 1
+    title = [w for r in rows[first:] for w in r]
+    if blocks:  # whole lines: a title may start left of the box ("GRAPH 3:" over a picture)
+        top, bottom = min(w.mid for w in title) - 1, max(w.mid for w in title) + 1
+        title = [w for w in words if w.block in blocks and top <= w.mid <= bottom]
+    return " ".join(w.text for r in _rows(title) for w in r)
 
 
 def _chart(
@@ -275,7 +293,7 @@ def _vector_page(doc: Any, no: int, title: str | None) -> tuple[list, list, int]
             flat += [Rule(p, q, _hex(d["color"])) for p, q in seg if abs(p.y - q.y) < 0.5]
     if not series:
         return [], [], 0  # words are the slow part
-    words = [Word(*w[:5]) for w in page.get_text("words")]
+    words = [Word(*w[:6]) for w in page.get_text("words")]
     numbers = [w for w in words if _number(w.text) is not None]
     boxes.sort(key=lambda b: b.width * b.height)
     charts: dict[tuple, list[Series]] = defaultdict(list)

@@ -7,6 +7,8 @@ from typing import Any
 from ._chart_settings import MONTHS, ChartSettings
 from .charts import ChartError, Word, _rows, has_letters
 
+SAME_COLOR = 60  # RGB distance within which two legends give one color
+
 
 def series_colors(pixels: Any, words: list[Word], settings: ChartSettings) -> dict[str, tuple]:
     """Series name -> RGB: the settings', else each legend line sample and the words after it."""
@@ -25,7 +27,9 @@ def series_colors(pixels: Any, words: list[Word], settings: ChartSettings) -> di
             name = _name(
                 " ".join(o.text for o in parts if x0 <= (o.x0 + o.x1) / 2 < stop), settings
             )
-            same = next((n for n, c in found.items() if math.dist(c, rgb) < 60), None)
+            if settings.names and name not in settings.names:
+                continue  # the recipe names the legend: other text with a color is not a series
+            same = next((n for n, c in found.items() if math.dist(c, rgb) < SAME_COLOR), None)
             if has_letters(name) and (same is None or len(name) > len(same)):
                 if same:
                     del found[same]

@@ -9,6 +9,22 @@ workflow moves those entries into a dated section.
 
 ## [Unreleased]
 
+### Added
+
+- Web results show the CLI command that gives the same result.
+- `[charts] require_line`: a chart-picture value with no line to check it against fails.
+- Chart pictures: a value nearer another point fails, and so does a series mostly off its line.
+
+### Fixed
+
+- `mmis_malaria` reads the 2025 reports and places values by x, so a blank month keeps its place.
+- `mmis_malaria` TPR check skips the 2025 3-year average and allows an average of 0 slides.
+- Charts: a title wrapped onto two lines or starting left of its picture is read whole.
+- Chart pictures: value boxes match their series by hue, and touching boxes are split.
+- Chart pictures: a line hidden under its label is read from the segments either side.
+- Chart pictures: a legend hidden by the month labels takes the colors of the other charts.
+- Chart pictures: small pictures are enlarged more for the layout OCR.
+
 ## [0.3.0] - 2026-10-22
 
 ### Added

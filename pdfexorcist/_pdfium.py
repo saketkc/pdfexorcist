@@ -43,6 +43,8 @@ def _pdfium_words(page: Any, tp: Any) -> list:
     ox, oy = ctypes.c_double(), ctypes.c_double()
     char_angle = pdfium.raw.FPDFText_GetCharAngle
     for j, ch in enumerate(tp.get_text_range()):
+        if ch == "\ufffe":  # PDFium's mark for a hyphen that ends a line; the others read "-"
+            ch = "-"
         # tight boxes gap around "."
         left, b, r, t = tp.get_charbox(j, loose=True)
         if r <= left or not _inside(box, left, b, r, t):

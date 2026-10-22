@@ -3,9 +3,11 @@
 import re
 from collections.abc import Iterable, Iterator
 
+import idsp_ruled
+
 from pdfexorcist.rows import Page
 
-ID = re.compile(r"^[A-Z]{2}/[A-Z]{2,4}/\d{4}/\d+/\d+$")
+ID = re.compile(r"^[A-Z]{2}/[A-Z]{2,4}/\d{4}/\d+/\d*$")  # wrapped IDs may end at the "/"
 INT = re.compile(r"^\d+$")
 DATE = re.compile(r"^\d\d-\d\d-(\d{4})?$")
 # the statuses this report prints; a new one reads as a comment word
@@ -79,15 +81,38 @@ def _words(parts: list[str]) -> str:
 
 
 def parse(pages: Iterable[Page]) -> Iterator[dict]:
+    """Yield each outbreak's columns: by unique ID, or for older reports by drawn cell.
+
+    Reports from 2017 on start every row with a unique ID, which the text alone can
+    follow. Older ones have none and merge State cells over many rows (idsp_ruled.py);
+    those need the drawn table and an engine that gives word boxes.
+    """
+    pages = list(pages)
+    rows = list(_by_id(pages))
+    if any(getattr(c, "box", None) for _, lines in pages for line in lines for c in line):
+        # the text parser loses IDs wrapped in a narrow column (2025 on); the larger count wins
+        ruled = list(idsp_ruled.parse(pages))
+        if len({r["id"] for r in ruled}) > len({r["id"] for r in rows}):
+            rows = ruled
+    yield from rows
+
+
+def _by_id(pages: Iterable[Page]) -> Iterator[dict]:
     """Yield each outbreak's columns keyed by its unique ID."""
-    late = False
+    late = follow_up = False
     for page_no, lines in pages:
         row: _Row | None = None
         for line in lines:
             cells = [(x, s.strip()) for x, s in line if s.strip()]
             text = " ".join(t for _, t in cells)
-            if LATE in text:
-                late = True
+            # follow-ups update outbreaks an earlier report counted; left out, or they count twice
+            is_late, is_follow_up = LATE in text, bool(idsp_ruled.FOLLOW_UP.search(text))
+            if is_late or is_follow_up:
+                late, follow_up = is_late, is_follow_up
+                yield from _emit(row, page_no)
+                row = None
+            if follow_up:
+                continue
             if cells and ID.match(cells[0][1]):
                 yield from _emit(row, page_no)
                 row = _row(cells, late)
@@ -95,6 +120,10 @@ def parse(pages: Iterable[Page]) -> Iterator[dict]:
                 yield from _emit(row, page_no)
                 row = None
             elif row:
+                if cells and INT.match(cells[0][1]) and cells[0][0] < row.anchors[0][0]:
+                    # digits left of the State column end a wrapped ID ("AS/DAR/2025/23/9" "59")
+                    row.id += cells[0][1]
+                    cells = cells[1:]
                 for x, t in cells:
                     row.add(x, t)
         yield from _emit(row, page_no)
