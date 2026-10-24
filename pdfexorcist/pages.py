@@ -45,6 +45,17 @@ def parse_pages(spec: str, n_pages: int | None = None) -> list[int]:
     return out
 
 
+def format_pages(pages: list[int]) -> str:
+    """Pages as parse_pages reads them: [18, 19, 20, 43] -> "18-20,43"."""
+    runs: list[list[int]] = []
+    for p in pages:
+        if runs and p == runs[-1][1] + 1:
+            runs[-1][1] = p
+        else:
+            runs.append([p, p])
+    return ",".join(str(a) if a == b else f"{a}-{b}" for a, b in runs)
+
+
 def page_texts(
     pdf: Path,
     ocr_fallback: bool = False,

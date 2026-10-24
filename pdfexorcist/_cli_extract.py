@@ -32,6 +32,7 @@ from ._ui import (
     resolve_input,
     setup_logging,
 )
+from .pages import format_pages
 
 
 @app.command(
@@ -143,7 +144,7 @@ def extract(
         plan = make_plan(src, rec, output, fmt, pages, engines, ocr, min_agree, layout, force)
         if not (quiet or as_json):
             what = (
-                f"{'page' if len(plan.pages) == 1 else 'pages'} {_page_ranges(plan.pages)} of "
+                f"{'page' if len(plan.pages) == 1 else 'pages'} {format_pages(plan.pages)} of "
                 if plan.pages
                 else ""
             )
@@ -163,14 +164,3 @@ def extract(
         elif not quiet:
             render_summary(summary)
         raise typer.Exit(summary["exit_code"])
-
-
-def _page_ranges(pages: list[int]) -> str:
-    """Compact page numbers into ranges."""
-    runs: list[list[int]] = []
-    for p in pages:
-        if runs and p == runs[-1][1] + 1:
-            runs[-1][1] = p
-        else:
-            runs.append([p, p])
-    return ",".join(str(a) if a == b else f"{a}-{b}" for a, b in runs)

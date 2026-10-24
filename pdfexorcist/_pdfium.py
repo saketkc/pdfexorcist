@@ -47,6 +47,10 @@ def _pdfium_words(page: Any, tp: Any) -> list:
             ch = "-"
         # tight boxes gap around "."
         left, b, r, t = tp.get_charbox(j, loose=True)
+        if ch == " " and r <= left and chars and chars[-1]["upright"]:
+            # a space PDFium generated (zero width) still ends a word ("841/19027" "(4.42)")
+            chars.append({**chars[-1], "text": " ", "x0": chars[-1]["x1"]})
+            continue
         if r <= left or not _inside(box, left, b, r, t):
             continue  # generated (zero-width) glyph, or outside the page box
         x0, top, x1, bottom = _displayed(left, b, r, t, rot, w, h)

@@ -28,6 +28,7 @@ TEXT_ENGINE = "pymupdf"  # reads the layout, and a text PDF's trial runs
 SHORTLIST = 3  # recipes taken from each ranking for a trial run
 BINS = 20  # column starts, as a fraction of page width
 COVERAGE = 0.2  # a fit reads at least this share of the values printed on its pages
+MISPRINTS = 0.02  # a fit may fail its checks on this share of cells (a report's own errors)
 WORD = re.compile(r"[a-z][a-z'-]{2,}")
 KINDS = [  # value kinds, tried in order; any other value is "-"
     ("A", re.compile(r"^\d{1,2}[-/.]\d{1,2}[-/.](\d{2,4})?$")),
@@ -197,6 +198,7 @@ class Candidate:
     cells: int | None = None
     coverage: float = 0.0  # numbers read / numbers printed on the pages tried
     failed: list[str] = field(default_factory=list)
+    failed_share: float = 0.0  # of the cells read
     error: str = ""
     engines: tuple[str, ...] | None = None  # the recipe's engines; None: the defaults
     engine: str = TEXT_ENGINE  # the trial run's engine
@@ -204,7 +206,7 @@ class Candidate:
 
     @property
     def fits(self) -> bool:
-        return self.coverage >= COVERAGE and not self.failed and not self.error
+        return self.coverage >= COVERAGE and self.failed_share <= MISPRINTS and not self.error
 
     @property
     def score(self) -> float:
@@ -240,6 +242,8 @@ def rank(
                 area=rec.area,
                 fit_boxes=rec.fit_boxes,
                 engines=rec.engines,
+                # pdfexorcist charts reads its values; extract reads none
+                cells=0 if rec.charts is not None else None,
             )
         )
     return sorted(out, key=lambda c: -c.score)
@@ -285,6 +289,7 @@ def trial(c: Candidate, src: Path, printed: int) -> Candidate:
     c.cells = len(ok)
     c.coverage = sum(map(is_value, ok.value.astype(str))) / printed if printed else 0.0
     c.failed = sorted({f for f in ok.failed if f})
+    c.failed_share = float((ok.failed.fillna("") != "").mean()) if len(ok) else 0.0
     return c
 
 
@@ -339,6 +344,7 @@ def suggest(pdf: Path, jobs: int = 1) -> tuple[list[Candidate], bool]:
     fit first; and whether pdf is a scan."""
     from functools import partial
 
+    from .doctor import OCR_ENGINES
     from .vote import _pool, or_here
 
     with tempfile.TemporaryDirectory() as tmp:
@@ -368,7 +374,12 @@ def suggest(pdf: Path, jobs: int = 1) -> tuple[list[Candidate], bool]:
                     c.error = _first_line(got)
                 else:
                     vars(c).update(vars(got))  # a worker returns a filled-in copy
-    return sorted(picked, key=lambda c: (not c.fits, -c.score)), fp["scan"]
+
+    def ocr_only(c: Candidate) -> bool:  # on a text PDF it comes after the text recipes
+        engines = set(c.engines or ())
+        return bool(engines) and engines <= set(OCR_ENGINES) and not fp["scan"]
+
+    return sorted(picked, key=lambda c: (not c.fits, ocr_only(c), -c.score)), fp["scan"]
 
 
 if __name__ == "__main__":  # rebuilds the index from the fixtures

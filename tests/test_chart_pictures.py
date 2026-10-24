@@ -155,3 +155,11 @@ def test_legend_names_snap_to_the_settings() -> None:
     assert _name("• TPCAverage 3 years", settings) == "Average 3 years"
     assert _name("BSE Current Year", settings) == "Current Year"
     assert _name("Rainfall", settings) == "Rainfall"  # no near name: kept as read
+
+
+def test_ncvbdc_checks_pass_without_charts() -> None:
+    """Pin the checks on a PDF with no chart (extract --recipe ncvbdc_charts on another report)."""
+    from charts_checks import pf_within_tpc, tpr
+
+    cells = pd.DataFrame({"page": [1], "row": ["Kerala#1"], "col": [0], "value": ["12"]})
+    assert not tpr(cells).any() and not pf_within_tpc(cells).any()

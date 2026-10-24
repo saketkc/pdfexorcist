@@ -13,17 +13,18 @@ workflow moves those entries into a dated section.
 
 - Web results show the CLI command that gives the same result.
 - `[charts] require_line`: a chart-picture value with no line to check it against fails.
-- Chart pictures: a value nearer another point fails, and so does a series mostly off its line.
+- Add `amrsn` recipe
 
 ### Fixed
 
-- `mmis_malaria` reads the 2025 reports and places values by x, so a blank month keeps its place.
-- `mmis_malaria` TPR check skips the 2025 3-year average and allows an average of 0 slides.
-- Charts: a title wrapped onto two lines or starting left of its picture is read whole.
-- Chart pictures: value boxes match their series by hue, and touching boxes are split.
-- Chart pictures: a line hidden under its label is read from the segments either side.
-- Chart pictures: a legend hidden by the month labels takes the colors of the other charts.
-- Chart pictures: small pictures are enlarged more for the layout OCR.
+- `ocrmac`: after an empty accurate reading, each later page still gets one accurate try.
+- `recipe suggest`: a recipe fits when its checks fail on 2% of cells or fewer.
+  On a text PDF, recipes that read only by OCR come after the text recipes.
+- `recipe suggest` does not run a trial extract for a `[charts]` recipe.
+  `ncvbdc_charts` checks pass when no chart was read.
+- A space stays when the next letter only overhangs it. PDFium read "Enterococcus faecalis"
+  as one word.
+- A zero-width space now ends a word in a pdfium
 
 ## [0.3.0] - 2026-10-22
 

@@ -12,17 +12,18 @@ TRIES = 3  # Vision sometimes returns nothing while the GPU is busy with other w
 
 
 def read(img: Image.Image, fast: bool = False, tries: int = TRIES) -> tuple[list, bool]:
-    """Vision's reading of one image, and whether to read the next with "fast"."""
+    """Vision's reading of one image, and whether accurate mode last came back empty.
+
+    After an empty accurate reading, each later image gets one accurate try before fast mode.
+    """
     found: list = []
-    for attempt in range(0 if fast else tries):
+    for attempt in range(1 if fast else tries):
         if attempt:
             time.sleep(1)
         if found := ocrmac.OCR(img, recognition_level="accurate").recognize():
-            break
-    if not found:  # a blank page stays empty either way
-        found = ocrmac.OCR(img, recognition_level="fast").recognize()
-        fast = fast or bool(found)
-    return [[text, conf, list(box)] for text, conf, box in found], fast
+            return [[text, conf, list(box)] for text, conf, box in found], False
+    found = ocrmac.OCR(img, recognition_level="fast").recognize()  # a blank page stays empty
+    return [[text, conf, list(box)] for text, conf, box in found], fast or bool(found)
 
 
 def main() -> None:

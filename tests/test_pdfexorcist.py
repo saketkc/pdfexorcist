@@ -499,3 +499,30 @@ def test_fit_width_gives_back_a_label_number() -> None:
     wide = [[(10.0, t), (40.0, "1"), (60.0, "2"), (80.0, "3")] for t in ("a", "b")]
     wide.append([(10.0, "c"), (60.0, "4")])
     assert _keys(wide, fit_width=True) == [("a#1", "1"), ("b#1", "1"), ("c#1", "4")]
+
+
+def test_vision_back_to_accurate(monkeypatch):
+    """Pin that one empty accurate reading does not leave later pages to fast mode."""
+    import pytest
+
+    pytest.importorskip("ocrmac")
+    from pdfexorcist import _vision_worker as vw
+
+    calls: list[str] = []
+    accurate = iter([[], [], [], [("A", 1.0, (0, 0, 1, 1))]])  # page 1: 3 empty tries; page 2: text
+
+    class FakeOCR:
+        def __init__(self, img, recognition_level):
+            self.level = recognition_level
+
+        def recognize(self):
+            calls.append(self.level)
+            return next(accurate) if self.level == "accurate" else [("a", 0.5, (0, 0, 1, 1))]
+
+    monkeypatch.setattr(vw.ocrmac, "OCR", FakeOCR)
+    monkeypatch.setattr(vw.time, "sleep", lambda s: None)
+    found, fast = vw.read(None)
+    assert found[0][0] == "a" and fast  # fell back to fast
+    found, fast = vw.read(None, fast)
+    assert found[0][0] == "A" and not fast  # one accurate try, and it read: accurate again
+    assert calls == ["accurate"] * 3 + ["fast", "accurate"]

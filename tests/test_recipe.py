@@ -41,6 +41,15 @@ def test_parse_pages():
             parse_pages(bad, 10)
 
 
+def test_format_pages_reads_back():
+    """Pin format_pages as the inverse of parse_pages."""
+    from pdfexorcist.pages import format_pages
+
+    assert format_pages([18, 19, 20, 43, 45, 46]) == "18-20,43,45-46"
+    assert parse_pages(format_pages([1, 2, 3, 7]), 10) == [1, 2, 3, 7]
+    assert format_pages([]) == ""
+
+
 def test_pages_matching(tmp_path):
     pdf = make_pdf(
         tmp_path / "doc.pdf",

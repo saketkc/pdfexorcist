@@ -1,0 +1,43 @@
+# pdfexorcist recipe: ICMR AMRSN tables printed as pictures, read by OCR
+#
+# Some reports paste tables as Excel screenshots: most of 2018, and chapters 2-3 of 2019-2022.
+# The text layer has the captions of these tables, but not the numbers.
+# recipe.toml reads all the other tables.
+# This recipe reads the pictures with three OCR engines and GLM-OCR.
+# It reads the lines from each "Table N" caption to the next figure. Each line is a row.
+# GLM-OCR gives table cells without word boxes. Its tables get the captions from the text layer.
+# Give it the pages with picture tables. "python amrsn_pictures.py report.pdf" prints them.
+# Use -j 1. Apple Vision reads nothing while another engine uses the GPU.
+# 2020 Table 3.2:
+#
+#   pdfexorcist extract https://www.icmr.gov.in/icmrobject/custom_data/pdf/resource-guidelines/AMRSN_annual_report_2020_1.pdf --pages 71 --recipe amrsn/pictures.toml
+#
+# On the fixture:
+#
+#   pdfexorcist extract tests/fixtures/amrsn/amrsn_pictures.pdf --recipe pdfexorcist/recipes/amrsn/pictures.toml
+
+name = "ICMR AMRSN picture tables"
+description = "AMRSN tables pasted as pictures, read by OCR (docTR, Indra, Apple Vision, GLM-OCR)"
+sample = "../../../tests/fixtures/amrsn/amrsn_pictures.pdf"
+
+[engines]
+# Four labs with one vote each. tesseract reads the data bars as marks, so it is not used.
+use = ["doctr", "indra", "ocrmac", "glmocr"]
+# A 2-2 split stays unresolved. With 3, a page where GLM-OCR reads no table
+# needs all the other engines to agree.
+min_agree = 2
+
+[parser]
+type = "custom"
+function = "amrsn_pictures.py:parse"
+key = ["page", "table", "row", "col", "field"]  # field: "value", or "pct" under an R/n count
+
+[postprocess]
+# Only GLM-OCR reads the vertical headings of 2018. See name_columns.
+function = "amrsn_pictures.py:name_columns"
+
+[output]
+layout = "table"
+rows = ["page", "title", "label", "col", "column"]  # column: the headings over it ("ward / %s")
+columns = "field"
+format = "csv"

@@ -152,6 +152,14 @@
     "recipe": "cwc_reservoirs"
   },
   {
+    "id": "amrsn",
+    "kicker": "ICMR | AMRSN annual reports, 2017-2023",
+    "title": "Antimicrobial susceptibility",
+    "blurb": "\"R/n\" over \"(%)\" cells placed through the ruling lines, with the caption, agent and column heading. Checks each % against R/n.",
+    "pdf": "tests/fixtures/amrsn/amrsn_2017-2023.pdf",
+    "recipe": "amrsn"
+  },
+  {
     "id": "cpcb-aqi",
     "kicker": "CPCB | AQI bulletin | 18 October 2026",
     "title": "Air quality by city",

@@ -18,6 +18,8 @@ def _parts(df: pd.DataFrame) -> pd.DataFrame:
 
 def _wide(df: pd.DataFrame) -> pd.DataFrame:
     """Indicators as columns, one row per area, series and month."""
+    if not {"title", "series", "category"} <= set(df.columns):  # no chart read
+        return pd.DataFrame()
     return _parts(df).pivot_table(index=KEY, columns="indicator", values="value", aggfunc="first")
 
 

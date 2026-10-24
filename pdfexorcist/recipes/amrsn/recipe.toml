@@ -1,0 +1,40 @@
+# pdfexorcist recipe: ICMR AMRSN annual report (Antimicrobial Resistance Surveillance Network)
+#
+# Every table in the text layer, 2017 to 2024. Antibiograms (one row per agent, one
+# column per specimen, year, region or setting) print "R/n" over "(%)", or a count over
+# "(%)" (2018). amrsn.py places each value through the table's ruling lines and splits it
+# into r, n and pct (and rank, range, value). Gene tables name each entry ("mecA"). Other
+# tables are read cell by cell as text (amrsn_tables.py). Each value keeps the table
+# caption, a heading across the table (group), the row label and the column heading.
+# Tables pasted as pictures need OCR: see pictures.toml.
+# The check holds each pct to 100 * r / n. Try it on the 2017 report:
+#
+#   pdfexorcist extract https://www.icmr.gov.in/icmrobject/custom_data/1720315291_annual_report_amr_jan2017-18.pdf --recipe amrsn
+#
+# On the fixture (one or two pages from each year's report):
+#
+#   pdfexorcist extract tests/fixtures/amrsn/amrsn_2017-2023.pdf --recipe pdfexorcist/recipes/amrsn/recipe.toml
+
+name = "ICMR AMRSN annual report"
+description = "Antimicrobial susceptibility by organism, agent and specimen (ICMR AMRSN, 2017-2023)"
+sample = "../../../tests/fixtures/amrsn/amrsn_2017-2023.pdf"
+
+[engines]
+ocr = false
+# These engines give word boxes. pdftotext gives none. camelot gives its own cells,
+# which do not align with the rules. All three engines must agree.
+use = ["pdfplumber", "pymupdf", "pdfium"]
+
+[parser]
+type = "custom"
+function = "amrsn.py:parse"
+key = ["id", "col", "entry", "field"]
+
+[[checks]]
+function = "amrsn_cells.py:pct_matches"
+
+[output]
+layout = "table"
+rows = ["page", "title", "group", "id", "label", "col", "column", "entry"]
+columns = "field"
+format = "csv"
