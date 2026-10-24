@@ -9,6 +9,8 @@ workflow moves those entries into a dated section.
 
 ## [Unreleased]
 
+## [0.4.0] - 2026-10-24
+
 ### Added
 
 - Web results show the CLI command that gives the same result.
@@ -104,7 +106,8 @@ Initial release:
 - pdfexorcist also runs in the browser (`web/`) with pyodide at <https://pdfexorcist.in/>
 - pdfexorcist is a new package for extracting tables from pdfs (text and scanned)
 
-[Unreleased]: https://github.com/saketkc/pdfexorcist/compare/v0.3.0...HEAD
+[Unreleased]: https://github.com/saketkc/pdfexorcist/compare/v0.4.0...HEAD
+[0.4.0]: https://github.com/saketkc/pdfexorcist/compare/v0.3.0...v0.4.0
 [0.3.0]: https://github.com/saketkc/pdfexorcist/compare/v0.2.0...v0.3.0
 [0.2.0]: https://github.com/saketkc/pdfexorcist/compare/v0.1.2...v0.2.0
 [0.1.2]: https://github.com/saketkc/pdfexorcist/compare/v0.1.1...v0.1.2

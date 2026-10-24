@@ -1,4 +1,6 @@
-"""Drop slanted text printed across a table ("Not Available" over blank cells)."""
+"""Drop slanted text printed across a table ("Not Available" over blank cells).
+
+Text turned a quarter is a heading printed sideways (2024 AMRSN Table 2.21) and stays."""
 
 import logging
 from pathlib import Path
@@ -23,14 +25,19 @@ def _chars(page: Any) -> tuple[list[Char], list[Char], list[Any]]:
             chars = [c for s in line["spans"] for c in s["chars"] if not c["c"].isspace()]
             dx, dy = line["dir"]
             flat = abs(dy) < 0.02 and dx > 0
-            if not flat and any(c["c"].isdigit() for c in chars):
-                continue  # a sideways number is table data
+            if not flat and (_quarter(dx, dy) or any(c["c"].isdigit() for c in chars)):
+                continue  # a sideways heading or number is table data
             for c in chars:
                 x0, y0, x1, y1 = c["bbox"]
                 (level if flat else slanted).append((c["c"], (x0 + x1) / 2, (y0 + y1) / 2))
                 if flat:
                     boxes.append(pymupdf.Rect(c["bbox"]))
     return level, slanted, boxes
+
+
+def _quarter(dx: float, dy: float) -> bool:
+    """Whether a line's direction is turned a quarter, up or down."""
+    return abs(dx) < 0.02
 
 
 def _level_copy(doc: Any, n: int, dots: list[tuple[float, float]]) -> Any:
@@ -52,7 +59,7 @@ def _has_slanted(page: Any) -> bool:
     import pymupdf
 
     return any(
-        not (abs(ln["dir"][1]) < 0.02 and ln["dir"][0] > 0)
+        not (abs(ln["dir"][1]) < 0.02 and ln["dir"][0] > 0) and not _quarter(*ln["dir"])
         for block in page.get_text("dict", flags=pymupdf.TEXTFLAGS_TEXT)["blocks"]
         for ln in block.get("lines", [])
     )

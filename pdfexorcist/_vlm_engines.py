@@ -31,15 +31,24 @@ class _HtmlRows:
         class P(HTMLParser):
             cell: list[str] | None = None
 
-            col, span = 0, 1
+            col, span, down = 0, 1, 1
+
+            def __init__(self) -> None:
+                super().__init__()
+                self.held: dict[int, int] = {}  # column -> rows still covered by a rowspan above
 
             def handle_starttag(self, tag: str, attrs: list[tuple[str, str | None]]) -> None:
                 if tag == "tr":
                     rows.append([])
                     self.col = 0
+                    self.held = {c: n - 1 for c, n in self.held.items() if n > 1}
                 elif tag in ("td", "th", "h1", "h2", "h3"):
                     self.cell = []
-                    self.span = int(dict(attrs).get("colspan") or 1)
+                    a = dict(attrs)
+                    self.span = int(a.get("colspan") or 1)
+                    self.down = int(a.get("rowspan") or 1)
+                    while self.col in self.held:  # a cell from a row above ("AMA", rowspan 3)
+                        self.col += 1
                 elif tag == "br" and self.cell is not None:
                     self.cell.append(" ")
 
@@ -49,6 +58,8 @@ class _HtmlRows:
                 if tag in ("td", "th"):
                     # spanning cell at its middle column keeps later cells in place
                     rows[-1].append((self.col + (self.span - 1) / 2, "".join(self.cell).strip()))
+                    if self.down > 1:
+                        self.held |= {self.col + i: self.down for i in range(self.span)}
                     self.col += self.span
                     self.cell = None
                 elif tag in ("h1", "h2", "h3"):
@@ -136,7 +147,10 @@ def oxr_(pdf: Path) -> Iterator[Page]:
     (2018 AMRSN Table 6.2: 0 of 200 R/n cells wrong from the picture, 1-3 from the page).
     """
     for i, crops in _page_pictures(pdf):
-        yield i, [row for img in crops for row in _HtmlRows.parse(_cached("oxr", img, _oxr_infer))]
+        rows: list = []
+        for img in crops:  # an empty row between pictures: a chart's labels are not table headings
+            rows += ([[]] if rows else []) + _HtmlRows.parse(_cached("oxr", img, _oxr_infer))
+        yield i, rows
 
 
 def _oxr_infer(img: Any) -> str:

@@ -9,7 +9,7 @@ import pandas as pd
 import pytest
 from amrsn import _rows
 from amrsn_cells import _cell, pct_matches
-from amrsn_pictures import _clean, _row_key, picture_pages
+from amrsn_pictures import _clean, _model_heading, _model_tables, _row_key, picture_pages
 from amrsn_pictures import parse as parse_pictures
 from cli_helpers import run
 
@@ -261,7 +261,9 @@ def test_picture_model_cells(monkeypatch) -> None:
     from the text layer, the row by its label, the column by its index after the label."""
     import amrsn_pictures
 
-    monkeypatch.setattr(amrsn_pictures, "_picture_captions", lambda page: [("5.2", "Table 5.2 x")])
+    monkeypatch.setattr(
+        amrsn_pictures, "_picture_captions", lambda page, pdf=None: [("5.2", "Table 5.2 x")]
+    )
     lines = [
         [(0, "Among Aeromonas spp isolated in 2018, susceptibility was 10% overall")],
         [(0, "AMA"), (1, "All Specimens")],
@@ -312,7 +314,7 @@ def test_label_line_with_counts() -> None:
 
 
 def test_picture_headings_from_model(monkeypatch) -> None:
-    """Pin headings printed sideways (2018 Table 2.2) taken from GLM-OCR where it read the same
+    """Pin headings printed sideways (2018 Table 2.2) taken from a model where it read the same
     label and value, and only there."""
     import amrsn_pictures
 
@@ -322,17 +324,17 @@ def test_picture_headings_from_model(monkeypatch) -> None:
         [(0, "*E. coli*"), (1, "82"), (2, "19")],
         [(0, "*Klebsiella*"), (1, "45"), (2, "21")],
     ]
-    monkeypatch.setattr(amrsn_pictures, "_model_pages", lambda pdf: iter([(1, lines)]))
+    monkeypatch.setattr(amrsn_pictures, "_model_pages", lambda pdf, engine: iter([(1, lines)]))
     monkeypatch.setattr(
         amrsn_pictures, "_picture_captions", lambda page, pdf=None: [("2.2", "Table 2.2")]
     )
     cells = pd.DataFrame({
         "page": [1, 1, 1], "table": ["2.2"] * 3, "row": ["ecoli#1", "ecoli#1", "klebsiella#1"],
         "col": [0, 1, 1], "value": ["82", "19", "22"], "column": ["", "s", ""],
-        "status": ["verified"] * 3,
+        "field": ["value"] * 3, "status": ["verified"] * 3,
     })  # fmt: skip
     out = amrsn_pictures.name_columns(cells, "x.pdf")
-    assert out.column.tolist() == ["amikacin", "cefotax", ""]  # 22 is not GLM-OCR's 21
+    assert out.column.tolist() == ["amikacin", "cefotax", ""]  # 22 is not the model's 21
 
 
 def test_group_headings() -> None:
@@ -368,3 +370,65 @@ def test_centre_rows_key_alike_across_engines() -> None:
     assert _row_key("RC113") == "rc11"
     assert _row_key("Overrall") == "overall"
     assert _clean(("1", "RC14 1479D 773_ 89.9-", None))[1] == "RC14 1479 773 89.9-"
+
+
+def test_model_table_spans_blank_centres_and_spanning_headings() -> None:
+    # OXR, 2022 p89: "RC 02" has no isolates; "Pip-taz" spans its n and %S columns
+    lines = [
+        [(0, ""), (1.5, "Pip-taz"), (3.5, "Cephazolin")],
+        [(0, ""), (1, "n"), (2, "%S"), (3, "n"), (4, "%S")],
+        [(0, "RC 01"), (1, "699"), (2, "54"), (3, "687"), (4, "14")],
+        [(0, "RC 02"), (1, ""), (2, ""), (3, ""), (4, "")],
+        [(0, "Overall"), (1, "11723"), (2, "56"), (3, "4794"), (4, "20")],
+    ]
+    tables = _model_tables(lines)
+    assert len(tables) == 1 and len(tables[0][1]) == 2
+    maps = [dict(h) for h in tables[0][0]]
+    assert [_model_heading(maps, j) for j in (1, 2, 3)] == [
+        "Pip-taz / n",
+        "Pip-taz / %S",
+        "Cephazolin / n",
+    ]
+
+
+def test_model_columns_skip_data_bar_columns(monkeypatch: pytest.MonkeyPatch) -> None:
+    # OXR, 2021 p73: each data bar is an empty column between n and %S ("324", "", "24")
+    import amrsn_pictures
+
+    monkeypatch.setattr(
+        amrsn_pictures, "_picture_captions", lambda p, pdf=None: [("2.14", "Table 2.14")]
+    )
+    lines = [
+        [(0, ""), (1, "n"), (2.5, "%S"), (4, "n"), (5.5, "%S")],
+        [(0, "RC 01"), (1, "324"), (2, ""), (3, "24"), (4, "324"), (5, ""), (6, "12")],
+        [(0, "Overall"), (1, "3403"), (2, ""), (3, "41"), (4, "1120"), (5, ""), (6, "18")],
+    ]
+    cells = list(amrsn_pictures._model_page(73, lines))
+    assert [(c["row"], c["col"], c["value"]) for c in cells[:4]] == [
+        ("rc01#1", 0, "324"), ("rc01#1", 1, "24"), ("rc01#1", 2, "324"), ("rc01#1", 3, "12"),
+    ]  # fmt: skip
+    assert [c["column"] for c in cells[:2]] == ["n", "%s"]
+
+
+def test_model_table_drifting_under_blank_heading_is_skipped() -> None:
+    # OXR, 2022 p90: "352", "", "27" in one row, "214", "51" in another; heading "n", "%S", "", "n"
+    from amrsn_pictures import _drifts
+
+    bottom = [(0.0, ""), (1.0, "n"), (2.0, "%S"), (3.0, ""), (4.0, "n"), (5.0, "%S")]
+    good = [[(0, "RC 01"), (1, "352"), (2, "27"), (3, ""), (4, "316"), (5, "11")]]
+    drift = [[(0, "RC 04"), (1, "214"), (2, ""), (3, "57"), (4, "0"), (5, "")]]
+    assert not _drifts(bottom, good)
+    assert _drifts(bottom, drift)
+
+
+def test_wrapped_range_joins_its_first_half() -> None:
+    # 2018 p75: "87.7-" on the count line, "99.8" under it on the "(%)" line
+    from amrsn_pictures import _close_ranges, _is_val
+
+    above = [("3564/3646", (100.0, 0, 140.0, 8)), ("87.7-", (160.0, 0, 185.0, 8))]
+    rest = _close_ranges(
+        above, [("(97.8)", (105.0, 10, 135.0, 18)), ("99.8", (162.0, 10, 182.0, 18))]
+    )
+    assert [t for t, _ in above] == ["3564/3646", "87.7-99.8"]
+    assert [t for t, _ in rest] == ["(97.8)"]
+    assert _is_val("96.9-100") and _is_val("98.3")

@@ -35,14 +35,16 @@ RC_KEY = re.compile(r"^\s*R\s*C+\s*[IOo]?\s*(\d)(\d)?")
 # An "R/n" count ("5887/8595"). A "*" before it marks a small n. OCR can read it as a quote.
 RATIO = re.compile(r"^[*\"'“”]?\d+/\d+$")
 PCT = re.compile(r"^\((?:\d+(?:\.\d+)?|-|–)\)$")  # the "(%)" printed under an "R/n"
+RANGE = re.compile(r"^\d+(?:\.\d+)?-\d+(?:\.\d+)?$")  # a "%Range" across centres (2018)
+OPEN_RANGE = re.compile(r"^\d+(?:\.\d+)?-$")  # its first half, wrapped: "87.7-" over "99.8"
 PROSE = 6  # a line with this many words is prose
 LABEL_WORD = re.compile(r"RC\d{1,2}|[A-Za-z][A-Za-z.\-/]+")  # words of a row label in a pair table
 COL_GAP = 20  # points between the centres of two columns of centred values
 
 
 def _is_val(tok: str) -> bool:
-    """A value in a picture table: what is_value takes, an "R/n" count, or "(-)" (no %)."""
-    return is_value(tok) or bool(RATIO.match(tok)) or tok in ("(-)", "(–)")
+    """A value in a picture table: what is_value takes, an "R/n" count, a "%Range", or "(-)"."""
+    return is_value(tok) or bool(RATIO.match(tok) or RANGE.match(tok)) or tok in ("(-)", "(–)")
 
 
 def _clean(cell: Sequence) -> BoxCell:
@@ -130,13 +132,13 @@ def _pairs_region(page_no: int, num: str, title: str | None, toks_by_line: list,
     for toks in toks_by_line[len(heads) :]:
         if _prose(" ".join(t for t, _ in toks)):
             break  # the text under the table
-        vals = [(t, b) for t, b in toks if _is_val(t)]
-        words = [t for t, _ in toks if not _is_val(t)]
+        vals = [(t, b) for t, b in toks if _is_val(t) or OPEN_RANGE.match(t)]
+        words = [t for t, _ in toks if not (_is_val(t) or OPEN_RANGE.match(t))]
         if any(RATIO.match(t) for t, _ in vals):
             rows.append((words, vals))
         elif rows:
             rows[-1][0].extend(words)
-            rows[-1][1].extend(vals)
+            rows[-1][1].extend(_close_ranges(rows[-1][1], vals))
     centres = [_mid(g) for g in _groups([cx(b) for _, vals in rows for _, b in vals], COL_GAP)]
     seen: dict[str, int] = {}
     for words, vals in rows:
@@ -151,6 +153,24 @@ def _pairs_region(page_no: int, num: str, title: str | None, toks_by_line: list,
                 "col": col, "column": _heading(heads, centres[col]), "label": label,
                 "field": _field(t), "value": t,
             }  # fmt: skip
+
+
+def _close_ranges(above: list, vals: list) -> list:
+    """vals of a line, with the second half of a range wrapped from the line above ("87.7-"
+    over "99.8") joined to it in above. Returns the vals that are not such halves."""
+    rest = []
+    for t, b in vals:
+        opens = [
+            i
+            for i, (u, c) in enumerate(above)
+            if OPEN_RANGE.match(u) and abs(cx(c) - cx(b)) <= COL_GAP
+        ]
+        if opens and is_value(t):
+            i = opens[0]
+            above[i] = (above[i][0] + t, union([above[i][1], b]))
+        else:
+            rest.append((t, b))
+    return rest
 
 
 def _groups(xs: list[float], gap: float) -> list[list[float]]:
@@ -223,10 +243,10 @@ def _boxless(line: list) -> bool:
     return all(getattr(c, "box", None) is None for c in line)
 
 
-def _model_page(page_no: int, lines: list) -> Iterator[dict]:
+def _model_page(page_no: int, lines: list, pdf: str | None = None) -> Iterator[dict]:
     """A model's "R/n" over "(%)" tables, in the order of the picture captions in the text layer.
     Rows and columns get the same keys as in the word-box engines, so all readings vote."""
-    captions = _picture_captions(page_no)
+    captions = _picture_captions(page_no, pdf)
     tables = _model_tables(lines)
     if len(tables) != len(captions):
         logger.warning("page %d: %d tables read, %d captions", page_no, len(tables), len(captions))
@@ -236,7 +256,19 @@ def _model_page(page_no: int, lines: list) -> Iterator[dict]:
             # An n and %S table read with blank cells dropped: its columns shift row to row.
             # OXR keeps a blank as an empty cell, so its rows are all one width.
             continue
+        if not ratios and heads and _drifts(heads[-1], rows):
+            continue
         maps = [dict(hr) for hr in heads]
+        # Columns are counted over those holding a value, as the box engines count them. A model
+        # gives a data bar its own empty column ("324", "", "24"); that column is not counted.
+        used = sorted(
+            {
+                j
+                for r in rows
+                for j, c in r
+                if (all if j == 0 else any)(map(_is_val, c.split())) and c
+            }
+        )  # not "RC 01"
         seen: dict[str, int] = {}
         for r in rows:
             first = r[0][1] if r[0][0] == 0 else ""
@@ -244,6 +276,7 @@ def _model_page(page_no: int, lines: list) -> Iterator[dict]:
             key = _row_key(label)
             seen[key] = seen.get(key, 0) + 1
             for j, text in r:
+                text = re.sub(r"(?<=\d)-\s+(?=\d)", "-", text)  # a range wrapped in its cell
                 vals = [t for t in text.split() if _is_val(t)]
                 if not vals or (label and j == 0):
                     continue
@@ -251,15 +284,37 @@ def _model_page(page_no: int, lines: list) -> Iterator[dict]:
                 for t in vals:
                     yield {
                         "page": page_no, "table": num, "title": title,
-                        "row": f"{key}#{seen[key]}", "col": j - 1 if label else j,
+                        "row": f"{key}#{seen[key]}", "col": used.index(j),
                         "column": column.lower(), "label": label,
                         "field": _field(t), "value": t,
                     }  # fmt: skip
 
 
+def _drifts(bottom: list, rows: list) -> bool:
+    """Whether a value of a model's n / %S table sits under no "n" or "%S" of the bottom heading
+    row. OXR can drop a data bar's empty cell in some rows only (2022 p90): the row's later
+    values move one column left, under the blank heading over a bar."""
+    named = [x for x, h in bottom if h]
+    if len(named) < 4:  # no "n %S n %S" row to hold the columns to
+        return False
+    return any(
+        min(abs(x - j) for x in named) > 0.5
+        for r in rows
+        for j, c in r
+        if j > 0 and any(map(_is_val, c.split()))
+    )
+
+
 def _model_heading(maps: list[dict], j: int) -> str:
-    """The headings of column j in a model's table, from top to bottom."""
-    return " / ".join(h for h in (m.get(j, "") for m in maps) if h)
+    """The headings of column j in a model's table, from top to bottom. A heading spanning
+    columns sits at their middle ("Amikacin" over n and %S at 1.5); a column takes the nearest
+    heading of each row (the label column's only for itself)."""
+    out = []
+    for m in maps:
+        near = [(abs(x - j), h) for x, h in m.items() if h and (x > 0) == (j > 0)]
+        if near:
+            out.append(min(near)[1])
+    return " / ".join(out)
 
 
 def _model_tables(lines: list) -> list[tuple[list, list]]:
@@ -269,6 +324,11 @@ def _model_tables(lines: list) -> list[tuple[list, list]]:
     heads: list = []
     rows: list = []
     for line in lines:
+        if not line:  # OXR: the next picture
+            if rows:
+                tables.append((heads, rows))
+            heads, rows = [], []
+            continue
         cells = [(int(c[0]), str(c[1])) for c in line]
         text = " ".join(c for _, c in cells)
         # The model also reads captions and prose. A prose cell has many words.
@@ -285,7 +345,7 @@ def _model_tables(lines: list) -> list[tuple[list, list]]:
         if rows:
             tables.append((heads, rows))
             heads, rows = [], []
-        heads.append(cells)
+        heads.append([(float(c[0]), str(c[1])) for c in line])  # a spanning heading at 1.5
     if rows:
         tables.append((heads, rows))
     return tables
@@ -451,47 +511,43 @@ def _numbers(lines: list, top: float, bottom: float) -> int:
 
 
 def name_columns(cells: Any, pdf: Any) -> Any:
-    """Postprocess: give a heading to each verified value that has none.
+    """Postprocess: a verified value takes a model's headings where a model read it, in an
+    "R/n" table or where the vote gave it none.
 
-    A value gets the GLM-OCR heading if GLM-OCR read the same row label and value.
-    Only GLM-OCR reads the vertical headings of 2018.
+    The word-box engines read the headings of the 2018 "R/n" pictures a column off (Table 6.2)
+    or not at all (vertical); the models read those tables as a grid. Over an n / %S table a
+    model can take a chart above for headings (2020 p84), so there the vote's headings stay.
+    OXR is used first, then GLM-OCR.
     """
-    blank = (cells.status == "verified") & ~cells.column.fillna("").str.contains(r"[A-Za-z]{3}")
-    if not blank.any():
-        return cells
-    try:
-        model = dict(_model_pages(Path(pdf)))
-    except (ImportError, ValueError, RuntimeError, OSError) as e:  # GLM-OCR missing or failed
-        logger.warning("name_columns: no GLM-OCR reading (%s)", e)
-        return cells
     heading: dict[tuple, str] = {}
-    for page in {int(p) for p in cells.page[blank]}:
-        lines = model.get(page)
-        if not lines:
+    for engine in ("glmocr", "oxr"):  # OXR last, so its heading wins
+        try:
+            pages = dict(_model_pages(Path(pdf), engine))
+        except (ImportError, ValueError, RuntimeError, OSError) as e:  # model missing or failed
+            logger.warning("name_columns: no %s reading (%s)", engine, e)
             continue
-        for (num, _), (heads, rows) in zip(
-            _picture_captions(page, str(pdf)), _model_tables(lines), strict=False
-        ):
-            maps = [dict(hr) for hr in heads]
-            for r in rows:
-                key = _row_key(r[0][1]) if r and r[0][0] == 0 else ""
-                for j, text in r:
-                    if j and heads:
-                        name = _model_heading(maps, j)
-                        heading[(page, num, key, j - 1, text.strip())] = name.lower()
+        for page in {int(p) for p in cells.page}:
+            for c in _model_page(page, pages.get(page) or [], str(pdf)):
+                if c["column"]:
+                    k = (page, c["table"], c["row"], c["col"], c["field"], c["value"])
+                    heading[k] = c["column"]
     out = cells.copy()
-    for i in out.index[blank]:
-        c = out.loc[i]
-        k = (int(c.page), str(c.table), str(c.row).split("#")[0], int(c.col), str(c.value).strip())
-        if k in heading:
-            out.at[i, "column"] = heading[k]
+    ratio = out.value.astype(str).str.match(RATIO.pattern)
+    rn = ratio.groupby([out.page, out.table]).transform("any")
+    blank = ~out.column.fillna("").str.contains(r"[A-Za-z]{3}")
+    ok = (out.status == "verified") & (rn | blank)
+    v = out[ok]
+    keys = zip(v.page.astype(int), v.table.astype(str), v.row.astype(str), v.col.astype(int),
+               v.field.astype(str), v.value.astype(str), strict=True)  # fmt: skip
+    named = [heading.get(k) for k in keys]
+    out.loc[ok, "column"] = [n or c for n, c in zip(named, out.column[ok], strict=True)]
     return out
 
 
-def _model_pages(pdf: Path) -> Iterator[tuple[int, list]]:
-    from pdfexorcist._vlm_engines import glmocr_
+def _model_pages(pdf: Path, engine: str) -> Iterator[tuple[int, list]]:
+    from pdfexorcist._vlm_engines import glmocr_, oxr_
 
-    yield from glmocr_(pdf)  # cached per page after the first read
+    yield from (oxr_ if engine == "oxr" else glmocr_)(pdf)  # cached per page after the first read
 
 
 if __name__ == "__main__":  # prints the pages to give pictures.toml: "18-26,43,..."

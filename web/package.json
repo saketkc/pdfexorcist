@@ -1,6 +1,6 @@
 {
   "name": "pdfexorcist-web",
-  "version": "0.3.0",
+  "version": "0.4.0",
   "private": true,
   "type": "module",
   "description": "pdfexorcist in the browser: the package in Pyodide, with pdftotext and PDFium as WebAssembly",

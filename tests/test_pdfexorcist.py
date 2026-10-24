@@ -526,3 +526,18 @@ def test_vision_back_to_accurate(monkeypatch):
     found, fast = vw.read(None, fast)
     assert found[0][0] == "A" and not fast  # one accurate try, and it read: accurate again
     assert calls == ["accurate"] * 3 + ["fast", "accurate"]
+
+
+def test_html_rows_rowspan_keeps_columns() -> None:
+    # OXR, 2018 AMRSN Table 6.2: "AMA" spans three heading rows; "Total" is the first value column
+    from pdfexorcist._vlm_engines import _HtmlRows
+
+    html = (
+        '<table><tr><td rowspan="2">AMA</td><td colspan="2">S. aureus</td></tr>'
+        "<tr><td>Total</td><td>OPD</td></tr><tr><td>Cefoxitin</td><td>1/2</td><td>3/4</td></tr></table>"
+    )
+    assert _HtmlRows.parse(html) == [
+        [(0, "AMA"), (1.5, "S. aureus")],
+        [(1, "Total"), (2, "OPD")],
+        [(0, "Cefoxitin"), (1, "1/2"), (2, "3/4")],
+    ]

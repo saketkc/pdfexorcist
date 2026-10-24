@@ -132,7 +132,7 @@ def pdfplumber_(pdf: Path) -> Iterator[Page]:
             page = raw.filter(_not_in(_space_ids(raw))).dedupe_chars(tolerance=COPY_PT)
             words = [  # pdfminer reads text drawn outside the page box; poppler doesn't
                 w
-                for w in page.extract_words(use_text_flow=False)
+                for w in _plumber_words(page, sideways=raw.rotation % 360 == 0)
                 if _inside(raw.bbox, w["x0"], w["top"], w["x1"], w["bottom"])
             ]
             yield (
@@ -140,6 +140,26 @@ def pdfplumber_(pdf: Path) -> Iterator[Page]:
                 group_words([(w["x0"], w["x1"], w["bottom"], w["text"], w["top"]) for w in words]),
             )
             raw.close()
+
+
+def _plumber_words(page: Any, sideways: bool) -> list[dict]:
+    """pdfplumber's words. Text turned a quarter (headings printed sideways, 2024 AMRSN
+    Table 2.21) is read along its baseline as whole words, as PyMuPDF and pdfium read it;
+    pdfplumber alone would give one word per letter."""
+    if not sideways:
+        return page.extract_words(use_text_flow=False)
+
+    def turn(o: dict) -> float:
+        return o["matrix"][1] if o.get("object_type") == "char" else 0.0
+
+    flat = page.filter(lambda o: abs(turn(o)) <= 0.5).extract_words(use_text_flow=False)
+    up = page.filter(lambda o: o.get("object_type") != "char" or turn(o) > 0.5)
+    down = page.filter(lambda o: o.get("object_type") != "char" or turn(o) < -0.5)
+    return (
+        flat
+        + up.extract_words(line_dir="ltr", char_dir="btt")
+        + down.extract_words(line_dir="rtl", char_dir="ttb")
+    )
 
 
 @register("pymupdf")
