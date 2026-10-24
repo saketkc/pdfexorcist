@@ -136,6 +136,10 @@ module = [
 ]
 ignore_missing_imports = true
 
+[tool.uv.sources]
+# OXR (engine "oxr") is on mlx-vlm main, not yet in a release (0.7.10 lacks it)
+mlx-vlm = { git = "https://github.com/Blaizzy/mlx-vlm", rev = "3fc4e5a9500cb6e59190056c882df2ac5bab068e" }
+
 [tool.uv]
 # camelot-py[ml] needs transformers < 5; mlx-vlm >= 0.7.10 (GLM-OCR) needs transformers >= 5.14
 conflicts = [

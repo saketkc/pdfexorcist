@@ -183,6 +183,7 @@ WORDS = frozenset(
         "othercandida",
         "others",
         "outcome",
+        "overall",
         "oxacillin",
         "oxazole",
         "parapsilosis",

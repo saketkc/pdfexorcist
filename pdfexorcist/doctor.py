@@ -118,6 +118,15 @@ KNOWN: dict[str, EngineInfo] = {
             platforms=_apple_silicon,
             platform_note="Apple Silicon Macs only",
         ),
+        EngineInfo(
+            "oxr",
+            "pixels (OCR)",
+            "OXR table model via MLX",
+            modules=("mlx_vlm",),  # OXR is in mlx-vlm after 0.7.10
+            extra="glmocr",
+            platforms=_apple_silicon,
+            platform_note="Apple Silicon Macs only",
+        ),
     ]
 }
 OCR_ENGINES = [n for n, e in KNOWN.items() if e.reads.startswith("pixels")]

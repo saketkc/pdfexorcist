@@ -16,6 +16,9 @@ from .rows import Page, is_value
 logger = logging.getLogger(__name__)
 
 GLM_OCR_MLX = "mlx-community/GLM-OCR-bf16"
+OXR = "SoMarkAI/OXR-1.0"
+OXR_PIXELS = 4_000_000  # its default, 960 x 960, blurs the small print of a table
+PICTURE_SHARE = 0.1  # a picture covering this share of the page is read on its own
 
 
 class _HtmlRows:
@@ -123,6 +126,80 @@ def glmocr_(pdf: Path) -> Iterator[Page]:
             i,
             _HtmlRows.parse(text) if "<table" in text.lower() else _parse_markdown(text),
         )
+
+
+@register("oxr", default=False, in_process=True)
+def oxr_(pdf: Path) -> Iterator[Page]:
+    """Run SoMark OXR through MLX on each picture of a page, or on the page if it has none.
+
+    OXR reads at most OXR_PIXELS; a picture read at its own resolution keeps small print legible
+    (2018 AMRSN Table 6.2: 0 of 200 R/n cells wrong from the picture, 1-3 from the page).
+    """
+    for i, crops in _page_pictures(pdf):
+        yield i, [row for img in crops for row in _HtmlRows.parse(_cached("oxr", img, _oxr_infer))]
+
+
+def _oxr_infer(img: Any) -> str:
+    from mlx_vlm import generate
+
+    m, proc, prompt = _oxr_model()
+    out = generate(m, proc, prompt, image=[img], max_tokens=8192, temperature=0.0,
+                   verbose=False, max_pixels=OXR_PIXELS)  # fmt: skip
+    return str(getattr(out, "text", out))
+
+
+@functools.lru_cache(maxsize=1)
+def _oxr_model() -> tuple:
+    """Load OXR once per process."""
+    from importlib.util import find_spec
+
+    from mlx_vlm import load
+    from mlx_vlm.prompt_utils import apply_chat_template
+
+    if find_spec("mlx_vlm.models.oxr") is None:
+        raise RuntimeError("oxr needs an mlx-vlm with OXR (after 0.7.10): uv sync --extra glmocr")
+    m, proc = load(OXR)
+    prompt = "Recognize the table of the image into html format."
+    return m, proc, apply_chat_template(proc, m.config, prompt, num_images=1)
+
+
+def _page_pictures(pdf: Path) -> Iterator[tuple[int, list]]:
+    """Each page's pictures, top to bottom, rendered at their own resolution (at most 300 dpi);
+    the whole page rendered when it has none."""
+    import pymupdf
+
+    with pymupdf.open(pdf) as doc:
+        for i, page in enumerate(doc, start=1):
+            area = page.rect.width * page.rect.height
+            crops = []
+            for info in sorted(page.get_image_info(), key=lambda d: d["bbox"][1]):
+                rect = pymupdf.Rect(info["bbox"]) & page.rect
+                if rect.is_empty or rect.width * rect.height < PICTURE_SHARE * area:
+                    continue
+                dpi = min(300, max(72, round(info["width"] / rect.width * 72)))
+                crops.append(_image(page.get_pixmap(clip=rect, dpi=dpi)))
+            yield i, crops or [render_page(page, None).image]
+
+
+def _image(pix: Any) -> Any:
+    from PIL import Image
+
+    return Image.frombytes("RGB" if pix.n < 4 else "RGBA", (pix.width, pix.height), pix.samples)
+
+
+def _cached(engine: str, img: Any, infer: Callable[[Any], str]) -> str:
+    """Model output for an image, cached by its pixels."""
+    from .fetch import cache_root
+
+    root = cache_root() / engine
+    root.mkdir(parents=True, exist_ok=True)
+    h = hashlib.md5(img.tobytes())
+    h.update(f"{img.width}x{img.height}".encode())
+    f = root / f"{h.hexdigest()}.html"
+    if not f.exists():
+        f.write_text(infer(img))
+        logger.info("%s %dx%d", engine, img.width, img.height)
+    return f.read_text()
 
 
 @functools.lru_cache(maxsize=1)

@@ -27,8 +27,11 @@ OCR_CAPTION = re.compile(
 DIGIT_LOOKALIKES = str.maketrans("zZlIoOS", "2211005")
 # a data bar's edge read as a mark before a number ("_77", "|45") or after one ("78)")
 SPECK = re.compile(r"(?<!\S)[_~|•«»]+(?=\d)")
-TRAIL = re.compile(r"(?<=\d)[)\]|}]+$")
+# also "1479D", "746I", "773_"; not "-", which ends half of a split range ("89.9-" "100")
+TRAIL = re.compile(r"(?<=\d)[)\]|}_.€DIlOoS]+$")
 CENTRE = re.compile(r"\bRC[Il1]?\s+(\d{1,2})\b")  # "RC 01": the number names the centre
+# "RCC04", "RCO05", "RC05 O", "RC113 3131": the centre is RC and the next two digits
+RC_KEY = re.compile(r"^\s*R\s*C+\s*[IOo]?\s*(\d)(\d)?")
 # An "R/n" count ("5887/8595"). A "*" before it marks a small n. OCR can read it as a quote.
 RATIO = re.compile(r"^[*\"'“”]?\d+/\d+$")
 PCT = re.compile(r"^\((?:\d+(?:\.\d+)?|-|–)\)$")  # the "(%)" printed under an "R/n"
@@ -63,6 +66,8 @@ def _cells(line: list) -> list[BoxCell]:
 def _row_key(label: str) -> str:
     """A label's letters, and the digits of its first two words: "RC01", "ecoli". A word
     misread by one engine takes the nearest word of the antibiograms ("mipenem")."""
+    if m := RC_KEY.match(label):
+        return f"rc{int(m[1] + (m[2] or '')):02d}"
     head = "".join(re.findall(r"\d", "".join(label.split()[:2])))
     return "".join(_snap(w) for w in re.findall(r"[a-z]+", label.lower())) + head
 
@@ -226,13 +231,16 @@ def _model_page(page_no: int, lines: list) -> Iterator[dict]:
     if len(tables) != len(captions):
         logger.warning("page %d: %d tables read, %d captions", page_no, len(tables), len(captions))
     for (num, title), (heads, rows) in zip(captions, tables, strict=False):
-        if not any(RATIO.match(t) for r in rows for _, c in r for t in c.split()):
-            # Skip n and %S tables. Their blank cells give each engine different columns.
+        ratios = any(RATIO.match(t) for r in rows for _, c in r for t in c.split())
+        if not ratios and len({max(j for j, _ in r) for r in rows}) > 1:
+            # An n and %S table read with blank cells dropped: its columns shift row to row.
+            # OXR keeps a blank as an empty cell, so its rows are all one width.
             continue
         maps = [dict(hr) for hr in heads]
         seen: dict[str, int] = {}
         for r in rows:
-            label = r[0][1] if r[0][0] == 0 and not any(map(_is_val, r[0][1].split())) else ""
+            first = r[0][1] if r[0][0] == 0 else ""
+            label = first if not all(map(_is_val, first.split())) else ""  # "RC 01" is a label
             key = _row_key(label)
             seen[key] = seen.get(key, 0) + 1
             for j, text in r:
@@ -272,6 +280,8 @@ def _model_tables(lines: list) -> list[tuple[list, list]]:
         if any(_is_val(t) for j, c in cells if j > 0 for t in c.split()):
             rows.append(cells)
             continue
+        if rows and not any(c for j, c in cells if j > 0):
+            continue  # a centre with no isolates ("RC 02"), or a spacer row: the table goes on
         if rows:
             tables.append((heads, rows))
             heads, rows = [], []

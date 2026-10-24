@@ -8,7 +8,8 @@ import re
 import shutil
 import tempfile
 from collections import Counter
-from collections.abc import Mapping, Sequence
+from collections.abc import Iterator, Mapping, Sequence
+from contextlib import contextmanager
 from dataclasses import dataclass, field
 from pathlib import Path
 from typing import Any
@@ -259,9 +260,17 @@ def shortlist(ranked: list[Candidate]) -> list[Candidate]:
     return sorted({c.recipe: c for c in picks}.values(), key=lambda c: -c.score)
 
 
-def _quiet_checks() -> None:
-    """Checks warn of labels a wrong recipe cannot find; a trial expects that."""
-    logging.getLogger("pdfexorcist._recipe_model").setLevel(logging.ERROR)
+@contextmanager
+def _quiet_checks() -> Iterator[None]:
+    """Checks warn of labels a wrong recipe cannot find; a trial expects that. Restores the
+    level, so a later extract in the same process still warns."""
+    log = logging.getLogger("pdfexorcist._recipe_model")
+    level = log.level
+    log.setLevel(logging.ERROR)
+    try:
+        yield
+    finally:
+        log.setLevel(level)
 
 
 def trial(c: Candidate, src: Path, printed: int) -> Candidate:
@@ -271,10 +280,10 @@ def trial(c: Candidate, src: Path, printed: int) -> Candidate:
     from ._ui import CliError
     from .vote import TooFewReadings
 
-    _quiet_checks()
     plan = Plan(src=src, is_image=False, n_pages=0, pages=None, methods=[c.engine], min_agree=1)
     try:
-        res, _ = run(plan, load_recipe(c.path), lambda *_: None, prepared=True)
+        with _quiet_checks():
+            res, _ = run(plan, load_recipe(c.path), lambda *_: None, prepared=True)
     except CliError as e:
         if isinstance(e.__cause__, TooFewReadings):
             c.cells = 0  # the recipe read nothing here

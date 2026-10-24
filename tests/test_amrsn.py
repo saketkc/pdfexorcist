@@ -9,8 +9,8 @@ import pandas as pd
 import pytest
 from amrsn import _rows
 from amrsn_cells import _cell, pct_matches
+from amrsn_pictures import _clean, _row_key, picture_pages
 from amrsn_pictures import parse as parse_pictures
-from amrsn_pictures import picture_pages
 from cli_helpers import run
 
 from pdfexorcist.cells import BoxCell
@@ -359,3 +359,12 @@ def test_wrapped_names_are_not_group_headings() -> None:
     first = [("Piperacillin-", (100.0, 0, 140.0, 5)), ("Trimethoprim-", (460.0, 0, 500.0, 5))]
     got = _headers([(0.0, first)], cols)
     assert got.get(0) == "Piperacillin-" and got.get(9) == "Trimethoprim-" and 1 not in got
+
+
+def test_centre_rows_key_alike_across_engines() -> None:
+    # 2022 p89: doctr, Indra and Apple Vision read RC01 and RC04 with bar marks and fused values
+    assert {_row_key(x) for x in ["RC01", "RCC01", "RC 01 O", "RCO01"]} == {"rc01"}
+    assert _row_key("RCC04") == "rc04"
+    assert _row_key("RC113") == "rc11"
+    assert _row_key("Overrall") == "overall"
+    assert _clean(("1", "RC14 1479D 773_ 89.9-", None))[1] == "RC14 1479 773 89.9-"

@@ -14,6 +14,7 @@ workflow moves those entries into a dated section.
 - Web results show the CLI command that gives the same result.
 - `[charts] require_line`: a chart-picture value with no line to check it against fails.
 - Add `amrsn` recipe
+- Opt-in OCR engine `oxr` (SoMark OXR-1.0 through MLX, Apple Silicon; extra `glmocr`). 
 
 ### Fixed
 
