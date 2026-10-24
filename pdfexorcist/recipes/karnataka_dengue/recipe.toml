@@ -1,0 +1,64 @@
+# pdfexorcist recipe: Karnataka daily dengue and chikungunya report (NVBDCP)
+#
+# Per district: areas affected, suspected cases, samples, IgM, NS1 (dengue) or other
+# positives, positives and deaths, on the day (day_*) and since 1 January (cum_*). BBMP
+# is a row of its own. Reports from September 2021 are kept at
+# extranet.icts.res.in/Dengue/Data-repository/media_bulletin.html. Try 5 August 2023:
+#
+#   pdfexorcist extract https://extranet.icts.res.in/Dengue/Data-repository/PDF/2023/August/05-08-2023.pdf --recipe karnataka_dengue
+#
+# On the fixture:
+#
+#   pdfexorcist extract tests/fixtures/karnataka_dengue/ka_dengue_2023-08-05.pdf --recipe pdfexorcist/recipes/karnataka_dengue/recipe.toml
+
+name = "Karnataka dengue daily report"
+description = "Dengue and chikungunya by district, on the day and cumulative (Karnataka NVBDCP)"
+sample = "../../../tests/fixtures/karnataka_dengue/ka_dengue_2023-08-05.pdf"
+
+[engines]
+use = ["pdfplumber", "pymupdf", "pdfium"]  # the engines that give word boxes
+ocr = false
+
+[parser]
+type = "custom"
+function = "karnataka_dengue.py:parse"
+key = ["disease", "district", "col"]
+
+# the districts add up to the State total; BBMP is printed apart and is not in it
+[[checks]]
+column = "district"
+rule = "Total = rest"
+by = ["disease", "col"]
+where = "district != 'Bangaluru City (BBMP)'"
+name = "districts = total"
+
+# total positives are the IgM positives and the NS1 (dengue) or other (chikungunya) ones
+[[checks]]
+column = "col"
+rule = "day_positive = day_igm + day_ns1"
+by = ["disease", "district"]
+where = "disease == 'Dengue'"
+
+[[checks]]
+column = "col"
+rule = "cum_positive = cum_igm + cum_ns1"
+by = ["disease", "district"]
+where = "disease == 'Dengue'"
+
+[[checks]]
+column = "col"
+rule = "day_positive = day_igm + day_others"
+by = ["disease", "district"]
+where = "disease == 'Chikungunya'"
+
+[[checks]]
+column = "col"
+rule = "cum_positive = cum_igm + cum_others"
+by = ["disease", "district"]
+where = "disease == 'Chikungunya'"
+
+[output]
+layout = "table"
+rows = ["disease", "district"]
+columns = "col"
+format = "csv"

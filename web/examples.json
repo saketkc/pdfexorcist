@@ -184,6 +184,86 @@
     "recipe": "karnataka_idsp"
   },
   {
+    "id": "insp-sitrep",
+    "kicker": "INSP | DR Congo Ebola situation report | No. 160, 2026",
+    "title": "Ebola cases and deaths by health zone",
+    "blurb": "Provinces and health zones from the drawn cells, so blank day columns stay blank. Checks that the zones add up to each province and the provinces to the total.",
+    "pdf": "tests/fixtures/insp_sitrep/insp_sitrep_160_p2-4.pdf",
+    "recipe": "insp_sitrep"
+  },
+  {
+    "id": "cdsco-nsq",
+    "kicker": "CDSCO | Not of Standard Quality drug alert | State labs, May 2025",
+    "title": "Drug batches that failed quality tests",
+    "blurb": "One row per batch, keyed by serial number: wrapped cells joined, and rows split over page breaks put back together. Checks that the serial numbers have no gaps.",
+    "pdf": "tests/fixtures/cdsco_nsq/cdsco_nsq_state_2025-05_p1-3.pdf",
+    "recipe": "cdsco_nsq"
+  },
+  {
+    "id": "karnataka-dengue",
+    "kicker": "Karnataka NVBDCP | Daily dengue report | 5 August 2023",
+    "title": "Dengue and chikungunya by district",
+    "blurb": "Suspected cases, samples, IgM, NS1 and positives on the day and since 1 January, with BBMP apart from the State total.",
+    "pdf": "tests/fixtures/karnataka_dengue/ka_dengue_2023-08-05.pdf",
+    "recipe": "karnataka_dengue"
+  },
+  {
+    "id": "kerala-dhs",
+    "kicker": "DHS Kerala | Communicable disease data | 2022",
+    "title": "Cases and deaths by disease and district",
+    "blurb": "The State page and one page per district, keyed by district, disease and column, fever split into OP and IP. Checks that the 14 districts add up to Kerala.",
+    "pdf": "tests/fixtures/kerala_dhs/kerala_dhs_2022_p2_6-19.pdf",
+    "recipe": "kerala_dhs"
+  },
+  {
+    "id": "tb-report",
+    "kicker": "MoHFW | India TB Report 2024 | Annexures",
+    "title": "TB notification and treatment outcomes",
+    "blurb": "State/UT counts with their %, a wrapped % kept with its count. Checks each % against the counts, and the States against the India row.",
+    "pdf": "tests/fixtures/tb_report/tb_report_2024_p199-218.pdf",
+    "recipe": "tb_report"
+  },
+  {
+    "id": "ncvbdc-states",
+    "kicker": "NCVBDC | MoHFW | Situation tables",
+    "title": "Dengue, chikungunya and malaria by State",
+    "blurb": "State/UT cases and deaths by year: a merged NR cell fills both columns, footnote marks are kept, and the States add up to the Total.",
+    "pdf": "tests/fixtures/ncvbdc_states/ncvbdc_dengue_2021-2026.pdf",
+    "recipe": "ncvbdc_states"
+  },
+  {
+    "id": "cbhi-nhp",
+    "kicker": "CBHI | National Health Profile 2022",
+    "title": "Cases and deaths by State and sex",
+    "blurb": "One disease a table: male, female and total cases and deaths for each State/UT, checked against the India row and the totals.",
+    "pdf": "tests/fixtures/cbhi_nhp/nhp_2022_p225.pdf",
+    "recipe": "cbhi_nhp"
+  },
+  {
+    "id": "rhs-staff",
+    "kicker": "MoHFW | Rural Health Statistics 2021-22",
+    "title": "Health staff by State/UT",
+    "blurb": "Required, sanctioned, in position, vacant and shortfall for each cadre in rural, urban and tribal areas, read through the drawn cells; wrapped State names stay one row.",
+    "pdf": "tests/fixtures/rhs/rhs_2021-22_t12-17-76.pdf",
+    "recipe": "rhs"
+  },
+  {
+    "id": "naco-hiv",
+    "kicker": "NACO | India HIV Estimates 2022 | Annexure 5",
+    "title": "HIV estimates by State/UT",
+    "blurb": "Each \"estimate (lower-upper)\" split into three cells, State/UT rows found by name. Checks that each estimate lies inside its interval and the States/UTs add up to India.",
+    "pdf": "tests/fixtures/naco_hiv/hiv_estimates_2022_p63.pdf",
+    "recipe": "naco_hiv"
+  },
+  {
+    "id": "nha",
+    "kicker": "MoHFW / NHSRC | National Health Accounts 2021-22",
+    "title": "India's health spending",
+    "blurb": "Total, government and out-of-pocket health spending by year, spending by SHA 2011 code, and State indicators. Checks totals, shares and ratios.",
+    "pdf": "tests/fixtures/nha/nha_2021-22_p40-83.pdf",
+    "recipe": "nha"
+  },
+  {
     "id": "iips-sirohi",
     "kicker": "IIPS | District population projections",
     "title": "Sirohi, Rajasthan",

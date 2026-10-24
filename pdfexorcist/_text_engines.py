@@ -155,11 +155,14 @@ def _plumber_words(page: Any, sideways: bool) -> list[dict]:
     flat = page.filter(lambda o: abs(turn(o)) <= 0.5).extract_words(use_text_flow=False)
     up = page.filter(lambda o: o.get("object_type") != "char" or turn(o) > 0.5)
     down = page.filter(lambda o: o.get("object_type") != "char" or turn(o) < -0.5)
-    return (
-        flat
-        + up.extract_words(line_dir="ltr", char_dir="btt")
-        + down.extract_words(line_dir="rtl", char_dir="ttb")
-    )
+
+    # the direction applies whether pdfminer marks the letters upright or not
+    def read(p: Any, line: str, char: str) -> list[dict]:
+        return p.extract_words(
+            line_dir=line, char_dir=char, line_dir_rotated=line, char_dir_rotated=char
+        )
+
+    return flat + read(up, "ltr", "btt") + read(down, "rtl", "ttb")
 
 
 @register("pymupdf")
@@ -174,9 +177,22 @@ def pymupdf_(pdf: Path) -> Iterator[Page]:
             words = _respace(
                 page.get_text("words", textpage=tp), page.get_text("rawdict", textpage=tp)
             )
+            shift = pymupdf_shift(page)
             turn = page.rotation_matrix  # words come unrotated
-            rects = [(pymupdf.Rect(w[:4]) * turn, w[4]) for w in words]
+            move = pymupdf.Rect(shift, shift)
+            rects = [((pymupdf.Rect(w[:4]) + move) * turn, w[4]) for w in words]
             yield i, group_words([(r.x0, r.x1, r.y1, t, r.y0) for r, t in rects])
+
+
+def pymupdf_shift(page: Any) -> Any:
+    """Offset from PyMuPDF page coordinates to pdfplumber's.
+
+    PyMuPDF measures from the crop box corner; pdfplumber measures x from the PDF origin and
+    y from the media box top. Parsers that read PyMuPDF pages directly subtract it.
+    """
+    import pymupdf
+
+    return pymupdf.Point(page.cropbox.x0, page.cropbox.y0 - page.mediabox.y0)
 
 
 def _respace(words: list, raw: dict) -> list:

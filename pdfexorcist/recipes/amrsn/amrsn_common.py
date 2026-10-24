@@ -9,10 +9,13 @@ Word = tuple[str, Box]  # text, box
 # The capital letter after the number stops a match on "Table 6.16 and".
 # The 2017 report uses roman numerals ("Table iii.").
 CAPTION = re.compile(
-    r"^\s*Table\s*(\d+(?:\.\d+)*[A-Za-z]?|[ivxIVX]{1,4}(?=\s*[:.]))\s*[:.\-]?\s*[A-Z(]"
+    r"^\s*Table\s*-?\s*(\d+(?:\.\d+)*(?:\s?[A-Za-z])?|[ivxIVX]{1,4}(?=\s*[:.]))\s*[:.\-]?\s*[A-Z(]"
 )
-TABLE_START = re.compile(r"^\s*Table\s*(\d|[ivx]{1,4}\s*[:.])", re.I)
-END = re.compile(r"^\s*(Fig(ure|\.)|Source|Note)", re.I)  # what ends a table below its caption
+# "Table- 7.19 A:" (2023) is a caption too
+TABLE_START = re.compile(r"^\s*Table\s*-?\s*(\d|[ivx]{1,4}\s*[:.])", re.I)
+END = re.compile(
+    r"^\s*(Fig(ure|\.)|Source|Note|Clinical relevance)", re.I
+)  # what ends a table below its caption
 FOOT = re.compile(r"Surveillance\s+Network|Council\s+of\s+Medical", re.I)  # the running footer
 GAP = 6  # points between the words of one cell
 

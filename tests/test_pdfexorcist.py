@@ -446,6 +446,36 @@ def test_sideways_table(tmp_path, rot):
     assert ok.groupby("label")["value"].apply(tuple).to_dict() == {r[0]: r[1:] for r in ROWS}
 
 
+def test_two_sideways_pages(tmp_path):
+    """Every sideways page is turned; clearing one page's margin text must not break the next."""
+    from pdfexorcist._upright import upright_pages
+
+    pdf = Path(__file__).parent / "fixtures" / "upright" / "tb_report_2024_p185-186.pdf"
+    with pymupdf.open(upright_pages(pdf, tmp_path)) as out:
+        assert len(out) == 2
+        assert all(page.rect.width > page.rect.height for page in out)
+        assert all("States/UTs" in page.get_text() for page in out)
+
+
+def test_pymupdf_boxes_match_pdfplumber():
+    """PyMuPDF's words line up with pdfplumber's on a page whose CropBox and MediaBox differ."""
+    import pdfplumber
+
+    from pdfexorcist.cells import token_boxes
+
+    pdf = Path(__file__).parent / "fixtures" / "rhs" / "rhs_2021-22_t12-17-76.pdf"
+    with pdfplumber.open(pdf) as doc:
+        tops = {w["text"]: (w["x0"], w["top"]) for w in doc.pages[0].extract_words()}
+    lines = next(lines for page, lines in EXTRACTORS["pymupdf"](pdf) if page == 1)
+    gaps = [
+        max(abs(tops[t][0] - b[0]), abs(tops[t][1] - b[1]))
+        for line in lines
+        for _, t, b in token_boxes(line)
+        if b is not None and t in tops
+    ]
+    assert len(gaps) > 100 and sorted(gaps)[len(gaps) // 2] < 3  # was 8 pt across, 25 pt down
+
+
 def _keys(lines: list, **kw) -> list[tuple[str, str]]:
     return [(r["row"], r["value"]) for r in parse_rows([(1, lines)], **kw) if r["col"] == 0]
 
@@ -541,3 +571,20 @@ def test_html_rows_rowspan_keeps_columns() -> None:
         [(1, "Total"), (2, "OPD")],
         [(0, "Cefoxitin"), (1, "1/2"), (2, "3/4")],
     ]
+
+
+def test_sideways_heading_is_one_word_and_kept(tmp_path):
+    import pymupdf
+
+    from pdfexorcist._slanted import drop_slanted
+    from pdfexorcist._text_engines import pdfplumber_
+
+    pdf = tmp_path / "side.pdf"
+    doc = pymupdf.open()
+    page = doc.new_page()
+    page.insert_text((100, 200), "TEM", rotate=90)  # a gene heading printed bottom to top
+    page.insert_text((150, 300), "RC2 78%")
+    doc.save(pdf)
+    assert drop_slanted(pdf, tmp_path / "level") == pdf  # nothing to drop
+    words = [t for _, lines in pdfplumber_(pdf) for line in lines for _, t in line]
+    assert "TEM" in words

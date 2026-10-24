@@ -1,0 +1,42 @@
+# pdfexorcist recipe: India TB Report annexures (Central TB Division, MoHFW, annual)
+#
+# State/UT annexures: notification, patient characteristics, HIV status, pregnancy
+# screening and treatment outcomes. A cell "225 (44.6)" gives value and pct. Reports are
+# listed at tbcindia.mohfw.gov.in/annual-reports. Try the 2024 report:
+#
+#   pdfexorcist extract https://tbcindia.mohfw.gov.in/wp-content/uploads/2024/10/TB-Report_for-Web_08_10-2024-1.pdf --recipe tb_report
+#
+# On the fixture (Annexures 2.1, 2.13 and the first page of 3.1 of the 2024 report):
+#
+#   pdfexorcist extract tests/fixtures/tb_report/tb_report_2024_p199-218.pdf --recipe pdfexorcist/recipes/tb_report/recipe.toml
+
+name = "India TB Report annexures"
+description = "TB notification, patient characteristics and treatment outcomes by State/UT (India TB Report, MoHFW)"
+sample = "../../../tests/fixtures/tb_report/tb_report_2024_p199-218.pdf"
+
+[pages]
+match = 'Pradesh'  # every page of a State table prints one (Andhra ... Uttar Pradesh)
+
+[engines]
+use = ["pdfplumber", "pymupdf", "pdfium"]  # the engines that give word boxes
+ocr = false
+
+[parser]
+type = "custom"
+function = "tb_report.py:parse"
+key = ["table", "state", "col", "field"]
+
+[[checks]]
+function = "tb_report_checks.py:pct_matches"
+
+[[checks]]
+function = "tb_report_checks.py:states_sum_to_india"
+
+[[checks]]
+function = "tb_report_checks.py:parts_sum_to_total"
+
+[output]
+layout = "table"
+rows = ["table", "title", "state", "col", "column"]
+columns = "field"
+format = "csv"

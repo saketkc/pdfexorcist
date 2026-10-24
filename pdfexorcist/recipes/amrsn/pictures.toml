@@ -38,6 +38,6 @@ function = "amrsn_pictures.py:name_columns"
 
 [output]
 layout = "table"
-rows = ["page", "title", "label", "col", "column"]  # column: the headings over it ("ward / %s")
+rows = ["page", "title", "row", "label", "col", "column"]  # row: the row key; column: the headings over it ("ward / %s")
 columns = "field"
 format = "csv"

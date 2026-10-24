@@ -21,7 +21,11 @@ NUMBER = r"[-−]?\d[\d,]*(?:[.·]\d+)?"
 UNCERTAIN = rf"{NUMBER}(?:±|\+/-|\+-){NUMBER}%?"
 PLACEHOLDERS = r"\*|-|–|—|\.\.\.?|…|--|na|NA|nc|NC|n/a|N/A|N\.A\.|n\.a\.|#N/A"
 PLAIN = rf"\(?{NUMBER}%?\)?[*#@$]?"
-VALUE = re.compile("|".join(f"^(?:{p})$" for p in (PLAIN, UNCERTAIN, PLACEHOLDERS, LOSSY_FORMS)))
+# 97.1(68/70): a % with its count, joined by the engine or a recipe, is one cell
+WITH_COUNT = rf"{NUMBER}%?\(\d+/\d+\)"
+VALUE = re.compile(
+    "|".join(f"^(?:{p})$" for p in (PLAIN, UNCERTAIN, WITH_COUNT, PLACEHOLDERS, LOSSY_FORMS))
+)
 KEY = ["page", "row", "col"]
 FLUSH_PT = 0.5  # words this close were printed as one, split only by a shifted baseline
 PLACEMENTS = ("x", "both")
@@ -179,18 +183,10 @@ def _tables(lines: list[list[Cell]]) -> Iterator[list[list[Cell]]]:
         yield part
 
 
-def group_words(words: list[tuple], gap: float = 8.0) -> list[list[Cell]]:
-    """(x0, x1, y_bottom, text[, y_top]) words to lines of (x_centre, text) BoxCells.
-
-    A word joins a line when it overlaps the line's first word by half the shorter
-    height; a word without y_top is 1 pt tall. Copies of a word drawn again within
-    COPY_PT (fake bold) count once.
-    Label words within gap pt join one cell; values never join. A word printed flush
-    (FLUSH_PT) joins without a space, as subscripts do ("PM2.5").
-    """
-    boxes = [(w[0], w[1], w[4] if len(w) > 4 else w[2] - 1, w[2], w[3]) for w in words]
-    boxes = drop_copies(boxes)
-    rows: list[list] = []  # [anchor top, anchor bottom, words]
+def _lines(boxes: list[tuple]) -> list[list]:
+    """[anchor top, anchor bottom, words, sideways]: a word joins a line when it overlaps the
+    line's first word by half the shorter height."""
+    rows: list[list] = []
     for x0, x1, top, bottom, t in sorted(boxes, key=lambda b: ((b[2] + b[3]) / 2, b[0])):
         word = (x0, x1, t, top, bottom)
         if rows:
@@ -199,9 +195,38 @@ def group_words(words: list[tuple], gap: float = 8.0) -> list[list[Cell]]:
             if overlap >= 0.5 * min(r[1] - r[0], bottom - top):
                 r[2].append(word)
                 continue
-        rows.append([top, bottom, [word]])
+        rows.append([top, bottom, [word], False])
+    return rows
+
+
+def group_words(words: list[tuple], gap: float = 8.0) -> list[list[Cell]]:
+    """(x0, x1, y_bottom, text[, y_top]) words to lines of (x_centre, text) BoxCells.
+
+    A word joins a line when it overlaps the line's first word by half the shorter
+    height; a word without y_top is 1 pt tall. A word printed sideways joins the line
+    through its middle. Copies of a word drawn again within
+    COPY_PT (fake bold) count once.
+    Label words within gap pt join one cell; values never join. A word printed flush
+    (FLUSH_PT) joins without a space, as subscripts do ("PM2.5").
+    """
+    boxes = [(w[0], w[1], w[4] if len(w) > 4 else w[2] - 1, w[2], w[3]) for w in words]
+    boxes = drop_copies(boxes)
+    # a word printed sideways is tall: it would join the lines above and below it, each engine
+    # a different set, so it joins only the line through its middle
+    side = [b for b in boxes if b[3] - b[2] > 1.5 * (b[1] - b[0]) and len(b[4]) > 1]
+    rows = _lines([b for b in boxes if b not in side])
+    for x0, x1, top, bottom, t in side:
+        mid = (top + bottom) / 2
+        r = next((r for r in rows if r[0] <= mid <= r[1] and not r[3]), None)
+        if r is None:
+            r = next((r for r in rows if r[3] and r[0] <= mid <= r[1]), None)
+        if r is None:  # a line of sideways headings
+            r = [mid - 1, mid + 1, [], True]
+            rows.append(r)
+        r[2].append((x0, x1, t, top, bottom))
+    rows.sort(key=lambda r: (r[0] + r[1]) / 2)
     out: list[list[Cell]] = []
-    for _, _, row in rows:
+    for _, _, row, _ in rows:
         row.sort(key=lambda w: w[0])
         cells: list[list] = []  # [x0, x1, text, top, bottom]
         for x0, x1, t, top, bottom in row:

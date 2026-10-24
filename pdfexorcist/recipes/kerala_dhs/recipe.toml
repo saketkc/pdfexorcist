@@ -1,0 +1,45 @@
+# pdfexorcist recipe: Kerala DHS communicable disease data (annual)
+#
+# Cases and deaths by disease for Kerala and (2020 on) each district; fever is split into
+# OP and IP cases. Reports are at dhs.kerala.gov.in/data. Try it on the 2025 report:
+#
+#   pdfexorcist extract https://dhs.kerala.gov.in/wp-content/uploads/2026/09/CD-Data-2025-Approved.pdf --recipe kerala_dhs
+#
+# On the fixture (the State and district pages of the 2024 report):
+#
+#   pdfexorcist extract tests/fixtures/kerala_dhs/kerala_dhs_2024_p2-16.pdf --recipe pdfexorcist/recipes/kerala_dhs/recipe.toml
+
+name = "Kerala DHS communicable disease data"
+description = "Cases and deaths by disease for Kerala and each district, one year (DHS Kerala, State Surveillance Unit)"
+sample = "../../../tests/fixtures/kerala_dhs/kerala_dhs_2024_p2-16.pdf"
+
+[pages]
+match = 'Name of Diseases'  # the State and district tables; not the month-wise grids
+
+[engines]
+use = ["pdfplumber", "pymupdf", "pdfium", "pdftotext"]  # the engines the browser build runs
+ocr = false
+
+[normalize]
+remove_commas = true
+remove_footnote_marks = true  # "439*": malaria 2022, footnoted as imported cases
+
+[parser]
+type = "custom"
+function = "kerala_dhs.py:parse"
+key = ["area", "disease", "col"]
+
+# the districts add up to Kerala (Kerala may exceed them when a district page is missing)
+[[checks]]
+function = "kerala_dhs.py:districts_add_up"
+
+[[checks]]
+column = "col"
+rule = "cases >= deaths"
+by = ["area", "disease"]
+
+[output]
+layout = "table"
+rows = ["area", "disease"]
+columns = "col"
+format = "csv"

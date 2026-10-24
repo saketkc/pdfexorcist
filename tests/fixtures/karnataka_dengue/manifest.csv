@@ -1,0 +1,4 @@
+fixture,source_url,report_date,source_pages,note
+ka_dengue_2023-08-05.pdf,https://extranet.icts.res.in/Dengue/Data-repository/PDF/2023/August/05-08-2023.pdf,2023-08-05,1-2,"31 districts (Vijaya nagar included). Most day cells blank; the remarks are printed sideways across the rows."
+ka_dengue_2021-12-01.pdf,https://extranet.icts.res.in/Dengue/Data-repository/PDF/2021/December/01-12-2021.pdf,2021-12-01,1-2,"30 districts. The chikungunya heading ""Others (NS 1 Antign)"" holds a lone 1; Vijayapura's values print below its name in the text layer."
+ka_dengue_2022-02-28.pdf,https://extranet.icts.res.in/Dengue/Data-repository/PDF/2022/February/28-02-2022.pdf,2022-02-28,1-2,"pdfium reads the sideways PHC and cumulative Suspected headings as blank; columns are named by place."

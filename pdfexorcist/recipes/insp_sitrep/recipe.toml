@@ -1,0 +1,51 @@
+# pdfexorcist recipe: INSP Ebola situation report (DRC, 2026 Bundibugyo outbreak)
+#
+# Confirmed cases and deaths by province (Tableau 1) and by health zone (Tableau 2),
+# cumulative and for the day. A province's row has zone "Total". Reports are at insp.cd.
+# Try it on sitrep 160 (21 October 2026):
+#
+#   pdfexorcist extract https://insp.cd/wp-content/uploads/2026/10/SITREP_MVEBDB_160_21_10_2026-1.pdf --recipe insp_sitrep
+#
+# On the fixture (pages 2-4 of sitrep 160):
+#
+#   pdfexorcist extract tests/fixtures/insp_sitrep/insp_sitrep_160_p2-4.pdf --recipe pdfexorcist/recipes/insp_sitrep/recipe.toml
+
+name = "INSP Ebola situation report"
+description = "Confirmed Ebola cases and deaths by province and health zone (INSP, DR Congo)"
+sample = "../../../tests/fixtures/insp_sitrep/insp_sitrep_160_p2-4.pdf"
+
+[engines]
+use = ["pdfplumber", "pymupdf", "pdfium"]  # the engines that give word boxes
+ocr = false
+
+[parser]
+type = "custom"
+function = "insp_sitrep.py:parse"
+key = ["table", "province", "zone", "col"]
+
+# the zones of a province add up to its row (the unassigned pool "A ventiler" included)
+[[checks]]
+column = "zone"
+rule = "Total = rest"
+by = ["table", "province", "col"]
+where = "table != 'provinces' and province != 'Total' and col in ['cases', 'deaths', 'new_cases', 'community_deaths', 'cte_deaths', 'new_deaths']"
+name = "zones = province"
+
+# the provinces add up to the national total
+[[checks]]
+column = "province"
+rule = "Total = rest"
+by = ["table", "col"]
+where = "table == 'provinces' and col in ['cases', 'deaths', 'new_cases']"
+name = "provinces = total"
+
+[[checks]]
+column = "col"
+rule = "cases >= deaths"
+by = ["table", "province", "zone"]
+
+[output]
+layout = "table"
+rows = ["table", "province", "zone"]
+columns = "col"
+format = "csv"

@@ -12,6 +12,7 @@ from pathlib import Path
 import pandas as pd
 
 from pdfexorcist import EXTRACTORS, fit_page_boxes
+from pdfexorcist._text_engines import pymupdf_shift
 from pdfexorcist.rows import Page, is_value
 
 KEY = ["page", "code", "pocc", "sex", "col"]
@@ -234,7 +235,8 @@ def header_states(pdf: Path) -> dict[tuple[int, int], str | None]:
         pages = dict(EXTRACTORS["pymupdf"](pdf))
         with pymupdf.open(pdf) as doc:
             for page_no, page in enumerate(doc, start=1):
-                xs = _column_xs(pages.get(page_no, []))
+                dx = pymupdf_shift(page).x  # extractor x to page x
+                xs = [x - dx for x in _column_xs(pages.get(page_no, []))]
                 names = _page_states(page, xs) if len(xs) >= 3 else None
                 out.update({(page_no, c): names[c] if names else None for c in range(len(xs))})
     return out

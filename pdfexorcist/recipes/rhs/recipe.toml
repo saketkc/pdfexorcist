@@ -1,0 +1,43 @@
+# pdfexorcist recipe: Rural Health Statistics (MoHFW), staff tables
+#
+# Staff by State/UT, one cadre a table: required, sanctioned, in position, vacant and
+# shortfall (rural, urban, tribal). "*" is a surplus. RHS 2016-17 to 2021-22; renamed
+# Health Dynamics of India from 2022-23. Try it on RHS 2021-22:
+#
+#   pdfexorcist extract "https://web.archive.org/web/20230313122223id_/https://hmis.mohfw.gov.in/downloadfile?filepath=publications/Rural-Health-Statistics/RHS%202021-22.pdf" --recipe rhs
+#
+# On the fixture (Tables 12, 17 and 76 of RHS 2021-22):
+#
+#   pdfexorcist extract tests/fixtures/rhs/rhs_2021-22_t12-17-76.pdf --recipe pdfexorcist/recipes/rhs/recipe.toml
+
+name = "Rural Health Statistics: staff tables"
+description = "Health staff required, sanctioned, in position, vacant and short by State/UT (MoHFW RHS)"
+sample = "../../../tests/fixtures/rhs/rhs_2021-22_t12-17-76.pdf"
+
+[pages]
+match = 'Sanctioned'  # rhs.py skips the comparative statements and the DH/SDH tables
+
+[engines]
+use = ["pdfplumber", "pymupdf", "pdfium"]  # the engines that give word boxes
+ocr = false
+
+[parser]
+type = "custom"
+function = "rhs.py:parse"
+key = ["table", "sno", "col"]
+
+# the States/UTs add up to All India; vacant and shortfall there leave out the surpluses
+[[checks]]
+column = "sno"
+rule = "total = rest"
+by = ["table", "col"]
+name = "States = All India"
+
+[[checks]]
+function = "rhs_checks.py:CHECKS"
+
+[output]
+layout = "table"
+rows = ["table", "sno"]
+columns = "col"
+format = "csv"

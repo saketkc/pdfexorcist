@@ -1,0 +1,41 @@
+# pdfexorcist recipe: NCVBDC State/UT situation tables (dengue, chikungunya, malaria)
+#
+# The "Situation in India" PDFs at ncvbdc.mohfw.gov.in: per State/UT and year, the cases
+# and deaths (dengue), cases (chikungunya), or tests, positives, Pf and deaths (malaria).
+# Values are kept as printed ("30683*", NR). Try it on the dengue table:
+#
+#   pdfexorcist extract https://ncvbdc.mohfw.gov.in/Doc/Dengue-Cases-deaths-2021-2026-till-April.pdf --recipe ncvbdc_states
+#
+# On the fixture:
+#
+#   pdfexorcist extract tests/fixtures/ncvbdc_states/ncvbdc_dengue_2021-2026.pdf --recipe pdfexorcist/recipes/ncvbdc_states/recipe.toml
+
+name = "NCVBDC State/UT situation tables"
+description = "State/UT wise dengue, chikungunya and malaria cases and deaths by year (NCVBDC)"
+sample = "../../../tests/fixtures/ncvbdc_states/ncvbdc_dengue_2021-2026.pdf"
+
+[engines]
+use = ["pdfplumber", "pymupdf", "pdfium"]  # the engines that give word boxes
+ocr = false
+
+[parser]
+type = "custom"
+function = "ncvbdc_states.py:parse"
+key = ["page", "state", "col"]
+
+[postprocess]
+function = "ncvbdc_states.py:add_number"  # adds `number`: "30683*" -> 30683, "NR" -> empty
+
+# the States/UTs add up to the Total row, in each year and measure
+[[checks]]
+column = "state"
+rule = "Total = rest"
+by = ["page", "col"]
+value = "number"
+name = "States/UTs add up to Total"
+
+[output]
+layout = "table"
+rows = ["state"]
+columns = "col"
+format = "csv"

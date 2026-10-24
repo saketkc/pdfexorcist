@@ -1,0 +1,37 @@
+# pdfexorcist recipe: NACO HIV tables by State/UT (Sankalak and India HIV Estimates)
+#
+# State/UT tables of Sankalak (testing, ART, lab tests) and the India HIV Estimates, where
+# "estimate (lower-upper)" gives plhiv, plhiv_lower and plhiv_upper. Units are as printed.
+# Try it on the 2023 Sankalak (5th edition):
+#
+#   pdfexorcist extract https://naco.mohfw.gov.in/wp-content/uploads/2024/04/Sankalak-Booklet.pdf --recipe naco_hiv
+#
+# On the fixture (Tables 7.1, 8.1 and 10.1 of that edition):
+#
+#   pdfexorcist extract tests/fixtures/naco_hiv/sankalak_2023_p97_p110_p119.pdf --recipe pdfexorcist/recipes/naco_hiv/recipe.toml
+#
+# Tables printed as pictures (the HIV Estimates 2023 fact sheets) need OCR and are not read.
+
+name = "NACO HIV tables by State/UT"
+description = "State/UT tables of NACO's Sankalak and India HIV Estimates, with estimate intervals"
+sample = "../../../tests/fixtures/naco_hiv/sankalak_2023_p97_p110_p119.pdf"
+
+[engines]
+ocr = false
+# the four text engines that also run in the browser; 3 must agree
+use = ["pdfplumber", "pymupdf", "pdfium", "pdftotext"]
+
+[parser]
+type = "custom"
+function = "naco_hiv.py:parse"
+key = ["table", "state", "col"]
+
+# States/UTs = India in each column of counts; lower <= estimate <= upper
+[[checks]]
+function = "naco_checks.py:checks"
+
+[output]
+layout = "table"
+rows = ["table", "title", "state"]  # one row per table and State/UT
+columns = "col"
+format = "csv"

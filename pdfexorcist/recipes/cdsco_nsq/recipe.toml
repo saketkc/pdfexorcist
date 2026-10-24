@@ -1,0 +1,34 @@
+# pdfexorcist recipe: CDSCO alert of drugs Not of Standard Quality (NSQ)
+#
+# One row per drug batch a central or state laboratory found not of standard quality,
+# keyed by serial number. CDSCO posts two lists a month at
+# cdsco.gov.in/opencms/opencms/en/Latest-Alerts. Try it on the state list for May 2025:
+#
+#   pdfexorcist extract "https://cdsco.gov.in/opencms/resources/UploadCDSCOWeb/2018/UploadAlertsFiles/STATE%20NSQ%20MAY-2025.pdf" --recipe cdsco_nsq
+#
+# On the fixture (pages 1-3 of that list):
+#
+#   pdfexorcist extract tests/fixtures/cdsco_nsq/cdsco_nsq_state_2025-05_p1-3.pdf --recipe pdfexorcist/recipes/cdsco_nsq/recipe.toml
+
+name = "CDSCO NSQ drug alert"
+description = "Drug batches not of standard quality, by product, batch, manufacturer and lab (CDSCO, India)"
+sample = "../../../tests/fixtures/cdsco_nsq/cdsco_nsq_state_2025-05_p1-3.pdf"
+
+[engines]
+use = ["pdfplumber", "pymupdf", "pdfium"]  # the engines that give word boxes
+ocr = false
+
+[parser]
+type = "custom"
+function = "cdsco_nsq.py:parse"
+key = ["sno", "col"]
+
+# serial numbers run on without a gap or a repeat; each record names a product and batch
+[[checks]]
+function = "cdsco_nsq.py:checks"
+
+[output]
+layout = "table"
+rows = ["sno"]
+columns = "col"
+format = "csv"

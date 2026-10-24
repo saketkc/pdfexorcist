@@ -1,0 +1,2 @@
+fixture,source_url,report_date,source_pages,note
+tb_report_2024_p185-186.pdf,https://tbcindia.mohfw.gov.in/wp-content/uploads/2024/10/TB-Report_for-Web_08_10-2024-1.pdf,2024,185-186,"Two pages printed sideways. Turning them upright one at a time failed with ""source object number out of range"". Cut with qpdf."

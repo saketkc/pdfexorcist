@@ -1,0 +1,5 @@
+fixture,source_url,report_date,source_pages,note
+insp_sitrep_160_p2-4.pdf,https://insp.cd/wp-content/uploads/2026/10/SITREP_MVEBDB_160_21_10_2026-1.pdf,2026-10-21,2-4,"Tableau 1 (provinces) and Tableau 2 (zones) over three pages. Right of the case-fatality column most rows draw no rules; the first row of each continued page sits above its first rule; Buta to Ganga share one label cell; a zone named Tshopo in Tshopo province."
+insp_sitrep_102_p2-3.pdf,https://insp.cd/wp-content/uploads/2026/08/SitRep_MVEBDB_102_24_08_2026.pdf,2026-08-24,2-3,"The last block (Buta to the national Total) draws no rules between its rows."
+insp_sitrep_026_p4.pdf,https://insp.cd/wp-content/uploads/2026/06/SitRep_MVE_RDC_N°26_09_06_2026_Final.pdf,2026-06-09,4,"Every rule drawn as 0.5 pt dots; provinces are section rows; Sous-total rows."
+insp_sitrep_087_p2.pdf,https://insp.cd/wp-content/uploads/2026/08/SITREP_MVEBDB_087_09_08_2026_VF.pdf,2026-08-09,2,"The day-only layout: the province cell is merged over its zones; ND for not given."

@@ -1,0 +1,57 @@
+# pdfexorcist recipe: National Health Accounts Estimates for India (NHSRC / MoHFW)
+#
+# Key indicators, spending by financing scheme, revenue, provider and function (SHA 2011
+# codes), capital formation, and the State and UT annexures. Try it on the 2021-22 report:
+#
+#   pdfexorcist extract "https://web.archive.org/web/20240927034510id_/https://mohfw.gov.in/sites/default/files/NHA%202021-22_up.pdf" --recipe nha
+#
+# On the fixture (12 table pages of the 2021-22 report; tests/fixtures/nha also holds the
+# 2020-21 and 2015-16 reports):
+#
+#   pdfexorcist extract tests/fixtures/nha/nha_2021-22_p40-83.pdf --recipe pdfexorcist/recipes/nha/recipe.toml
+
+name = "National Health Accounts Estimates for India"
+description = "Health expenditure by financing scheme, revenue, provider, function and State (NHA India, SHA 2011)"
+sample = "../../../tests/fixtures/nha/nha_2021-22_p40-83.pdf"
+
+# no [pages]: a table runs on to pages with no title or header, so nha.py reads every page
+# and keeps only the rows below a title it knows
+
+[engines]
+use = ["pdfplumber", "pymupdf", "pdfium", "pdftotext"]
+ocr = false
+
+[normalize]
+remove_commas = true  # "1,11,126" -> "111126", so sums can be checked
+
+[parser]
+type = "custom"
+function = "nha.py:parse"
+key = ["table", "item", "col"]
+
+# the codes of each classification add up to its Total (each amount rounded to a crore)
+[[checks]]
+column = "item"
+rule = "Total = rest"
+by = ["table", "col"]
+where = "table in ['HF', 'FS', 'HP', 'HC', 'capital'] and col == 'amount' and not item.str.startswith('HC.RI')"
+abs_tolerance = 5
+name = "codes = Total"
+
+# their shares add up to 100, within rounding
+[[checks]]
+column = "item"
+rule = "Total = rest"
+by = ["table", "col"]
+where = "table in ['HF', 'FS', 'HP', 'HC', 'capital'] and col == 'pct' and not item.str.startswith('HC.RI')"
+abs_tolerance = 0.1
+name = "shares = 100"
+
+[[checks]]
+function = "nha_checks.py:CHECKS"
+
+[output]
+layout = "table"
+rows = ["table", "item"]
+columns = "col"
+format = "csv"

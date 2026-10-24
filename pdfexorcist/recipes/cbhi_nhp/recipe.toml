@@ -1,0 +1,54 @@
+# pdfexorcist recipe: CBHI National Health Profile, State/UT wise cases and deaths by sex
+#
+# State/UT cases and deaths by sex, one disease a table ("State/UT wise Cases and Deaths
+# due to <disease> in India, <year>"), NHP 2011 to 2023. Malaria is in nhp_malaria.
+# Try it on NHP 2023 (the whole book):
+#
+#   pdfexorcist extract https://web.archive.org/web/20240712165541id_/https://cbhidghs.mohfw.gov.in/WriteReadData/l892s/Final_Central%20Bureau%20of%20Health%20Intelligene%20July%202024.pdf --recipe cbhi_nhp
+#
+# On a fixture (NHP 2022 page 225):
+#
+#   pdfexorcist extract tests/fixtures/cbhi_nhp/nhp_2022_p225.pdf --recipe pdfexorcist/recipes/cbhi_nhp/recipe.toml
+
+name = "NHP cases and deaths by sex"
+description = "State/UT wise cases and deaths by sex, one disease a table (CBHI National Health Profile)"
+sample = "../../../tests/fixtures/cbhi_nhp/nhp_2022_p225.pdf"
+
+[pages]
+# a title, then the Male / Female header; skips the contents pages
+match = 'wise\s+Cases\s+(and|&)\s+Deaths\s+due.{0,400}Female.{0,200}Cases\s+Deaths\s+Cases\s+Deaths'
+
+[engines]
+use = ["pdfplumber", "pymupdf", "pdfium", "pdftotext"]  # the engines of the browser build
+ocr = false
+
+[parser]
+type = "custom"
+function = "cbhi_nhp.py:parse"
+key = ["table", "state", "col"]
+
+# the States and UTs add up to India, in each column
+[[checks]]
+column = "state"
+rule = "India = rest"
+by = ["table", "col"]
+name = "States/UTs add up to India"
+
+# male and female add up to the total, in each row
+[[checks]]
+column = "col"
+rule = "Total Cases = Male Cases + Female Cases"
+by = ["table", "state"]
+name = "Male + Female = Total cases"
+
+[[checks]]
+column = "col"
+rule = "Total Deaths = Male Deaths + Female Deaths"
+by = ["table", "state"]
+name = "Male + Female = Total deaths"
+
+[output]
+layout = "table"
+rows = ["table", "disease", "year", "state"]
+columns = "col"
+format = "csv"

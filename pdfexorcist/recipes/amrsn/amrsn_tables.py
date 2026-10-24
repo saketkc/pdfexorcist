@@ -24,6 +24,9 @@ from amrsn_common import (
 from pdfexorcist import grid
 from pdfexorcist.cells import Box
 
+NUMBER = re.compile(r"[<>]?\d[\d,]*(?:\.\d+)?%?")
+YEAR = re.compile(r"(19|20)\d\d")  # a heading of years ("2021  2022") is not data
+
 
 def _index(values: list[float], v: float) -> int:
     return min(range(len(values)), key=lambda i: abs(values[i] - v))
@@ -41,8 +44,19 @@ def _emit(
     page_no: int, tid: str, title: str, cells: dict[tuple[int, int], list[str]]
 ) -> Iterator[dict]:
     """One record per cell. The label is the first cell of the row.
-    The column is the cell of the first row."""
-    first_row = min((r for r, _ in cells), default=0)
+    The column is the cells of the rows above the first row with a number (at most three):
+    headings printed on staggered lines ("Fluconazole" under "Amphotericin", 2020 Table 2.8)
+    are lines of one heading. A table whose first row has a number is headed by that row."""
+    rows = sorted({r for r, _ in cells})
+
+    def data(t: list[str]) -> bool:
+        text = norm(" ".join(t))
+        return bool(NUMBER.fullmatch(text)) and not YEAR.fullmatch(text)
+
+    numeric = [r for r in rows if any(data(t) for (q, _), t in cells.items() if q == r)]
+    # at most three lines of heading, and only above a row of numbers
+    head = [r for r in rows if r < numeric[0]][:3] if numeric else rows[:1]
+    head = head or rows[:1]
     for (r, c), texts in sorted(cells.items()):
         text = norm(" ".join(texts))
         if not text:
@@ -50,7 +64,7 @@ def _emit(
         yield {
             "page": page_no, "id": f"{page_no}.{tid}.{r}", "title": title, "group": "",
             "label": norm(" ".join(cells.get((r, 0), []))),
-            "col": c, "column": norm(" ".join(cells.get((first_row, c), []))),
+            "col": c, "column": norm(" ".join(t for h in head for t in cells.get((h, c), []))),
             "entry": "", "field": "text", "value": text,
         }  # fmt: skip
 

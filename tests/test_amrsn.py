@@ -290,6 +290,10 @@ def test_picture_caption_number_misread() -> None:
     assert num("TABLE 4 . 4: Location-wise") == "4.4"
     assert num("Table 1.18b: Isolate percentages") == "1.18b"
     assert num("Table shows the trend") is None
+    from amrsn_pictures import CAPTION_IN_PROSE
+
+    assert CAPTION_IN_PROSE.match("Table 4.11 depicts sample-wise susceptible trend")
+    assert not CAPTION_IN_PROSE.match("Table 4.11: Sample-wise susceptible percentage")
 
 
 def test_label_line_with_counts() -> None:
@@ -432,3 +436,77 @@ def test_wrapped_range_joins_its_first_half() -> None:
     assert [t for t, _ in above] == ["3564/3646", "87.7-99.8"]
     assert [t for t, _ in rest] == ["(97.8)"]
     assert _is_val("96.9-100") and _is_val("98.3")
+
+
+def test_staggered_heading_lines_name_every_column():
+    import amrsn_tables
+
+    cells = {(0, 1): ["Amphotericin"], (1, 2): ["Fluconazole"], (2, 1): ["B"],
+             (3, 0): ["CSVC-7.2"], (3, 1): ["0.5"], (3, 2): ["0.12"]}  # fmt: skip
+    recs = {r["col"]: r["column"] for r in amrsn_tables._emit(62, "t", "x", cells) if r["label"]}
+    assert recs == {0: "", 1: "Amphotericin B", 2: "Fluconazole"}
+
+
+def test_a_heading_row_of_years_names_its_columns():
+    import amrsn_tables
+
+    cells = {(0, 0): ["Indicator"], (0, 1): ["2021"], (0, 2): ["2022"],
+             (1, 0): ["Patient days"], (1, 1): ["4,72,959"], (1, 2): ["3,12,310"]}  # fmt: skip
+    recs = {r["col"]: r["column"] for r in amrsn_tables._emit(1, "t", "x", cells)}
+    assert recs == {0: "Indicator", 1: "2021", 2: "2022"}
+
+
+def test_picture_groups_of_repeated_rows(monkeypatch) -> None:
+    """Pin 2020 Table 2.10 (a picture captioned "Table 4." under the report's "Table 2.10"):
+    a group printed once beside its rows keys them, so a row one engine misses shifts no other
+    group, and "97.1 (68/70)" is one cell, not part of the label."""
+    import amrsn_pictures
+
+    monkeypatch.setattr(
+        amrsn_pictures, "_picture_captions", lambda page, pdf=None: [("2.10", "Table 2.10: x")]
+    )
+    lines = [
+        [(0, ""), (1, ""), (2, "Total (n = 70)"), (3, "C. krusei (n = 13)")],
+        [(0, "Essential agreement (%)"), (1, "Fluconazole"), (2, "97.1 (68/70)"), (3, "100")],
+        [(0, ""), (1, "Voriconazole"), (2, "92.8 (65/70)"), (3, "84.6")],
+        [(0, "Major errors (n)"), (1, "Fluconazole"), (2, "0"), (3, "0")],
+        [(0, ""), (1, "Voriconazole"), (2, "0"), (3, "1")],
+    ]
+    got = {(c["row"], c["col"]): c["value"] for c in parse_pictures([(65, lines)])}
+    assert got == {
+        ("essentialagreement:fluconazole#1", 0): "97.1(68/70)",
+        ("essentialagreement:fluconazole#1", 1): "100",
+        ("essentialagreement:voriconazole#1", 0): "92.8(65/70)",
+        ("essentialagreement:voriconazole#1", 1): "84.6",
+        ("majorerrorsn:fluconazole#1", 0): "0", ("majorerrorsn:fluconazole#1", 1): "0",
+        ("majorerrorsn:voriconazole#1", 0): "0", ("majorerrorsn:voriconazole#1", 1): "1",
+    }  # fmt: skip
+    box = list(parse_pictures([(65, [
+        [_box(50, "Table 2.10: Result of direct-antifungal susceptibility in yeast species")],
+        [_box(50, "Table4. Resultofdirect-antifungalsusceptibility in yeast species")],
+        [_box(50, "Fluconazole"), _box(200, "97.1"), _box(230, "(68/70)"), _box(300, "92.8")],
+        [_box(50, "Voriconazole"), _box(200, "92.8"), _box(230, "(65/70)"), _box(300, "85.7")],
+    ])]))  # fmt: skip
+    assert {c["table"] for c in box} == {"2.10"}
+    assert {c["value"] for c in box if c["col"] == 0} == {"97.1(68/70)", "92.8(65/70)"}
+
+
+def test_picture_model_percent_sign(monkeypatch) -> None:
+    """Pin 2018 Table 6.1: "(61.4%)" is the (%) under a count, and a model's "4467/7274/(61.4%)"
+    is the count and its (%)."""
+    import amrsn_pictures
+
+    monkeypatch.setattr(
+        amrsn_pictures, "_picture_captions", lambda page, pdf=None: [("6.1", "Table 6.1 x")]
+    )
+    lines = [
+        [(0, "Among S. aureus isolated in 2018, susceptibility was 61% to cefoxitin")],
+        [(0, "AMA"), (1, "Sau n=7939")],
+        [(0, "Cefoxitin"), (1, "4467/7274/(61.4%)")],
+        [(0, "Linezolid"), (1, "7484/7577/(98.8%)")],
+    ]
+    got = {(c["row"], c["field"]): c["value"] for c in parse_pictures([(72, lines)])}
+    assert got == {
+        ("cefoxitin#1", "value"): "4467/7274", ("cefoxitin#1", "pct"): "(61.4%)",
+        ("linezolid#1", "value"): "7484/7577", ("linezolid#1", "pct"): "(98.8%)",
+    }  # fmt: skip

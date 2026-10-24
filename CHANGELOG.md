@@ -9,6 +9,44 @@ workflow moves those entries into a dated section.
 
 ## [Unreleased]
 
+### Added
+
+- Recipes that read tables through their drawn cells and check their totals:
+  - `insp_sitrep`: DR Congo INSP Ebola situation reports, cases and deaths by province and
+    health zone.
+  - `cdsco_nsq`: CDSCO monthly lists of drugs Not of Standard Quality, one row per batch.
+  - `karnataka_dengue`: Karnataka daily dengue and chikungunya report by district (text PDFs).
+  - `tb_report`: India TB Report State/UT annexures, each % checked against its counts.
+  - `ncvbdc_states`: NCVBDC State/UT tables for dengue, chikungunya and malaria.
+  - `rhs`: Rural Health Statistics staff tables by State/UT.
+- Recipes that read text rows:
+  - `kerala_dhs`: Kerala DHS cases and deaths by disease and district.
+  - `cbhi_nhp`: CBHI National Health Profile cases and deaths by State/UT and sex.
+  - `naco_hiv`: NACO Sankalak and India HIV Estimates by State/UT; "est (lower-upper)" gives
+    three cells.
+  - `nha`: National Health Accounts Estimates, with ratio and share checks.
+- `tests/fixtures/download.py` downloads each fixture's source PDF, from the Internet Archive
+  when the site fails.
+
+### Fixed
+
+- `grid` finds tables whose rules are drawn as dots.
+- `pymupdf` word boxes use pdfplumber's page coordinates, so they fall in `grid` cells on pages
+  whose CropBox or MediaBox is offset.
+- Turning two or more sideways pages upright raised "source object number out of range".
+- Text printed sideways (headings turned a quarter) is kept and read as whole words by every
+  text engine; a sideways word joins only the line through its middle.
+- `amrsn`: headings printed on staggered lines name every column; "Table- 7.19 A:" is a caption.
+- `amrsn` pictures: an "R/n" over "(%)" table with wrapped "%Range" lines is read as one; data-bar
+  marks ("SHV O O", "116ął") are not part of a row label or value.
+- A % with its count joined as one token (`97.1(68/70)`) is a value.
+- `amrsn` pictures: a group printed once beside its rows ("Major errors (n)") is part of their
+  row key, and the output is indexed by row key, so repeated labels do not clash; "97.1 (68/70)"
+  is one cell; a picture's own caption under the report's keeps the report's number; "Table 4.11
+  depicts ..." in the text is not a caption.
+- `amrsn` pictures: "(61.4%)" under a count is its (%) (2018 Table 6.1); a table model's
+  "4467/7274/(61.4%)" is the count and its (%).
+
 ## [0.4.0] - 2026-10-24
 
 ### Added

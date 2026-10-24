@@ -7,7 +7,7 @@ Each line is a row.
 import logging
 import re
 from collections.abc import Iterable, Iterator, Sequence
-from difflib import get_close_matches
+from difflib import SequenceMatcher, get_close_matches
 from functools import lru_cache
 from pathlib import Path
 from typing import Any
@@ -25,21 +25,26 @@ OCR_CAPTION = re.compile(
     r"^\s*(?i:table)\s*((?=[\dzZlIoOS.\s]*\d)[\dzZlIoOS]+(?:\s*\.\s*[\dzZlIoOS]+)*[A-Za-z]?)\b"
 )
 DIGIT_LOOKALIKES = str.maketrans("zZlIoOS", "2211005")
+# "Table 4.11 depicts sample-wise ...": a sentence about a table, not its caption
+CAPTION_IN_PROSE = re.compile(
+    r"^\s*(?i:table)\s*[\d.\s]+\s(?i:depicts|shows?|showed|presents?|gives)\b"
+)
 # a data bar's edge read as a mark before a number ("_77", "|45") or after one ("78)")
 SPECK = re.compile(r"(?<!\S)[_~|•«»]+(?=\d)")
 # also "1479D", "746I", "773_"; not "-", which ends half of a split range ("89.9-" "100")
-TRAIL = re.compile(r"(?<=\d)[)\]|}_.€DIlOoS]+$")
+TRAIL = re.compile(r"(?<=\d)(?:[)\]|}_.€DIlOoS]|[^\x00-\x7f])+$")  # and "116ął"
 CENTRE = re.compile(r"\bRC[Il1]?\s+(\d{1,2})\b")  # "RC 01": the number names the centre
 # "RCC04", "RCO05", "RC05 O", "RC113 3131": the centre is RC and the next two digits
 RC_KEY = re.compile(r"^\s*R\s*C+\s*[IOo]?\s*(\d)(\d)?")
 # An "R/n" count ("5887/8595"). A "*" before it marks a small n. OCR can read it as a quote.
 RATIO = re.compile(r"^[*\"'“”]?\d+/\d+$")
-PCT = re.compile(r"^\((?:\d+(?:\.\d+)?|-|–)\)$")  # the "(%)" printed under an "R/n"
+PCT = re.compile(r"^\((?:\d+(?:\.\d+)?%?|-|–)\)$")  # the "(%)" under an "R/n"; "(61.4%)" in 2018
 RANGE = re.compile(r"^\d+(?:\.\d+)?-\d+(?:\.\d+)?$")  # a "%Range" across centres (2018)
 OPEN_RANGE = re.compile(r"^\d+(?:\.\d+)?-$")  # its first half, wrapped: "87.7-" over "99.8"
 PROSE = 6  # a line with this many words is prose
 LABEL_WORD = re.compile(r"RC\d{1,2}|[A-Za-z][A-Za-z.\-/]+")  # words of a row label in a pair table
 COL_GAP = 20  # points between the centres of two columns of centred values
+COUNT = re.compile(r"(?<=\d)\s+(?=\(\d+/\d+\))")  # "97.1 (68/70)": a % and its count, one cell
 
 
 def _is_val(tok: str) -> bool:
@@ -49,7 +54,9 @@ def _is_val(tok: str) -> bool:
 
 def _clean(cell: Sequence) -> BoxCell:
     """A cell without the marks OCR reads off a data bar around a number."""
-    words = [SPECK.sub("", w) for w in str(cell[1]).split(" ")]
+    text = re.sub(r"\)(?=\d)", ") ", str(cell[1]))  # "(91.3)93.9": a (%) and the next value
+    text = COUNT.sub("", text)
+    words = [SPECK.sub("", w) for w in text.split(" ")]
     words = [w if "(" in w else TRAIL.sub("", w) for w in words]  # "(97)" keeps its ")"
     return BoxCell(cell[0], CENTRE.sub(r"RC\1", " ".join(words)), cell_box(cell))
 
@@ -60,6 +67,9 @@ def _cells(line: list) -> list[BoxCell]:
     for c in map(_clean, line):
         if out and re.fullmatch(r"RC[Il1]?", out[-1][1]) and re.fullmatch(r"\d{1,2}", c[1]):
             out[-1] = BoxCell(out[-1][0], "RC" + c[1], union([cell_box(out[-1]), cell_box(c)]))
+        elif out and re.search(r"\d$", out[-1][1]) and re.fullmatch(r"\(\d+/\d+\)", c[1]):
+            box = union([cell_box(out[-1]), cell_box(c)])
+            out[-1] = BoxCell(out[-1][0], out[-1][1] + c[1], box)
         else:
             out.append(c)
     return out
@@ -70,8 +80,34 @@ def _row_key(label: str) -> str:
     misread by one engine takes the nearest word of the antibiograms ("mipenem")."""
     if m := RC_KEY.match(label):
         return f"rc{int(m[1] + (m[2] or '')):02d}"
+    label = re.sub(r"(?<!\S)[OoIl|](?!\S)", " ", label)  # a data bar's edge read as "O" ("SHV O O")
     head = "".join(re.findall(r"\d", "".join(label.split()[:2])))
     return "".join(_snap(w) for w in re.findall(r"[a-z]+", label.lower())) + head
+
+
+def _keys(labels: list[str]) -> list[str]:
+    """Row keys: _row_key and the label's count so far ("caspofungin#2").
+
+    Where labels repeat, a group printed once beside its block of rows joins the key: a label
+    ending in the same word as labels with other words before it opens a group ("Essential
+    agreement (%) Fluconazole", "Major errors (n) Fluconazole"; 2020 p65). An engine that
+    misses a row then shifts only the rows of its group.
+    """
+    words = [lab.split() for lab in labels]
+    groups: dict[str, set] = {}
+    for w in words:
+        if len(w) > 1:
+            groups.setdefault(_row_key(w[-1]), set()).add(_row_key(" ".join(w[:-1])))
+    repeats = len({_row_key(lab) for lab in labels}) < len(labels)
+    group, out, seen = "", [], {}
+    for lab, w in zip(labels, words, strict=True):
+        key = _row_key(lab)
+        if repeats and len(w) > 1 and len(groups.get(_row_key(w[-1]), ())) > 1:
+            group, key = _row_key(" ".join(w[:-1])), _row_key(w[-1])
+        key = f"{group}:{key}" if group else key
+        seen[key] = seen.get(key, 0) + 1
+        out.append(f"{key}#{seen[key]}")
+    return out
 
 
 @lru_cache(maxsize=4096)
@@ -98,22 +134,23 @@ def _region(page_no: int, region: list, num: str, title: str | None) -> Iterator
             rows.append((" ".join(t for t, _ in toks if not _is_val(t)), vals))
         elif not rows:
             heads.append(chunks(toks))
-    # an "R/n" over "(%)" table: most rows hold a count (one misread "2083/61" does not count)
-    if sum(any(RATIO.match(t) for t, _ in vals) for _, vals in rows) * 2 >= len(rows) > 0:
+    # an "R/n" over "(%)" table: a third of the rows hold a count, and counts and their (%)
+    # lines make most rows (wrapped "%Range" halves and a "n=4609" line are the rest; 2018 p74)
+    ratio = sum(any(RATIO.match(t) for t, _ in vals) for _, vals in rows)
+    pct = sum(any(PCT.match(t) for t, _ in vals) for _, vals in rows)
+    if rows and ratio * 3 >= len(rows) and ratio + pct >= 0.7 * len(rows):
         yield from _pairs_region(page_no, num, title, toks_by_line, heads)
         return
     counts = [len(vals) for _, vals in rows]
     full = counts and counts.count(max(counts)) >= 0.6 * len(counts)
-    cells = parse_by_columns([(page_no, lines)], min_values=2) if full else _by_edges(rows)
-    seen: dict[str, int] = {}
-    last, key = None, ""
+    found = parse_by_columns([(page_no, lines)], min_values=2) if full else _by_edges(rows)
+    cells = list(found)
+    labels = {c["row"]: c["label"] for c in reversed(cells)}  # each row's first label
+    order = list(dict.fromkeys(c["row"] for c in cells))
+    keys = dict(zip(order, _keys([labels[r] for r in order]), strict=True))
     for c in cells:
-        if c["row"] != last:
-            last = c["row"]
-            key = _row_key(c["label"])
-            seen[key] = seen.get(key, 0) + 1
         yield {
-            "page": page_no, "table": num, "title": title, "row": f"{key}#{seen[key]}",
+            "page": page_no, "table": num, "title": title, "row": keys[c["row"]],
             "col": c["col"], "column": _heading(heads, cx(c["box"])) if c.get("box") else "",
             "label": c["label"], "field": "value", "value": c["value"],
         }  # fmt: skip
@@ -269,22 +306,29 @@ def _model_page(page_no: int, lines: list, pdf: str | None = None) -> Iterator[d
                 if (all if j == 0 else any)(map(_is_val, c.split())) and c
             }
         )  # not "RC 01"
-        seen: dict[str, int] = {}
+        labels = []
         for r in rows:
-            first = r[0][1] if r[0][0] == 0 else ""
-            label = first if not all(map(_is_val, first.split())) else ""  # "RC 01" is a label
-            key = _row_key(label)
-            seen[key] = seen.get(key, 0) + 1
+            # the cells before the first value: a group spanning rows ("Essential agreement
+            # (%)") and the row's own label (2020 p65); "RC 01" is a label
+            lead = []
+            for j, c in r:
+                if c and all(map(_is_val, COUNT.sub("", c).split())):
+                    break
+                lead.append((j, c))
+            labels.append((" ".join(c for _, c in lead if c), {j for j, _ in lead}))
+        keys = _keys([lab for lab, _ in labels])
+        for (label, skip), key, r in zip(labels, keys, rows, strict=True):
             for j, text in r:
                 text = re.sub(r"(?<=\d)-\s+(?=\d)", "-", text)  # a range wrapped in its cell
+                text = COUNT.sub("", text)
                 vals = [t for t in text.split() if _is_val(t)]
-                if not vals or (label and j == 0):
+                if not vals or j in skip:
                     continue
                 column = _model_heading(maps, j)
                 for t in vals:
                     yield {
                         "page": page_no, "table": num, "title": title,
-                        "row": f"{key}#{seen[key]}", "col": used.index(j),
+                        "row": key, "col": used.index(j),
                         "column": column.lower(), "label": label,
                         "field": _field(t), "value": t,
                     }  # fmt: skip
@@ -329,7 +373,8 @@ def _model_tables(lines: list) -> list[tuple[list, list]]:
                 tables.append((heads, rows))
             heads, rows = [], []
             continue
-        cells = [(int(c[0]), str(c[1])) for c in line]
+        # "4467/7274/(61.4%)": a model joins the two lines of a cell with "/"
+        cells = [(int(c[0]), re.sub(r"(?<=\d)/\s*(?=\()", " ", str(c[1]))) for c in line]
         text = " ".join(c for _, c in cells)
         # The model also reads captions and prose. A prose cell has many words.
         if CAPTION.match(text) or END.match(text) or any(_prose(c) for _, c in cells):
@@ -410,6 +455,13 @@ def _has_rows(region: list) -> bool:
     return False
 
 
+def _same_title(title: str | None, text: str) -> bool:
+    """Whether two captions read alike after their numbers. Letters only: docTR can join the
+    words ("Resultofdirect-antifungal")."""
+    a, b = (re.sub(r"[^a-z]", "", OCR_CAPTION.sub("", str(t)).lower())[:40] for t in (title, text))
+    return len(a) >= 10 and SequenceMatcher(None, a, b).ratio() >= 0.8
+
+
 def _regions(lines: list, start: tuple | None) -> Iterator[tuple[str, str, list, bool]]:
     """Each caption's (number, title, lines below it, whether the footer ended them).
 
@@ -419,7 +471,9 @@ def _regions(lines: list, start: tuple | None) -> Iterator[tuple[str, str, list,
     region: list = []
     for line in [*lines, None]:
         text = " ".join(str(c[1]) for c in line) if line is not None else ""
-        cap = OCR_CAPTION.match(text)
+        cap = None if CAPTION_IN_PROSE.match(text) else OCR_CAPTION.match(text)
+        if cap and num is not None and not _has_rows(region) and _same_title(title, text):
+            continue  # the picture's own caption under the report's ("Table 4." under "Table 2.10")
         foot = line is None or bool(FOOT.search(text))
         if not (foot or cap or END.match(text)):
             if num is not None:

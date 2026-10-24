@@ -16,7 +16,8 @@ A custom parser takes only pages, so extract() publishes the PDF it is reading:
 Boxes are (x0, top, x1, bottom) in points from the top-left, as BoxCell boxes are.
 """
 
-from collections.abc import Iterator
+import math
+from collections.abc import Iterable, Iterator, Sequence
 from contextlib import contextmanager
 from contextvars import ContextVar
 from dataclasses import dataclass
@@ -24,11 +25,15 @@ from functools import lru_cache
 from pathlib import Path
 from typing import Any, cast
 
-from .cells import Box
+from .cells import Box, _inside, token_boxes
 
 _PDF: ContextVar[Path | None] = ContextVar("pdfexorcist_grid_pdf", default=None)
 
-__all__ = ["Table", "current_pdf", "reading", "tables"]
+__all__ = ["SNAP", "Table", "Word", "bands", "current_pdf", "reading", "snap", "tables"]
+__all__ += ["in_band", "words", "words_in"]
+
+SNAP = 2.5  # pt: drawn edges closer than this are one edge
+Word = tuple[str, Box]
 
 
 @dataclass(frozen=True)
@@ -44,6 +49,36 @@ class Table:
             c for c in self.cells if c[0] - 0.5 <= x <= c[2] + 0.5 and c[1] - 0.5 <= y <= c[3] + 0.5
         ]
         return min(hits, key=lambda c: (c[2] - c[0]) * (c[3] - c[1])) if hits else None
+
+
+def snap(values: Iterable[float], tol: float = SNAP) -> list[float]:
+    """Sorted values, dropping each within tol of the last one kept."""
+    out: list[float] = []
+    for v in sorted(values):
+        if not out or v - out[-1] > tol:
+            out.append(v)
+    return out
+
+
+def bands(table: Table) -> list[float]:
+    """The table's row edges: the top and bottom of every drawn cell, snapped."""
+    return snap([c[1] for c in table.cells] + [c[3] for c in table.cells])
+
+
+def words(lines: Sequence[Sequence]) -> list[Word]:
+    """An engine's words on one page that carry a box."""
+    return [(t, tb) for line in lines for _, t, tb in token_boxes(line) if tb is not None]
+
+
+def words_in(ws: Sequence[Word], box: Box) -> list[Word]:
+    """The words whose centre lies in box, top to bottom then left to right."""
+    inside = [w for w in ws if _inside(box, *w[1])]
+    return sorted(inside, key=lambda w: (round(w[1][1] / 4), w[1][0]))
+
+
+def in_band(ws: Sequence[Word], top: float, bottom: float) -> list[Word]:
+    """The words whose centre lies between top and bottom."""
+    return [w for w in ws if top <= (w[1][1] + w[1][3]) / 2 <= bottom]
 
 
 def current_pdf() -> Path:
@@ -117,5 +152,50 @@ def _rules(page: Any) -> list[dict]:
     def rule(obj: dict) -> bool:
         return bool(obj.get("stroke")) or min(obj["width"], obj["height"]) < RULE_PT
 
-    keep = [*page.lines, *filter(rule, page.rects), *filter(rule, page.curves)]
-    return [e for obj in keep for e in obj_to_edges(obj)]  # _tables keeps the h and v ones
+    def dot(obj: dict) -> bool:
+        return max(obj["width"], obj["height"]) <= DOT_PT
+
+    rects = [r for r in page.rects if not dot(r)]
+    keep = [*page.lines, *filter(rule, rects), *filter(rule, page.curves)]
+    edges = [e for obj in keep for e in obj_to_edges(obj)]  # _tables keeps the h and v ones
+    return edges + _dotted([r for r in page.rects if dot(r)])
+
+
+DOT_PT = 0.6  # a rectangle this small on both sides is a dot of a dotted rule
+
+
+def _dotted(dots: list[dict]) -> list[dict]:
+    """Edges from rules drawn as rows or columns of touching dots."""
+    out: list[dict] = []
+    for vertical in (True, False):
+        lines: dict[float, list[tuple[float, float]]] = {}
+        for d in dots:
+            at, span = (
+                (d["x0"], (d["top"], d["bottom"])) if vertical else (d["top"], (d["x0"], d["x1"]))
+            )
+            lines.setdefault(round(at * 2) / 2, []).append(span)
+        for at, spans in lines.items():
+            spans.sort()
+            lo, hi = spans[0]
+            for a, b in [*spans[1:], (math.inf, math.inf)]:
+                if a - hi <= DOT_PT:
+                    hi = max(hi, b)
+                    continue
+                if hi - lo >= 3:  # pt; shorter runs are specks
+                    out.append(_edge(at, lo, hi, vertical))
+                lo, hi = a, b
+    return out
+
+
+def _edge(at: float, lo: float, hi: float, vertical: bool) -> dict:
+    x0, x1, top, bottom = (at, at, lo, hi) if vertical else (lo, hi, at, at)
+    return {
+        "x0": x0,
+        "x1": x1,
+        "top": top,
+        "bottom": bottom,
+        "width": x1 - x0,
+        "height": bottom - top,
+        "orientation": "v" if vertical else "h",
+        "object_type": "dot_edge",
+    }

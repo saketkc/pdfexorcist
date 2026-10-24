@@ -58,13 +58,16 @@ def upright_pages(pdf: Path, out_dir: Path) -> Path:
         dirs = [None if page.rotation else _turn(page) for page in doc]
         if not any(dirs):
             return pdf
+        # redact all pages first; copying between redactions breaks object numbers
+        for page, d in zip(doc, dirs, strict=True):
+            if d is not None:
+                # a dot per character; a running head's box can overlap table text
+                redact_dots(page, (xy for k, v in _centres(page).items() if k != d for xy in v))
         with pymupdf.open() as out:
             for page, d in zip(doc, dirs, strict=True):
                 if d is None:
                     out.insert_pdf(doc, from_page=page.number, to_page=page.number)
                     continue
-                # a dot per character; a running head's box can overlap table text
-                redact_dots(page, (xy for k, v in _centres(page).items() if k != d for xy in v))
                 w, h = page.rect.width, page.rect.height
                 if d[0] == 0:
                     w, h = h, w
