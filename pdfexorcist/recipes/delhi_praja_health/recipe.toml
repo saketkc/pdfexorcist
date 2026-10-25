@@ -1,0 +1,72 @@
+# pdfexorcist recipe: Praja Foundation, State of Health in Delhi, cases by MCD zone
+#
+# Zone tables ("Zone- wise Malaria Data", 2017 to 2019 editions; "Zone wise Malaria cases
+# registered in MCD & State Dispensary", 2022): cases registered in the government
+# dispensaries and hospitals of each zone of the three municipal corporations (EDMC, NDMC
+# for North Delhi, SDMC) and New Delhi Municipal Council, a column a year, with a Total
+# row. Delhi tables ("Malaria number of cases in government dispensaries/hospitals in
+# Delhi", 2017 to 2024): MCD and state facilities (dispensaries and hospitals apart from
+# 2022), Total Cases and deaths. Diseases: malaria, dengue, tuberculosis, diarrhoea,
+# cholera, typhoid, hepatitis, HIV, diabetes, hypertension. The data are the
+# corporations' and the Delhi government's, obtained by Praja under RTI. Reports:
+# https://www.praja.org/praja_docs/praja_downloads/ . On the fixtures:
+#
+#   pdfexorcist extract tests/fixtures/delhi_praja_health/praja_delhi_2018_p45.pdf --recipe pdfexorcist/recipes/delhi_praja_health/recipe.toml
+
+name = "Praja State of Health in Delhi, cases by MCD zone"
+description = "Cases registered in government dispensaries and hospitals by MCD zone and year, one disease a table (Praja Foundation, Delhi)"
+sample = "../../../tests/fixtures/delhi_praja_health/praja_delhi_2018_p45.pdf"
+
+[pages]
+match = 'Zone\s*-?\s*wise\s+(Malaria|Dengue|TB|Tuberculosis|Diarrh?oea|Cholera|Typhoid|Hepatitis|HIV|Diabetes|Hypertension)\s+(Data|cases)|(Malaria|Dengue|Tuberculosis|Diarrh?oea|Cholera|Typhoid|Hepatitis|HIV|Diabetes|Hypertension)\s+(number\s+of\s+)?cases\s+(registered\s+)?in\s+government'
+
+[engines]
+ocr = false
+
+[normalize]
+remove_commas = true  # 1,47,57,803
+
+[parser]
+type = "custom"
+function = "delhi_praja_health.py:parse"
+key = ["table", "row", "col"]
+
+# zones add up to the Total row
+[[checks]]
+column = "row"
+rule = "Total = rest"
+by = ["table", "col"]
+where = "kind in ['zone', 'total']"
+name = "zones = Total"
+
+# the years add up to the Total column (2022 zone tables)
+[[checks]]
+column = "col"
+rule = "Total = rest"
+by = ["table", "row"]
+name = "years = Total"
+
+# MCD and state facilities add up to Total Cases (Delhi tables)
+[[checks]]
+column = "row"
+rule = "Total Cases = MCD Total + State Total"
+by = ["table", "col"]
+name = "MCD + State = Total Cases"
+
+[[checks]]
+column = "row"
+rule = "MCD Total = MCD Dispensaries + MCD Hospital"
+by = ["table", "col"]
+name = "MCD dispensaries + hospitals"
+
+[[checks]]
+column = "row"
+rule = "State Total = State Dispensaries + State Hospital"
+by = ["table", "col"]
+name = "State dispensaries + hospitals"
+
+[output]
+layout = "table"
+rows = ["table", "disease", "row"]
+columns = "col"
+format = "csv"

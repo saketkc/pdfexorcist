@@ -72,6 +72,13 @@ def fit_page_boxes(pdf: Path, out_dir: Path) -> Path:
         return _fit_boxes(doc, pdf, out_dir)
 
 
+def _ocr_layer_only(page: Any) -> bool:
+    """Whether all of page's text is unseen (render mode 3 or no opacity): a scanning app's
+    OCR layer. Adobe Scan's strays far outside the page (DR-30-07-2025: a box grown from 444
+    to 741 pt), which would shrink the scan in the page and hide it from turn_scans."""
+    return all(s["type"] == 3 or s["opacity"] == 0 for s in page.get_texttrace())
+
+
 def _fit_boxes(doc: Any, pdf: Path, out_dir: Path) -> Path:
     import pymupdf
 
@@ -85,7 +92,7 @@ def _fit_boxes(doc: Any, pdf: Path, out_dir: Path) -> Path:
         box = pymupdf.Rect(page.cropbox)
         for w in words:
             box |= pymupdf.Rect(w[:4]) * page.derotation_matrix
-        if box != page.cropbox:
+        if box != page.cropbox and not _ocr_layer_only(page):
             # set_mediabox also resets the CropBox (which MuPDF clips to) to the new MediaBox
             page.set_mediabox(box * ~page.transformation_matrix)
             grown += 1

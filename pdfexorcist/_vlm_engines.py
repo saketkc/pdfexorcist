@@ -182,15 +182,18 @@ def _page_pictures(pdf: Path) -> Iterator[tuple[int, list]]:
     the whole page rendered when it has none."""
     import pymupdf
 
+    from .pages import image_boxes
+
     with pymupdf.open(pdf) as doc:
         for i, page in enumerate(doc, start=1):
             area = page.rect.width * page.rect.height
             crops = []
-            for info in sorted(page.get_image_info(), key=lambda d: d["bbox"][1]):
-                rect = pymupdf.Rect(info["bbox"]) & page.rect
+            for box, info in sorted(image_boxes(page), key=lambda b: b[0].y0):
+                rect = box & page.rect  # in the turned page, as clip is (/Rotate)
                 if rect.is_empty or rect.width * rect.height < PICTURE_SHARE * area:
                     continue
-                dpi = min(300, max(72, round(info["width"] / rect.width * 72)))
+                across = rect.height if page.rotation % 180 else rect.width  # info["width"]'s
+                dpi = min(300, max(72, round(info["width"] / across * 72)))
                 crops.append(_image(page.get_pixmap(clip=rect, dpi=dpi)))
             yield i, crops or [render_page(page, None).image]
 

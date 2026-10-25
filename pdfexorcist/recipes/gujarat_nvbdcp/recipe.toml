@@ -1,0 +1,38 @@
+# pdfexorcist recipe: Gujarat NVBDCP monthly report (2018-2019 decks), malaria by district
+#
+# Each district's (and municipal corporation's) chart page: slide positivity rate (SPR),
+# slide falciparum rate (SFR), monthly blood examination rate (MBER) and monthly
+# parasite incidence (MPI), month by month from January of the previous year to the
+# report's month. Values are keyed by page, indicator and order (c01 is January of the
+# previous year); the district and years are in the page title, left to the caller.
+# Listed at https://gujhealth.gujarat.gov.in/malaria-control.htm and
+# https://nhm.gujarat.gov.in/nvbdcp1.htm. On the fixture:
+#
+#   pdfexorcist extract tests/fixtures/gujarat_nvbdcp/gujarat_nvbdcp_2018-12_p9.pdf --recipe pdfexorcist/recipes/gujarat_nvbdcp/recipe.toml
+
+name = "Gujarat NVBDCP district malaria indicators"
+description = "SPR, SFR, MBER and MPI by month for one district a page (Gujarat NVBDCP monthly report, 2018-2019)"
+sample = "../../../tests/fixtures/gujarat_nvbdcp/gujarat_nvbdcp_2018-12_p9.pdf"
+
+[pages]
+match = 'Month\s*wise\s+SPR'
+
+[engines]
+ocr = false
+
+[parser]
+type = "custom"
+function = "gujarat_nvbdcp.py:parse"
+key = ["page", "measure", "col"]
+
+[[checks]]
+column = "measure"
+rule = "SPR >= SFR"
+by = ["page", "col"]
+name = "positivity >= falciparum"
+
+[output]
+layout = "table"
+rows = ["page", "measure"]
+columns = "col"
+format = "csv"

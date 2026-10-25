@@ -1,0 +1,58 @@
+# pdfexorcist recipe: Praja Foundation, Mumbai health white paper, cases by BMC ward
+#
+# "Ward wise <disease> Data" (2013 to 2019 editions), "Ward wise registered cases of
+# <disease>" (2012) and "Ward Wise <disease> Cases Registered in BMC dispensaries" (2022,
+# 2024): cases registered in the municipal dispensaries of each of Mumbai's 24 wards, a
+# column a year (financial years to 2018, calendar years from 2019), with hospital rows
+# and a Total in most editions. Diseases: malaria, dengue, tuberculosis, diarrhoea,
+# typhoid, HIV, hypertension, diabetes. The data are BMC's, obtained by Praja under RTI.
+# White papers: https://www.praja.org/praja_docs/praja_downloads/ . On the fixture:
+#
+#   pdfexorcist extract tests/fixtures/mumbai_praja_health/praja_health_2024_p41.pdf --recipe pdfexorcist/recipes/mumbai_praja_health/recipe.toml
+
+name = "Praja Mumbai health white paper, cases by ward"
+description = "Cases registered in BMC dispensaries by ward and year, one disease a table (Praja Foundation, Mumbai)"
+sample = "../../../tests/fixtures/mumbai_praja_health/praja_health_2024_p41.pdf"
+
+[pages]
+match = 'Ward\s*-?\s*wise\s*\d*\s+(registered\s+cases\s+of\s+)?(Malaria|Dengue|TB|Tuberculosis|Diabetes|Diarrh?oea|Hypertension|HIV|Typhoid)'
+
+[engines]
+ocr = false
+
+[normalize]
+remove_commas = true  # 1,24,42,373
+
+[parser]
+type = "custom"
+function = "mumbai_praja_health.py:parse"
+key = ["table", "row", "col"]
+
+# wards and hospitals add up to the Total row (2013 to 2019 editions)
+[[checks]]
+column = "row"
+rule = "Total = rest"
+by = ["table", "col"]
+where = "kind != 'dispensaries'"
+name = "wards + hospitals = Total"
+
+# wards add up to the Total Municipal Dispensaries row (2019 edition)
+[[checks]]
+column = "row"
+rule = "Total Municipal Dispensaries = rest"
+by = ["table", "col"]
+where = "kind in ['ward', 'dispensaries']"
+name = "wards = Total Municipal Dispensaries"
+
+# the years add up to the Total column (2022 and 2024 editions)
+[[checks]]
+column = "col"
+rule = "Total = rest"
+by = ["table", "row"]
+name = "years = Total"
+
+[output]
+layout = "table"
+rows = ["table", "disease", "row"]
+columns = "col"
+format = "csv"

@@ -1,0 +1,4 @@
+fixture,source_url,report_date,source_pages,note
+rj_scrub_typhus_2025-05-23.pdf,https://rajswasthya.rajasthan.gov.in/admin/upload/mausami/Scrub%20Typhu.pdf,2025-05-23,1,"Cumulative to 23 May 2025. Jaipur 2's positives are blank; district names in mixed case and capitals."
+rj_h1n1_2025-05-16.pdf,https://rajswasthya.rajasthan.gov.in/admin/upload/mausami/Swine%20Flu%20Status%20upto%2016.05.2025.pdf,2025-05-16,1,"Influenza A(H1N1) from 1 January to 16 May 2025; ""Deaths"" where the others print ""Death""."
+rj_leptospirosis_2025-05-08.pdf,https://rajswasthya.rajasthan.gov.in/admin/upload/mausami/Brucellosis%20&%20Leptospirosts.pdf,2025-05-08,1,"Two diseases side by side (leptospirosis, brucellosis); ""Jaipur 2"" ends in a digit."

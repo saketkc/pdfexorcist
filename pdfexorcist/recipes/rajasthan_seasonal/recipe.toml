@@ -1,0 +1,42 @@
+# pdfexorcist recipe: Rajasthan seasonal disease status by district
+#
+# Cumulative positives and deaths since 1 January, per district (42 health districts,
+# Jaipur and "Jaipur 2" apart) and Total, for scrub typhus, influenza A (H1N1), or
+# leptospirosis and brucellosis. The Medical, Health and Family Welfare department links
+# them from https://rajswasthya.rajasthan.gov.in/link/mausami.php and overwrites each file
+# in place. The dengue/malaria/chikungunya status there is a scan (no text layer). Try:
+#
+#   pdfexorcist extract 'https://rajswasthya.rajasthan.gov.in/admin/upload/mausami/Scrub%20Typhu.pdf' --recipe rajasthan_seasonal
+#
+# On the fixture:
+#
+#   pdfexorcist extract tests/fixtures/rajasthan_seasonal/rj_leptospirosis_2025-05-08.pdf --recipe pdfexorcist/recipes/rajasthan_seasonal/recipe.toml
+
+name = "Rajasthan seasonal disease status"
+description = "Cumulative positives and deaths by district for scrub typhus, H1N1, leptospirosis and brucellosis (Rajasthan health department)"
+sample = "../../../tests/fixtures/rajasthan_seasonal/rj_leptospirosis_2025-05-08.pdf"
+
+[engines]
+ocr = false
+
+[parser]
+type = "custom"
+function = "rajasthan_seasonal.py:parse"
+key = ["disease", "district", "col"]
+
+[[checks]]
+column = "district"
+rule = "Total = rest"
+by = ["disease", "col"]
+name = "districts = total"
+
+[[checks]]
+column = "col"
+rule = "positive >= deaths"
+by = ["disease", "district"]
+
+[output]
+layout = "table"
+rows = ["disease", "district"]
+columns = "col"
+format = "csv"

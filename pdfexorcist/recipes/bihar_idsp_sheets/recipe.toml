@@ -1,0 +1,37 @@
+# pdfexorcist recipe: State Health Society Bihar monthly IDSP report, district sheets
+#
+# The annexed "SHEET A-Z" tables of the monthly report: one disease or syndrome of one
+# IDSP form (presumptive P, laboratory L, syndromic S) a sheet, cases by district and
+# month for the year so far, with a TOTAL row. Rows are keyed by page, table on the page
+# and district as printed; the sheet's disease and year are in its heading, left to the
+# caller. The reports (September 2012 to June 2018) are listed at
+# http://statehealthsocietybihar.org/idsp.html. On the fixture:
+#
+#   pdfexorcist extract tests/fixtures/bihar_idsp_sheets/bihar_sheets_2016-06_p77.pdf --recipe pdfexorcist/recipes/bihar_idsp_sheets/recipe.toml
+
+name = "Bihar IDSP monthly district sheets"
+description = "Cases by district and month for one IDSP disease a sheet (State Health Society Bihar monthly report annexure)"
+sample = "../../../tests/fixtures/bihar_idsp_sheets/bihar_sheets_2016-06_p77.pdf"
+
+[pages]
+match = 'CASE\s*OF'
+
+[engines]
+ocr = false
+
+[parser]
+type = "custom"
+function = "bihar_idsp_sheets.py:parse"
+key = ["page", "table", "district", "col"]
+
+[[checks]]
+column = "district"
+rule = "Total = rest"
+by = ["page", "table", "col"]
+name = "districts = total"
+
+[output]
+layout = "table"
+rows = ["page", "table", "district"]
+columns = "col"
+format = "csv"

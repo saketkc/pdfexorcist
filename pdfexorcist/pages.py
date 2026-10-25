@@ -14,6 +14,7 @@ _RANGE = re.compile(r"^(\d+)?\s*(-)?\s*(\d+)?$")
 IMAGE_SUFFIXES = {".png", ".jpg", ".jpeg", ".tif", ".tiff", ".bmp", ".webp"}
 INPUT_SUFFIXES = IMAGE_SUFFIXES | {".pdf"}
 STRIP = 0.15  # share of the page height read by OCR for titles
+COVER = 0.8  # share of the page a scan's picture covers (DR17-10-23 p2: 0.89, its box grown)
 
 
 def parse_pages(spec: str, n_pages: int | None = None) -> list[int]:
@@ -171,18 +172,23 @@ def page_kinds(pdf: Path, pages: Sequence[int] | None = None) -> list[dict]:
     with pymupdf.open(pdf) as doc:
         for i in pages or range(1, doc.page_count + 1):
             page = doc[i - 1]
-            area = abs(page.rect) or 1.0
-            cover = max((abs(box & page.rect) for box, _ in image_boxes(page)), default=0.0)
             out.append(
                 {
                     "page": i,
                     "chars": len("".join(page.get_text().split())),
-                    "scan": cover / area >= 0.8,
+                    "scan": is_scan_page(page),
                     "width": round(page.rect.width, 1),
                     "height": round(page.rect.height, 1),
                 }
             )
     return out
+
+
+def is_scan_page(page: Any) -> bool:
+    """Whether one picture covers page."""
+    # scanners leave a sliver of the page bare (DR22-1-24: 0.3 pt at the top)
+    cover = max((abs(box & page.rect) for box, _ in image_boxes(page)), default=0.0)
+    return cover >= COVER * (abs(page.rect) or 1.0)
 
 
 def is_scan(kinds: Sequence[dict]) -> bool:

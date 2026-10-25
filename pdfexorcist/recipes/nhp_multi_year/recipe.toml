@@ -1,0 +1,41 @@
+# pdfexorcist recipe: CBHI National Health Profile, State/UT wise tables by year
+#
+# The tables of chapter 3.1 that print several years side by side, one disease a table:
+# malaria, clinically suspected chikungunya, kala-azar, acute encephalitis syndrome,
+# Japanese encephalitis, dengue (cases and deaths) and lab confirmed influenza A H1N1.
+# nhp_multi_year.py reads the disease from the title and each value's year and measure
+# from the header; the last year is often provisional. The tables of one year by sex are
+# in cbhi_nhp. Try it on NHP 2021:
+#
+#   pdfexorcist extract https://web.archive.org/web/2024id_/http://cbhidghs.mohfw.gov.in/sites/default/files/NHP/National-health-2021.pdf --recipe nhp_multi_year
+#
+# On the fixture (NHP 2021, dengue and H1N1):
+#
+#   pdfexorcist extract tests/fixtures/nhp_multi_year/nhp_2021_p188_231.pdf --recipe pdfexorcist/recipes/nhp_multi_year/recipe.toml
+
+name = "NHP cases and deaths by year"
+description = "State/UT wise malaria, dengue, chikungunya, kala-azar, AES, JE and H1N1 cases and deaths by year (CBHI National Health Profile)"
+sample = "../../../tests/fixtures/nhp_multi_year/nhp_2021_p188_231.pdf"
+
+
+[engines]
+use = ["pdftotext", "pdfplumber", "pymupdf", "pdfium"]
+ocr = false
+
+[parser]
+type = "custom"
+function = "nhp_multi_year.py:parse"
+key = ["disease", "state", "col"]
+
+# the States and UTs add up to India, in each year and measure
+[[checks]]
+column = "state"
+rule = "India = rest"
+by = ["disease", "col"]
+name = "States/UTs add up to India"
+
+[output]
+layout = "table"
+rows = ["disease", "state"]
+columns = "col"
+format = "csv"

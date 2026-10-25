@@ -2,8 +2,10 @@
 
 from pathlib import Path
 
+from ._deskew import straighten_scans
 from ._glyphs import decode_type3
 from ._invisible import drop_invisible
+from ._orient import turn_scans
 from ._prepare import _pages, crop_pages, fit_page_boxes
 from ._segments import merge_segments
 from ._slanted import drop_slanted
@@ -12,7 +14,8 @@ from ._upright import upright_pages
 
 def clean_pdf(pdf: Path, out_dir: Path, decode_fonts: bool = True, fit_boxes: bool = True) -> Path:
     """Redraw rules drawn in pieces whole, decode Type3 glyphs, fit page boxes, turn sideways
-    pages upright, drop slanted and invisible text; each step writes a copy under out_dir."""
+    pages upright, drop slanted and invisible text, turn sideways scans upright and level
+    tilted ones; each step writes a copy under out_dir."""
     pdf = merge_segments(pdf, out_dir / "rules")
     if decode_fonts:
         pdf = decode_type3(pdf, out_dir / "decoded")
@@ -20,7 +23,9 @@ def clean_pdf(pdf: Path, out_dir: Path, decode_fonts: bool = True, fit_boxes: bo
         pdf = fit_page_boxes(pdf, out_dir / "fit")
     pdf = upright_pages(pdf, out_dir / "upright")
     pdf = drop_slanted(pdf, out_dir / "level")
-    return drop_invisible(pdf, out_dir / "visible")
+    pdf = drop_invisible(pdf, out_dir / "visible")
+    pdf = turn_scans(pdf, out_dir / "turned")  # after: a hidden OCR layer hides a scan
+    return straighten_scans(pdf, out_dir / "level_scans")  # after: tilt is read upright
 
 
 def cut(pdf: Path, pages: list[int] | None, area: tuple | None, out_dir: Path) -> Path:

@@ -1,0 +1,46 @@
+# pdfexorcist recipe: Haryana daily influenza A (H1N1 and H3N2) surveillance report
+#
+# Per district (22, and Total), for H1N1 and for H3N2: confirmed cases on the report
+# date (day_cases), and cases and deaths since 1 January (cum_cases, cum_deaths). The
+# state status table above it (admitted, active, recovered) is left out. The Haryana
+# health department lists the latest ~33 bulletins at http://112.196.32.110:8111/bulletin
+# and deletes older files. On the fixture:
+#
+#   pdfexorcist extract tests/fixtures/haryana_influenza/hr_influenza_2026-10-23_p1.pdf --recipe pdfexorcist/recipes/haryana_influenza/recipe.toml
+
+name = "Haryana influenza daily report"
+description = "Influenza A H1N1 and H3N2 cases and deaths by district, on the day and cumulative (Haryana health department)"
+sample = "../../../tests/fixtures/haryana_influenza/hr_influenza_2026-10-23_p1.pdf"
+
+[pages]
+match = 'District wise distribution'
+
+[engines]
+ocr = false
+
+[parser]
+type = "custom"
+function = "haryana_influenza.py:parse"
+key = ["subtype", "district", "col"]
+
+[[checks]]
+column = "district"
+rule = "Total = rest"
+by = ["subtype", "col"]
+name = "districts = total"
+
+[[checks]]
+column = "col"
+rule = "cum_cases >= day_cases"
+by = ["subtype", "district"]
+
+[[checks]]
+column = "col"
+rule = "cum_cases >= cum_deaths"
+by = ["subtype", "district"]
+
+[output]
+layout = "table"
+rows = ["subtype", "district"]
+columns = "col"
+format = "csv"

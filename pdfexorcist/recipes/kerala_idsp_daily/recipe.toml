@@ -1,0 +1,61 @@
+# pdfexorcist recipe: Kerala DHS "Communicable Diseases - Daily Report" (IDSP)
+#
+# The State Surveillance Unit's daily report: per district (14, and TOT) fever OP/IP cases
+# and suspected, confirmed and death counts for dengue, chikungunya, leptospirosis,
+# cholera, malaria (by species, imported or indigenous) and more; the State's counts on the
+# day, in the month and in the year; and the confirmed dengue cases each district lists.
+# The district table's columns changed over the years (kerala_layouts.py). Reports are at
+# https://dhs.kerala.gov.in/en/category/idsp/ (2020 on; 2016-2020 as drcd_DDMMYYYY.pdf in
+# the Wayback Machine). Try 24 October 2026:
+#
+#   pdfexorcist extract https://dhs.kerala.gov.in/wp-content/uploads/2026/10/IDSP-Daily-Report-24.10.2026.pdf --recipe kerala_idsp_daily
+#
+# On the fixture:
+#
+#   pdfexorcist extract tests/fixtures/kerala_idsp_daily/kl_daily_2026-10-24_p2-3.pdf --recipe pdfexorcist/recipes/kerala_idsp_daily/recipe.toml
+
+name = "Kerala DHS communicable diseases daily report"
+description = "Daily counts by district and disease, and the State's day, month and year totals (DHS Kerala, IDSP)"
+sample = "../../../tests/fixtures/kerala_idsp_daily/kl_daily_2026-10-24_p2-3.pdf"
+
+[pages]
+match = '(REPORTING FORMAT|ANALYSIS OF COMMUNICABLE)'
+
+[engines]
+use = ["pdfplumber", "pymupdf", "pdfium", "pdftotext"]
+ocr = false
+
+[parser]
+type = "custom"
+function = "kerala_idsp_daily.py:parse"
+key = ["table", "area", "disease", "subgroup", "measure", "period"]
+
+[[checks]]
+column = "area"
+rule = "TOT = rest"
+by = ["disease", "subgroup", "measure"]
+where = "table == 'district'"
+name = "districts = TOT"
+
+[[checks]]
+function = "kerala_idsp_daily.py:tot_is_state"
+
+[[checks]]
+function = "kerala_idsp_daily.py:listed_dengue"
+
+# counts so far this year are at least those so far this month, which include the day's
+[[checks]]
+column = "period"
+rule = "year >= month"
+by = ["disease", "subgroup", "measure"]
+where = "table == 'state'"
+
+[[checks]]
+column = "period"
+rule = "month >= day"
+by = ["disease", "subgroup", "measure"]
+where = "table == 'state'"
+
+[output]
+layout = "cells"
+format = "csv"

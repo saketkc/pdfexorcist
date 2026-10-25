@@ -1,0 +1,30 @@
+# pdfexorcist recipe: Gujarat NVBDCP monthly highlights (one page, 2019 onwards)
+#
+# The state's blood examination rate (MBER or ABER, %), the change in malaria, dengue and
+# chikungunya cases since January against the year before (signed %), and the districts
+# and municipal corporations contributing most cases since January with their share (%),
+# keyed by disease, measure and place as printed. Listed at
+# https://gujhealth.gujarat.gov.in/malaria-control.htm. On the fixture:
+#
+#   pdfexorcist extract tests/fixtures/gujarat_nvbdcp/gujarat_nvbdcp_2026-03.pdf --recipe pdfexorcist/recipes/gujarat_nvbdcp/highlights.toml
+
+name = "Gujarat NVBDCP monthly highlights"
+description = "Blood examination rate, change in cases and the top contributing districts' shares (Gujarat NVBDCP highlights)"
+sample = "../../../tests/fixtures/gujarat_nvbdcp/gujarat_nvbdcp_2026-03.pdf"
+
+[pages]
+match = 'Highlights'
+
+[engines]
+ocr = false
+
+[parser]
+type = "custom"
+function = "gujarat_nvbdcp_highlights.py:parse"
+key = ["disease", "measure", "area"]
+
+[output]
+layout = "table"
+rows = ["disease", "area"]
+columns = "measure"
+format = "csv"

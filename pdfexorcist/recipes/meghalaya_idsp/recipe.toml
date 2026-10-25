@@ -1,0 +1,36 @@
+# pdfexorcist recipe: Meghalaya IDSP monthly bulletin (Department of Health and Family Welfare)
+#
+# The state-level counts of the IHIP monthly bulletin: reporting status and (from 2025)
+# cases and deaths for syndromic, presumptive and laboratory surveillance; event alerts,
+# ongoing outbreaks and outbreaks since 1 January, and outbreaks by district; and (from
+# October 2025) the monthly influenza test table. Charts (cases by syndrome or disease,
+# daily ILI/SARI) are left out. NHM Meghalaya lists the bulletins at
+# https://nhmmeghalaya.nic.in/idsp-bulletin.html. On the fixture:
+#
+#   pdfexorcist extract tests/fixtures/meghalaya_idsp/meghalaya_idsp_2026-07.pdf --recipe pdfexorcist/recipes/meghalaya_idsp/recipe.toml
+
+name = "Meghalaya IDSP monthly bulletin"
+description = "Surveillance totals, outbreaks by district and influenza tests (Meghalaya IDSP monthly bulletin)"
+sample = "../../../tests/fixtures/meghalaya_idsp/meghalaya_idsp_2026-07.pdf"
+
+[engines]
+ocr = false
+
+[parser]
+type = "custom"
+function = "meghalaya_idsp.py:parse"
+key = ["table", "row", "col"]
+
+# the districts add up to Meghalaya (bulletins of early 2025 list only districts with one)
+[[checks]]
+column = "row"
+rule = "Meghalaya = rest"
+by = ["table", "col"]
+where = "table == 'outbreaks'"
+name = "districts = total"
+
+[output]
+layout = "table"
+rows = ["table", "row"]
+columns = "col"
+format = "csv"

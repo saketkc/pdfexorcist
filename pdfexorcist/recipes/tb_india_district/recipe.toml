@@ -1,0 +1,69 @@
+# pdfexorcist recipe: TB India annual reports (Central TB Division), district tables
+#
+# District notification figures of the 2010-2019 editions (data for 2009-2018): case
+# finding and notification under the old smear definitions (2010-2014), private sector
+# notification (2016), and public and private notification by type of patient (2017-2019).
+# Each edition prints its own columns; tb_india_layouts.py lists them. Later editions are
+# State/UT only (see tb_report); 2013's tables have no text layer and 2015 has charts only.
+# Reports: https://tbcindia.mohfw.gov.in/annual-reports/. Try the 2018 report:
+#
+#   pdfexorcist extract https://tbcindia.mohfw.gov.in/wp-content/uploads/2023/05/6250311444TB-India-Report-2018.pdf --recipe tb_india_district
+#
+# On the fixture (two pages of each layout):
+#
+#   pdfexorcist extract tests/fixtures/tb_india_district/tb_india_district_sample.pdf --recipe pdfexorcist/recipes/tb_india_district/recipe.toml
+
+name = "TB India district notification"
+description = "TB notification and case finding by district and State (TB India annual reports 2010-2019)"
+sample = "../../../tests/fixtures/tb_india_district/tb_india_district_sample.pdf"
+
+[pages]
+match = 'District'
+
+[engines]
+use = ["pdfplumber", "pymupdf", "pdfium", "pdftotext"]
+ocr = false
+# pdfium reads some State and district runs as one line of text, and pymupdf and pdfium
+# merge neighbouring rows of the 2019 report, so their row keys differ there; a value two
+# engines read alike, with none reading another, is kept
+min_unopposed = 2
+
+[parser]
+type = "custom"
+function = "tb_india_district.py:parse"
+key = ["table", "state", "district", "col"]
+
+# public and private sector notifications add up to the total
+[[checks]]
+column = "col"
+rule = "total_notified = public_notified + private_notified"
+by = ["table", "state", "district"]
+where = "table in ['2017', '2018', '2019']"
+name = "public + private = total"
+
+[[checks]]
+column = "col"
+rule = "public_notified = pulmonary + extrapulmonary"
+by = ["table", "state", "district"]
+where = "table == '2017'"
+name = "pulmonary + extrapulmonary = public"
+
+[[checks]]
+column = "col"
+rule = "private_notified = private_lab_notified + private_single_clinic_notified + private_multi_clinic_notified"
+by = ["table", "state", "district"]
+where = "table in ['2014c', '2016']"
+name = "laboratories + clinics = private"
+
+[[checks]]
+column = "col"
+rule = "treatment_initiated = treatment_initiated_public + treatment_initiated_private"
+by = ["table", "state", "district"]
+where = "table == '2019'"
+name = "initiated public + private = total"
+
+[output]
+layout = "table"
+rows = ["table", "state", "district"]
+columns = "col"
+format = "csv"

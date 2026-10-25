@@ -1,0 +1,71 @@
+# pdfexorcist recipe: NCVBDC malaria annual report, district-wise epidemiological situation
+#
+# Per district and State/UT (and India), for one year: population, blood smears and RDTs
+# collected and examined, positives by species (Pv, Pf, mixed; Pm, Po and others from
+# 2022), indigenous and imported cases (from 2021), Pf%, ABER, API, SPR, AFI, SFR,
+# radical treatment and deaths. The 2017 and 2018 reports print the rates and deaths
+# only. The column set changed in 2017, 2019, 2020, 2021, 2022 and 2024; the parser tells
+# them apart by the number of values a row. Reports (2010-2024):
+# https://ncvbdc.mohfw.gov.in/Doc/Malaria-Annual-Report-2010.pdf and its siblings. Try it:
+#
+#   pdfexorcist extract https://ncvbdc.mohfw.gov.in/Doc/Malaria-AnnualReport-2021.pdf --recipe ncvbdc_malaria_district
+#
+# On the fixture:
+#
+#   pdfexorcist extract tests/fixtures/ncvbdc_malaria_district/ncvbdc_malaria_2010_p1-2.pdf --recipe pdfexorcist/recipes/ncvbdc_malaria_district/recipe.toml
+
+name = "NCVBDC malaria annual report, by district"
+description = "Malaria tests, positives by species, Pf%, ABER, API, SPR, AFI and deaths by district and State/UT (NCVBDC annual report)"
+sample = "../../../tests/fixtures/ncvbdc_malaria_district/ncvbdc_malaria_2010_p1-2.pdf"
+
+[engines]
+use = ["pdftotext", "pdfplumber", "pymupdf", "pdfium"]
+ocr = false
+
+[parser]
+type = "custom"
+function = "ncvbdc_malaria_district.py:parse"
+key = ["block", "row", "col"]
+
+# the districts add up to their State's Total row (and the States to India)
+[[checks]]
+column = "row"
+rule = "Total = rest"
+by = ["block", "col"]
+where = "kind == 'count'"
+name = "districts = State total"
+
+[[checks]]
+column = "col"
+rule = "positive = pv + pf"
+by = ["block", "row"]
+where = "layout == '2010'"
+
+[[checks]]
+column = "col"
+rule = "positive = pv + pf + mixed"
+by = ["block", "row"]
+where = "layout in ['2019', '2020', '2021']"
+
+[[checks]]
+column = "col"
+rule = "positive = pv + pf + mixed + pm + po + others"
+by = ["block", "row"]
+where = "layout in ['2022', '2024']"
+
+[[checks]]
+column = "col"
+rule = "positive = ind_total + imp_total"
+by = ["block", "row"]
+where = "layout in ['2021', '2022', '2024']"
+
+[[checks]]
+column = "col"
+rule = "tested = bse + rdt"
+by = ["block", "row"]
+
+[output]
+layout = "table"
+rows = ["block", "row", "state", "district"]
+columns = "col"
+format = "csv"

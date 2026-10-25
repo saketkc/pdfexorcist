@@ -66,3 +66,23 @@ def token_boxes(
                     y1,
                 )
             yield x, m.group(), tb
+
+
+def word_xs(cells: Sequence[Sequence]) -> list[tuple[float, str]]:
+    """Each word with its x; a cell of several words is spread over its width.
+
+    Without a box the engine's unit is taken to be a character (pdftotext).
+    """
+    out: list[tuple[float, str]] = []
+    for cell in cells:
+        x, text = cell[0], cell[1]
+        words = list(re.finditer(r"\S+", text))
+        if len(words) == 1:
+            out.append((x, words[0].group()))
+            continue
+        box = cell_box(cell)
+        x0, width = (box[0], box[2] - box[0]) if box else (x - len(text) / 2, len(text))
+        for m in words:
+            mid = (m.start() + m.end()) / 2 / max(len(text), 1)
+            out.append((x0 + width * mid, m.group()))
+    return out

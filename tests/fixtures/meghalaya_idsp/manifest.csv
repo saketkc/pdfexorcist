@@ -1,0 +1,4 @@
+fixture,source_url,report_date,source_pages,note
+meghalaya_idsp_2026-07.pdf,https://nhmmeghalaya.nic.in/Idsp%20Bulletin/IDSP%20Bulletin%20-%20July%202026.pdf,2026-07-31,1-3,"Three panels a line on page 1: the laboratory Cases/Deaths line also holds Meghalaya's outbreak count. Influenza test table, January to July 2026, split over pages 2-3."
+meghalaya_idsp_2025-06_p1.pdf,https://nhmmeghalaya.nic.in/Idsp%20Bulletin/6.%20Jun%202025%20IDSP%20Bulletin.pdf,2025-06-30,1,"Laboratory counts headed Samples Tested/Positive. Districts without an outbreak are left out of the district panel; ongoing outbreaks print as 02."
+meghalaya_idsp_2023-07_p1_4.pdf,https://nhmmeghalaya.nic.in/Idsp%20Bulletin/IDSPBulletin-July2023.pdf,2023-07-31,"1,4","2023 layout: the three reporting status percentages after one heading, and the outbreak summary after the period ""(01st Jan - 31st Jul 2023)"". No district panel."

@@ -208,12 +208,108 @@
     "recipe": "karnataka_dengue"
   },
   {
+    "id": "haryana-influenza",
+    "kicker": "Haryana Health | Daily influenza bulletin | 23 October 2026",
+    "title": "H1N1 and H3N2 by district",
+    "blurb": "Cases on the day and since 1 January, and deaths, for each subtype. The state status table above is left out; checks that the districts add up to the Total row.",
+    "pdf": "tests/fixtures/haryana_influenza/hr_influenza_2026-10-23_p1.pdf",
+    "recipe": "haryana_influenza"
+  },
+  {
+    "id": "ncvbdc-malaria-district",
+    "kicker": "NCVBDC | Malaria annual report | 2021",
+    "title": "Malaria by district",
+    "blurb": "Tests, positives by species, indigenous and imported cases, rates and deaths. Some rows are printed over two lines and are put back together; checks that the districts add up to the State total.",
+    "pdf": "tests/fixtures/ncvbdc_malaria_district/ncvbdc_malaria_2021_p3_7.pdf",
+    "recipe": "ncvbdc_malaria_district"
+  },
+  {
+    "id": "mumbai-praja-health",
+    "kicker": "Praja Foundation | Mumbai health white paper | 2024",
+    "title": "Malaria cases by BMC ward",
+    "blurb": "Cases registered in each ward's municipal dispensaries, a column a year, from BMC data obtained under RTI. The rate per 1,00,000 is left out; checks that the years add up to the Total column.",
+    "pdf": "tests/fixtures/mumbai_praja_health/praja_health_2024_p41.pdf",
+    "recipe": "mumbai_praja_health"
+  },
+  {
+    "id": "delhi-praja-health",
+    "kicker": "Praja Foundation | State of Health in Delhi | 2018",
+    "title": "Malaria cases by MCD zone",
+    "blurb": "Cases registered in government dispensaries and hospitals of each zone, a column a financial year, from data obtained under RTI. The corporation and population printed once per group are left out; checks that the zones add up to the Total row.",
+    "pdf": "tests/fixtures/delhi_praja_health/praja_delhi_2018_p45.pdf",
+    "recipe": "delhi_praja_health"
+  },
+  {
+    "id": "rajasthan-seasonal",
+    "kicker": "Rajasthan Health | Seasonal disease status | May 2025",
+    "title": "Leptospirosis and brucellosis by district",
+    "blurb": "Cumulative positives and deaths for each disease named above the columns, placed by x so a blank cell or a name ending in a digit (Jaipur 2) stays in its row. Checks that the districts add up to the Total row.",
+    "pdf": "tests/fixtures/rajasthan_seasonal/rj_leptospirosis_2025-05-08.pdf",
+    "recipe": "rajasthan_seasonal"
+  },
+  {
+    "id": "meghalaya-idsp",
+    "kicker": "Meghalaya IDSP | Monthly bulletin | July 2026",
+    "title": "Surveillance totals and outbreaks by district",
+    "blurb": "Panels set side by side on one page, each count found by the words around it: cases and deaths by surveillance form, outbreaks by district, and the monthly influenza tests. Checks that the districts add up to Meghalaya.",
+    "pdf": "tests/fixtures/meghalaya_idsp/meghalaya_idsp_2026-07.pdf",
+    "recipe": "meghalaya_idsp"
+  },
+  {
+    "id": "bihar-idsp-weekly",
+    "kicker": "State Health Society Bihar | Weekly IDSP bulletin | Week 13, 2016",
+    "title": "IDSP diseases, the week and the year so far",
+    "blurb": "22 diseases, this year and last, for the week and cumulative. Lab-confirmed diseases print tested/positive, read as two counts. Checks that cumulative counts are at least the week's and positives at most the tested.",
+    "pdf": "tests/fixtures/bihar_idsp_weekly/bihar_weekly_2016_w13.pdf",
+    "recipe": "bihar_idsp_weekly"
+  },
+  {
+    "id": "bihar-idsp-monthly",
+    "kicker": "State Health Society Bihar | Monthly IDSP report | August 2017",
+    "title": "Outbreaks by disease and district",
+    "blurb": "The month's outbreaks, cases and deaths for each disease and district, wrapped names joined to their row. Checks that the rows add up to the Total row.",
+    "pdf": "tests/fixtures/bihar_idsp_monthly/bihar_monthly_2017-08_p5.pdf",
+    "recipe": "bihar_idsp_monthly"
+  },
+  {
+    "id": "bihar-idsp-sheets",
+    "kicker": "State Health Society Bihar | Monthly IDSP report, annexure | June 2016",
+    "title": "Cases by district and month, one disease a sheet",
+    "blurb": "Each annexed sheet gives one disease of one IDSP form for 38 districts, a column per month of the year so far. Checks that the districts add up to the TOTAL row.",
+    "pdf": "tests/fixtures/bihar_idsp_sheets/bihar_sheets_2016-06_p77.pdf",
+    "recipe": "bihar_idsp_sheets"
+  },
+  {
+    "id": "gujarat-nvbdcp",
+    "kicker": "NVBDCP Gujarat | Monthly report | December 2018",
+    "title": "Malaria indicators by month for one district",
+    "blurb": "The data table under an Excel chart: slide positivity and falciparum rates, blood examination rate and parasite incidence, a value per month from January of the year before. Checks that positivity is at least the falciparum rate.",
+    "pdf": "tests/fixtures/gujarat_nvbdcp/gujarat_nvbdcp_2018-12_p9.pdf",
+    "recipe": "gujarat_nvbdcp"
+  },
+  {
+    "id": "gujarat-nvbdcp-highlights",
+    "kicker": "NVBDCP Gujarat | Monthly highlights | March 2026",
+    "title": "Rates, changes and top districts from a page of prose",
+    "blurb": "The state's blood examination rate and change in cases since January, read from sentences, and the districts contributing most cases with their share, from a small table whose cells name one or more places.",
+    "pdf": "tests/fixtures/gujarat_nvbdcp/gujarat_nvbdcp_2026-03.pdf",
+    "recipe": "gujarat_nvbdcp/highlights"
+  },
+  {
     "id": "kerala-dhs",
     "kicker": "DHS Kerala | Communicable disease data | 2022",
     "title": "Cases and deaths by disease and district",
     "blurb": "The State page and one page per district, keyed by district, disease and column, fever split into OP and IP. Checks that the 14 districts add up to Kerala.",
     "pdf": "tests/fixtures/kerala_dhs/kerala_dhs_2022_p2_6-19.pdf",
     "recipe": "kerala_dhs"
+  },
+  {
+    "id": "kerala-idsp-daily",
+    "kicker": "DHS Kerala | Communicable diseases daily report | 24 October 2026",
+    "title": "Daily cases by district and disease",
+    "blurb": "The district table (fever OP/IP, suspected, confirmed and deaths, malaria by species and origin) and the State's counts on the day, in the month and in the year. Checks that the districts add up to TOT and TOT to the State.",
+    "pdf": "tests/fixtures/kerala_idsp_daily/kl_daily_2026-10-24_p2-3.pdf",
+    "recipe": "kerala_idsp_daily"
   },
   {
     "id": "tb-report",
@@ -302,5 +398,21 @@
     "blurb": "Spending per spell and per childbirth, care for the aged: Rural, Urban and Rural + Urban blocks with the sector printed once beside each.",
     "pdf": "tests/fixtures/nss_health/nss_ki75_appendix_p68-73.pdf",
     "recipe": "nss_health"
+  },
+  {
+    "id": "tb-india-district",
+    "kicker": "Central TB Division | TB India Report 2018 | Annexure 1b",
+    "title": "TB notification by district",
+    "blurb": "Public and private notification, rates and patient mix for every district, with State names centred on two lines around each row; public + private is checked against the total.",
+    "pdf": "tests/fixtures/tb_india_district/tb_india_district_sample.pdf",
+    "recipe": "tb_india_district"
+  },
+  {
+    "id": "nhp-multi-year",
+    "kicker": "CBHI | National Health Profile 2021 | Chapter 3.1",
+    "title": "Dengue and H1N1 cases and deaths by State and year",
+    "blurb": "Five years side by side, the last provisional; footnote marks glued to values are dropped and the States are checked against the India total.",
+    "pdf": "tests/fixtures/nhp_multi_year/nhp_2021_p188_231.pdf",
+    "recipe": "nhp_multi_year"
   }
 ]

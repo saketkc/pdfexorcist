@@ -1,0 +1,10 @@
+fixture,source_url,report_date,source_pages,note
+ncvbdc_malaria_2010_p1-2.pdf,https://ncvbdc.mohfw.gov.in/Doc/Malaria-Annual-Report-2010.pdf,2010,1-2,"12 values a row; zero-case rows print blank rates (Bihar); Arunachal Pradesh runs over the page break."
+ncvbdc_malaria_2017_p6.pdf,https://ncvbdc.mohfw.gov.in/Doc/Annual-Report-2017.pdf,2017,6,"Rates and deaths only; a name wrapped above its row; the Total row printed as 0 State Total."
+ncvbdc_malaria_2018_p1_45.pdf,https://ncvbdc.mohfw.gov.in/Doc/Annual-Report-2018.pdf,2018,"1,45","Each name on the line above its numbers; the State-wise India page."
+ncvbdc_malaria_2019_p2.pdf,https://ncvbdc.mohfw.gov.in/Doc/Malaria-AnnualReport-2019.pdf,2019,2,"16 values a row; #DIV/0! rates; a name with the word district in it."
+ncvbdc_malaria_2020_p1.pdf,https://ncvbdc.mohfw.gov.in/Doc/Malaria-AnnualReport-2020.pdf,2020,1,"20 values a row (RDTs added)."
+ncvbdc_malaria_2021_p3_7.pdf,https://ncvbdc.mohfw.gov.in/Doc/Malaria-AnnualReport-2021.pdf,2021,"3,7","28 values a row; cells at different heights split a row over two lines (Assam, Chhattisgarh)."
+ncvbdc_malaria_2022_p1_49.pdf,https://ncvbdc.mohfw.gov.in/Doc/Malaria-AnnualReport-2022.pdf,2022,"1,49","34 values a row; the India row prints no label; its smears collected miss the States' sum by 2."
+ncvbdc_malaria_2023_p1.pdf,https://ncvbdc.mohfw.gov.in/Doc/Malaria-AnnualReport-2023.pdf,2023,1,"No State title: the State comes from its Total row."
+ncvbdc_malaria_2024_p1.pdf,https://ncvbdc.mohfw.gov.in/Doc/Malaria-Annual-Report-2024.pdf,2024,1,"37 values a row and a State column; names cut short or wrapped above (Dr. B.R. Ambedkar)."

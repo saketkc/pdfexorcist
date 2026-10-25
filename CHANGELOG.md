@@ -12,10 +12,29 @@ workflow moves those entries into a dated section.
 ### Added
 
 - Recipes that read tables through their drawn cells and check their totals:
+  - `tb_india_district`: TB India annual reports 2010-2019, notification and case finding by
+    district.
+  - `nhp_multi_year`: CBHI National Health Profile State/UT tables of malaria, dengue,
+    chikungunya, kala-azar, AES, JE and H1N1 by year.
   - `insp_sitrep`: DR Congo INSP Ebola situation reports, cases and deaths by province and
     health zone.
   - `cdsco_nsq`: CDSCO monthly lists of drugs Not of Standard Quality, one row per batch.
   - `karnataka_dengue`: Karnataka daily dengue and chikungunya report by district (text PDFs).
+    `karnataka_dengue/scan` reads the scanned ones with OCR.
+  - `haryana_influenza`: Haryana daily influenza A (H1N1, H3N2) bulletin, cases and deaths by
+    district.
+  - `ncvbdc_malaria_district`: NCVBDC district-wise malaria annual reports 2010-2024, in their
+    seven column layouts.
+  - `mumbai_praja_health`: Praja Foundation Mumbai health white papers (2012 to 2024), cases
+    in BMC dispensaries by ward and year.
+  - `delhi_praja_health`: Praja Foundation State of Health in Delhi reports (2017 to 2024),
+    cases by MCD zone, and cases and deaths in MCD and state facilities.
+  - `rajasthan_seasonal`: Rajasthan seasonal disease status (scrub typhus, H1N1,
+    leptospirosis and brucellosis), cumulative positives and deaths by district.
+    `rajasthan_seasonal/scan` reads the scanned dengue, malaria and chikungunya status with OCR.
+  - `kerala_idsp_daily`: Kerala DHS communicable diseases daily report (2016 on), counts by
+    district, the State's day, month and year counts, and the dengue list by district; the TOT
+    row is checked against the State's.
   - `tb_report`: India TB Report State/UT annexures, each % checked against its counts.
   - `ncvbdc_states`: NCVBDC State/UT tables for dengue, chikungunya and malaria.
   - `rhs`: Rural Health Statistics staff tables by State/UT.
@@ -25,11 +44,28 @@ workflow moves those entries into a dated section.
   - `naco_hiv`: NACO Sankalak and India HIV Estimates by State/UT; "est (lower-upper)" gives
     three cells.
   - `nha`: National Health Accounts Estimates, with ratio and share checks.
+  - `meghalaya_idsp`: Meghalaya IDSP monthly bulletin, surveillance totals, outbreaks by
+    district and influenza tests.
+  - `bihar_idsp_weekly`: State Health Society Bihar weekly IDSP bulletin (2013 to 2018), cases
+    for the week and cumulative, this year and last.
+  - `bihar_idsp_monthly`: State Health Society Bihar monthly IDSP report (2012 to 2018), the
+    month's outbreaks, cases and deaths by disease and district.
+  - `bihar_idsp_sheets`: the district sheets annexed to that report, cases by district and
+    month.
+  - `gujarat_nvbdcp`: Gujarat NVBDCP monthly decks (2018-2019), malaria SPR, SFR, MBER and
+    MPI by district and month. `gujarat_nvbdcp/highlights` reads the one-page highlights
+    (2020 onwards): blood examination rate, change in cases and district shares.
 - `tests/fixtures/download.py` downloads each fixture's source PDF, from the Internet Archive
   when the site fails.
 
 ### Fixed
 
+- Scanned pages printed sideways or upside down are turned upright before any engine reads
+  them, by tesseract's orientation detection. Off with `PDFEXORCIST_TURN_SCANS=0`.
+- Scanned pages 0.3 to 2 degrees askew are levelled before OCR, so a row keeps its own values.
+  Off with `PDFEXORCIST_DESKEW=0`.
+- `karnataka_dengue/scan` reads the Adobe Scans of July-November 2025.
+- `oxr` crops a page's pictures in the page as turned by /Rotate, at the picture's own dpi.
 - `grid` finds tables whose rules are drawn as dots.
 - `pymupdf` word boxes use pdfplumber's page coordinates, so they fall in `grid` cells on pages
   whose CropBox or MediaBox is offset.
@@ -46,6 +82,7 @@ workflow moves those entries into a dated section.
   depicts ..." in the text is not a caption.
 - `amrsn` pictures: "(61.4%)" under a count is its (%) (2018 Table 6.1); a table model's
   "4467/7274/(61.4%)" is the count and its (%).
+- `karnataka_idsp` reads the weekly reports from week 44 of 2023 on.
 
 ## [0.4.0] - 2026-10-24
 

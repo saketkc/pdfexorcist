@@ -34,12 +34,12 @@ AREA = {label_key(a): name for name, alias in DISTRICTS.items() for a in [name, 
 # label_key of a printed name -> the name the State page prints
 ALIASES = {"acuteencephalitissyndrome": "AES", "cpox": "Chicken Pox"}
 FEVER = "Fever"
-NUM = r"\d[\d,]*\*?"  # "439*": a footnote mark, removed by [normalize]
+NUM = r"(?:\d[\d,]*\*?|-)"  # "439*": a footnote mark, removed by [normalize]; "-": none (2011)
 ROW = re.compile(rf"^(\d{{1,2}}) (?P<name>.*?[A-Za-z].*?) (?P<cases>{NUM}) (?P<deaths>{NUM})$")
 # a name wrapped around its numbers: "Hand Foot and Mouth Disease", "16 408 0", "(HFMD)"
 WRAPPED = re.compile(rf"^(\d{{1,2}})(?P<name>) (?P<cases>{NUM}) (?P<deaths>{NUM})$")
 WORDS = re.compile(r"^\D*[A-Za-z]\D*$")
-OPIP = re.compile(rf"\b(OP|IP) ({NUM})$")
+OPIP = re.compile(rf"\b(OP|IP) ({NUM})(?: -)?$")  # 2011 prints "-" deaths beside each
 FEVER_DEATHS = re.compile(rf"^(\d{{1,2}} )?(?:Fever )?({NUM})$")  # Kannur 2024 prints no Sl.No.
 HEADER = re.compile(r"^Sl\.\s*(No\.?)?$")
 YEAR = re.compile(r"^(20\d\d)$")
@@ -64,7 +64,9 @@ def _area(lines: list[list]) -> str | None:
         for _, t in line:
             if (key := label_key(t)) in AREA:
                 return AREA[key]
-        state |= "dataoncommunicabledisease" in label_key(" ".join(t for _, t in line))
+        key = label_key(" ".join(t for _, t in line))
+        # "Data on Communicable Diseases"; up to 2013 "Communicable Diseases Data"
+        state |= "dataoncommunicabledisease" in key or "communicablediseasesdata" in key
     return STATE if state else None
 
 

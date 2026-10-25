@@ -1,0 +1,67 @@
+# pdfexorcist recipe: Karnataka daily dengue and chikungunya report, scanned
+#
+# The same report as recipe.toml, posted as a scan on hfwcom.karnataka.gov.in (most from
+# late 2023 on). A row's values are named by their count (karnataka_dengue_scan.py), and
+# the report date and the year the cumulative counts start come out as rows of their own.
+# The fixture is https://hfwcom.karnataka.gov.in/uploads/DR%2010-12-25_1765541072.pdf.
+# Upright Adobe Scans (DR12-12-2023, July-November 2025) carry a hidden text layer, so they
+# look like text PDFs: send any report whose page is one picture with only hidden text here.
+# pdfexorcist levels their tilt first; a note printed sideways in the margin is dropped.
+#
+#   pdfexorcist extract tests/fixtures/karnataka_dengue/ka_dengue_scan_2025-12-10.pdf --recipe pdfexorcist/recipes/karnataka_dengue/scan.toml
+
+name = "Karnataka dengue daily report (scan)"
+description = "Scanned Karnataka NVBDCP dengue and chikungunya report, by district"
+sample = "../../../tests/fixtures/karnataka_dengue/ka_dengue_scan_2025-12-10.pdf"
+
+[engines]
+# Tesseract misreads the ruled cells; Apple Vision drops zeros, so its rows never fit a
+# layout. GLM-OCR and OXR read whole rows; two of them agreeing count when the others
+# read nothing there.
+use = ["glmocr", "oxr", "indra", "doctr"]
+ocr = true
+min_unopposed = 2
+
+[parser]
+type = "custom"
+function = "karnataka_dengue_scan.py:parse"
+key = ["disease", "district", "col"]
+
+# the districts add up to the State total; BBMP is printed apart and is not in it
+[[checks]]
+column = "district"
+rule = "Total = rest"
+by = ["disease", "col"]
+where = "district != 'Bangaluru City (BBMP)'"
+name = "districts = total"
+
+# total positives are the IgM positives and the NS1 (dengue) or other (chikungunya) ones
+[[checks]]
+column = "col"
+rule = "day_positive = day_igm + day_ns1"
+by = ["disease", "district"]
+where = "disease == 'Dengue'"
+
+[[checks]]
+column = "col"
+rule = "cum_positive = cum_igm + cum_ns1"
+by = ["disease", "district"]
+where = "disease == 'Dengue'"
+
+[[checks]]
+column = "col"
+rule = "day_positive = day_igm + day_others"
+by = ["disease", "district"]
+where = "disease == 'Chikungunya'"
+
+[[checks]]
+column = "col"
+rule = "cum_positive = cum_igm + cum_others"
+by = ["disease", "district"]
+where = "disease == 'Chikungunya'"
+
+[output]
+layout = "table"
+rows = ["disease", "district"]
+columns = "col"
+format = "csv"

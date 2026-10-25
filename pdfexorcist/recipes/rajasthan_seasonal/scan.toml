@@ -1,0 +1,41 @@
+# pdfexorcist recipe: Rajasthan seasonal disease status, scanned
+#
+# The same district table as recipe.toml, posted as a scan with no text layer (Readiris):
+# the dengue, malaria and chikungunya status ("Seasonal Disease Status 2026, Up to 22 Oct
+# 2026"), positives and deaths for 42 health districts and Total. The parser is the text
+# recipe's: each count is placed by its x among the column centres of the full rows. The
+# fixture is https://rajswasthya.rajasthan.gov.in/admin/upload/mausami/Dengue%20Status.pdf
+# as captured on 25 October 2026 (the site overwrites it in place).
+#
+#   pdfexorcist extract tests/fixtures/rajasthan_seasonal/rj_dengue_scan_2026-10-22.pdf --recipe pdfexorcist/recipes/rajasthan_seasonal/scan.toml
+
+name = "Rajasthan seasonal disease status (scan)"
+description = "Scanned Rajasthan dengue, malaria and chikungunya status: cumulative positives and deaths by district"
+sample = "../../../tests/fixtures/rajasthan_seasonal/rj_dengue_scan_2026-10-22.pdf"
+
+[engines]
+use = ["glmocr", "oxr", "indra", "doctr"]
+ocr = true
+min_unopposed = 2
+
+[parser]
+type = "custom"
+function = "rajasthan_seasonal.py:parse"
+key = ["disease", "district", "col"]
+
+[[checks]]
+column = "district"
+rule = "Total = rest"
+by = ["disease", "col"]
+name = "districts = total"
+
+[[checks]]
+column = "col"
+rule = "positive >= deaths"
+by = ["disease", "district"]
+
+[output]
+layout = "table"
+rows = ["disease", "district"]
+columns = "col"
+format = "csv"

@@ -2,8 +2,11 @@
 #
 # Two pages of boxes, one per disease, beside a trend chart each: last week (last
 # month for malaria and JE) and the current year, as cases, bites and deaths, or
-# tested and positives. idsp.py keys each value by the disease's name as printed,
-# the period and the measure, and leaves out the charts' axis labels. Try it:
+# tested and positives. idsp.py places words by position, keys each value by the
+# disease's name as printed, the period and the measure, and leaves out the charts'
+# axis labels (a smaller type). A "-" (no monthly figure yet) is left blank. Reports
+# from week 44 of 2023 are at hfwcom.karnataka.gov.in/63/weekly-infectious-disease-report/en.
+# Try it:
 #
 #   pdfexorcist extract 'https://hfwcom.karnataka.gov.in/uploads/41st%20IDSP%20Weekly%20Infectious%20Diseases%20Report_1792161404.pdf' --recipe pdfexorcist/recipes/karnataka_idsp/recipe.toml
 #
@@ -16,6 +19,7 @@ description = "Cases, tests and positives by disease, last week and the current 
 sample = "../../../tests/fixtures/karnataka_idsp/karnataka_idsp_2026_week41.pdf"
 
 [engines]
+use = ["pdfplumber", "pymupdf", "pdfium"]  # the engines that give word boxes
 ocr = false
 
 [normalize]

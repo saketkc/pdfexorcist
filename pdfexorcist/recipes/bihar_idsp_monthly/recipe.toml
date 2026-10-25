@@ -1,0 +1,48 @@
+# pdfexorcist recipe: State Health Society Bihar monthly IDSP report, outbreaks by district
+#
+# The "Summary of Outbreaks in <month> in Bihar" table: per disease and district, the
+# number of outbreaks reported in the month, their cases and deaths, and (in most months)
+# a Total row. n numbers repeats of a disease and district in one table. The rest of the
+# ~120-page report (state data tables, district trend charts, line lists) is left out; in
+# a few months (September 2013 among them) the table is a picture and gives no rows. The
+# reports (September 2012 to June 2018) are listed at
+# http://statehealthsocietybihar.org/idsp.html. On the fixture:
+#
+#   pdfexorcist extract tests/fixtures/bihar_idsp_monthly/bihar_monthly_2017-08_p5.pdf --recipe pdfexorcist/recipes/bihar_idsp_monthly/recipe.toml
+
+name = "Bihar IDSP monthly outbreak summary"
+description = "Outbreaks, cases and deaths by disease and district in the month (State Health Society Bihar IDSP)"
+sample = "../../../tests/fixtures/bihar_idsp_monthly/bihar_monthly_2017-08_p5.pdf"
+
+[pages]
+match = 'summary\s+of\s+outbreaks'
+
+[engines]
+ocr = false
+
+[parser]
+type = "custom"
+function = "bihar_idsp_monthly.py:parse"
+key = ["disease", "district", "n", "col"]
+
+[[checks]]
+column = "disease"
+rule = "Total = rest"
+by = ["col"]
+name = "rows = total"
+
+[[checks]]
+column = "col"
+rule = "cases >= deaths"
+by = ["disease", "district", "n"]
+
+[[checks]]
+column = "col"
+rule = "cases >= outbreaks"
+by = ["disease", "district", "n"]
+
+[output]
+layout = "table"
+rows = ["disease", "district", "n"]
+columns = "col"
+format = "csv"

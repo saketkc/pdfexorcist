@@ -1,0 +1,53 @@
+# pdfexorcist recipe: State Health Society Bihar weekly infectious disease bulletin (IDSP)
+#
+# State-level counts for 22 IDSP diseases: the week in the previous year and this year
+# (prev_week, week) and the cumulative counts to that week (prev_cum, cum). Lab-confirmed
+# diseases (hepatitis A and E, typhoid, meningococcal meningitis, AES/JE, chikungunya,
+# dengue) print tested/positive, read as the measures tested and positive; the others are
+# cases. A leading "*" on a pair is kept as the measure starred. The week's dates and the
+# two years are in the heading, left to the caller. The bulletins (2013 to 2018) are listed
+# at http://statehealthsocietybihar.org/idsp.html. On the fixture:
+#
+#   pdfexorcist extract tests/fixtures/bihar_idsp_weekly/bihar_weekly_2016_w13.pdf --recipe pdfexorcist/recipes/bihar_idsp_weekly/recipe.toml
+
+name = "Bihar IDSP weekly bulletin"
+description = "IDSP diseases in Bihar, the week and cumulative, this year and last (State Health Society Bihar)"
+sample = "../../../tests/fixtures/bihar_idsp_weekly/bihar_weekly_2016_w13.pdf"
+
+[pages]
+match = 'WEEKLY INFECTIOUS DISEASE BULLETIN'
+
+[engines]
+ocr = false
+
+[parser]
+type = "custom"
+function = "bihar_idsp_weekly.py:parse"
+key = ["disease", "measure", "col"]
+
+[[checks]]
+column = "col"
+rule = "cum >= week"
+by = ["disease", "measure"]
+where = "measure != 'starred'"
+name = "cumulative >= week"
+
+[[checks]]
+column = "col"
+rule = "prev_cum >= prev_week"
+by = ["disease", "measure"]
+where = "measure != 'starred'"
+name = "previous cumulative >= previous week"
+
+[[checks]]
+column = "measure"
+rule = "tested >= positive"
+by = ["disease", "col"]
+where = "measure != 'starred'"
+name = "tested >= positive"
+
+[output]
+layout = "table"
+rows = ["disease", "measure"]
+columns = "col"
+format = "csv"
