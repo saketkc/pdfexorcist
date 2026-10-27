@@ -9,7 +9,7 @@ from html.parser import HTMLParser
 from pathlib import Path
 from typing import Any
 
-from ._ocr_engines import render_page
+from ._ocr_engines import Worker, render_page
 from ._registry import register
 from .rows import Page, is_value
 
@@ -133,10 +133,12 @@ def glmocr_(pdf: Path) -> Iterator[Page]:
         return str(getattr(out, "text", out))
 
     for i, text in _cache_pages("glmocr", pdf, infer):
-        yield (
-            i,
-            _HtmlRows.parse(text) if "<table" in text.lower() else _parse_markdown(text),
-        )
+        yield i, _parse_output(text)
+
+
+def _parse_output(text: str) -> list:
+    """Rows of a model's HTML table or Markdown."""
+    return _HtmlRows.parse(text) if "<table" in text.lower() else _parse_markdown(text)
 
 
 @register("oxr", default=False, in_process=True)
@@ -146,11 +148,54 @@ def oxr_(pdf: Path) -> Iterator[Page]:
     OXR reads at most OXR_PIXELS; a picture read at its own resolution keeps small print legible
     (2018 AMRSN Table 6.2: 0 of 200 R/n cells wrong from the picture, 1-3 from the page).
     """
+    yield from _picture_rows("oxr", pdf, _oxr_infer, _HtmlRows.parse)
+
+
+@register("unlimitedocr", default=False, in_process=True)
+def unlimitedocr_(pdf: Path) -> Iterator[Page]:
+    """Run Baidu Unlimited-OCR 2 on each picture of a page, or on the page if it has none.
+
+    Runs _uocr_worker.py under $PDFEXORCIST_UOCR_PYTHON; the model's code needs transformers 4.52.
+    """
+    import os
+    import sys
+
+    worker = _uocr_worker(os.environ.get("PDFEXORCIST_UOCR_PYTHON", sys.executable))
+    yield from _picture_rows("unlimitedocr", pdf, lambda img: str(worker.ask(img)), _uocr_rows)
+
+
+@functools.lru_cache(maxsize=1)
+def _uocr_worker(python: str) -> Worker:
+    """One per process; loading the model is slow."""
+    return Worker([python, str(Path(__file__).with_name("_uocr_worker.py"))])
+
+
+def _picture_rows(
+    engine: str, pdf: Path, infer: Callable[[Any], str], parse: Callable[[str], list]
+) -> Iterator[Page]:
+    """Rows of each picture of a page, or of the page if it has none, read by a cached model."""
     for i, crops in _page_pictures(pdf):
         rows: list = []
         for img in crops:  # an empty row between pictures: a chart's labels are not table headings
-            rows += ([[]] if rows else []) + _HtmlRows.parse(_cached("oxr", img, _oxr_infer))
+            rows += ([[]] if rows else []) + parse(_cached(engine, img, infer))
         yield i, rows
+
+
+_UOCR_TOKEN = re.compile(r"<(PAGE|FORK|MERGE|LEVEL\d*)>")
+_UOCR_HEAD = re.compile(r"\s*([a-z_]+)(<LEVEL\d*>)?\[[-\d,\s]*\]")
+
+
+def _uocr_rows(raw: str) -> list:
+    """Rows of Unlimited-OCR's layout blocks ("<BLOCK>table[x1,y1,x2,y2]<FORK><table>...")."""
+    rows: list = []
+    for block in raw.split("<BLOCK>"):
+        label = ""
+        if head := _UOCR_HEAD.match(block):
+            label, block = head.group(1), block[head.end() :]
+        body = _UOCR_TOKEN.sub(" ", block).strip()
+        if body and label not in ("image", "chart"):  # pictures: no table text
+            rows += _parse_output(body)
+    return rows
 
 
 def _oxr_infer(img: Any) -> str:

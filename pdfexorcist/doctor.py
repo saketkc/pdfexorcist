@@ -1,5 +1,6 @@
 """Installed engines and install hints."""
 
+import os
 import platform
 import shutil
 import sys
@@ -11,6 +12,10 @@ from ._text_engines import PDFJS_INSTALL, _pdfjs_dist, camelot_ml
 from .extractors import DEFAULTS, EXTRACTORS
 
 PIP = 'pip install "pdfexorcist[{}]"'
+UOCR_INSTALL = (
+    "set $PDFEXORCIST_UOCR_PYTHON to a Python with torch, transformers==4.52.1, tokenizers==0.21.4,"
+    " huggingface-hub==0.36.0, addict, einops, easydict and pillow"
+)
 
 
 @dataclass(frozen=True)
@@ -126,6 +131,12 @@ KNOWN: dict[str, EngineInfo] = {
             extra="glmocr",
             platforms=_apple_silicon,
             platform_note="Apple Silicon Macs only",
+        ),
+        EngineInfo(
+            "unlimitedocr",
+            "pixels (OCR)",
+            "Baidu Unlimited-OCR 2 model, GPU (CUDA or Apple), in its own Python",
+            check=lambda: "" if os.environ.get("PDFEXORCIST_UOCR_PYTHON") else UOCR_INSTALL,
         ),
     ]
 }

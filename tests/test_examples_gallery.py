@@ -143,7 +143,7 @@ def test_imd_1961_1990_abu(tmp_path):
 
 
 # examples the home page leaves out: OCR does not run in the browser; settings shows options
-HIDDEN = {"mybmc_lakes", "nta_toppers", "ncvbdc_charts", "settings"}
+HIDDEN = {"mybmc_lakes", "nta_toppers", "ncvbdc_charts", "settings", "nacnet"}
 
 
 def test_home_page_lists_every_example():

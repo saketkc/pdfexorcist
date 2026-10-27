@@ -11,6 +11,14 @@ workflow moves those entries into a dated section.
 
 ### Added
 
+- `nacnet` recipe: NCDC NAC-NET antimicrobial consumption reports, chart values checked against bars.
+- `unlimitedocr` engine: Baidu Unlimited-OCR 2, run under `$PDFEXORCIST_UOCR_PYTHON`.
+
+### Fixed
+
+- Sideways pages: digits decide the text direction (`_upright`).
+- `charts`: dashed averages, leader lines, short sideways labels and gridless ticks read right.
+
 - Recipes that read tables through their drawn cells and check their totals:
   - `tb_india_district`: TB India annual reports 2010-2019, notification and case finding by
     district.

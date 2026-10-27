@@ -573,6 +573,22 @@ def test_html_rows_rowspan_keeps_columns() -> None:
     ]
 
 
+def test_unlimitedocr_blocks_to_rows() -> None:
+    # Unlimited-OCR 2 output: layout blocks with boxes; a chart block is dropped
+    from pdfexorcist._vlm_engines import _uocr_rows
+
+    raw = (
+        "<PAGE><BLOCK>title<LEVEL1>[10,20,300,40]<FORK>Table 6.2"
+        "<BLOCK>cross_table[10,50,990,900]<FORK><table><tr><td>AMK</td><td>12/40</td></tr></table>"
+        "<BLOCK>chart[1,1,2,2]<FORK>x<BLOCK>text[1,2,3,4]<FORK>Total 41 52<MERGE>"
+    )
+    assert _uocr_rows(raw) == [
+        [(0, "Table"), (1, "6.2")],
+        [(0, "AMK"), (1, "12/40")],
+        [(0, "Total"), (1, "41"), (2, "52")],
+    ]
+
+
 def test_sideways_heading_is_one_word_and_kept(tmp_path):
     import pymupdf
 

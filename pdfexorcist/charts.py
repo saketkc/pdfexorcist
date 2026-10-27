@@ -64,6 +64,14 @@ def _hex(rgb: tuple) -> str:
     return "#" + "".join(f"{round(c * 255):02x}" for c in rgb)
 
 
+def _style(d: dict) -> str:
+    """A path's colour, and its dash pattern when dashed: Excel draws a series and its average
+    in one colour, one of them dashed."""
+    dashes = str(d.get("dashes") or "")
+    dashed = bool(re.search(r"\[\s*[\d.]", dashes))
+    return _hex(d["color"]) + (" " + " ".join(dashes.split()) if dashed else "")
+
+
 def _segments(d: dict) -> list[tuple[Any, Any]]:
     """The straight segments of a path, or [] when it has curves or rectangles."""
     items = d["items"]
@@ -130,10 +138,16 @@ def _y_axis(ticks: list[Word], grid: list[float]) -> tuple[float, float]:
     right = max(w.x1 for w in ticks)
     ticks = [w for w in ticks if right - w.x1 < 3]  # one right-aligned column
     vs = [float(_number(w.text) or 0) for w in ticks]  # ticks are numbers
-    ys = []
+    snapped: list[float | None] = []
     for w in ticks:
         near = min(grid, key=lambda g: abs(g - w.mid), default=None)
-        ys.append(near if near is not None and abs(near - w.mid) < SNAP_PT else w.mid)
+        snapped.append(near if near is not None and abs(near - w.mid) < SNAP_PT else None)
+    # a label without its gridline (only the axis line drawn) sits off by the same amount as
+    # the labels on gridlines
+    shift = statistics.median(
+        [y - w.mid for y, w in zip(snapped, ticks, strict=True) if y is not None] or [0.0]
+    )
+    ys = [w.mid + shift if y is None else y for y, w in zip(snapped, ticks, strict=True)]
     if len(set(ys)) < 2:
         raise ChartError("fewer than two y tick labels")
     b, a = statistics.linear_regression(ys, vs)
@@ -230,7 +244,24 @@ def _chart(
     a, b = _y_axis(ticks, grid)
     low = max(w.mid for w in ticks)
     below = [w for w in inside if w.y0 > low + 2 and w.x1 > x0 - 20]
-    cats = _labels(_rows(below)[0]) if below else []
+    turned = [w for w in below if w.y1 - w.y0 > 1.5 * (w.x1 - w.x0) and has_letters(w.text)]
+    if below and len(turned) > len(below) / 2:  # sideways labels: one per column, read by x
+        top = statistics.median(
+            w.y0 for w in turned
+        )  # they end at the axis; a short one is not tall
+        turned = [w for w in below if abs(w.y0 - top) < 2 and has_letters(w.text)]
+        cols: list[list[Word]] = []
+        for w in sorted(turned, key=lambda w: w.x0):
+            if cols and w.x0 - cols[-1][-1].x0 < 2:
+                cols[-1].append(w)
+            else:
+                cols.append([w])
+        cats = [
+            ((c[0].x0 + c[0].x1) / 2, " ".join(w.text for w in sorted(c, key=lambda w: -w.y1)))
+            for c in cols
+        ]
+    else:
+        cats = _labels(_rows(below)[0]) if below else []
     if len(cats) < 2:
         raise ChartError("no category labels under the plot")
     tol = min(q[0] - p[0] for p, q in pairwise(cats)) / 4
@@ -248,9 +279,13 @@ def _chart(
             names.setdefault(r.color, " ".join(text))
 
     values: dict[str, dict[str, float]] = defaultdict(dict)
+    longest = max(len(s.seg) for s in series)
     for s in series:
         name = names.get(s.color, s.color)
-        for pt in [s.seg[0][0]] + [q for _, q in s.seg]:
+        points = [s.seg[0][0]] + [q for _, q in s.seg]
+        if len(s.seg) < longest / 2:
+            continue  # a few strokes beside full series: a label's leader line
+        for pt in points:
             x, cat = min(cats, key=lambda c: abs(c[0] - pt.x))
             if abs(x - pt.x) > tol:
                 raise ChartError(f"a point at x={pt.x:.1f} is under no category")
@@ -288,9 +323,9 @@ def _vector_page(doc: Any, no: int, title: str | None) -> tuple[list, list, int]
             boxes.append(r)
         seg = _segments(d) if d.get("color") and "s" in d["type"] else []
         if _is_series(seg):
-            series.append(Series(r, seg, _hex(d["color"])))
+            series.append(Series(r, seg, _style(d)))
         else:
-            flat += [Rule(p, q, _hex(d["color"])) for p, q in seg if abs(p.y - q.y) < 0.5]
+            flat += [Rule(p, q, _style(d)) for p, q in seg if abs(p.y - q.y) < 0.5]
     if not series:
         return [], [], 0  # words are the slow part
     words = [Word(*w[:6]) for w in page.get_text("words")]

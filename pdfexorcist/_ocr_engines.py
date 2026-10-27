@@ -127,45 +127,78 @@ def _images(pdf: Path) -> Iterator[tuple]:
             yield (i, *_render(page))
 
 
+class Worker:
+    """A subprocess answering each length-prefixed PNG with one JSON line; started on first use."""
+
+    def __init__(self, cmd: list[str]) -> None:
+        self.cmd = cmd
+        self.proc: Any = None
+        self.log: Any = None
+
+    def __enter__(self) -> "Worker":
+        return self
+
+    def __exit__(self, exc_type: object, *_: object) -> None:
+        if self.proc is not None and exc_type is None:
+            self.proc.stdin.close()
+            if self.proc.wait():
+                raise self._failed()
+        self.close()
+
+    def ask(self, img: Any) -> Any:
+        """The worker's answer for one image; raise with its log if it died."""
+        import io
+        import json
+        import tempfile
+
+        if self.proc is None:
+            self.log = tempfile.TemporaryFile()  # noqa: SIM115  # open while the worker runs
+            self.proc = subprocess.Popen(
+                self.cmd, stdin=subprocess.PIPE, stdout=subprocess.PIPE, stderr=self.log
+            )
+        png = io.BytesIO()
+        img.save(png, format="PNG")
+        try:
+            self.proc.stdin.write(len(png.getbuffer()).to_bytes(4, "big"))
+            self.proc.stdin.write(png.getbuffer())
+            self.proc.stdin.flush()
+            answer = self.proc.stdout.readline()
+        except BrokenPipeError:  # it died while loading
+            answer = b""
+        if not answer:
+            self.proc.wait()
+            err = self._failed()
+            self.close()
+            raise err
+        return json.loads(answer)
+
+    def _failed(self) -> subprocess.CalledProcessError:
+        self.log.seek(0)
+        return subprocess.CalledProcessError(self.proc.returncode, self.cmd, stderr=self.log.read())
+
+    def close(self) -> None:
+        if self.proc is not None and self.proc.poll() is None:  # an error, or the caller stopped
+            self.proc.kill()
+            self.proc.wait()
+        if self.log is not None:
+            self.log.close()
+        self.proc = self.log = None
+
+
 @register("ocrmac", default=False)
 def ocrmac_(pdf: Path, tries: int = 3) -> Iterator[Page]:
     """Run Apple Vision OCR through ocrmac; tries: readings of a page that comes back empty."""
-    import io
-    import json
     import sys
-    import tempfile
 
     import ocrmac  # noqa: F401  # ImportError here, so extract() skips the engine
 
-    cmd = [sys.executable, "-m", "pdfexorcist._vision_worker", str(tries)]
-    with tempfile.TemporaryFile() as log:
-        proc = subprocess.Popen(cmd, stdin=subprocess.PIPE, stdout=subprocess.PIPE, stderr=log)
-        assert proc.stdin is not None and proc.stdout is not None
-        try:
-            for i, img, scale in _images(pdf):
-                w, h = img.width * scale, img.height * scale
-                png = io.BytesIO()
-                img.save(png, format="PNG")
-                proc.stdin.write(len(png.getvalue()).to_bytes(4, "big") + png.getvalue())
-                proc.stdin.flush()
-                answer = proc.stdout.readline()
-                if not answer:  # the worker died: raise with its error output
-                    proc.stdin.close()
-                    proc.wait()
-                    log.seek(0)
-                    raise subprocess.CalledProcessError(proc.returncode, cmd, stderr=log.read())
-                words = []
-                for text, _, (x, y, bw, bh) in json.loads(answer):
-                    words += _words(x * w, (x + bw) * w, (1 - y - bh) * h, (1 - y) * h, text)
-                yield i, group_words(words)
-            proc.stdin.close()
-            if proc.wait():
-                log.seek(0)
-                raise subprocess.CalledProcessError(proc.returncode, cmd, stderr=log.read())
-        finally:
-            if proc.poll() is None:  # stopped early (an error, or the caller stopped reading)
-                proc.kill()
-                proc.wait()
+    with Worker([sys.executable, "-m", "pdfexorcist._vision_worker", str(tries)]) as worker:
+        for i, img, scale in _images(pdf):
+            w, h = img.width * scale, img.height * scale
+            words = []
+            for text, _, (x, y, bw, bh) in worker.ask(img):
+                words += _words(x * w, (x + bw) * w, (1 - y - bh) * h, (1 - y) * h, text)
+            yield i, group_words(words)
 
 
 @register("paddleocr", default=False)

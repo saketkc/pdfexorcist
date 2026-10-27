@@ -1,0 +1,37 @@
+# pdfexorcist recipe: NCDC NAC-NET antimicrobial consumption reports (2017-2021, 2024)
+#
+# Values printed on bar and pie charts, and the tables. Bars come from the drawing; the engines
+# vote on the printed number, and a check compares it with the bar's drawn length.
+# Charts pasted as pictures (2022, 2023 reports) are not read.
+#
+#   pdfexorcist extract https://ncdc.mohfw.gov.in/uploads/pdf/amr26.pdf --recipe nacnet
+#
+# On the fixtures:
+#
+#   pdfexorcist extract tests/fixtures/nacnet/nacnet_2024_p21-22_25_34_42.pdf --recipe pdfexorcist/recipes/nacnet/recipe.toml
+
+name = "NCDC NAC-NET antimicrobial consumption report"
+description = "Antibiotic consumption (DDD/100 bed days) by site, AWaRe group and antibiotic, from the bar charts and tables (NCDC NAC-NET)"
+sample = "../../../tests/fixtures/nacnet/nacnet_2024_p21-22_25_34_42.pdf"
+
+[engines]
+ocr = false
+use = ["pdfplumber", "pymupdf", "pdfium"]
+
+[parser]
+type = "custom"
+function = "nacnet.py:parse"
+key = ["page", "item", "chart", "slot", "series", "field"]
+
+[postprocess]
+function = "nacnet.py:postprocess"
+
+[[checks]]
+function = "nacnet.py:label_off_bar"
+
+[[checks]]
+function = "nacnet.py:pie_total"
+
+[output]
+layout = "cells"
+format = "csv"

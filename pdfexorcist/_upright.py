@@ -34,14 +34,23 @@ def _centres(page: Any) -> Centres:
 
 
 def _turn(page: Any) -> tuple[int, int] | None:
-    """Return the direction most characters run in, when it is not left to right."""
+    """Return the direction most characters run in, when it is not left to right.
+
+    Digits decide when the page has some: a chart with long sideways category labels and level
+    numbers stays as it is.
+    """
     import pymupdf
 
     count: Counter = Counter()
+    digits: Counter = Counter()
     for block in page.get_text("dict", flags=pymupdf.TEXTFLAGS_TEXT)["blocks"]:
         for line in block.get("lines", []):
             d = (round(line["dir"][0]), round(line["dir"][1]))
-            count[d] += sum(len("".join(s["text"].split())) for s in line["spans"])
+            text = "".join("".join(s["text"].split()) for s in line["spans"])
+            count[d] += len(text)
+            digits[d] += sum(c.isdigit() for c in text)
+    if sum(digits.values()) >= 10:
+        count = digits
     top = max(count, key=count.__getitem__, default=None)
     return top if top in _TURNS else None
 

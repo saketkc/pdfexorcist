@@ -23,7 +23,7 @@ from ._text_engines import (
     pypdf_,
     tabula_,
 )
-from ._vlm_engines import GLM_OCR_MLX, chandra_, glmocr_, oxr_
+from ._vlm_engines import GLM_OCR_MLX, chandra_, glmocr_, oxr_, unlimitedocr_
 from ._vlm_engines import _cache_pages as _cache_pages
 from ._vlm_engines import _chandra_model as _chandra_model
 from ._vlm_engines import _glm_model as _glm_model
@@ -53,4 +53,5 @@ __all__ = [
     "register",
     "tabula_",
     "tesseract_",
+    "unlimitedocr_",
 ]

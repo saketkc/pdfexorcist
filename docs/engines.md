@@ -25,6 +25,7 @@ An engine reads a page and returns lines of text with their x positions. pdfexor
 | `indra` (Datalab's Indra OCR on onnxruntime) | pixels | `--ocr` | all, CPU, extra `indra` | yes |
 | `ocrmac` (Apple Vision) | pixels | `--ocr` | macOS, extra `mac` | yes |
 | `glmocr` (GLM-OCR model via MLX) | pixels | `--ocr` | Apple Silicon, extra `mlx` | no |
+| `unlimitedocr` (Baidu Unlimited-OCR 2 model) | pixels | `--ocr` | CUDA or Apple GPU, `$PDFEXORCIST_UOCR_PYTHON` | no |
 
 * default: runs on every `extract`.
 * `--ocr`: added by `--ocr`, `ocr = true` in a recipe, or an image input.
@@ -35,7 +36,12 @@ An engine reads a page and returns lines of text with their x positions. pdfexor
 
 `pdfjs` finds pdfjs-dist in the global npm root, or at `$PDFEXORCIST_PDFJS`. pypdf drops rotated text.
 
-`chandra` and `glmocr` cache each page's reading under `$PDFEXORCIST_CACHE` (default `~/.cache/pdfexorcist/<engine>/`), and a second run on the same file reads that cache.
+`unlimitedocr` runs its model in a separate Python, because the model's code needs transformers 4.52.
+Set `$PDFEXORCIST_UOCR_PYTHON` to a Python with `torch`, `transformers==4.52.1`, `tokenizers==0.21.4`,
+`huggingface-hub==0.36.0`, `addict`, `einops`, `easydict` and `pillow`. It reads each picture of a page at its own
+resolution, or the whole page when the page has no picture.
+
+`chandra`, `glmocr` and `unlimitedocr` cache each page's reading under `$PDFEXORCIST_CACHE` (default `~/.cache/pdfexorcist/<engine>/`), and a second run on the same file reads that cache.
 
 ## The vote
 

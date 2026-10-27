@@ -9,7 +9,7 @@ from .cells import Box, token_boxes
 SHOW_DPI = 200  # display resolution of a text page (photos keep their own)
 PAGE_FRAME = {"tesseract", "pdfjs"}  # boxes in pymupdf page.rect points
 # the image render_page made
-RENDER_FRAME = {"ocrmac", "paddleocr", "chandra", "glmocr", "oxr", "doctr", "indra"}
+RENDER_FRAME = {"ocrmac", "paddleocr", "chandra", "glmocr", "oxr", "unlimitedocr", "doctr", "indra"}
 USER_FRAME = {"pdfplumber", "pdfium", "camelot", "pymupdf"}  # (x, page height - y) in user space
 GEOMETRY_PREFERENCE = ["pymupdf", "pdfplumber", "pdfium", "paddleocr", "ocrmac", "tesseract"]
 
