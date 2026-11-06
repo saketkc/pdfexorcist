@@ -11,7 +11,7 @@ KEY = ["area", "which", "category"]
 
 def _parts(df: pd.DataFrame) -> pd.DataFrame:
     """df with indicator and area from the chart title, and which series (current, avg3 or NaN)."""
-    m = df.title.str.extract(r"TREND OF (\w+) IN (.+?)\s*$")
+    m = df["title"].str.extract(r"TREND OF (\w+) IN (.+?)\s*$")
     which = df.series.map({"Current Year": "current", "Average 3 years": "avg3"})  # [charts] names
     return df.assign(indicator=m[0], area=m[1], which=which)
 
