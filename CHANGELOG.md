@@ -9,6 +9,8 @@ workflow moves those entries into a dated section.
 
 ## [Unreleased]
 
+## [0.5.0] - 2026-11-07
+
 ### Added
 
 - `nacnet` recipe: NCDC NAC-NET antimicrobial consumption reports, chart values checked against bars.
@@ -186,7 +188,8 @@ Initial release:
 - pdfexorcist also runs in the browser (`web/`) with pyodide at <https://pdfexorcist.in/>
 - pdfexorcist is a new package for extracting tables from pdfs (text and scanned)
 
-[Unreleased]: https://github.com/saketkc/pdfexorcist/compare/v0.4.0...HEAD
+[Unreleased]: https://github.com/saketkc/pdfexorcist/compare/v0.5.0...HEAD
+[0.5.0]: https://github.com/saketkc/pdfexorcist/compare/v0.4.0...v0.5.0
 [0.4.0]: https://github.com/saketkc/pdfexorcist/compare/v0.3.0...v0.4.0
 [0.3.0]: https://github.com/saketkc/pdfexorcist/compare/v0.2.0...v0.3.0
 [0.2.0]: https://github.com/saketkc/pdfexorcist/compare/v0.1.2...v0.2.0
