@@ -14,11 +14,6 @@ workflow moves those entries into a dated section.
 - `nacnet` recipe: NCDC NAC-NET antimicrobial consumption reports, chart values checked against bars.
 - `unlimitedocr` engine: Baidu Unlimited-OCR 2, run under `$PDFEXORCIST_UOCR_PYTHON`.
 
-### Fixed
-
-- Sideways pages: digits decide the text direction (`_upright`).
-- `charts`: dashed averages, leader lines, short sideways labels and gridless ticks read right.
-
 - Recipes that read tables through their drawn cells and check their totals:
   - `tb_india_district`: TB India annual reports 2010-2019, notification and case finding by
     district.
@@ -68,6 +63,8 @@ workflow moves those entries into a dated section.
 
 ### Fixed
 
+- Sideways pages: digits decide the text direction (`_upright`).
+- `charts`: dashed averages, leader lines, short sideways labels and gridless ticks read right.
 - Scanned pages printed sideways or upside down are turned upright before any engine reads
   them, by tesseract's orientation detection. Off with `PDFEXORCIST_TURN_SCANS=0`.
 - Scanned pages 0.3 to 2 degrees askew are levelled before OCR, so a row keeps its own values.
